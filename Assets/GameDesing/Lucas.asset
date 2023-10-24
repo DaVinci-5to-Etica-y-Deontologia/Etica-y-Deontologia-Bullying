@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6694412534766355566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 16
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: La concha de tu madre
+  <UnBan>k__BackingField: AAAA
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: -5
+  <Deley>k__BackingField: 5
+--- !u!114 &-1938472736763354258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 13
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Che que buen stream
+  <UnBan>k__BackingField: 
+  <Views>k__BackingField: 10
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 5
+--- !u!114 &-1401015415659143904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 1
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Che que buen stream
+  <UnBan>k__BackingField: "\uFFFDFue mi primito me desbaneas?"
+  <Views>k__BackingField: 10
+  <Damage>k__BackingField: 1
+  <Deley>k__BackingField: 5
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
+  m_Name: Lucas
+  m_EditorClassIdentifier: 
+  <comments>k__BackingField:
+  - {fileID: -1401015415659143904}
+  - {fileID: 5490126073022437601}
+  - {fileID: 2148488564236423488}
+  - {fileID: -1938472736763354258}
+  - {fileID: 3244757244372379381}
+  - {fileID: -6694412534766355566}
+  <Name>k__BackingField: Lucas
+  <Ban>k__BackingField: 0
+  <Enable>k__BackingField: 1
+--- !u!114 &2148488564236423488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 4
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: La concha de tu madre
+  <UnBan>k__BackingField: AAAA
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: -5
+  <Deley>k__BackingField: 5
+--- !u!114 &3244757244372379381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 14
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: dkamsdlakm
+  <UnBan>k__BackingField: AAAA
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: -5
+  <Deley>k__BackingField: 5
+--- !u!114 &5490126073022437601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 2
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: dkamsdlakm
+  <UnBan>k__BackingField: AAAA
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: -5
+  <Deley>k__BackingField: 5
