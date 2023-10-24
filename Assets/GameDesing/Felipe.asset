@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7639820972484465485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 7
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Che {5} que buena que esta tu perra
+  <UnBan>k__BackingField: dsa
+  <Views>k__BackingField: -10
+  <Damage>k__BackingField: 10
+  <Deley>k__BackingField: 5
+--- !u!114 &-5108016840466322302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 20
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Che {5} que buena que esta tu perra
+  <UnBan>k__BackingField: aaaaa
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 5
+--- !u!114 &-4324628667174110282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 6
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Son todos unas nenitas aca?
+  <UnBan>k__BackingField: dsa
+  <Views>k__BackingField: -10
+  <Damage>k__BackingField: 10
+  <Deley>k__BackingField: 5
+--- !u!114 &-4090582479012087101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 8
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Che {5} que buena que esta tu perra
+  <UnBan>k__BackingField: dsa
+  <Views>k__BackingField: -10
+  <Damage>k__BackingField: 10
+  <Deley>k__BackingField: 5
+--- !u!114 &-4017248827639885951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 18
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Son todos unas nenitas aca?
+  <UnBan>k__BackingField: dsa
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 10
+  <Deley>k__BackingField: 5
+--- !u!114 &-3696391913414665303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 9
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Che {5} que buena que esta tu perra
+  <UnBan>k__BackingField: dsa
+  <Views>k__BackingField: -10
+  <Damage>k__BackingField: 10
+  <Deley>k__BackingField: 5
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
+  m_Name: Felipe
+  m_EditorClassIdentifier: 
+  <comments>k__BackingField:
+  - {fileID: -4324628667174110282}
+  - {fileID: -7639820972484465485}
+  - {fileID: -4090582479012087101}
+  - {fileID: -3696391913414665303}
+  - {fileID: -4017248827639885951}
+  - {fileID: 1407953201124688491}
+  - {fileID: -5108016840466322302}
+  - {fileID: 2212805912716932650}
+  <Name>k__BackingField: Felipe
+  <Ban>k__BackingField: 0
+  <Enable>k__BackingField: 1
+--- !u!114 &1407953201124688491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 19
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: 
+  <UnBan>k__BackingField: dasd
+  <Views>k__BackingField: -10
+  <Damage>k__BackingField: 10
+  <Deley>k__BackingField: 5
+--- !u!114 &2212805912716932650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 21
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: Che {5} que buena que esta tu perra
+  <UnBan>k__BackingField: dsa
+  <Views>k__BackingField: -10
+  <Damage>k__BackingField: 10
+  <Deley>k__BackingField: 0
