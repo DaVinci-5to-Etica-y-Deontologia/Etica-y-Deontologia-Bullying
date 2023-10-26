@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6703911243971606123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 17
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: 
+  <UnBan>k__BackingField: dsa
+  <Views>k__BackingField: 1
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
+  m_Name: Jose
+  m_EditorClassIdentifier: 
+  <comments>k__BackingField:
+  - {fileID: 4479975589356468306}
+  - {fileID: -6703911243971606123}
+  <Name>k__BackingField: Jose
+  <Ban>k__BackingField: 0
+  <Enable>k__BackingField: 1
+--- !u!114 &4479975589356468306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 5
+  m_EditorClassIdentifier: 
+  <Comentario>k__BackingField: asd
+  <UnBan>k__BackingField: dsa
+  <Views>k__BackingField: 1
+  <Damage>k__BackingField: 1
+  <Deley>k__BackingField: 5

@@ -1,0 +1,22 @@
+Usuario	Damage	Views	Condicion necesaria	Comentario	Unban	Deley	
+Lucas	1	10	!Kate	Che que buen stream	¿Fue mi primito me desbaneas?	5	
+Lucas	-5	0	Kate	dkamsdlakm	AAAA	5	
+Kate	6	-5	Lucas	efe	CCC	5	
+Lucas	-5	0		La concha de tu madre	AAAA	5	
+Jose	1	1	ID	asd	dsa	5	
+Felipe	10	-10	(Toxicidad<100),[!Lucas],{ID}	Son todos unas nenitas aca?	dsa	5	
+Felipe	10	-10	(Toxicidad>100),[Lucas],{5}	Che {5} que buena que esta tu perra	dsa	5	
+Felipe	10	-10	(Toxicidad>100),[Lucas],{5}	Che {5} que buena que esta tu perra	dsa	5	
+Felipe	10	-10	(Toxicidad>100),[Lucas],{5}	Che {5} que buena que esta tu perra	dsa	5	
+							
+							
+							
+Lucas		10	!Kate	Che que buen stream		5	
+Lucas	-5	0	Kate	dkamsdlakm	AAAA	5	
+Kate	6	-5	Lucas	efe	CCC	5	
+Lucas	-5	0		La concha de tu madre	AAAA	5	
+Jose		1	ID		dsa		
+Felipe	10			Son todos unas nenitas aca?	dsa	5	
+Felipe	10	-10	(Toxicidad>100),[Lucas],{5}		dasd	5	
+Felipe			(Toxicidad>100),[Lucas],{5}	Che {5} que buena que esta tu perra	aaaaa	5	
+Felipe	10	-10		Che {5} que buena que esta tu perra	dsa		
