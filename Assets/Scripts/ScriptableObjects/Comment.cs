@@ -34,7 +34,6 @@ public class Comment : SuperScriptableObject
 
     /////////////////////////////////////////////////////////////////////////
     ///
-
     public new User Parent => (User)base.Parent;
 
 #if UNITY_EDITOR

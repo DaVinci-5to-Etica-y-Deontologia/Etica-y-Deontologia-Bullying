@@ -35,9 +35,9 @@ RectTransform:
   - {fileID: 4358041710109857418}
   m_Father: {fileID: 1947637450547018206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 374.45, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 374.45, y: 0}
   m_SizeDelta: {x: 518.9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8628339759115402605
@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 8657474774859262774}
   - component: {fileID: 2746574716588709447}
   - component: {fileID: 4300313383535924878}
+  - component: {fileID: 2893779287732540056}
   m_Layer: 5
   m_Name: Button Comentario
   m_TagString: Untagged
@@ -562,6 +563,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2893779287732540056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3041439934508008734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32946953b798ea649929b1316686ef60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 750771010519157440}
+  perfil: {fileID: 7350077285269235968}
 --- !u!1 &5736684715801277188
 GameObject:
   m_ObjectHideFlags: 0
