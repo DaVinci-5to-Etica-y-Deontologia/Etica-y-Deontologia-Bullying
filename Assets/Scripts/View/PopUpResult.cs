@@ -21,6 +21,7 @@ public class PopUpResult : PopUp
     void PopUp((int damage, int viewers) resultado)
     {
         onActive.Invoke();
+        callsManager.DestroyAll();
         StartCoroutine(ViewerNumber(resultado));
     }
 
@@ -28,7 +29,9 @@ public class PopUpResult : PopUp
     {
         damageNumber.text = string.Empty;
 
-        for (int i = 0; i < resultado.viewers; i++)
+        viwersNumber.text = "0";
+
+        for (int i = 1; i <= resultado.viewers; i++)
         {
             yield return new WaitForSeconds(timeToShow / resultado.viewers);
 

@@ -24,5 +24,7 @@ public class EventCallsManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+
+        eventscalls.Clear();
     }
 }
