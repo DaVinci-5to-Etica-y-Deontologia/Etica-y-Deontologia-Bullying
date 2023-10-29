@@ -26,10 +26,11 @@ public class User : SuperScriptableObject
     [field: SerializeField]
     public bool Enable { get; set; }
 
+    [field: SerializeField]
+    public Sprite Perfil { get; set; }
 
-
-
-
+    [field: SerializeField]
+    public Color colorText { get; set; }
 
 
     //////////////////////////////////////////////////////

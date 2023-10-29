@@ -1,0 +1,80 @@
+Usuario	Damage	Views	Condicion necesaria	Comentario	Deley	Unban
+DarkYors	0	0		Hola	2	
+SerpienteSutil	0	4		wow nuevo streamer	2	
+XimenittaGG	0	0		buenas 	3	
+beefo0	0	0		quien sos	1	
+QuasarQuest_00	0	0		¿Quien eres?	2	
+pablokd21	0	0		por que me recomendaron este stream	2	
+Zenit_Zigzag8	0	0		que tal va?	3	
+XFirreDX	0	0		Hola	2	
+SantiesPain	0	0		holiii	3	
+DarkYors	0	2		Eres nuevo, no?	1	
+VortexDreamer	0	0		holaaaa	3	
+SoyTuPadre_	0	0		Qué se supone que es esto?	1	
+XimenittaGG	0	1		de que trata este stream?	2	
+Zenit_Zigzag8	0	2		nuevo en esto eh	1	
+SerpienteSutil	0	0		ese juego es muy entretenido	4	
+DarkYors	0	0		Ese juego es viejisimo 	1	
+beefo0	0	-2		otro mas que solo juega	2	
+XimenittaGG	0	4		a que vas a jugar?	3	
+Zenit_Zigzag8	0	3		ese juego me trae nostalgia	2	
+QuasarQuest_01	0	0		¿Dónde puedo descargar ese juego?	2	
+Zenit_Zigzag8	0	2		siempre lo jugaba con mis hermanos	1	
+beefo0	0	0		uff ese juego es super viejo y aburrido	3	
+SoyTuPadre_	-1	0		Como los jovenes no hacen mas que jugar	2	
+pablokd21	0	-2	SoyTuPadre_	ya cayese viejo	1	
+plumoso	0	0	QuasarQuest_02	creo que ya no se puede descargar es muy antiguo	0.5	
+Zenit_Zigzag8	0	0		vamos empieza la partida	1	
+XimenittaGG	0	0		nunca habia oido hablar de ese juego	2	
+manchu_gg	0	0		Nunca habia visto ese juego	0.5	
+beefo0	-2	-5		no eres nada original	1	
+SerpienteSutil	0	0		trata de ir por otros caminos	2	
+XimenittaGG	0	0		seguro es muy complicado	1	
+Zenit_Zigzag8	0	0		siguiente nivel	3	
+SantiesPain	0	2		avanzas muy rapido	2	
+andrspzx	0	0		pense que ya no existia ese juego	1	
+manchu_gg	-2	-1		Eres malísimo	0.5	
+plumoso	0	0		por donde vas	0.5	
+VortexDreamer	0	0		no debe ser por ahí	1	
+beefo0	0	0		no sabes jugar?	1	
+XimenittaGG	0	0		no parece que sea por ahí	0.5	
+SerpienteSutil	0	0		no debiste ir por ahí	0.5	
+pablokd21	0	0		era por el otro lado	1	
+DarkYors	0	0		Si ibas por el otro lado había una moneda secreta	1	
+Zenit_Zigzag8	0	0		juegas bien	2	
+SoyTuPadre_	-1	0		Oye niño deberias salir al sol a hacer algo mas productivo	1	
+RedRebelde09	0	0		ese juego es nuevo?	2	
+pablokd21	-2	-2		va no puedes ser mas tonto	1	
+DarkYors	0	0		Yo me pase ese juego como 20 veces	1	
+Zenit_Zigzag8	0	0		creo que por ahí no era	2	
+pablokd21	-1	-1		no me creo que no puedas pasar de ahí	2	
+manchu_gg	0	0		No sigas intentando por ahí	0.5	
+DarkYors	0	0		No intentes pasar por ahí	1	
+Zenit_Zigzag8	0	0		intenta ir por otro lado	1	
+DarkYors	0	0		No hay nada ahí	0.5	
+plumoso	0	0		si era por la izquierda jajaja	2	
+andrspzx	0	0		ve por otro lado	1	
+beefo0	-3	0		va que mal juegas	3	
+pablokd25	-1	0		estaba super obvio	1	
+QuasarQuest_02	0	0		¿Alguien sabe como hacer un videojuego?	2	
+SerpienteSutil	1	0		seguro lo pasas la proxima vez	1	
+beefo0	-4	-3		dedicate a otra cosa	3	
+XFirreDX	0	0	QuasarQuest_02	Todos diran que pueden	2	
+XFirreDX	0	0	QuasarQuest_02	Los videojuegos son dificiles de hacer	0.5	
+Zenit_Zigzag8	0	0		ya terminaras el stream?	4	
+SoyTuPadre_	0	0		La juventud solo desperdicia su tiempo	1	
+QuasarQuest_03	0	2		¿Cuándo volveras a hacer stream?	2	
+SerpienteSutil	1	8		estuvo bueno el stream	0.5	
+andrspzx	0	2	QuasarQuest_02	dijo que mañana	1	
+DarkYors	0	0		El stream fue corto	2	
+beefo0	-5	-5		eres muy aburrido	1	
+XimenittaGG	0	0		chau chau	2	
+Zenit_Zigzag8	0	0		bueno nos vemos	0.5	
+SerpienteSutil	0	0		bye	1	
+Zenit_Zigzag8	0	0		bueno nos vemos	0.5	
+pablokd21	-5	0		no vuelvas	0.5	
+RedRebelde09	0	0		hasta luego	0.5	
+XimenittaGG	0	0		hasta otro stream	1	
+VortexDreamer	0	0		chau chau	0.5	
+SantiesPain	0	0		hasta otro dia	0.5	
+XFirreDX	0	0		Chau	2	

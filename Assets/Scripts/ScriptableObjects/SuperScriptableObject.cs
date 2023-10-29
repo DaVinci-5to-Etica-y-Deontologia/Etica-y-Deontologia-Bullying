@@ -13,10 +13,20 @@ namespace Euler
     /// </summary>
     public abstract class SuperScriptableObject : ScriptableObject
     {
+        public ScriptableObject Parent 
+        { 
+            get=>_parent; 
+
+            private set 
+            {
+                _parent = value;
+            }
+        }
+
+        [SerializeField]
+        ScriptableObject _parent;
 
 #if UNITY_EDITOR
-
-        public ScriptableObject Parent { get; private set; }
 
 
         /// <summary>
