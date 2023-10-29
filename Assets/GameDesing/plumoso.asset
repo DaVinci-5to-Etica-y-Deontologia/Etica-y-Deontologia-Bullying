@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7746468471283495832
+--- !u!114 &-5026781970167598940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 15
+  m_Name: 25
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: efe
-  <UnBan>k__BackingField: CCC
-  <Views>k__BackingField: -5
-  <Damage>k__BackingField: 6
+  <Comentario>k__BackingField: creo que ya no se puede descargar es muy antiguo
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
   <Deley>k__BackingField: 5
 --- !u!114 &11400000
 MonoBehaviour:
@@ -28,18 +28,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
-  m_Name: Kate
+  m_Name: plumoso
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   <comments>k__BackingField:
-  - {fileID: 1646028808472143493}
-  - {fileID: -7746468471283495832}
-  <Name>k__BackingField: Kate
+  - {fileID: -5026781970167598940}
+  - {fileID: 8576204348239729866}
+  - {fileID: 6082418158872046841}
+  <Name>k__BackingField: plumoso
   <Ban>k__BackingField: 0
   <Enable>k__BackingField: 1
   <Perfil>k__BackingField: {fileID: 0}
-  <colorText>k__BackingField: {r: 0.41033608, g: 0.4245283, b: 0, a: 1}
---- !u!114 &1646028808472143493
+  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &6082418158872046841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,11 +50,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 3
+  m_Name: 54
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: efe
-  <UnBan>k__BackingField: CCC
-  <Views>k__BackingField: -5
-  <Damage>k__BackingField: 6
+  <Comentario>k__BackingField: si era por la izquierda jajaja
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &8576204348239729866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 36
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: por donde vas
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
   <Deley>k__BackingField: 5

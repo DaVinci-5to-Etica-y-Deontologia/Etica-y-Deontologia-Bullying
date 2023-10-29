@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7992620319074699151
+--- !u!114 &-8417241852288301221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,76 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 13
+  m_Name: 15
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: Che que buen stream
-  <UnBan>k__BackingField: 
-  <Views>k__BackingField: 10
+  <Comentario>k__BackingField: ese juego es muy entretenido
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 5
---- !u!114 &-96208815436369746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 4
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: La concha de tu madre
-  <UnBan>k__BackingField: AAAA
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: -5
-  <Deley>k__BackingField: 5
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
-  m_Name: Lucas
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
-  <comments>k__BackingField:
-  - {fileID: 8640014750813419565}
-  - {fileID: 3960154503462878453}
-  - {fileID: -96208815436369746}
-  - {fileID: -7992620319074699151}
-  - {fileID: 3779947338475412989}
-  - {fileID: 6710252000351775186}
-  <Name>k__BackingField: Lucas
-  <Ban>k__BackingField: 0
-  <Enable>k__BackingField: 1
-  <Perfil>k__BackingField: {fileID: 0}
-  <colorText>k__BackingField: {r: 0.45696867, g: 0.47482374, b: 0.5943396, a: 1}
---- !u!114 &3779947338475412989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 14
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: dkamsdlakm
-  <UnBan>k__BackingField: AAAA
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: -5
-  <Deley>k__BackingField: 5
---- !u!114 &3960154503462878453
+  <Deley>k__BackingField: 4
+--- !u!114 &-5775882510460843367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,12 +31,12 @@ MonoBehaviour:
   m_Name: 2
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: dkamsdlakm
-  <UnBan>k__BackingField: AAAA
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: -5
-  <Deley>k__BackingField: 5
---- !u!114 &6710252000351775186
+  <Comentario>k__BackingField: wow nuevo streamer
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 4
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &-5452223257680900496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,15 +46,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 16
+  m_Name: 40
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: La concha de tu madre
-  <UnBan>k__BackingField: AAAA
+  <Comentario>k__BackingField: "no debiste ir por ah\uFFFD"
+  <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
-  <Damage>k__BackingField: -5
+  <Damage>k__BackingField: 0
   <Deley>k__BackingField: 5
---- !u!114 &8640014750813419565
+--- !u!114 &-3056134037039465366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,11 +64,91 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 1
+  m_Name: 59
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: Che que buen stream
-  <UnBan>k__BackingField: "\uFFFDFue mi primito me desbaneas?"
-  <Views>k__BackingField: 10
+  <Comentario>k__BackingField: seguro lo pasas la proxima vez
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 1
+  <Deley>k__BackingField: 1
+--- !u!114 &-1799836750669401276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 72
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: bye
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
+  m_Name: SerpienteSutil
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
+  <comments>k__BackingField:
+  - {fileID: -5775882510460843367}
+  - {fileID: -8417241852288301221}
+  - {fileID: 2902488886752225910}
+  - {fileID: -5452223257680900496}
+  - {fileID: -3056134037039465366}
+  - {fileID: 5293190246668218136}
+  - {fileID: -1799836750669401276}
+  <Name>k__BackingField: SerpienteSutil
+  <Ban>k__BackingField: 0
+  <Enable>k__BackingField: 1
+  <Perfil>k__BackingField: {fileID: 0}
+  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &2902488886752225910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 30
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: trata de ir por otros caminos
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &5293190246668218136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 66
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: estuvo bueno el stream
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 8
   <Damage>k__BackingField: 1
   <Deley>k__BackingField: 5
