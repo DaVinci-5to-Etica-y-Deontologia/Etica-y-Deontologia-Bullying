@@ -2220,6 +2220,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3116565864717615809, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1676bc0ffe51c1947bd2f2391efbc405, type: 3}
     - target: {fileID: 3496957810255365158, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
       propertyPath: m_Name
       value: GamePlay
@@ -2243,6 +2247,22 @@ PrefabInstance:
     - target: {fileID: 5285267703058418333, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050041665651802321, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e529d031e6e71643a73b016e0defce9, type: 3}
+    - target: {fileID: 6050041665651802321, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050041665651802321, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050041665651802321, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
