@@ -12,8 +12,17 @@ public class EventCall : MonoBehaviour
     [SerializeField]
     Button button;
 
+    [SerializeField]
+    TMPro.TextMeshProUGUI textMeshPro;
+
     public void OnClick()
     {
         eventToCall.Invoke(button);
+    }
+
+    public void Set(string nameToShow, UnityAction action)
+    {
+        textMeshPro.text = nameToShow;
+        button.onClick.AddListener(action);
     }
 }
