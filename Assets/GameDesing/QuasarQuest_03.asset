@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4101473134721207878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 65
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "\uFFFDCu\uFFFDndo volveras a hacer stream?"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 2
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
+  m_Name: QuasarQuest_03
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
+  <comments>k__BackingField:
+  - {fileID: -4101473134721207878}
+  <Name>k__BackingField: QuasarQuest_03
+  <Ban>k__BackingField: 0
+  <Enable>k__BackingField: 1
+  <Perfil>k__BackingField: {fileID: 0}
+  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
