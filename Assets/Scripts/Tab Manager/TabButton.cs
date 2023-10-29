@@ -8,6 +8,8 @@ public class TabButton : MonoBehaviour
 {
     public TabGroup _TabGroup;
 
+    public Tab tabToLoad;
+
     public Animator _Anim { get; private set; }
 
     void Start()
@@ -20,7 +22,6 @@ public class TabButton : MonoBehaviour
 
     public void Clicked()
     {
-
         _TabGroup.OnTabSelected(this);
     }
 

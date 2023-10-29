@@ -52,13 +52,6 @@ public class PauseMenuSettings : MonoBehaviour
 
     }
 
-
-    void Update()
-    {
-        
-    }
-
-
     public void SetResolition(int resIndex)
     {
         Resolution res = _filteredResolutions[resIndex];

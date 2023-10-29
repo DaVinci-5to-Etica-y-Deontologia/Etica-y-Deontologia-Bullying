@@ -11,12 +11,10 @@ public class TabGroup : MonoBehaviour
 
     public void Subscribe(TabButton button)
     {
-
-        int index = button.transform.GetSiblingIndex();
         Tabs holder = new()
         {
             Button = button,
-            Tab = _Tabs[index]
+            Tab = button.tabToLoad
         };
         _TabButtons.Add(holder);
     }
@@ -24,17 +22,14 @@ public class TabGroup : MonoBehaviour
 
     public void OnTabEnter(TabButton button)
     {
-        ResetTabs();
     }
     public void OnTabExit(TabButton button)
     {
-        ResetTabs();
     }
 
     public void OnTabSelected(TabButton button)
     {
         _selectedTab = button;
-        ResetTabs();
 
         foreach (Tabs tab in _TabButtons)
         {
@@ -48,19 +43,8 @@ public class TabGroup : MonoBehaviour
                 tab.Tab._Anim.SetTrigger("Deselected");
                 tab.Tab._Anim.ResetTrigger("Selected");
             }
-                
         }
     }
-
-    public void ResetTabs()
-    {
-        foreach (Tabs tab in _TabButtons)
-        {
-            if (_selectedTab != null && tab.Button == _selectedTab) { continue; }
-        }
-    }
-
-
 
     [System.Serializable]
     public class Tabs
