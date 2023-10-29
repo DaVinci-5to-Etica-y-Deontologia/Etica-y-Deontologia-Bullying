@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 2746574716588709447}
   - component: {fileID: 4300313383535924878}
   - component: {fileID: 2893779287732540056}
+  - component: {fileID: 552846352251057716}
   m_Layer: 5
   m_Name: Button Comentario
   m_TagString: Untagged
@@ -577,6 +578,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 750771010519157440}
   perfil: {fileID: 7350077285269235968}
+--- !u!225 &552846352251057716
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3041439934508008734}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5736684715801277188
 GameObject:
   m_ObjectHideFlags: 0

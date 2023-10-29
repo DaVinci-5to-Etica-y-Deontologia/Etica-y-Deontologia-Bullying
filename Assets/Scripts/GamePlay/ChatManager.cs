@@ -25,7 +25,8 @@ public class ChatManager : MonoBehaviour
     float startDeley;
 
     [SerializeField]
-    Transform contain;
+    UnityEngine.UI.ContentSizeFitter contain;
+    
 
     private void Awake()
     {
@@ -40,9 +41,9 @@ public class ChatManager : MonoBehaviour
             return;
         }
 
-        var newComment=Instantiate(prefab, contain);
+        var newComment=Instantiate(prefab, contain.transform);
 
-        newComment.Create(dataBase.comments[index]);        
+        newComment.Create(dataBase.comments[index], contain);        
 
         comments.Add(newComment);
 
@@ -50,5 +51,4 @@ public class ChatManager : MonoBehaviour
 
         deley.Set(dataBase.comments[index].Deley);
     }
-
 }

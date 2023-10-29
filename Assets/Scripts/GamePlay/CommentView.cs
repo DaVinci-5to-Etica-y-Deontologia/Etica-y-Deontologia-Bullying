@@ -14,12 +14,22 @@ public class CommentView : MonoBehaviour
     [SerializeField]
     Image perfil;
 
-    public void Create(Comment comment)
+    [SerializeField]
+    ContentSizeFitter contain;
+
+    public void Create(Comment comment, ContentSizeFitter contain)
     {
+        this.contain = contain;
+
         this.comment = comment;
 
         perfil.sprite = comment.Parent.Perfil;
 
         textMesh.text = comment.Comentario.RichText("color", "#" + ColorUtility.ToHtmlStringRGBA(comment.Parent.colorText));
+    }
+
+    public void AnimRefresh()
+    {
+        contain.enabled = true;
     }
 }
