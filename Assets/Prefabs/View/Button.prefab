@@ -151,6 +151,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   button: {fileID: 8874761820115736253}
+  textMeshPro: {fileID: 798834770017409449}
 --- !u!95 &8120757502272738719
 Animator:
   serializedVersion: 5
@@ -289,6 +290,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}
+--- !u!114 &798834770017409449 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8577883460788367806, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}
+  m_PrefabInstance: {fileID: 8943238958014490647}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7937926127868234183 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1312211822815977936, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}

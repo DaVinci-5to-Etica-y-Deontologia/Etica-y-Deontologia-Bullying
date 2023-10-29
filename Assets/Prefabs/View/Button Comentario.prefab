@@ -35,9 +35,9 @@ RectTransform:
   - {fileID: 4358041710109857418}
   m_Father: {fileID: 1947637450547018206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 272.7, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 272.7, y: 0}
   m_SizeDelta: {x: 315.4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8628339759115402605
@@ -487,6 +487,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2893779287732540056}
+        m_TargetAssemblyTypeName: CommentView, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7448909781144444764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,9 +588,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32946953b798ea649929b1316686ef60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <comment>k__BackingField: {fileID: 0}
+  eventManager: {fileID: 11400000, guid: 61a7d81338181f9409e4d385c1b3b4c5, type: 2}
   textMesh: {fileID: 750771010519157440}
   perfil: {fileID: 7350077285269235968}
   contain: {fileID: 0}
+  button: {fileID: 140912322178551159}
 --- !u!225 &552846352251057716
 CanvasGroup:
   m_ObjectHideFlags: 0

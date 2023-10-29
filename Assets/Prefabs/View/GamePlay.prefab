@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 49.1, y: 0}
+  m_AnchoredPosition: {x: 49.100098, y: 0}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1772395299916822
@@ -485,7 +485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 21.487}
+  m_AnchoredPosition: {x: 0, y: 21.48706}
   m_SizeDelta: {x: 0, y: -150.89}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &612745577053567185
@@ -2095,15 +2095,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ae808255de5284f8826aa79161684d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comments: []
-  finishDay:
-    m_PersistentCalls:
-      m_Calls: []
+  eventManager: {fileID: 11400000, guid: 61a7d81338181f9409e4d385c1b3b4c5, type: 2}
   prefab: {fileID: 2893779287732540056, guid: c94143bf0fbd7984aae14bbcff1c15bf, type: 3}
   dataBase: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   index: 0
   startDeley: 3.57
+  endDeley: 5
   contain: {fileID: 895258726687356868}
+  multiply: 1
 --- !u!1001 &102997970962024524
 PrefabInstance:
   m_ObjectHideFlags: 0

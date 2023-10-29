@@ -6,7 +6,11 @@ using UnityEngine.UI;
 
 public class CommentView : MonoBehaviour
 {
-    Comment comment;
+    [field: SerializeField]
+    public Comment comment { get; private set; }
+
+    [SerializeField]
+    EventManager eventManager;
 
     [SerializeField]
     TextMeshProUGUI textMesh;
@@ -16,6 +20,9 @@ public class CommentView : MonoBehaviour
 
     [SerializeField]
     ContentSizeFitter contain;
+
+    [SerializeField]
+    Button button;
 
     public void Create(Comment comment, ContentSizeFitter contain)
     {
@@ -31,5 +38,10 @@ public class CommentView : MonoBehaviour
     public void AnimRefresh()
     {
         contain.enabled = true;
+    }
+
+    public void OnClick()
+    {
+        eventManager.events.SearchOrCreate<EventParam<CommentView>>("onclickcomment").delegato.Invoke(this);
     }
 }
