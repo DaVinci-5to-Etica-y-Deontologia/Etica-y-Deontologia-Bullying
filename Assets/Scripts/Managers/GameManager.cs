@@ -138,6 +138,7 @@ public class GameManager : SingletonMono<GameManager>
     protected override void Awake()
     {
         base.Awake();
+
         _fsmGameMaganer = new FSMGameMaganer(this);
 
         var victory = _eventManager.events.SearchOrCreate<EventParam>("victory");
@@ -186,7 +187,7 @@ public class FSMGameMaganer : FSM<FSMGameMaganer, GameManager>
 
     public FSMGameMaganer(GameManager reference) : base(reference)
     {
-        Init(gamePlay);
+        Init(load);
     }
 }
 

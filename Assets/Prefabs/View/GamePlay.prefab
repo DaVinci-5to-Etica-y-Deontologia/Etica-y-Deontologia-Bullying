@@ -555,7 +555,19 @@ MonoBehaviour:
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5120369268545282656}
+        m_TargetAssemblyTypeName: ChatContentRefresh, Assembly-CSharp
+        m_MethodName: OnValueChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3142605254338302418
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contain: {fileID: 895258726687356868}
+  containScroll: {fileID: 961978212349586907}
+  containScrollRect: {fileID: 8393130927728686322}
 --- !u!1 &4483646358237121016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,7 +2102,7 @@ MonoBehaviour:
   prefab: {fileID: 2893779287732540056, guid: c94143bf0fbd7984aae14bbcff1c15bf, type: 3}
   dataBase: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   index: 0
-  startDeley: 1
+  startDeley: 3.57
   contain: {fileID: 895258726687356868}
 --- !u!1001 &102997970962024524
 PrefabInstance:

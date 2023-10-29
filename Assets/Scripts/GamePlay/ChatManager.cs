@@ -26,11 +26,17 @@ public class ChatManager : MonoBehaviour
 
     [SerializeField]
     UnityEngine.UI.ContentSizeFitter contain;
-    
+
 
     private void Awake()
     {
-        deley = TimersManager.Create(startDeley, Delay);
+        deley = TimersManager.Create(startDeley, Delay).Stop();
+    }
+
+    public void MyStart()
+    {
+        print("Comienza el juego");
+        deley.Start();
     }
 
     void Delay()
