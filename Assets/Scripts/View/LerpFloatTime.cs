@@ -40,8 +40,6 @@ public class LerpFloatTime : MonoBehaviour
         {
             fillAmounts[i].OnValidate();
         }
-
-        Debug.Log("me llama");
     }
 }
 
@@ -124,8 +122,6 @@ public class FillAmount
         keys[^1].time = 1;
 
         animationCurve.keys = keys;
-
-        Debug.Log("llegue");
     }
 }
 
