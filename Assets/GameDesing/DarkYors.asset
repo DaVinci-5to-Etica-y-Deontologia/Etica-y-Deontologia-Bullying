@@ -1,60 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8005456647872550081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 1
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: Hola
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 2
---- !u!114 &-7732400722619233866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 10
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: Eres nuevo, no?
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 2
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &-4010641908940633706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 47
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: Yo me pase ese juego como 20 veces
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &-3561063899429514572
+--- !u!114 &-6495944730370347952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +18,7 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 2
---- !u!114 &-2267411636532179074
+--- !u!114 &-5945326217187716596
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,14 +28,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 53
+  m_Name: 51
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "No hay nada ah\uFFFD"
+  <Comentario>k__BackingField: "No intentes pasar por ah\xED"
   <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 5
+  <Deley>k__BackingField: 1
+--- !u!114 &-5447740324336079138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 10
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: Eres nuevo, no?
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 2
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &-5312837476944382747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 42
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "Si ibas por el otro lado hab\xEDa una moneda secreta"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,56 +86,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   <comments>k__BackingField:
-  - {fileID: -8005456647872550081}
-  - {fileID: -7732400722619233866}
-  - {fileID: 7220858752341926917}
-  - {fileID: 1617057782649259556}
-  - {fileID: -4010641908940633706}
-  - {fileID: 1320182196749823038}
-  - {fileID: -2267411636532179074}
-  - {fileID: -3561063899429514572}
+  - {fileID: 3216972583522697819}
+  - {fileID: -5447740324336079138}
+  - {fileID: 2375281976312403942}
+  - {fileID: -5312837476944382747}
+  - {fileID: 4752101919930060446}
+  - {fileID: -5945326217187716596}
+  - {fileID: 8460036098760813658}
+  - {fileID: -6495944730370347952}
   <Name>k__BackingField: DarkYors
   <Ban>k__BackingField: 0
   <Enable>k__BackingField: 1
   <Perfil>k__BackingField: {fileID: 0}
   <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &1320182196749823038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 51
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "No intentes pasar por ah\uFFFD"
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &1617057782649259556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 42
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "Si ibas por el otro lado hab\uFFFDa una moneda secreta"
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &7220858752341926917
+--- !u!114 &2375281976312403942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,3 +117,57 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 1
+--- !u!114 &3216972583522697819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 1
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: Hola
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &4752101919930060446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 47
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: Yo me pase ese juego como 20 veces
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &8460036098760813658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 53
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "No hay nada ah\xED"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 5

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5847257536245012816
+--- !u!114 &-8932368244592543064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,10 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 20
+  m_Name: 5
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "\uFFFDD\uFFFDnde puedo descargar ese juego?"
+  <Comentario>k__BackingField: "\xBFQuien eres?"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &-7094309190723424062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 58
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "\xBFAlguien sabe como hacer un videojuego?"
   <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
@@ -32,9 +50,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   <comments>k__BackingField:
-  - {fileID: -5847257536245012816}
+  - {fileID: -8932368244592543064}
+  - {fileID: 970204008945545988}
+  - {fileID: -7094309190723424062}
+  - {fileID: 5501327285922265787}
   <Name>k__BackingField: QuasarQuest_01
   <Ban>k__BackingField: 0
   <Enable>k__BackingField: 1
   <Perfil>k__BackingField: {fileID: 0}
   <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &970204008945545988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 20
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "\xBFD\xF3nde puedo descargar ese juego?"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &5501327285922265787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 65
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "\xBFCu\xE1ndo volveras a hacer stream?"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 2
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
