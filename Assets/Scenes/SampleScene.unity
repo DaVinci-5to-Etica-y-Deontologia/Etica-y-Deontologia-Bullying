@@ -572,7 +572,7 @@ MonoBehaviour:
   fillAmounts:
   - fadeOn:
       durationAnim: 5
-      durationWait: 5
+      durationWait: 3
       timerOn:
         rid: -2
       unscaled: 0
@@ -623,6 +623,30 @@ MonoBehaviour:
     onEndOff:
       m_PersistentCalls:
         m_Calls: []
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: -0.00021743152
+        outSlope: -0.00021743152
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 1
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: -0.000899664
+        outSlope: -0.000899664
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 1
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - fadeOn:
       durationAnim: 0.5
       durationWait: 0
@@ -664,6 +688,30 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   references:
     version: 2
     RefIds:
@@ -1512,6 +1560,30 @@ MonoBehaviour:
     onEndOff:
       m_PersistentCalls:
         m_Calls: []
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - fadeOn:
       durationAnim: 0.5
       durationWait: 0
@@ -1551,8 +1623,32 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   references:
     version: 2
     RefIds:
@@ -2239,10 +2335,6 @@ PrefabInstance:
     - target: {fileID: 3496957810255365158, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
       propertyPath: m_Name
       value: GamePlay
-      objectReference: {fileID: 0}
-    - target: {fileID: 3565274342916419107, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
-      propertyPath: multiply
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4151406349603605169, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
       propertyPath: m_AnchorMax.x

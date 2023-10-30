@@ -33,6 +33,16 @@ public class LerpFloatTime : MonoBehaviour
             fillAmounts[i].Off();
         }
     }
+
+    private void OnValidate()
+    {
+        for (int i = 0; i < fillAmounts.Length; i++)
+        {
+            fillAmounts[i].OnValidate();
+        }
+
+        Debug.Log("me llama");
+    }
 }
 
 [System.Serializable]
@@ -56,11 +66,14 @@ public class FillAmount
     [SerializeField]
     public UnityEngine.Events.UnityEvent onEndOff;
 
+    [SerializeField]
+    AnimationCurve animationCurve;
+
     bool enable;
 
     public void Init()
     {
-        fadeOn.alphas += (alpha) => fill.Invoke(alpha);
+        fadeOn.alphas += (alpha) =>  fill.Invoke(animationCurve.Evaluate(alpha));
 
         fadeOn.end += InternalFade;
 
@@ -94,6 +107,25 @@ public class FillAmount
             onEndOn.Invoke();
         else
             onEndOff.Invoke();
+    }
+
+    public void OnValidate()
+    {
+        if (animationCurve == null)
+        {
+            animationCurve = AnimationCurve.Linear(0, 0, 1, 1);
+            return;
+        }
+
+        var keys = animationCurve.keys;
+
+        keys[0].time = 0;
+
+        keys[^1].time = 1;
+
+        animationCurve.keys = keys;
+
+        Debug.Log("llegue");
     }
 }
 
