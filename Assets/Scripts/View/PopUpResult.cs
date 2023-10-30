@@ -49,7 +49,7 @@ public class PopUpResult : PopUp
 
 
         
-        callsManager.Create("Exit", Application.Quit);
+        callsManager.Create("Exit", GameManager.instance.Quit);
 
         
         callsManager.Create("Reset", ()=> SceneManager.LoadScene(SceneManager.GetActiveScene().name));
