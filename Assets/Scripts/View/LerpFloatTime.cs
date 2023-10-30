@@ -75,8 +75,6 @@ public class FillAmount
 
         fadeOn.end += InternalFade;
 
-        fadeOn.unscaled = true;
-
         fadeOn.Init();
     }
 
