@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7546238194686672080
+--- !u!114 &-8849145133824214777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,7 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 14
+  m_Name: 53
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "creo que por ah\xED no era"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &-7503082574265858705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 17
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
   <Comentario>k__BackingField: nuevo en esto eh
@@ -18,25 +36,7 @@ MonoBehaviour:
   <Views>k__BackingField: 2
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 1
---- !u!114 &-6278837479380672611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 19
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: ese juego me trae nostalgia
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 3
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 2
---- !u!114 &-6033497880266567796
+--- !u!114 &-5411601938947272381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Name: 48
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "creo que por ah\xED no era"
+  <Comentario>k__BackingField: juegas bien
   <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 2
---- !u!114 &-5271446388959427296
+--- !u!114 &-3761418547080167523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 71
+  m_Name: 83
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
   <Comentario>k__BackingField: bueno nos vemos
@@ -72,42 +72,6 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 5
---- !u!114 &-4133121594571035852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 52
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: intenta ir por otro lado
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &-407632150713292356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 32
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: siguiente nivel
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,24 +86,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   <comments>k__BackingField:
-  - {fileID: 8686715965976346863}
-  - {fileID: -7546238194686672080}
-  - {fileID: -6278837479380672611}
-  - {fileID: 387235942541710546}
-  - {fileID: 3589081789707463246}
-  - {fileID: -407632150713292356}
-  - {fileID: 5576704348559515000}
-  - {fileID: -6033497880266567796}
-  - {fileID: -4133121594571035852}
-  - {fileID: 6603075495401416691}
-  - {fileID: -5271446388959427296}
-  - {fileID: 3439830409175220711}
+  - {fileID: 7150546142902943702}
+  - {fileID: -7503082574265858705}
+  - {fileID: 6626863311858127356}
+  - {fileID: 7707265463517326899}
+  - {fileID: 7119851019523844096}
+  - {fileID: 5966611583847079613}
+  - {fileID: -5411601938947272381}
+  - {fileID: -8849145133824214777}
+  - {fileID: 5870395570994096107}
+  - {fileID: 642089815972187822}
+  - {fileID: 832613920717467601}
+  - {fileID: -3761418547080167523}
   <Name>k__BackingField: Zenit_Zigzag8
   <Ban>k__BackingField: 0
   <Enable>k__BackingField: 1
   <Perfil>k__BackingField: {fileID: 0}
-  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &387235942541710546
+  <colorText>k__BackingField: {r: 0.14117648, g: 0.10588236, b: 0.078431375, a: 1}
+--- !u!114 &642089815972187822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,79 +113,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 21
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: siempre lo jugaba con mis hermanos
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 2
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &3439830409175220711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 73
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: bueno nos vemos
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 5
---- !u!114 &3589081789707463246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 26
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: vamos empieza la partida
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &5576704348559515000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 43
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: juegas bien
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 2
---- !u!114 &6603075495401416691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 63
+  m_Name: 71
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
   <Comentario>k__BackingField: ya terminaras el stream?
@@ -229,7 +121,7 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 4
---- !u!114 &8686715965976346863
+--- !u!114 &832613920717467601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,7 +131,97 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 7
+  m_Name: 80
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: bueno nos vemos
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 5
+--- !u!114 &5870395570994096107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 58
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: intenta ir por otro lado
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &5966611583847079613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 37
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: siguiente nivel
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 3
+--- !u!114 &6626863311858127356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 22
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: ese juego me trae nostalgia
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 3
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &7119851019523844096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 30
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: vamos empieza la partida
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &7150546142902943702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 8
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
   <Comentario>k__BackingField: que tal va?
@@ -247,3 +229,21 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 3
+--- !u!114 &7707265463517326899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 25
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: siempre lo jugaba con mis hermanos
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 2
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1

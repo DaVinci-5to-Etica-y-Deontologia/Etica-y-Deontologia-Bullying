@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7729141639595894203
+--- !u!114 &-5737735185322383454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,50 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 51
+  m_Name: 82
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: va no puedes ser mas tonto
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: -2
-  <Damage>k__BackingField: -2
-  <Deley>k__BackingField: 1
---- !u!114 &-5017174089869554569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 28
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: ya cayese viejo
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: -2
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &-4701189603262793971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 46
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: era por el otro lado
+  <Comentario>k__BackingField: adios loquete
   <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
+  <Deley>k__BackingField: 5
+--- !u!114 &-1957569228959305157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 64
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "jajaja est\xE1s perdido"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: -1
+  <Deley>k__BackingField: 5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,23 +46,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
-  m_Name: pablokd21
+  m_Name: TechGuru
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   <comments>k__BackingField:
-  - {fileID: 6004761449013603221}
-  - {fileID: -5017174089869554569}
-  - {fileID: -4701189603262793971}
-  - {fileID: -7729141639595894203}
-  - {fileID: 6875269726335313727}
-  - {fileID: 5991228413141772085}
-  - {fileID: 7599704849376781171}
-  <Name>k__BackingField: pablokd21
+  - {fileID: 7668250535183773782}
+  - {fileID: 9140610935241829753}
+  - {fileID: 1555287532916865953}
+  - {fileID: -1957569228959305157}
+  - {fileID: -5737735185322383454}
+  <Name>k__BackingField: TechGuru
   <Ban>k__BackingField: 0
   <Enable>k__BackingField: 1
   <Perfil>k__BackingField: {fileID: 0}
   <colorText>k__BackingField: {r: 0.14117648, g: 0.10588236, b: 0.078431375, a: 1}
---- !u!114 &5991228413141772085
+--- !u!114 &1555287532916865953
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,15 +70,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 65
+  m_Name: 57
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: estaba super obvio
+  <Comentario>k__BackingField: noooo, te van a matar!
   <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
-  <Damage>k__BackingField: -1
-  <Deley>k__BackingField: 1
---- !u!114 &6004761449013603221
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 5
+--- !u!114 &7668250535183773782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,15 +88,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 7
+  m_Name: 11
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: por que me recomendaron este stream
+  <Comentario>k__BackingField: Buenas a todos!
   <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 2
---- !u!114 &6875269726335313727
+--- !u!114 &9140610935241829753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,29 +106,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 54
+  m_Name: 35
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "no me creo que no puedas pasar de ah\xED"
+  <Comentario>k__BackingField: parece interesante
   <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: -1
-  <Damage>k__BackingField: -1
-  <Deley>k__BackingField: 2
---- !u!114 &7599704849376781171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 84
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: no vuelvas
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: -5
-  <Deley>k__BackingField: 5
+  <Views>k__BackingField: 2
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1

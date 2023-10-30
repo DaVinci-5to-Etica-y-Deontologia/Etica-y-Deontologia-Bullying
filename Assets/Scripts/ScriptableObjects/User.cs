@@ -37,6 +37,7 @@ public class User : SuperScriptableObject
 
     public new BD Parent => (BD)base.Parent;
 
+    public bool Chck => Enable && !Ban;
 
 #if UNITY_EDITOR
 

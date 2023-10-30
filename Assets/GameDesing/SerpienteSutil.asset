@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6139590077918390127
+--- !u!114 &-6090144473694164630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -18,7 +18,7 @@ MonoBehaviour:
   <Views>k__BackingField: 4
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 2
---- !u!114 &-5519480430887598435
+--- !u!114 &-3948917449836495129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,15 +28,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 72
+  m_Name: 18
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: bye
+  <Comentario>k__BackingField: ese juego es muy entretenido
   <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &-4706657319290108890
+  <Deley>k__BackingField: 4
+--- !u!114 &-3572290719222901254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,15 +46,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 66
+  m_Name: 45
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: estuvo bueno el stream
+  <Comentario>k__BackingField: "no debiste ir por ah\xED"
   <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 8
-  <Damage>k__BackingField: 1
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
   <Deley>k__BackingField: 5
---- !u!114 &-2211719964999580850
+--- !u!114 &-2042174920017648426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 30
+  m_Name: 34
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
   <Comentario>k__BackingField: trata de ir por otros caminos
@@ -72,24 +72,6 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 2
---- !u!114 &-379068064217770588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 59
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: seguro lo pasas la proxima vez
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 1
-  <Deley>k__BackingField: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,19 +86,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   <comments>k__BackingField:
-  - {fileID: -6139590077918390127}
-  - {fileID: 1122962549017373321}
-  - {fileID: -2211719964999580850}
-  - {fileID: 285833720118072365}
-  - {fileID: -379068064217770588}
-  - {fileID: -4706657319290108890}
-  - {fileID: -5519480430887598435}
+  - {fileID: -6090144473694164630}
+  - {fileID: -3948917449836495129}
+  - {fileID: -2042174920017648426}
+  - {fileID: -3572290719222901254}
+  - {fileID: 4456827144431976294}
+  - {fileID: 8462739979695593836}
+  - {fileID: 37605810690711732}
   <Name>k__BackingField: SerpienteSutil
   <Ban>k__BackingField: 0
   <Enable>k__BackingField: 1
   <Perfil>k__BackingField: {fileID: 0}
-  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &285833720118072365
+  <colorText>k__BackingField: {r: 0.14117648, g: 0.10588236, b: 0.078431375, a: 1}
+--- !u!114 &37605810690711732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,29 +108,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 40
+  m_Name: 81
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "no debiste ir por ah\xED"
+  <Comentario>k__BackingField: bye
   <UnBan>k__BackingField: "\r"
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &4456827144431976294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 67
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: seguro lo pasas la proxima vez
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 1
+  <Deley>k__BackingField: 1
+--- !u!114 &8462739979695593836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 74
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: estuvo bueno el stream
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 8
+  <Damage>k__BackingField: 1
   <Deley>k__BackingField: 5
---- !u!114 &1122962549017373321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 15
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: ese juego es muy entretenido
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 4

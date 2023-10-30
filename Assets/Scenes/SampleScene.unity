@@ -572,7 +572,7 @@ MonoBehaviour:
   fillAmounts:
   - fadeOn:
       durationAnim: 5
-      durationWait: 5
+      durationWait: 3
       timerOn:
         rid: -2
       unscaled: 0
@@ -623,6 +623,30 @@ MonoBehaviour:
     onEndOff:
       m_PersistentCalls:
         m_Calls: []
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: -0.00021743152
+        outSlope: -0.00021743152
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 1
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: -0.000899664
+        outSlope: -0.000899664
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 1
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - fadeOn:
       durationAnim: 0.5
       durationWait: 0
@@ -664,6 +688,30 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   references:
     version: 2
     RefIds:
@@ -1484,8 +1532,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillAmounts:
   - fadeOn:
-      durationAnim: 1
-      durationWait: 0.1
+      durationAnim: 0.3
+      durationWait: 0
       timerOn:
         rid: -2
       unscaled: 0
@@ -1512,8 +1560,32 @@ MonoBehaviour:
     onEndOff:
       m_PersistentCalls:
         m_Calls: []
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   - fadeOn:
-      durationAnim: 0.5
+      durationAnim: 0.3
       durationWait: 0
       timerOn:
         rid: -2
@@ -1553,6 +1625,30 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   references:
     version: 2
     RefIds:
@@ -1890,7 +1986,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5177388603050735206, guid: cc35afd292fc349128b36a291fb3a165, type: 3}
+  m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2268,6 +2364,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8241539652357072859, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1792347874}
     - target: {fileID: 8531840333979990514, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
       propertyPath: m_fontSize
       value: 32
