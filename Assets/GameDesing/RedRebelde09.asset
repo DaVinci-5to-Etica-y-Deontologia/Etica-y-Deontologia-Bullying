@@ -1,27 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
-  m_Name: RedRebelde09
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
-  <comments>k__BackingField:
-  - {fileID: 1632684170531065811}
-  - {fileID: 3073240619256727198}
-  <Name>k__BackingField: RedRebelde09
-  <Ban>k__BackingField: 0
-  <Enable>k__BackingField: 1
-  <Perfil>k__BackingField: {fileID: 0}
-  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &1632684170531065811
+--- !u!114 &-2802064383174039169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,7 +18,7 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 2
---- !u!114 &3073240619256727198
+--- !u!114 &-1744074021883190756
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,3 +36,24 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 5
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
+  m_Name: RedRebelde09
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
+  <comments>k__BackingField:
+  - {fileID: -2802064383174039169}
+  - {fileID: -1744074021883190756}
+  <Name>k__BackingField: RedRebelde09
+  <Ban>k__BackingField: 0
+  <Enable>k__BackingField: 1
+  <Perfil>k__BackingField: {fileID: 0}
+  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
