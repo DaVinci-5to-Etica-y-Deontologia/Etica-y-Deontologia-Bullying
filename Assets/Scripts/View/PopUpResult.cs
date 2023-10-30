@@ -1,6 +1,8 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class PopUpResult : PopUp
 {
@@ -45,5 +47,13 @@ public class PopUpResult : PopUp
         else
             damageNumber.text = damageNumber.text.RichText("color", "green");
 
+
+        
+        callsManager.Create("Exit", Application.Quit);
+
+        
+        callsManager.Create("Reset", ()=> SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+
+        
     }
 }
