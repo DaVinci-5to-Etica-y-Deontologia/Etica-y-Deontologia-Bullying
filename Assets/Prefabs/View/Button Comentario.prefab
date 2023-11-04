@@ -515,6 +515,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   button: {fileID: 140912322178551159}
+  textMeshPro: {fileID: 0}
 --- !u!114 &8657474774859262774
 MonoBehaviour:
   m_ObjectHideFlags: 0
