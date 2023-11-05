@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Euler;
 
-
 #if UNITY_EDITOR 
 using UnityEditor;
 #endif
@@ -44,6 +43,33 @@ public class BD : SuperScriptableObject
             }
 
             return null;
+        }
+    }
+
+    public IEnumerable<User> EnableAllLazyness()
+    {
+        foreach (var user in users)
+        {
+            user.Enable = true;
+
+            yield return user;
+        }   
+    }
+
+    public IEnumerable<User> ResetAllLazyness()
+    {
+        foreach (var user in EnableAllLazyness())
+        {
+            user.Ban = false;
+
+            yield return user;
+        }
+    }
+
+    public void ResetAll()
+    {
+        foreach (var item in ResetAllLazyness())
+        {
         }
     }
 
