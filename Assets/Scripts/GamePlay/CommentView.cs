@@ -6,8 +6,12 @@ using UnityEngine.UI;
 
 public class CommentView : MonoBehaviour
 {
+    public User user;
+
     [field: SerializeField]
     public Comment comment { get; private set; }
+
+    public LinkedListNode<CommentView> node;
 
     [SerializeField]
     EventManager eventManager;
@@ -24,20 +28,27 @@ public class CommentView : MonoBehaviour
     [SerializeField]
     Button button;
 
-    public void Create(Comment comment, ContentSizeFitter contain)
+    public void Create(User user,Comment comment, ContentSizeFitter contain)
     {
+        this.user = user;
+
         this.contain = contain;
 
         this.comment = comment;
 
-        perfil.sprite = comment.Parent.Perfil;
+        perfil.sprite = user.Perfil;
 
-        textMesh.text = comment.Comentario.RichText("color", "#" + ColorUtility.ToHtmlStringRGBA(comment.Parent.colorText));
+        textMesh.text = comment.Text.RichText("color", "#" + ColorUtility.ToHtmlStringRGBA(user.colorText));
     }
 
     public void AnimRefresh()
     {
         contain.enabled = true;
+    }
+
+    public void Aplicate()
+    {
+        user.Aplicate(this);
     }
 
     public void OnClick()

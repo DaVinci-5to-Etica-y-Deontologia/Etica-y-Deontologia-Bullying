@@ -5,26 +5,23 @@ using UnityEngine;
 /// <summary>
 /// Clase destinada a ser un user
 /// </summary>
-public class User : SuperScriptableObject
+[System.Serializable]
+public class User
 {
-    #region NO TOCAR
-
     [field: SerializeField]
-    public Comment[] comments { get; private set; }
-
-    #endregion
-
-    ////////////////////////////////////////////////////////
-    //Colocar las variables para el usuario
+    public HashSet<CommentView> comments { get; private set; } = new();
 
     [field: SerializeField]
     public string Name { get; private set; }
 
     [field: SerializeField]
-    public bool Ban { get; set; }
+    public float MoralIndex { get; set; }
 
     [field: SerializeField]
-    public bool Enable { get; set; }
+    public float MoralRange { get; set; }
+
+    [field: SerializeField]
+    public bool Enable { get; set; } = true;
 
     [field: SerializeField]
     public Sprite Perfil { get; set; }
@@ -32,64 +29,105 @@ public class User : SuperScriptableObject
     [field: SerializeField]
     public Color colorText { get; set; } = new Color{ a=1 };
 
+    BD database => stream.dataBase;
 
-    //////////////////////////////////////////////////////
+    public float CoolDown { get=>_coolDown.current; set=> _coolDown.Set(value); }
 
-    public new BD Parent => (BD)base.Parent;
+    int _Admonition
+    {
+        get => _admonition;
+        set
+        {
+            if (_admonition + value <= 2)
+            {
+                _admonition = value;
+            }
+            else 
+                Destroy();
+        }
+    }
 
-    public bool Chck => Enable && !Ban;
+    int _admonition;
+
+    Timer _coolDown;
+
+    ChatManager stream;
 
     public override string ToString()
     {
-        return Name + " " + comments.Length;
+        return Name + " " + comments.Count;
     }
 
-#if UNITY_EDITOR
+    #region Moderator
 
-    public User Initilize(List<PDO<string, string>> param)
+    public void Admonition(CommentView commentView)
     {
-        //////////////////////////////////////////////////////////////////////////////////
-        //Colocar aqui el seteo de las variables para el usuario
-
-        Name = name;
-        Enable = true;
-
-
-
-
-        //Fin
-        //////////////////////////////////////////////////////////////////////////////////
-
-        //No tocar
-        InternalSet(param);
-        return this;
+        _admonition++;
+        CoolDown = 30;
+        Eliminate(commentView);
     }
 
-    
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
-    #region NO TOCAR
-    public override void DeleteThis()
+    public void Ban(CommentView commentView)
     {
-        comments?.Delete();
-
-        base.DeleteThis();
+        Ban();
     }
 
-    /// <summary>
-    /// recive una lista de todos los comentarios separados reglones, con sus parametros dentro del array
-    /// </summary>
-    /// <param name="param"></param>
-    void InternalSet(List<PDO<string, string>> param)
-    {
-        comments = new Comment[param.Count];
-        for (int i = 0; i < comments.Length; i++)
-        {
-            comments[i] = MakeNewChild<Comment>(param[i][0], (comments) => comments.Initilize(param[i]));
-        }
-    }
     #endregion
 
-#endif
+    public void Aplicate(CommentView commentView)
+    {
+        Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
 
+        stream.Users(commentView.comment.Views);
+
+        Eliminate(commentView);
+    }
+
+    public void Eliminate(CommentView commentView)
+    {
+        comments.Remove(commentView);
+
+        stream.LeaveComment(commentView);
+    }
+
+    public void Destroy()
+    {
+        _coolDown.Stop();
+        Enable = false;
+        stream.users.Remove(this);
+    }
+
+    void Ban()
+    {
+        foreach (var item in comments)
+        {
+            stream.LeaveComment(item);
+        }
+
+        Destroy();
+    }    
+
+    void CreateComment()
+    {
+        var aux = database.SelectComment(MoralIndex, MoralRange);
+
+        CoolDown = aux.Deley;
+
+        comments.Add(stream.CreateComment(this, aux));
+    }
+
+    public User(ChatManager chat)
+    {
+        stream = chat;
+        int rng = Random.Range(5,8);
+
+        string chars = "abcdefghijklmnñopqrstuvwxyz";
+
+        for (int i = 0; i < rng; i++)
+        {
+            Name += chars[Random.Range(0, chars.Length)];
+        }
+        
+        _coolDown = TimersManager.Create(Random.Range(10, 15), CreateComment);
+    }
 }

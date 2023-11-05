@@ -14,12 +14,9 @@ using UnityEditor;
 public class BD : SuperScriptableObject
 {
     [field: SerializeField]
-    public User[] users { get; private set; }
-
-    [field: SerializeField]
     public Comment[] comments { get; private set; }
 
-    public int Length => users.Length;
+    public int Length => comments.Length;
 
     public Comment this[int index]
     {
@@ -29,47 +26,16 @@ public class BD : SuperScriptableObject
         }
     }
 
-    public User this [string name]
+    /// <summary>
+    /// Adaptar al nuevo sistema
+    /// </summary>
+    /// <param name="moralIndex"></param>
+    /// <param name="moralRange"></param>
+    /// <returns></returns>
+    public Comment SelectComment(float moralIndex, float moralRange)
     {
-        get
-        {
-            for (int i = 0; i < users.Length; i++)
-            {
-                if (users[i].name == name)
-                    return users[i];
-            }
-
-            return null;
-        }
+        return comments[Random.Range(0, comments.Length)];
     }
-
-    public IEnumerable<User> EnableAllLazyness()
-    {
-        foreach (var user in users)
-        {
-            user.Enable = true;
-
-            yield return user;
-        }   
-    }
-
-    public IEnumerable<User> ResetAllLazyness()
-    {
-        foreach (var user in EnableAllLazyness())
-        {
-            user.Ban = false;
-
-            yield return user;
-        }
-    }
-
-    public void ResetAll()
-    {
-        foreach (var item in ResetAllLazyness())
-        {
-        }
-    }
-
 
     #region NO TOCAR
 
@@ -87,42 +53,21 @@ public class BD : SuperScriptableObject
 
         _txtToParse.Execute();
 
-        Dictionary<string,List<PDO<string, string>>> _users = new();
-
         List<Comment> comments = new List<Comment>();
 
         string debug = string.Empty;
 
-        int index = 0;
-
         //separo en users
         for (int i = 0; i < _txtToParse.DataOriginalOrder.Count; i++)
         {
-            if (_users.TryGetValue(_txtToParse.DataOriginalOrder[i][1], out var aux))
-                aux.Add(_txtToParse.DataOriginalOrder[i]);
-            else
-            {
-                _users.Add(_txtToParse.DataOriginalOrder[i][1], new List<PDO<string, string>>() { _txtToParse.DataOriginalOrder[i] });
-            }
-
             debug += _txtToParse.DataOriginalOrder[i].ToString() + "\n";
+
+            comments.Add(MakeNewChild<Comment>(i.ToString(), (comment)=> comment.Initilize(_txtToParse.DataOriginalOrder[i])));
         }
 
         _txtToParse.DataOriginalOrder.Clear();
 
         debug += "\n";
-
-        //agrego en los scriptables
-        foreach (var user in _users)
-        {
-            users[index] = MakeNew<User>(user.Key, (userClass) => userClass.Initilize(user.Value)); //creo en disco el scriptable
-
-            debug += users[index] + "\n";
-
-            comments.AddRange(users[index].comments);
-
-            index++;
-        }
 
         comments.Sort(Sort);
 
@@ -138,7 +83,9 @@ public class BD : SuperScriptableObject
     [ContextMenu("Borrar tablas relacionadas")]
     void DeleteAll()
     {
-        users?.Delete();
+        comments?.Delete();
+
+
     }
 
     int Sort(Comment x, Comment y)

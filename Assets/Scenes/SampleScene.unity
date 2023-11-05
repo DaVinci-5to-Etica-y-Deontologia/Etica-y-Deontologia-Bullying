@@ -2336,10 +2336,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamePlay
       objectReference: {fileID: 0}
-    - target: {fileID: 3565274342916419107, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
-      propertyPath: multiply
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4151406349603605169, guid: 9d7fef928756eda43a14f850a615edad, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
