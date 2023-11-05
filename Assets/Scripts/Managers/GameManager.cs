@@ -117,6 +117,11 @@ public class GameManager : SingletonMono<GameManager>
         victory.Invoke();
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     void MyUpdate(Pictionarys<MyScripts, UnityAction> update)
     {
         for (int i = 0; i < update.Count; i++)
