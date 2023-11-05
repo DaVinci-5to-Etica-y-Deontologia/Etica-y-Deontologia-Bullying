@@ -13,9 +13,6 @@ using UnityEditor;
 [CreateAssetMenu(menuName = "BD")]
 public class BD : SuperScriptableObject
 {
-    [SerializeField]
-    TextAsset _textAsset;
-
     [field: SerializeField]
     public User[] users { get; private set; }
 
@@ -78,6 +75,9 @@ public class BD : SuperScriptableObject
 
 #if UNITY_EDITOR
 
+    [SerializeField]
+    Parse _txtToParse;
+
     public event System.Action<BD> OnFinishSet;
 
     [ContextMenu("Cargar el texto")]
@@ -85,34 +85,39 @@ public class BD : SuperScriptableObject
     {
         DeleteAll();
 
-        Parse _parse = new Parse(_textAsset);
-        
-        users = new User[_parse.DataUser.Count];
+        _txtToParse.Execute();
+
+        Dictionary<string,List<PDO<string, string>>> _users = new();
 
         List<Comment> comments = new List<Comment>();
 
         string debug = string.Empty;
 
         int index = 0;
-        
-        foreach (var user in _parse.DataUser)
+
+        //separo en users
+        for (int i = 0; i < _txtToParse.DataOriginalOrder.Count; i++)
         {
-            List<PDO<string,string>> data = new List<PDO<string, string>>();
-
-            debug += user + "\n";
-
-            for (int i = _parse.DataOrdered.Count -1 ; i >= 0 ; i--)
+            if (_users.TryGetValue(_txtToParse.DataOriginalOrder[i][1], out var aux))
+                aux.Add(_txtToParse.DataOriginalOrder[i]);
+            else
             {
-                debug += "\t" + _parse.DataOrdered[i].ToString() + "\n";
-
-                if (_parse.DataOrdered[i][1] == user)
-                {
-                    data.Insert(0,_parse.DataOrdered[i]);
-                    _parse.DataOrdered.RemoveAt(i);
-                }                
+                _users.Add(_txtToParse.DataOriginalOrder[i][1], new List<PDO<string, string>>() { _txtToParse.DataOriginalOrder[i] });
             }
 
-            users[index] = MakeNew<User>(user, (userClass) => userClass.Initilize(data)); //creo en disco el scriptable
+            debug += _txtToParse.DataOriginalOrder[i].ToString() + "\n";
+        }
+
+        _txtToParse.DataOriginalOrder.Clear();
+
+        debug += "\n";
+
+        //agrego en los scriptables
+        foreach (var user in _users)
+        {
+            users[index] = MakeNew<User>(user.Key, (userClass) => userClass.Initilize(user.Value)); //creo en disco el scriptable
+
+            debug += users[index] + "\n";
 
             comments.AddRange(users[index].comments);
 
