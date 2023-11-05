@@ -1,6 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5737735185322383454
+--- !u!114 &-3200021805258717183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 11
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: Buenas a todos!
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &-1200997901470462357
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -18,7 +36,7 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 5
---- !u!114 &-1957569228959305157
+--- !u!114 &-790631019318621768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,53 +68,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   <comments>k__BackingField:
-  - {fileID: 7668250535183773782}
-  - {fileID: 9140610935241829753}
-  - {fileID: 1555287532916865953}
-  - {fileID: -1957569228959305157}
-  - {fileID: -5737735185322383454}
+  - {fileID: -3200021805258717183}
+  - {fileID: 966591989786078171}
+  - {fileID: 9015960037698634126}
+  - {fileID: -790631019318621768}
+  - {fileID: -1200997901470462357}
   <Name>k__BackingField: TechGuru
   <Ban>k__BackingField: 0
   <Enable>k__BackingField: 1
   <Perfil>k__BackingField: {fileID: 0}
-  <colorText>k__BackingField: {r: 0.14117648, g: 0.10588236, b: 0.078431375, a: 1}
---- !u!114 &1555287532916865953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 57
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: noooo, te van a matar!
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 5
---- !u!114 &7668250535183773782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 11
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: Buenas a todos!
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 2
---- !u!114 &9140610935241829753
+  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &966591989786078171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,3 +96,21 @@ MonoBehaviour:
   <Views>k__BackingField: 2
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 1
+--- !u!114 &9015960037698634126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 57
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: noooo, te van a matar!
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 5

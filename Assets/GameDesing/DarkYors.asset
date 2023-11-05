@@ -1,123 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7277542487568837153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 56
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "No intentes pasar por ah\xED"
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &-2637244791132482556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 13
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: Eres nuevo, no?
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 2
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &-1774054270108212443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 59
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: "No hay nada ah\xED"
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 5
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
-  m_Name: DarkYors
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
-  <comments>k__BackingField:
-  - {fileID: 23605413978314446}
-  - {fileID: -2637244791132482556}
-  - {fileID: 4409456719446213935}
-  - {fileID: 6171928799209796483}
-  - {fileID: 5367825149329433489}
-  - {fileID: -7277542487568837153}
-  - {fileID: -1774054270108212443}
-  - {fileID: 6380311205235022923}
-  <Name>k__BackingField: DarkYors
-  <Ban>k__BackingField: 0
-  <Enable>k__BackingField: 1
-  <Perfil>k__BackingField: {fileID: 0}
-  <colorText>k__BackingField: {r: 0.14117648, g: 0.10588236, b: 0.078431375, a: 1}
---- !u!114 &23605413978314446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 1
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: Hola
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 2
---- !u!114 &4409456719446213935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 19
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: 'Ese juego es viejisimo '
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 1
---- !u!114 &5367825149329433489
+--- !u!114 &-4771146889702544936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,7 +18,70 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 1
---- !u!114 &6171928799209796483
+--- !u!114 &-138177937874362328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 1
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: Hola
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
+  m_Name: DarkYors
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
+  <comments>k__BackingField:
+  - {fileID: -138177937874362328}
+  - {fileID: 2093869466608575962}
+  - {fileID: 663618825595433976}
+  - {fileID: 1368208395538790057}
+  - {fileID: -4771146889702544936}
+  - {fileID: 6539724429156741209}
+  - {fileID: 7610187733352382815}
+  - {fileID: 5657346281025587754}
+  <Name>k__BackingField: DarkYors
+  <Ban>k__BackingField: 0
+  <Enable>k__BackingField: 1
+  <Perfil>k__BackingField: {fileID: 0}
+  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &663618825595433976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 19
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: 'Ese juego es viejisimo '
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &1368208395538790057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,7 +99,25 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 1
---- !u!114 &6380311205235022923
+--- !u!114 &2093869466608575962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 13
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: Eres nuevo, no?
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 2
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &5657346281025587754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,3 +135,39 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 2
+--- !u!114 &6539724429156741209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 56
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "No intentes pasar por ah\xED"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 1
+--- !u!114 &7610187733352382815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 59
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: "No hay nada ah\xED"
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 5
