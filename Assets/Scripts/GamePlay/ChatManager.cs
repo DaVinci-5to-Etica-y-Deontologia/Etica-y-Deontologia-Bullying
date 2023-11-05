@@ -105,6 +105,8 @@ public class ChatManager : MonoBehaviour
         }
 
         comments.Remove(commentView.comment.Parent);
+
+        CheckComment();
     }
 
     public void Kick(CommentView commentView)
@@ -112,6 +114,8 @@ public class ChatManager : MonoBehaviour
         commentView.comment.Parent.Enable = false;
 
         Eliminate(commentView);
+
+        CheckComment();
     }
 
     public void Eliminate(CommentView commentView)
@@ -140,17 +144,32 @@ public class ChatManager : MonoBehaviour
         else
             commentsList.Add(newCommentView);
 
+        NextComment();
+    }
+
+    void CheckComment()
+    {
+        if (dataBase.comments[index].Chck)
+            return;
+
+        NextComment(dataBase.comments[index].Deley);
+    }
+
+
+    void NextComment(float timeCorrection = 0)
+    {
         do
         {
             index++;
-        } while (index < dataBase.comments.Length && (!dataBase.comments[index].Parent.Enable || dataBase.comments[index].Parent.Ban));
+        } while (index < dataBase.comments.Length-1 && !dataBase.comments[index].Chck);
 
-        if(index >= dataBase.comments.Length)
+        if (index >= dataBase.comments.Length-1)
         {
             TimersManager.Create(endDeley, FinishDay);
+            deley.Stop();
             return;
         }
 
-        deley.Set(dataBase.comments[index].Deley);
+        deley.Set(dataBase.comments[index].Deley - timeCorrection);
     }
 }

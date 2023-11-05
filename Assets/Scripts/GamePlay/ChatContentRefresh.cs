@@ -15,11 +15,16 @@ public class ChatContentRefresh : MonoBehaviour
 
     float prevValue;
 
+    int childCount;
+
     private void OnTransformChildrenChanged()
     {
-        contain.enabled = false;
+        if(childCount < transform.childCount)
+            contain.enabled = false;
 
         prevValue = containScrollRect.normalizedPosition.y;
+
+        childCount = transform.childCount;
     }
 
     public void OnValueChange(Vector2 value)

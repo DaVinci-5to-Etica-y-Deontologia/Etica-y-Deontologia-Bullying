@@ -42,8 +42,8 @@ public class PopUpComment : PopUp
             callsManager.Create("Ban" , ()=> ban.delegato.Invoke(comment));
 
         if (comment.comment.Parent.Enable)
-            callsManager.Create("kick", () => kick.delegato.Invoke(comment));
+            callsManager.Create("Kick", () => kick.delegato.Invoke(comment));
 
-        callsManager.Create("eliminate", () => eliminate.delegato.Invoke(comment));
+        callsManager.Create("Eliminate", () => eliminate.delegato.Invoke(comment));
     }
 }

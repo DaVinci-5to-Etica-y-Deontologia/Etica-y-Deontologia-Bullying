@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7527853281059115104
+--- !u!114 &-5922805736191452589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,106 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 69
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: eres muy aburrido
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: -5
-  <Damage>k__BackingField: -5
-  <Deley>k__BackingField: 1
---- !u!114 &-3384696936069069423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 17
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: otro mas que solo juega
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: -2
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 2
---- !u!114 &-2667512083878671180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 22
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: uff ese juego es super viejo y aburrido
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: 0
-  <Damage>k__BackingField: 0
-  <Deley>k__BackingField: 3
---- !u!114 &-1777156072597928164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 60
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: dedicate a otra cosa
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: -3
-  <Damage>k__BackingField: -4
-  <Deley>k__BackingField: 3
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
-  m_Name: beefo0
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
-  <comments>k__BackingField:
-  - {fileID: 6325001017860360813}
-  - {fileID: -3384696936069069423}
-  - {fileID: -2667512083878671180}
-  - {fileID: 4001986980584352981}
-  - {fileID: 4354897489865231365}
-  - {fileID: 12130607513514062}
-  - {fileID: -1777156072597928164}
-  - {fileID: -7527853281059115104}
-  <Name>k__BackingField: beefo0
-  <Ban>k__BackingField: 0
-  <Enable>k__BackingField: 1
-  <Perfil>k__BackingField: {fileID: 0}
-  <colorText>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &12130607513514062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 56
+  m_Name: 63
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
   <Comentario>k__BackingField: va que mal juegas
@@ -117,7 +18,7 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: -3
   <Deley>k__BackingField: 3
---- !u!114 &4001986980584352981
+--- !u!114 &-3693201952398850036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,25 +28,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 29
-  m_EditorClassIdentifier: 
-  _parent: {fileID: 11400000}
-  <Comentario>k__BackingField: no eres nada original
-  <UnBan>k__BackingField: "\r"
-  <Views>k__BackingField: -5
-  <Damage>k__BackingField: -2
-  <Deley>k__BackingField: 1
---- !u!114 &4354897489865231365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
-  m_Name: 38
+  m_Name: 43
   m_EditorClassIdentifier: 
   _parent: {fileID: 11400000}
   <Comentario>k__BackingField: no sabes jugar?
@@ -153,7 +36,7 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 1
---- !u!114 &6325001017860360813
+--- !u!114 &-2460998839680790435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,3 +54,120 @@ MonoBehaviour:
   <Views>k__BackingField: 0
   <Damage>k__BackingField: 0
   <Deley>k__BackingField: 1
+--- !u!114 &-1561472708752133456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 77
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: eres muy aburrido
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: -5
+  <Damage>k__BackingField: -5
+  <Deley>k__BackingField: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682cbdf3449d2274cb89e1f56225bc19, type: 3}
+  m_Name: beefo0
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
+  <comments>k__BackingField:
+  - {fileID: -2460998839680790435}
+  - {fileID: 5864836025139170686}
+  - {fileID: 3637338893054785146}
+  - {fileID: 3343849885812542347}
+  - {fileID: -3693201952398850036}
+  - {fileID: -5922805736191452589}
+  - {fileID: 4247986044925242009}
+  - {fileID: -1561472708752133456}
+  <Name>k__BackingField: beefo0
+  <Ban>k__BackingField: 0
+  <Enable>k__BackingField: 1
+  <Perfil>k__BackingField: {fileID: 0}
+  <colorText>k__BackingField: {r: 0.14117648, g: 0.10588236, b: 0.078431375, a: 1}
+--- !u!114 &3343849885812542347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 33
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: no eres nada original
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: -5
+  <Damage>k__BackingField: -2
+  <Deley>k__BackingField: 1
+--- !u!114 &3637338893054785146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 26
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: uff ese juego es super viejo y aburrido
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 3
+--- !u!114 &4247986044925242009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 68
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: dedicate a otra cosa
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: -3
+  <Damage>k__BackingField: -4
+  <Deley>k__BackingField: 3
+--- !u!114 &5864836025139170686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c9b42c860609f45a4519a27f31aa54, type: 3}
+  m_Name: 20
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 11400000}
+  <Comentario>k__BackingField: otro mas que solo juega
+  <UnBan>k__BackingField: "\r"
+  <Views>k__BackingField: -2
+  <Damage>k__BackingField: 0
+  <Deley>k__BackingField: 2
