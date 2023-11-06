@@ -412,7 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6917580175168480463}
   m_Layer: 5
-  m_Name: Resultado
+  m_Name: Fin de partida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

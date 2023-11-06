@@ -36,9 +36,11 @@ public class Comment : SuperScriptableObject
     ///
     public new User Parent => (User)base.Parent;
 
+    public bool Chck => Parent.Chck;
+
     public override string ToString()
     {
-        return JsonUtility.ToJson(this);
+        return JsonUtility.ToJson(this, true);
     }
 
 #if UNITY_EDITOR

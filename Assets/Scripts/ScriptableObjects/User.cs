@@ -30,13 +30,19 @@ public class User : SuperScriptableObject
     public Sprite Perfil { get; set; }
 
     [field: SerializeField]
-    public Color colorText { get; set; }
+    public Color colorText { get; set; } = new Color{ a=1 };
 
 
     //////////////////////////////////////////////////////
 
     public new BD Parent => (BD)base.Parent;
 
+    public bool Chck => Enable && !Ban;
+
+    public override string ToString()
+    {
+        return Name + " " + comments.Length;
+    }
 
 #if UNITY_EDITOR
 
