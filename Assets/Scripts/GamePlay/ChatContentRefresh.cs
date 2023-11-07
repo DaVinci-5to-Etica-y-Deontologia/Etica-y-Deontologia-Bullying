@@ -19,8 +19,13 @@ public class ChatContentRefresh : MonoBehaviour
 
     private void OnTransformChildrenChanged()
     {
+        /*
         if(childCount < transform.childCount)
+        {
             contain.enabled = false;
+            enabled = true;
+        }
+          */  
 
         prevValue = containScrollRect.normalizedPosition.y;
 
@@ -36,5 +41,10 @@ public class ChatContentRefresh : MonoBehaviour
         }
 
         prevValue = value.y;
+    }
+
+    private void LateUpdate()
+    {
+        contain.enabled = !contain.enabled;
     }
 }

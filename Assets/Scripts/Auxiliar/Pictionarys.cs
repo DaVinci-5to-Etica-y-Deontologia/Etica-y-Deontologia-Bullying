@@ -197,7 +197,7 @@ public class Pictionarys<K, V> : IEnumerable<Pictionary<K, V>>
             return default;
     }
 
-    public Pictionary<K, V> GetPic(int index)
+    public Pictionary<K, V> GetPicByIndex(int index)
     {
         return pictionaries[index];
     }

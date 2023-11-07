@@ -57,7 +57,6 @@ public class BD : SuperScriptableObject
 
         string debug = string.Empty;
 
-        //separo en users
         for (int i = 0; i < _txtToParse.DataOriginalOrder.Count; i++)
         {
             debug += _txtToParse.DataOriginalOrder[i].ToString() + "\n";

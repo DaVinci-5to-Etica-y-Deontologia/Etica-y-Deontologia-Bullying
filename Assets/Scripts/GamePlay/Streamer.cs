@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
 
-public class ChatManager : MonoBehaviour
+public class Streamer : MonoBehaviour
 {
+    public int ID;
+
     public BD dataBase;
 
-    public List<User> users = new();
+    public DataPic<User> users = new();
 
     [SerializeField]
     EventManager eventManager;
@@ -30,16 +32,17 @@ public class ChatManager : MonoBehaviour
     [SerializeField]
     float multiply=1;
 
-    EventParam<(int, int)> onFinishDay;    
+    EventParam<(int, int)> onFinishDay;
 
-    LinkedList<CommentView> commentViews = new();
-
+    DataPic<CommentView> commentViews = new();
 
     private void Awake()
     {
         deley = TimersManager.Create(startDeley, FinishDay).Stop();
 
         onFinishDay = eventManager.events.SearchOrCreate<EventParam<(int, int)>>("finishday");
+
+        ID = StreamerManager.instance.streamers.Add(this).Key;
     }
 
     public void MyStart()
@@ -58,46 +61,45 @@ public class ChatManager : MonoBehaviour
             CreateUsers(number);
         else
             LeaveUsers(-number);
-    }
+    }    
 
     void CreateUsers(int number)
     {
         for (int i = number - 1; i >= 0; i--)
         {
-            users.Add(new User(this));
+            Internal.Pictionary<int, User> idUser = new(users.lastID+1, new User(users.lastID + 1));
+
+            AddUser(JsonUtility.ToJson(idUser));
         }
     }
 
     void LeaveUsers(int number)
     {
-        for (int i = number - 1; i >= 0; i--)
+        for (int i = Mathf.Clamp(number - 1, 0 , users.Count - 1); i >= 0; i--)
         {
-            users[Random.Range(0, users.Count)].Destroy(); 
-        }
-    }
+            var rng = Random.Range(0, users.Count);
 
-    public void LeaveComment(CommentView commentView)
-    {
-        commentViews.Remove(commentView.node);
-        Destroy(commentView.gameObject);
+            RemoveUser(users.GetIDByIndex(rng));
+        }
     }
 
     public CommentView CreateComment(User user, Comment comment)
     {
-        while(commentViews.Count > 50)
+        if(commentViews.Count > 50)
         {
-            commentViews.First.Value.Aplicate();
-            LeaveComment(commentViews.First.Value);
-        }            
+            commentViews.GetTByIndex(0).Aplicate();
+            LeaveComment(commentViews.GetIDByIndex(0));
+        }      
 
         var newCommentView = Instantiate(prefab, contain.transform);
 
-        newCommentView.Create(user, comment, contain);
+        newCommentView.Create(commentViews.Add(newCommentView).Key, comment);
 
-        newCommentView.node = commentViews.AddLast(newCommentView);
+        newCommentView.Init(ID, user.ID);
 
         return newCommentView;
     }
+
 
     /// <summary>
     /// Calcula la sumatoria final de todo el danio y la cantidad de viewers
@@ -108,7 +110,27 @@ public class ChatManager : MonoBehaviour
         //onFinishDay.delegato.Invoke(sumSeed);
     }
 
-  
+    //rpc
+    public void AddUser(string jsonPic)
+    {
+        users.Add(JsonUtility.FromJson<Internal.Pictionary<int, User>>(jsonPic)).Value.Init(this);
+    }
+
+    //rpc
+    public void RemoveUser(int idUser)
+    {
+        users.GetTByID(idUser).Destroy();
+    }
+
+    //rpc
+    public void LeaveComment(int id)
+    {
+        var aux = commentViews.GetIndexByID(id);
+
+        Destroy(commentViews.GetTByIndex(aux).gameObject);
+
+        commentViews.RemoveAt(aux);
+    }
 
 
 }

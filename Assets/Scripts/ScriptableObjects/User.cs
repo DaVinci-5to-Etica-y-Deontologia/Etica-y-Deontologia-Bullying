@@ -8,8 +8,9 @@ using UnityEngine;
 [System.Serializable]
 public class User
 {
-    [field: SerializeField]
-    public HashSet<CommentView> comments { get; private set; } = new();
+    public int ID;
+
+    public HashSet<CommentView> comments { get; private set; }
 
     [field: SerializeField]
     public string Name { get; private set; }
@@ -51,7 +52,7 @@ public class User
 
     Timer _coolDown;
 
-    ChatManager stream;
+    Streamer stream;
 
     public override string ToString()
     {
@@ -87,21 +88,21 @@ public class User
     {
         comments.Remove(commentView);
 
-        stream.LeaveComment(commentView);
+        stream.LeaveComment(commentView.ID);
     }
 
     public void Destroy()
     {
         _coolDown.Stop();
         Enable = false;
-        stream.users.Remove(this);
+        stream.users.Remove(ID);
     }
 
     void Ban()
     {
-        foreach (var item in comments)
+        foreach (var comment in comments)
         {
-            stream.LeaveComment(item);
+            stream.LeaveComment(comment.ID);
         }
 
         Destroy();
@@ -116,9 +117,19 @@ public class User
         comments.Add(stream.CreateComment(this, aux));
     }
 
-    public User(ChatManager chat)
+    public void Init(Streamer stream)
     {
-        stream = chat;
+        this.stream = stream;
+
+        comments = new();
+
+        _coolDown = TimersManager.Create(Random.Range(10, 15), CreateComment);
+    }
+
+    public User(int id)
+    {
+        this.ID = id;
+
         int rng = Random.Range(5,8);
 
         string chars = "abcdefghijklmnñopqrstuvwxyz";
@@ -127,7 +138,5 @@ public class User
         {
             Name += chars[Random.Range(0, chars.Length)];
         }
-        
-        _coolDown = TimersManager.Create(Random.Range(10, 15), CreateComment);
     }
 }
