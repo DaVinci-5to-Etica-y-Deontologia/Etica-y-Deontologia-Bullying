@@ -28,14 +28,7 @@ public class CommentView : MonoBehaviour
     //rpc
     public void Init(int idStream,int idUser)
     {
-        this.user = StreamerManager.instance.streamers.GetTByID(idStream)?.users.GetTByID(idUser);
-
-        if (user == null)
-        {
-            StreamerManager.instance.streamers.GetTByID(idStream).LeaveComment(ID);
-            return;
-        }
-            
+        this.user = StreamerManager.instance.streamers.GetTByID(idStream)?.users.GetTByID(idUser);            
 
         perfil.sprite = user.Perfil;
 

@@ -85,17 +85,17 @@ public class Streamer : MonoBehaviour
 
     public CommentView CreateComment(User user, Comment comment)
     {
-        if(commentViews.Count > 50)
-        {
-            commentViews.GetTByIndex(0).Aplicate();
-            LeaveComment(commentViews.GetIDByIndex(0));
-        }      
-
         var newCommentView = Instantiate(prefab, contain.transform);
 
         newCommentView.Create(commentViews.Add(newCommentView).Key, comment);
 
         newCommentView.Init(ID, user.ID);
+
+        if (commentViews.Count > 50)
+        {
+            commentViews.GetTByIndex(0).Aplicate();
+            LeaveComment(commentViews.GetIDByIndex(0));
+        }
 
         return newCommentView;
     }
