@@ -147,7 +147,7 @@ public class User : IDirection
 
         comments.RemoveAt(index);
 
-        comment.Destroy();        
+        comment.Destroy();
     }
 
     public void Init(Streamer stream)

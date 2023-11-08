@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class CommentView : MonoBehaviour
+public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 {
     [SerializeField]
     TextMeshProUGUI textMesh;
@@ -14,6 +14,13 @@ public class CommentView : MonoBehaviour
 
     [SerializeField]
     Button button;
+
+    [SerializeField]
+    CommentData _commentData;
+
+    public Pool<CommentView> Parent { get; set; }
+
+    public IPoolElement<CommentView> Next { get; set; }
 
     public CommentData commentData
     {
@@ -29,19 +36,22 @@ public class CommentView : MonoBehaviour
 
             _commentData.onDestroy += _commentData_onDestroy;
         }
-
     }
 
-    private void _commentData_onDestroy()
+
+    public CommentView Create()
     {
-        _commentData = null;
-        Destroy(gameObject);
+        var aux = StreamerManager.SpawnComment();
+        aux.SetActiveGameObject(false);
+        return aux;
     }
 
-    [SerializeField]
-    CommentData _commentData;
+    public void Destroy()
+    {
+        this.SetActiveGameObject(false);
+        Parent.Return(this);
+    }
 
-    
     public void OnClick()
     {
         _commentData.OnClick();
@@ -52,11 +62,19 @@ public class CommentView : MonoBehaviour
     {
     }
 
+    private void _commentData_onDestroy()
+    {
+        _commentData = null;
+        Destroy();
+    }
+
+
     private void OnDestroy()
     {
         if(_commentData!=null)
             _commentData.onDestroy -= _commentData_onDestroy;
     }
+
 }
 
 [System.Serializable]
@@ -109,3 +127,4 @@ public interface IDirection
 {
     public string textIP { get; }
 }
+

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class StreamerManager : SingletonMono<StreamerManager>
 {
@@ -24,6 +25,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     [SerializeField]
     float multiply = 1;
+
+    Pool<CommentView> pool= new();
 
     
     int indexStreamWatch
@@ -117,14 +120,16 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         indexStreamWatch = index;
 
-        streamers.GetTByIndex(previus).onCreateComment -= StreamerManager_onCreateComment;
+        var aux = streamers.GetTByIndex(previus);
 
-        foreach (Transform item in contain.transform)
+        aux.onCreateComment -= StreamerManager_onCreateComment;
+
+        foreach ( var item in aux.commentViews)
         {
-            Destroy(item.gameObject);
+            item.Value.Destroy();
         }
 
-        var aux = streamers.GetTByIndex(indexStreamWatch);
+        aux = streamers.GetTByIndex(indexStreamWatch);
 
         aux.onCreateComment += StreamerManager_onCreateComment;
 
@@ -136,7 +141,13 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     private void StreamerManager_onCreateComment(CommentData obj)
     {
-        SpawnComment().commentData = obj;
+        var aux = pool.Obtain().Self;
+
+        aux.transform.SetAsLastSibling();
+
+        aux.commentData = obj;
+
+        aux.SetActiveGameObject(true);
     }
 
     protected override void Awake()
@@ -145,10 +156,10 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         TimersManager.Create(startDeley, MyStart);
 
+        StartCoroutine(pool.CreatePool(100, prefab));
+
         //onFinishDay = eventManager.events.SearchOrCreate<EventParam<(int, int)>>("finishday");
     }
-
-    string json;
 
     private void Update()
     {
@@ -167,4 +178,94 @@ public class Actions
     public const string Admonition = "Admonition";
 
     //public const string Ban = "Ban";
+}
+
+public interface IPoolElement<T> where T : IPoolElement<T>
+{
+    Pool<T> Parent { get; set; }
+
+    IPoolElement<T> Next { get; set; }
+
+    T Create();
+
+    void Destroy();
+
+    T Self => (T)this;
+}
+
+
+public class Pool<T> where T : IPoolElement<T>
+{
+    public IPoolElement<T> first;
+
+    public IPoolElement<T> last;
+
+    T model;
+
+    public IEnumerator CreatePool(int cantidad, T model)
+    {
+        this.model = model;
+
+        CreateFirst();
+
+        var wachdog = new Stopwatch();
+
+        wachdog.Start();
+
+        for (int i = 0; i < cantidad; i++)
+        {
+            last.Next = model.Create();
+
+            last = last.Next;
+
+            last.Parent = this;
+
+            if (wachdog.ElapsedMilliseconds > 1/60 * 1000)
+            {
+                wachdog.Reset();
+                yield return null;
+            }
+        }
+    }
+
+    public IPoolElement<T> Obtain()
+    {
+        var ret = first;
+
+        if(first.Next!=null)
+            first = first.Next;
+        else
+        {
+            CreateFirst();
+        }
+            
+
+        return ret;
+    }
+
+    public void Return(IPoolElement<T> poolElement)
+    {
+        if(last==null)
+        {
+            last = poolElement;
+            first = last;
+        }
+        else
+        {
+            last.Next = poolElement;
+
+            last = last.Next;
+        }
+
+        last.Next = null;
+    }
+
+    void CreateFirst()
+    {
+        first = model.Create();
+
+        last = first;
+
+        last.Parent = this;
+    }
 }
