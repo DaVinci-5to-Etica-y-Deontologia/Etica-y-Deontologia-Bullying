@@ -311,6 +311,16 @@ public class Pictionarys<K, V> : IEnumerable<Pictionary<K, V>>
         pictionaries.Clear();
     }
 
+    public List<Pictionary<K, V>> GetList()
+    {
+        return pictionaries;
+    }
+
+    public void SetList(List<Pictionary<K, V>> pictionaries)
+    {
+        this.pictionaries = pictionaries;
+    }
+
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();

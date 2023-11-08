@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-public class PopUpResult : PopUp
+public class PopUpResult : PopUpElement
 {
     [SerializeField]
     TMPro.TextMeshProUGUI damageNumber;
@@ -15,8 +15,9 @@ public class PopUpResult : PopUp
     [SerializeField]
     float timeToShow=1;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         eventManager.events.SearchOrCreate<EventParam<(int, int)>>("finishday").delegato += PopUp;
     }
 

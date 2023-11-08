@@ -4,53 +4,49 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
 
-public class Streamer : MonoBehaviour
+[System.Serializable]
+public class Streamer : IDirection
 {
     public int ID;
 
-    public BD dataBase;
-
     public DataPic<User> users = new();
 
-    [SerializeField]
-    EventManager eventManager;
-
-    [SerializeField]
-    CommentView prefab;   
-
-    Timer deley;
-
-    [SerializeField]
-    int index = 0;
-
-    [SerializeField,Range(10,60)]
-    float startDeley;
-
-    [SerializeField]
-    UnityEngine.UI.ContentSizeFitter contain;
-
-    [SerializeField]
-    float multiply=1;
-
-    EventParam<(int, int)> onFinishDay;
-
-    DataPic<CommentView> commentViews = new();
-
-    private void Awake()
+    public event System.Action<CommentData> onCreateComment;
+    public IEnumerable<Internal.Pictionary<int, CommentData>> commentViews
     {
-        deley = TimersManager.Create(startDeley, FinishDay).Stop();
-
-        onFinishDay = eventManager.events.SearchOrCreate<EventParam<(int, int)>>("finishday");
-
-        ID = StreamerManager.instance.streamers.Add(this).Key;
+        get
+        {
+            return users.SelectMany((user) => user.Value.comments).OrderBy((comment)=>comment.Key);
+        }
     }
 
-    public void MyStart()
-    {
-        print("Comienza el juego");
-        deley.Start();
+    public BD dataBase => streamerManager.dataBase;
 
-        CreateUsers(5);
+    public EventManager eventManager => streamerManager.eventManager;
+
+    public string textIP => ID.ToString();
+
+
+    StreamerManager streamerManager;
+
+    public Streamer()
+    {
+        this.streamerManager = StreamerManager.instance;
+    }
+
+    public User this[int ID]
+    {
+        get
+        {
+            return users.GetTByID(ID);
+        }
+    }
+
+    public void Create(int ID , int users)
+    {
+        this.ID = ID;
+
+        TimersManager.Create(5, ()=> CreateUsers(users));
     }
 
     public void Users(int number)
@@ -83,37 +79,14 @@ public class Streamer : MonoBehaviour
         }
     }
 
-    public CommentView CreateComment(User user, Comment comment)
-    {
-        var newCommentView = Instantiate(prefab, contain.transform);
-
-        newCommentView.Create(commentViews.Add(newCommentView).Key, comment);
-
-        newCommentView.Init(ID, user.ID);
-
-        if (commentViews.Count > 50)
-        {
-            commentViews.GetTByIndex(0).Aplicate();
-            LeaveComment(commentViews.GetIDByIndex(0));
-        }
-
-        return newCommentView;
-    }
-
-
-    /// <summary>
-    /// Calcula la sumatoria final de todo el danio y la cantidad de viewers
-    /// </summary>
-    public void FinishDay()
-    {
-      
-        //onFinishDay.delegato.Invoke(sumSeed);
-    }
-
     //rpc
     public void AddUser(string jsonPic)
     {
-        users.Add(JsonUtility.FromJson<Internal.Pictionary<int, User>>(jsonPic)).Value.Init(this);
+        var aux = JsonUtility.FromJson<Internal.Pictionary<int, User>>(jsonPic);
+
+        users.Add(aux).Value.Init(this);
+
+        aux.Value.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
     }
 
     //rpc
@@ -121,16 +94,4 @@ public class Streamer : MonoBehaviour
     {
         users.GetTByID(idUser).Destroy();
     }
-
-    //rpc
-    public void LeaveComment(int id)
-    {
-        var aux = commentViews.GetIndexByID(id);
-
-        Destroy(commentViews.GetTByIndex(aux).gameObject);
-
-        commentViews.RemoveAt(aux);
-    }
-
-
 }

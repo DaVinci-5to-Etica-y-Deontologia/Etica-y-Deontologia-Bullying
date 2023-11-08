@@ -1,25 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Internal;
 
 [System.Serializable]
-public class DataPic<T>
+public class DataPic<T> : IEnumerable<Pictionary<int, T>>
 {
     [SerializeField]
-    Pictionarys<int, T> data = new();
+    Pictionarys<int, T> _data = new();
 
     public int lastID { get; private set; }
 
-    public int Count => data.Count;
+    public int Count => _data.Count;
+
+    public List<Pictionary<int, T>> GetList() => _data.GetList();
 
     public T GetTByIndex(int index)
     {
-        return data.GetPicByIndex(index).Value;
+        return _data.GetPicByIndex(index).Value;
     }
 
     public T GetTByID(int ID)
     {
-        if(!data.TryGetValue(ID, out var value))
+        if(!_data.TryGetValue(ID, out var value))
         {
             Debug.LogError("no se encontro el ID: " + ID);
             return default;
@@ -30,40 +33,50 @@ public class DataPic<T>
 
     public int GetIDByIndex(int index)
     {
-        return data.GetPicByIndex(index).Key;
+        return _data.GetPicByIndex(index).Key;
     }
 
     public int GetIndexByID(int ID)
     {
-        if (!data.ContainsKey(ID, out var value))
+        if (!_data.ContainsKey(ID, out var value))
         {
             Debug.LogError("no se encontro el ID: " + ID);
-            return default;
+            return -1;
         }
 
         return value;
     }
 
-    public Internal.Pictionary<int, T> Add(T value)
+    public Pictionary<int, T> Add(T value)
     {
         lastID++;
 
-        return data.Add(lastID, value);
+        return _data.Add(lastID, value);
     }
 
-    public Internal.Pictionary<int, T> Add(Internal.Pictionary<int, T> pictionary)
+    public Pictionary<int, T> Add(Internal.Pictionary<int, T> pictionary)
     {
         lastID++;
-        return data.Add(pictionary);
+        return _data.Add(pictionary);
     }
 
     public void Remove(int ID)
     {
-        data.Remove(ID);
+        _data.Remove(ID);
     }
 
     public void RemoveAt(int index)
     {
-        data.RemoveAt(index);
+        _data.RemoveAt(index);
+    }
+
+    public IEnumerator<Pictionary<int, T>> GetEnumerator()
+    {
+        return _data.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return _data.GetEnumerator();
     }
 }

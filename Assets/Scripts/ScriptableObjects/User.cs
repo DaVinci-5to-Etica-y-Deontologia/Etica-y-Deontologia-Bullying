@@ -6,13 +6,13 @@ using UnityEngine;
 /// Clase destinada a ser un user
 /// </summary>
 [System.Serializable]
-public class User
+public class User : IDirection
 {
     public int ID;
 
-    public HashSet<CommentView> comments { get; private set; }
-
     [field: SerializeField]
+    public DataPic<CommentData> comments { get; private set; }
+
     public string Name { get; private set; }
 
     [field: SerializeField]
@@ -30,9 +30,23 @@ public class User
     [field: SerializeField]
     public Color colorText { get; set; } = new Color{ a=1 };
 
+    public event System.Action<CommentData> onCreateComment;
+
     BD database => stream.dataBase;
 
+    public EventManager eventManager => stream.eventManager;
+
+    public string textIP => $"{stream.textIP}.{ID}";
+
     public float CoolDown { get=>_coolDown.current; set=> _coolDown.Set(value); }
+
+    public CommentData this[int ID]
+    {
+        get
+        {
+            return comments.GetTByID(ID);
+        }
+    }
 
     int _Admonition
     {
@@ -41,12 +55,14 @@ public class User
         {
             if (_admonition + value <= 2)
             {
-                _admonition = value;
+                _admonition += value;
             }
             else 
                 Destroy();
         }
     }
+
+    
 
     int _admonition;
 
@@ -61,35 +77,29 @@ public class User
 
     #region Moderator
 
-    public void Admonition(CommentView commentView)
+    public void Admonition(int ID)
     {
         _admonition++;
         CoolDown = 30;
-        Eliminate(commentView);
+        LeaveComment(ID);
     }
 
-    public void Ban(CommentView commentView)
+    public void Ban(int ID)
     {
         Ban();
     }
 
     #endregion
 
-    public void Aplicate(CommentView commentView)
+    public void Aplicate(CommentData commentView)
     {
         Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
 
         stream.Users(commentView.comment.Views);
 
-        Eliminate(commentView);
+        LeaveComment(commentView.ID);
     }
 
-    public void Eliminate(CommentView commentView)
-    {
-        comments.Remove(commentView);
-
-        stream.LeaveComment(commentView.ID);
-    }
 
     public void Destroy()
     {
@@ -100,21 +110,44 @@ public class User
 
     void Ban()
     {
-        foreach (var comment in comments)
+        for (int i = comments.Count - 1; i >= 0; i--)
         {
-            stream.LeaveComment(comment.ID);
+            LeaveComment(comments.GetTByIndex(i).ID);
         }
 
         Destroy();
     }    
 
-    void CreateComment()
+    public void CreateComment()
     {
         var aux = database.SelectComment(MoralIndex, MoralRange);
 
         CoolDown = aux.Deley;
 
-        comments.Add(stream.CreateComment(this, aux));
+        var newCommentData = new CommentData();
+
+        var auxPic = comments.Add(newCommentData);
+
+        newCommentData.Create(auxPic.Key, aux);
+
+        newCommentData.Init(stream.ID, ID);
+
+        var timerDestroy = TimersManager.Create(30, () => Aplicate(newCommentData));
+
+        newCommentData.onDestroy += ()=> timerDestroy.Stop();
+
+        onCreateComment?.Invoke(newCommentData);
+    }
+
+    public void LeaveComment(int id)
+    {
+        var index = comments.GetIndexByID(id);
+
+        var comment = comments.GetTByIndex(index);
+
+        comments.RemoveAt(index);
+
+        comment.Destroy();        
     }
 
     public void Init(Streamer stream)

@@ -6,16 +6,6 @@ using UnityEngine.UI;
 
 public class CommentView : MonoBehaviour
 {
-    public int ID;
-
-    public User user;
-
-    [field: SerializeField]
-    public Comment comment { get; private set; }
-
-    [SerializeField]
-    EventManager eventManager;
-
     [SerializeField]
     TextMeshProUGUI textMesh;
 
@@ -25,42 +15,97 @@ public class CommentView : MonoBehaviour
     [SerializeField]
     Button button;
 
-    //rpc
-    public void Init(int idStream,int idUser)
+    public CommentData commentData
     {
-        this.user = StreamerManager.instance.streamers.GetTByID(idStream)?.users.GetTByID(idUser);            
+        get => _commentData;
 
-        perfil.sprite = user.Perfil;
+        set
+        {
+            _commentData = value;
 
-        textMesh.text = comment.Text.RichText("color", "#" + ColorUtility.ToHtmlStringRGBA(user.colorText));
+            perfil.sprite = _commentData.perfil;
+
+            textMesh.text = _commentData.textComment;
+
+            _commentData.onDestroy += _commentData_onDestroy;
+        }
+
     }
 
-    public void Create(int id, Comment comment)
+    private void _commentData_onDestroy()
     {
-        this.ID = id;
-
-        this.comment = comment;
-
-        JsonOverride(JsonUtility.ToJson(this));
+        _commentData = null;
+        Destroy(gameObject);
     }
 
-    public void Aplicate()
-    {
-        user.Aplicate(this);
-    }
+    [SerializeField]
+    CommentData _commentData;
 
+    
     public void OnClick()
     {
-        eventManager.events.SearchOrCreate<EventParam<CommentView>>("onclickcomment").delegato.Invoke(this);
+        _commentData.OnClick();
     }
+
 
     public void AnimRefresh()
     {
     }
 
-    //rpc
-    void JsonOverride(string json)
+    private void OnDestroy()
     {
-        JsonUtility.FromJsonOverwrite(json, this);
+        if(_commentData!=null)
+            _commentData.onDestroy -= _commentData_onDestroy;
     }
+}
+
+[System.Serializable]
+public class CommentData : IDirection
+{
+    public int ID;
+
+    User user;
+
+    public string textComment => comment.Text;
+
+    public bool Enable => user.Enable;
+
+    public string textIP => $"{user.textIP}.{ID}";
+
+    public string textName => user.Name.RichText("color", "#" + ColorUtility.ToHtmlStringRGBA(user.colorText));
+
+    public Sprite perfil => user.Perfil;
+
+    EventManager eventManager => user.eventManager;
+
+    [SerializeReference]
+    public Comment comment;
+
+    public event System.Action onDestroy;
+
+    public void OnClick()
+    {
+        eventManager.events.SearchOrCreate<EventParam<CommentData>>("onclickcomment").delegato.Invoke(this);
+    }
+    public void Create(int id, Comment comment)
+    {
+        this.ID = id;
+
+        this.comment = comment;
+    }
+
+    public void Init(int idStream, int idUser)
+    {
+        this.user = StreamerManager.instance[idStream]?[idUser];
+    }
+
+    public void Destroy()
+    {
+        onDestroy?.Invoke();
+    }
+}
+
+public interface IDirection
+{
+    public string textIP { get; }
 }
