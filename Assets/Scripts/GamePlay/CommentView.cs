@@ -15,7 +15,6 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
     [SerializeField]
     Button button;
 
-    [SerializeField]
     CommentData _commentData;
 
     public Pool<CommentView> Parent { get; set; }

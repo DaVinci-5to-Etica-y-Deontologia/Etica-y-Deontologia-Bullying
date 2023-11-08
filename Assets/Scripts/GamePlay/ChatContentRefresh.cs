@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ChatContentRefresh : MonoBehaviour
 {
@@ -17,30 +18,73 @@ public class ChatContentRefresh : MonoBehaviour
 
     int childCount;
 
+    int min => Mathf.Clamp(middle - 10, 0, comments.Length - 1);
+
+    int max => Mathf.Clamp(middle + 10, 0, comments.Length - 1);
+
+    int middle
+    {
+        get => _middle;
+        set
+        {
+            _middle = Mathf.Clamp(value, 0, comments.Length - 1);
+        }
+    }
+
+    int _middle;
+
+    Transform[] comments => transform.GetComponentsInChildren<CommentView>(true)
+        .Where((commentView) => commentView.commentData != null)
+        .Select((commentView) => commentView.transform)
+        .ToArray();
+
     private void OnTransformChildrenChanged()
     {
-        /*
-        if(childCount < transform.childCount)
+        if(childCount < 15)
         {
-            contain.enabled = false;
-            enabled = true;
+            Scroll();
+            childCount = comments.Length;
         }
-          */  
 
+        //abajo de todo y no tengo nada mas
         prevValue = containScrollRect.normalizedPosition.y;
 
-        childCount = transform.childCount;
+        if (prevValue < 0.05f && comments.Length-middle < 10)
+        {
+            middle = comments.Length;
+            Scroll();
+            containScroll.value = 0;
+            containScrollRect.normalizedPosition = Vector2.zero;
+        }
     }
 
     public void OnValueChange(Vector2 value)
     {
-        if (prevValue < 0.05f)
+        if(value.y<0.05f)
         {
-            containScrollRect.normalizedPosition = Vector2.zero;
-            containScroll.value = 0;
+            middle += 5;
+            Scroll();
+        }
+        else if(value.y > 0.95f)
+        {
+            middle -= 5;
+            Scroll();
+        }      
+
+        //prevValue = value.y;
+    }
+
+    void Scroll()
+    {
+        for (int i = 0; i < comments.Length; i++)
+        {
+            if(i >= min && i<= max)
+                comments[i].SetActiveGameObject(true);
+            else
+                comments[i].SetActiveGameObject(false);
         }
 
-        prevValue = value.y;
+        containScroll.value = 0.5f;
     }
 
     private void LateUpdate()

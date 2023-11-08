@@ -29,7 +29,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
     Pool<CommentView> pool= new();
 
     
-    int indexStreamWatch
+    public int indexStreamWatch
     {
         get => _indexStreamWatch;
 
@@ -45,12 +45,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
             
         }
     }
-
-    [SerializeField]
-    int _indexStreamWatch = 0;
-
-
-    Timer delay;
+    public Streamer Actual { get; private set; }
 
     public Streamer this[int ID]
     {
@@ -59,6 +54,15 @@ public class StreamerManager : SingletonMono<StreamerManager>
             return streamers.GetTByID(ID);
         }
     }
+
+
+    [SerializeField]
+    int _indexStreamWatch = 0;
+
+
+    Timer delay;
+
+    
 
     public static void Execute(string action, string direction)
     {
@@ -137,6 +141,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
         {
             StreamerManager_onCreateComment(item.Value);
         }
+
+        Actual = aux;
     }
 
     private void StreamerManager_onCreateComment(CommentData obj)
@@ -147,7 +153,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         aux.commentData = obj;
 
-        aux.SetActiveGameObject(true);
+        aux.SetActiveGameObject(false);
     }
 
     protected override void Awake()
