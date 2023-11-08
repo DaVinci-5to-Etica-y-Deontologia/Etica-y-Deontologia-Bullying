@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class ChatContentRefresh : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ChatContentRefresh : MonoBehaviour
     [SerializeField]
     UnityEngine.UI.ScrollRect containScrollRect;
 
+    //[SerializeField]
     float prevValue;
 
     int childCount;
@@ -31,6 +33,7 @@ public class ChatContentRefresh : MonoBehaviour
         }
     }
 
+    //[SerializeField]
     int _middle;
 
     Transform[] comments => transform.GetComponentsInChildren<CommentView>(true)
@@ -38,40 +41,64 @@ public class ChatContentRefresh : MonoBehaviour
         .Select((commentView) => commentView.transform)
         .ToArray();
 
+    /*
+    [SerializeField]
+    int commentsLenght;
+
+    [SerializeField]
+    float valueVertical;
+    */
+
+
+    private void Update()
+    {
+        //commentsLenght = comments.Length;
+    }
+
     private void OnTransformChildrenChanged()
     {
         if(childCount < 15)
         {
-            Scroll();
+            ScrollAndCenter();
             childCount = comments.Length;
         }
 
         //abajo de todo y no tengo nada mas
         prevValue = containScrollRect.normalizedPosition.y;
-
-        if (prevValue < 0.05f && comments.Length-middle < 10)
-        {
-            middle = comments.Length;
-            Scroll();
-            containScroll.value = 0;
-            containScrollRect.normalizedPosition = Vector2.zero;
-        }
+        
+        if (prevValue < 0.05f && comments.Length - middle < 10)
+            ClampBar();
+        
     }
 
     public void OnValueChange(Vector2 value)
     {
-        if(value.y<0.05f)
+        if (value.y < 0.3f && comments.Length - middle < 10)
+        {
+            ClampBar();
+            return;
+        }
+        
+        if (value.y < 0.05f)
         {
             middle += 5;
-            Scroll();
+            ScrollAndCenter();
         }
         else if(value.y > 0.95f)
         {
             middle -= 5;
-            Scroll();
-        }      
+            ScrollAndCenter();
+        }
+        
+        //valueVertical = value.y;
+    }
 
-        //prevValue = value.y;
+    void ClampBar()
+    {
+        middle = comments.Length;
+        Scroll();
+        containScroll.value = 0;
+        containScrollRect.verticalNormalizedPosition = 0f;
     }
 
     void Scroll()
@@ -83,7 +110,11 @@ public class ChatContentRefresh : MonoBehaviour
             else
                 comments[i].SetActiveGameObject(false);
         }
+    }
 
+    void ScrollAndCenter()
+    {
+        Scroll();
         containScroll.value = 0.5f;
     }
 
