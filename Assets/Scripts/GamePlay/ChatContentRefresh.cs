@@ -6,6 +6,12 @@ using UnityEngine.EventSystems;
 
 public class ChatContentRefresh : MonoBehaviour
 {
+    public int lenght;
+
+    public CommentView[] commentViews;
+
+    public bool flagScroll;
+
     [SerializeField]
     UnityEngine.UI.ContentSizeFitter contain;
 
@@ -16,110 +22,113 @@ public class ChatContentRefresh : MonoBehaviour
     UnityEngine.UI.ScrollRect containScrollRect;
 
     //[SerializeField]
-    float prevValue;
+    float valueY;
 
-    int childCount;
+    bool clampedEnd;
 
-    int min => Mathf.Clamp(middle - 10, 0, comments.Length - 1);
+    bool clampedStart;
 
-    int max => Mathf.Clamp(middle + 10, 0, comments.Length - 1);
+    int _middle = 10;
 
-    int middle
+    List<CommentData> commentDatas = new();
+
+    Streamer Actual => StreamerManager.instance.Actual;
+
+    IEnumerable<CommentData> comments => Actual.commentViews.Select((pic)=>pic.Value);
+
+    int actual
     {
-        get => _middle;
+        get
+        {
+            return (int)Mathf.Round((min + (max - min) * (1- valueY)));
+        }
+    }
+
+    int min => Mathf.Clamp(middle - 10, 0, lenght - 1);
+
+    int max => Mathf.Clamp(middle + 10, 0, lenght - 1);
+
+    public int middle
+    {
+        get => Mathf.Clamp(_middle, 10, lenght - 11);
         set
         {
-            _middle = Mathf.Clamp(value, 0, comments.Length - 1);
+            _middle = value;
         }
     }
 
-    //[SerializeField]
-    int _middle;
 
-    Transform[] comments => transform.GetComponentsInChildren<CommentView>(true)
-        .Where((commentView) => commentView.commentData != null)
-        .Select((commentView) => commentView.transform)
-        .ToArray();
-
-    /*
-    [SerializeField]
-    int commentsLenght;
-
-    [SerializeField]
-    float valueVertical;
-    */
-
-
-    private void Update()
-    {
-        //commentsLenght = comments.Length;
-    }
-
-    private void OnTransformChildrenChanged()
-    {
-        if(childCount < 15)
-        {
-            ScrollAndCenter();
-            childCount = comments.Length;
-        }
-
-        //abajo de todo y no tengo nada mas
-        prevValue = containScrollRect.normalizedPosition.y;
-        
-        if (prevValue < 0.05f && comments.Length - middle < 10)
-            ClampBar();
-        
-    }
-
+    
     public void OnValueChange(Vector2 value)
     {
-        if (value.y < 0.3f && comments.Length - middle < 10)
-        {
-            ClampBar();
-            return;
-        }
-        
-        if (value.y < 0.05f)
-        {
-            middle += 5;
-            ScrollAndCenter();
-        }
-        else if(value.y > 0.95f)
-        {
-            middle -= 5;
-            ScrollAndCenter();
-        }
-        
-        //valueVertical = value.y;
-    }
+        valueY = value.y;
 
-    void ClampBar()
-    {
-        middle = comments.Length;
-        Scroll();
-        containScroll.value = 0;
-        containScrollRect.verticalNormalizedPosition = 0f;
+        if (value.y < 0.02f)
+        {
+            middle = actual;
+
+            flagScroll = true;
+
+            if (actual != max)
+            {
+                containScroll.value = 0.75f;
+                containScrollRect.verticalNormalizedPosition = 0.75f;
+            }
+        }
+        else if (value.y > 0.98f)
+        {
+            middle = actual;
+
+            flagScroll = true;
+
+            if (actual != min)
+            {
+                containScroll.value = 0.25f;
+                containScrollRect.verticalNormalizedPosition = 0.25f;
+            }
+        }        
     }
 
     void Scroll()
     {
-        for (int i = 0; i < comments.Length; i++)
-        {
-            if(i >= min && i<= max)
-                comments[i].SetActiveGameObject(true);
-            else
-                comments[i].SetActiveGameObject(false);
-        }
-    }
+        lenght = this.comments.Count();
 
-    void ScrollAndCenter()
-    {
-        Scroll();
-        containScroll.value = 0.5f;
+        commentDatas = this.comments.Skip(min).Take(max - min).ToList();
+
+        for (int i = 0; i < commentViews.Length; i++)
+        {
+            bool _break=false;
+
+            for (int j = 0; j < commentDatas.Count; j++)
+            {
+                if(commentDatas[j] == commentViews[i].commentData)
+                {
+                    commentDatas.RemoveAt(j);
+                    _break = true;
+                    break;
+                }
+            }
+
+            if (!_break)
+            {
+                commentViews[i].Destroy();
+            }
+        }
+
+        for (int i = 0; i < commentDatas.Count; i++)
+        {
+            StreamerManager.CreateComment(commentDatas[i]);
+        }
     }
 
     private void LateUpdate()
     {
+
         contain.enabled = !contain.enabled;
+        if(flagScroll)
+        {
+            Scroll();
+            flagScroll = false;
+        }
     }
 }

@@ -21,6 +21,8 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 
     public IPoolElement<CommentView> Next { get; set; }
 
+    public bool inPool { get; set; }
+
     public CommentData commentData
     {
         get => _commentData;
@@ -29,14 +31,18 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
         {
             _commentData = value;
 
+            if (_commentData == null)
+                return;
+
             perfil.sprite = _commentData.perfil;
 
             textMesh.text = _commentData.textComment;
 
-            _commentData.onDestroy += _commentData_onDestroy;
+            _commentData.onDestroy += Destroy;
         }
     }
 
+    
 
     public CommentView Create()
     {
@@ -47,6 +53,7 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 
     public void Destroy()
     {
+        _commentData = null;
         this.SetActiveGameObject(false);
         Parent.Return(this);
     }
@@ -61,17 +68,11 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
     {
     }
 
-    private void _commentData_onDestroy()
-    {
-        _commentData = null;
-        Destroy();
-    }
-
 
     private void OnDestroy()
     {
         if(_commentData!=null)
-            _commentData.onDestroy -= _commentData_onDestroy;
+            _commentData.onDestroy -= Destroy;
     }
 
 }
@@ -82,6 +83,8 @@ public class CommentData : IDirection
     public int ID;
 
     User user;
+
+    public float time;
 
     public string textComment => comment.Text;
 
@@ -109,6 +112,8 @@ public class CommentData : IDirection
         this.ID = id;
 
         this.comment = comment;
+
+        time = Time.realtimeSinceStartup;
     }
 
     public void Init(int idStream, int idUser)

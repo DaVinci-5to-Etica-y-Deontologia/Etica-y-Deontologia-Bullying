@@ -12,11 +12,13 @@ public class Streamer : IDirection
     public DataPic<User> users = new();
 
     public event System.Action<CommentData> onCreateComment;
+
+    public event System.Action<CommentData> onLeaveComment;
     public IEnumerable<Internal.Pictionary<int, CommentData>> commentViews
     {
         get
         {
-            return users.SelectMany((user) => user.Value.comments).OrderBy((comment)=>comment.Key);
+            return users.SelectMany((user) => user.Value.comments).OrderBy((comment)=>comment.Value.time);
         }
     }
 
@@ -87,6 +89,8 @@ public class Streamer : IDirection
         users.Add(aux).Value.Init(this);
 
         aux.Value.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
+
+        aux.Value.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);
     }
 
     //rpc

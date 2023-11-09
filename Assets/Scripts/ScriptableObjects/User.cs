@@ -32,6 +32,8 @@ public class User : IDirection
 
     public event System.Action<CommentData> onCreateComment;
 
+    public event System.Action<CommentData> onLeaveComment;
+
     BD database => stream.dataBase;
 
     public EventManager eventManager => stream.eventManager;
@@ -93,7 +95,7 @@ public class User : IDirection
 
     public void Aplicate(CommentData commentView)
     {
-        Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
+        //Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
 
         stream.Users(commentView.comment.Views);
 
@@ -144,6 +146,8 @@ public class User : IDirection
         var index = comments.GetIndexByID(id);
 
         var comment = comments.GetTByIndex(index);
+
+        onLeaveComment?.Invoke(comment);
 
         comments.RemoveAt(index);
 

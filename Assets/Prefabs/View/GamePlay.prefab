@@ -911,7 +911,7 @@ MonoBehaviour:
   eventManager: {fileID: 11400000, guid: 61a7d81338181f9409e4d385c1b3b4c5, type: 2}
   prefab: {fileID: 2893779287732540056, guid: c94143bf0fbd7984aae14bbcff1c15bf, type: 3}
   startDeley: 0
-  contain: {fileID: 895258726687356868}
+  contain: {fileID: 5120369268545282656}
   streamers:
     _data:
       pictionaries: []
@@ -1082,6 +1082,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10fc8f941902e174faebdfae038a4ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lenght: 0
+  commentViews: []
+  flagScroll: 0
   contain: {fileID: 895258726687356868}
   containScroll: {fileID: 961978212349586907}
   containScrollRect: {fileID: 8393130927728686322}
