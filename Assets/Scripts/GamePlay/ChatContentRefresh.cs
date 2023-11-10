@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
+using System;
 
 public class ChatContentRefresh : MonoBehaviour
 {
@@ -11,6 +12,14 @@ public class ChatContentRefresh : MonoBehaviour
     public CommentView[] commentViews;
 
     public bool flagScroll;
+
+    public bool flagClamp;
+
+    public bool clampCondition;
+
+    public UnityEngine.UI.Button topButton;
+
+    public UnityEngine.UI.Button bottomButton;
 
     [SerializeField]
     UnityEngine.UI.ContentSizeFitter contain;
@@ -130,5 +139,31 @@ public class ChatContentRefresh : MonoBehaviour
             Scroll();
             flagScroll = false;
         }
+
+        if(flagClamp)
+            Clamp(clampCondition);
+    }
+
+    void Clamp(bool condition)
+    {
+        if (condition)
+            middle = 0;
+        else
+            middle = this.comments.Count();
+
+        Scroll();
+        containScroll.value = Convert.ToInt32(condition);
+        containScrollRect.verticalNormalizedPosition = Convert.ToInt32(condition);
+    }
+
+    public void SetClamp(bool condition)
+    {
+        clampCondition = condition;
+        flagClamp = !flagClamp;
+
+        if (condition)
+            bottomButton.interactable = !bottomButton.interactable;
+        else
+            topButton.interactable = !topButton.interactable;
     }
 }
