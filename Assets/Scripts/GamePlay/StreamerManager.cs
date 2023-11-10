@@ -85,7 +85,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
     {
         DataRpc dataRpc = JsonUtility.FromJson<DataRpc>(json);
 
-        UnityEngine.Debug.Log($"recibido:\n{dataRpc}");
+        //UnityEngine.Debug.Log($"recibido:\n{dataRpc}");
 
         var srch = Search(dataRpc.direction);
 
@@ -312,19 +312,19 @@ public struct DataRpc
 
     public static void Create(string action, string direction)
     {
-        UnityEngine.Debug.Log(action + ": " + direction);
+        //UnityEngine.Debug.Log(action + ": " + direction);
         StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction }));
     }
 
     public static void Create(string action, string direction, string data)
     {
-        UnityEngine.Debug.Log(action + ": " + direction + " " + data);
+        //UnityEngine.Debug.Log(action + ": " + direction + " " + data);
         StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction , data = data}));
     }
 
     public static void Create(string action, string direction, object data)
     {
-        UnityEngine.Debug.Log(action + ": " + direction + " " + JsonUtility.ToJson(data, true));
+        //UnityEngine.Debug.Log(action + ": " + direction + " " + JsonUtility.ToJson(data, true));
         StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = JsonUtility.ToJson(data) }));
     }
 
