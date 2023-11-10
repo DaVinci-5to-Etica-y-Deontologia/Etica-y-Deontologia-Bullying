@@ -372,14 +372,17 @@ public class Pictionarys<K, V> : IEnumerable<Pictionary<K, V>>
     
     int SearchIndex(K key)
     {
+        //string pantalla = "busqueda de: " + key;
         for (int i = 0; i < pictionaries.Count; i++)
         {
+            //pantalla += $"key {pictionaries[i].Key} value {pictionaries[i].Value} indice {i}";
             if (pictionaries[i].Key.Equals(key))
             {
+                //Debug.Log(pantalla);
                 return i;
             }
         }
-
+        //Debug.Log(pantalla);
         return -1;
     }
 

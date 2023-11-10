@@ -125,6 +125,9 @@ public class User : IDirection
         comments.RemoveAt(index);
 
         comment.Destroy();
+
+        if(!Enable && comments.Count==0)
+            stream.users.Remove(ID);
     }
 
     #endregion
@@ -143,7 +146,7 @@ public class User : IDirection
     {
         _coolDown.Stop();
         Enable = false;
-        stream.users.Remove(ID);
+        //stream.users.Remove(ID);
     }
 
     public void CreateComment()
