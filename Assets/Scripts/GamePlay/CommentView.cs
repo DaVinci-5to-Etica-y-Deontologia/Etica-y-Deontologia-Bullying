@@ -17,7 +17,7 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 
     CommentData _commentData;
 
-    public Pool<CommentView> Parent { get; set; }
+    public LinkedPool<CommentView> Parent { get; set; }
 
     public IPoolElement<CommentView> Next { get; set; }
 
@@ -41,8 +41,6 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
             _commentData.onDestroy += Destroy;
         }
     }
-
-    
 
     public CommentView Create()
     {
@@ -78,13 +76,16 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 }
 
 [System.Serializable]
-public class CommentData : IDirection
+public class CommentData : IDirection, IPoolElement<CommentData>
 {
     public int ID;
 
-    User user;
+    [SerializeReference]
+    public Comment comment;
 
-    public float time;
+    public float timeOnCreate;
+
+    public float Delay => comment.Deley;
 
     public string textComment => comment.Text;
 
@@ -98,8 +99,11 @@ public class CommentData : IDirection
 
     EventManager eventManager => user.eventManager;
 
-    [SerializeReference]
-    public Comment comment;
+    public LinkedPool<CommentData> Parent { get ; set ; }
+    public IPoolElement<CommentData> Next { get; set ; }
+    public bool inPool { get ; set ; }
+
+    User user;
 
     public event System.Action onDestroy;
 
@@ -107,23 +111,30 @@ public class CommentData : IDirection
     {
         eventManager.events.SearchOrCreate<EventParam<CommentData>>("onclickcomment").delegato.Invoke(this);
     }
+
+    public void Destroy()
+    {
+        onDestroy?.Invoke();
+        Parent.Return(this);
+    }
+
+    public CommentData Create()
+    {
+        return new CommentData();
+    }
+
     public void Create(int id, Comment comment)
     {
         this.ID = id;
 
         this.comment = comment;
 
-        time = Time.realtimeSinceStartup;
+        timeOnCreate = Time.realtimeSinceStartup;
     }
 
     public void Init(int idStream, int idUser)
     {
         this.user = StreamerManager.instance[idStream]?[idUser];
-    }
-
-    public void Destroy()
-    {
-        onDestroy?.Invoke();
     }
 }
 

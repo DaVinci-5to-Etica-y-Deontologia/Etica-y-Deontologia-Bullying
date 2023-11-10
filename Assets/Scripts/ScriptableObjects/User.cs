@@ -8,6 +8,8 @@ using UnityEngine;
 [System.Serializable]
 public class User : IDirection
 {
+    static LinkedPool<CommentData> poolCommentData = new LinkedPool<CommentData>(new CommentData());
+
     public int ID;
 
     [field: SerializeField]
@@ -122,23 +124,31 @@ public class User : IDirection
 
     public void CreateComment()
     {
-        var aux = database.SelectComment(MoralIndex, MoralRange);
+        System.Action lambda = () => 
+        {
+            if (!Enable)
+                return;
 
-        CoolDown = aux.Deley;
+            var aux = database.SelectComment(MoralIndex, MoralRange);
 
-        var newCommentData = new CommentData();
+            var newCommentData = poolCommentData.Obtain().Self;
 
-        var auxPic = comments.Add(newCommentData);
+            var auxPic = comments.Add(newCommentData);
 
-        newCommentData.Create(auxPic.Key, aux);
+            newCommentData.Create(auxPic.Key, aux);
 
-        newCommentData.Init(stream.ID, ID);
+            newCommentData.Init(stream.ID, ID);
 
-        var timerDestroy = TimersManager.Create(30, () => Aplicate(newCommentData));
+            var timerDestroy = TimersManager.Create(30, () => Aplicate(newCommentData));
 
-        newCommentData.onDestroy += ()=> timerDestroy.Stop();
+            newCommentData.onDestroy += () => timerDestroy.Stop();
 
-        onCreateComment?.Invoke(newCommentData);
+            CoolDown = newCommentData.Delay;
+
+            onCreateComment?.Invoke(newCommentData);
+        };
+
+        StreamerManager.eventQueue.Enqueue(lambda);
     }
 
     public void LeaveComment(int id)

@@ -18,7 +18,7 @@ public class Streamer : IDirection
     {
         get
         {
-            return users.SelectMany((user) => user.Value.comments).OrderBy((comment)=>comment.Value.time);
+            return users.SelectMany((user) => user.Value.comments).OrderBy((comment)=>comment.Value.timeOnCreate);
         }
     }
 

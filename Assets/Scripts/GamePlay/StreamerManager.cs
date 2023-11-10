@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics;
 using System.Linq;
+using System.Diagnostics;
 
 public class StreamerManager : SingletonMono<StreamerManager>
 {
-
     public BD dataBase;
 
     public EventManager eventManager;
 
+    public static Queue<System.Action> eventQueue = new();
+
     [SerializeField]
     CommentView prefab;
 
-    [SerializeField, Range(10, 60)]
+    [SerializeField, Range(1, 60)]
     float startDeley;
 
     [SerializeField]
@@ -23,13 +24,17 @@ public class StreamerManager : SingletonMono<StreamerManager>
     [SerializeField]
     DataPic<Streamer> streamers = new();
 
-
     [SerializeField]
     float multiply = 1;
 
-    Pool<CommentView> pool= new();
+    LinkedPool<CommentView> pool;
 
-    
+    EventParam<CommentData> onCreateComment;
+
+    EventParam<CommentData> onLeaveComment;
+
+    Stopwatch watchdog;
+
     public int indexStreamWatch
     {
         get => _indexStreamWatch;
@@ -46,7 +51,6 @@ public class StreamerManager : SingletonMono<StreamerManager>
             
         }
     }
-    public Streamer Actual { get; private set; }
 
     public Streamer this[int ID]
     {
@@ -55,36 +59,55 @@ public class StreamerManager : SingletonMono<StreamerManager>
             return streamers.GetTByID(ID);
         }
     }
-
+    public Streamer Actual { get; private set; }
 
     [SerializeField]
     int _indexStreamWatch = 0;
 
-
     Timer delay;
-
-    
 
     public static void Execute(string action, string direction)
     {
-        var splirDir = direction.Split('.');
-
-        var stream = instance[int.Parse(splirDir[0])];
-
-        var user = stream[int.Parse(splirDir[1])];
-
-        var comment = user[int.Parse(splirDir[2])];
+        var srch = Search(direction);
 
         switch (action)
         {
             case Actions.Ban:
-                user.Ban(comment.ID);
+                srch.user.Ban(srch.comment.ID);
                 break;
 
             case Actions.Admonition:
-                user.Admonition(comment.ID);
+                srch.user.Admonition(srch.comment.ID);
                 break;
         }
+    }
+
+    public static (Streamer streamer, User user, CommentData comment) Search(string dir)
+    {
+        var splirDir = dir.Split('.');
+
+        Streamer stream = null;
+
+        User user =null;
+
+        CommentData comment =  null;
+
+        if(splirDir.Length > 0)
+        {
+            stream = instance[int.Parse(splirDir[0])];
+
+            if(stream!=null && splirDir.Length > 1)
+            {
+                user = stream[int.Parse(splirDir[1])];
+
+                if(user!=null && splirDir.Length > 2)
+                {
+                    comment = user[int.Parse(splirDir[2])];
+                }
+            }
+        }
+
+        return (stream, user, comment);
     }
 
 
@@ -110,8 +133,6 @@ public class StreamerManager : SingletonMono<StreamerManager>
         aux.commentData = obj;
 
         aux.SetActiveGameObject(true);
-        
-        UnityEngine.Debug.Log(instance.pool);
     }
 
     public void CreateStream()
@@ -123,16 +144,6 @@ public class StreamerManager : SingletonMono<StreamerManager>
         streamer.Create(streamers.lastID , Random.Range(5,10));
     }
 
-    void MyStart()
-    {
-        print("Comienza el juego");        
-
-        CreateStream();
-        CreateStream();
-        CreateStream();
-        ChangeStream(0);
-    }
-
     public void ChangeStream(int index)
     {
         var previus = indexStreamWatch;
@@ -141,44 +152,42 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         var aux = streamers.GetTByIndex(previus);
 
-        aux.onCreateComment -= Aux_onCreateComment;
+        aux.onCreateComment -= CommentCreateQueue;
 
-        aux.onLeaveComment -= Aux_onLeaveComment;
+        aux.onLeaveComment -= CommentLeaveQueue;
 
         aux = streamers.GetTByIndex(indexStreamWatch);
 
-        aux.onCreateComment += Aux_onCreateComment;
+        aux.onCreateComment += CommentCreateQueue;
 
-        aux.onLeaveComment += Aux_onLeaveComment;
+        aux.onLeaveComment += CommentLeaveQueue;
         Actual = aux;
-
-        contain.flagScroll = true;
-
-        
     }
 
-    private void Aux_onLeaveComment(CommentData obj)
+    void CommentCreateQueue(CommentData commentData)
     {
-        contain.middle--;
+        onCreateComment.delegato.Invoke(commentData);
     }
 
-    private void Aux_onCreateComment(CommentData obj)
+    void CommentLeaveQueue(CommentData commentData)
     {
-        contain.flagScroll = true;
+        onLeaveComment.delegato.Invoke(commentData);
+
+        /*
+        while (watchdog.ElapsedMilliseconds < (1f / 20) && LeaveCommentQueue.Count > 0)
+        {
+            
+        }*/
     }
 
-    public void Load()
+    void MyStart()
     {
-        GameManager.instance.StartCoroutine(pool.CreatePool(30, prefab, ()=> contain.commentViews = contain.GetComponentsInChildren<CommentView>(true)));
-    }
+        print("Comienza el juego");
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-        TimersManager.Create(startDeley, MyStart);
-
-        //onFinishDay = eventManager.events.SearchOrCreate<EventParam<(int, int)>>("finishday");
+        CreateStream();
+        CreateStream();
+        CreateStream();
+        ChangeStream(0);
     }
 
     private void Update()
@@ -188,7 +197,37 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         if (Input.GetKeyDown(KeyCode.Q))
             ChangeStream(indexStreamWatch - 1);
+
+        while(eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16)
+        {
+            eventQueue.Dequeue().Invoke();
+        }
+
+        watchdog.Restart();
     }
+
+    public void Load()
+    {
+        onCreateComment = eventManager.events.SearchOrCreate<EventParam<CommentData>>("createcomment");
+
+        onLeaveComment = eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment");
+
+        GameManager.instance.StartCoroutine(pool.CreatePool(30, ()=> eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato.Invoke()));
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        TimersManager.Create(startDeley, MyStart);
+
+        pool = new(prefab);
+
+        watchdog = new Stopwatch();
+
+        watchdog.Start();
+    }
+
 }
 
 public class Actions
@@ -198,134 +237,4 @@ public class Actions
     public const string Admonition = "Admonition";
 
     //public const string Ban = "Ban";
-}
-
-public interface IPoolElement<T> where T : IPoolElement<T>
-{
-    Pool<T> Parent { get; set; }
-
-    IPoolElement<T> Next { get; set; }
-
-    T Create();
-
-    void Destroy();
-
-    bool inPool { get; set; }
-
-    T Self => (T)this;
-}
-
-
-public class Pool<T> where T : IPoolElement<T>
-{
-    public IPoolElement<T> first;
-
-    public IPoolElement<T> last;
-
-    public int Count { get; private set; }
-
-    T model;
-
-    public IEnumerator CreatePool(int cantidad, T model, System.Action action = null)
-    {
-        this.model = model;
-
-        Count = 1;
-
-        CreateFirst();
-
-        var wachdog = new Stopwatch();
-
-        wachdog.Start();
-
-        for (int i = 0; i < cantidad-1; i++)
-        {
-            last.Next = model.Create();
-
-            last = last.Next;
-
-            last.Parent = this;
-
-            last.inPool = true;
-
-            if (wachdog.ElapsedMilliseconds > 1/60 * 1000)
-            {
-                wachdog.Reset();
-                yield return null;
-            }
-
-            Count++;
-        }
-
-        action?.Invoke();
-    }
-
-    public IPoolElement<T> Obtain()
-    {
-        if(first==null)
-        {
-            return model.Create();
-        }
-
-        Count--;
-
-        var ret = first;
-
-        first = first.Next;
-
-        ret.inPool = false;
-
-        return ret;
-    }
-
-    public void Return(IPoolElement<T> poolElement)
-    {
-        if (poolElement.inPool)
-            return;
-
-        poolElement.inPool = true;
-
-        Count++;
-
-        if (first == null)
-        {
-            last = poolElement;
-            first = last;
-        }
-        else
-        {
-            last.Next = poolElement;
-
-            last = last.Next;
-        }
-
-        last.Next = null;
-    }
-
-    public override string ToString()
-    {
-        var aux = first;
-
-        string pantalla = string.Empty;
-
-        while (aux != null)
-        {
-            pantalla += "->" + aux;
-
-            aux = aux.Next;
-        }
-
-        return pantalla + "\n"+ Count;
-    }
-
-    void CreateFirst()
-    {
-        first = model.Create();
-
-        last = first;
-
-        last.Parent = this;
-
-        last.inPool = true;
-    }
 }

@@ -7,19 +7,14 @@ using System;
 
 public class ChatContentRefresh : MonoBehaviour
 {
-    public int lenght;
-
-    public CommentView[] commentViews;
-
-    public bool flagScroll;
-
-    public bool flagClamp;
-
-    public bool clampCondition;
-
     public UnityEngine.UI.Button topButton;
 
     public UnityEngine.UI.Button bottomButton;
+
+    public TMPro.TextMeshProUGUI commentText;
+
+    [SerializeField]
+    EventManager eventManager;
 
     [SerializeField]
     UnityEngine.UI.ContentSizeFitter contain;
@@ -33,13 +28,19 @@ public class ChatContentRefresh : MonoBehaviour
     //[SerializeField]
     float valueY;
 
-    bool clampedEnd;
-
-    bool clampedStart;
-
     int _middle = 10;
 
-    List<CommentData> commentDatas = new();
+    int lenght;
+
+    bool flagScroll;
+
+    bool flagClamp;
+
+    bool clampTopOrBotton;
+
+    CommentView[] commentViews;
+
+    List<CommentData> commentDatas;
 
     Streamer Actual => StreamerManager.instance.Actual;
 
@@ -65,12 +66,22 @@ public class ChatContentRefresh : MonoBehaviour
             _middle = value;
         }
     }
-
-
     
     public void OnValueChange(Vector2 value)
     {
         valueY = value.y;
+
+        SetText();
+
+        if (flagClamp)
+        {
+            if (value.y < 0.025f)
+            {
+                containScroll.value = 0;
+                containScrollRect.verticalNormalizedPosition = 0;
+            }
+            return;
+        }
 
         if (value.y < 0.02f)
         {
@@ -98,9 +109,38 @@ public class ChatContentRefresh : MonoBehaviour
         }        
     }
 
+    public void SetClamp(bool _clampBotton)
+    {
+        if (_clampBotton && !flagClamp)
+        {
+            flagClamp = true;
+            containScroll.value = 0;
+            containScrollRect.verticalNormalizedPosition = 0;
+            middle = this.comments.Count();
+        }
+        else
+        {
+            flagClamp = false;
+        }
+
+        if(!_clampBotton)
+        {
+            containScroll.value = 1;
+            containScrollRect.verticalNormalizedPosition = 1;
+            middle = 0;
+        }
+    }
+
+    void SetText()
+    {
+        commentText.text = $"Comentarios: {actual}/{lenght}";
+    }
+
     void Scroll()
     {
         lenght = this.comments.Count();
+
+        SetText();
 
         commentDatas = this.comments.Skip(min).Take(max - min).ToList();
 
@@ -130,40 +170,44 @@ public class ChatContentRefresh : MonoBehaviour
         }
     }
 
+    void OnLeaveComment(CommentData commentData)
+    {
+        if(min==0)
+            flagScroll = true;
+    }
+
+    void OnCreateComment(CommentData commentData)
+    {
+        if (lenght<30)
+        {
+            flagScroll = true;
+        }
+
+        if(flagClamp)
+        {
+            middle = this.comments.Count();
+            flagScroll = true;
+        }
+    }
+
+
+
     private void LateUpdate()
     {
+        //contain.enabled = !contain.enabled;
 
-        contain.enabled = !contain.enabled;
-        if(flagScroll)
+        if (flagScroll)
         {
             Scroll();
             flagScroll = false;
         }
-
-        if(flagClamp)
-            Clamp(clampCondition);
     }
-
-    void Clamp(bool condition)
+    
+    public void Load()
     {
-        if (condition)
-            middle = 0;
-        else
-            middle = this.comments.Count();
+        eventManager.events.SearchOrCreate<EventParam<CommentData>>("createcomment").delegato += OnCreateComment;
+        eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment").delegato += OnLeaveComment;
 
-        Scroll();
-        containScroll.value = Convert.ToInt32(condition);
-        containScrollRect.verticalNormalizedPosition = Convert.ToInt32(condition);
-    }
-
-    public void SetClamp(bool condition)
-    {
-        clampCondition = condition;
-        flagClamp = !flagClamp;
-
-        if (condition)
-            bottomButton.interactable = !bottomButton.interactable;
-        else
-            topButton.interactable = !topButton.interactable;
+        eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato += () => commentViews = GetComponentsInChildren<CommentView>(true);
     }
 }
