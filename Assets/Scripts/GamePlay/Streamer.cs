@@ -36,7 +36,7 @@ public class Streamer : IDirection
         this.streamerManager = StreamerManager.instance;
     }
 
-    public User this[int ID]
+    public (User value, int ID, int index) this[int ID]
     {
         get
         {
@@ -67,7 +67,7 @@ public class Streamer : IDirection
         {
             Internal.Pictionary<int, User> idUser = new(users.lastID+1, new User(users.lastID + 1));
 
-            AddUser(JsonUtility.ToJson(idUser));
+            DataRpc.Create(Actions.AddUser, textIP, idUser);
         }
     }
 
@@ -77,9 +77,12 @@ public class Streamer : IDirection
         {
             var rng = Random.Range(0, users.Count);
 
-            RemoveUser(users.GetIDByIndex(rng));
+
+            DataRpc.Create(Actions.RemoveUser, users.GetTByIndex(rng).value.textIP);
         }
     }
+
+
 
     //rpc
     public void AddUser(string jsonPic)
@@ -94,8 +97,8 @@ public class Streamer : IDirection
     }
 
     //rpc
-    public void RemoveUser(int idUser)
+    public void RemoveUser(int index)
     {
-        users.GetTByID(idUser).Destroy();
+        users.GetTByIndex(index).value.Destroy();
     }
 }

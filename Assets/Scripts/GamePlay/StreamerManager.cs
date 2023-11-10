@@ -6,6 +6,19 @@ using System.Diagnostics;
 
 public class StreamerManager : SingletonMono<StreamerManager>
 {
+    public struct SearchResult
+    {
+        public (Streamer value, int ID, int index) streamer;
+        public (User value, int ID, int index) user;
+        public (CommentData value, int ID, int index) comment;
+
+        public Streamer Streamer => streamer.value;
+
+        public User User => user.value;
+
+        public CommentData CommentData => comment.value;
+    }
+
     public BD dataBase;
 
     public EventManager eventManager;
@@ -52,13 +65,14 @@ public class StreamerManager : SingletonMono<StreamerManager>
         }
     }
 
-    public Streamer this[int ID]
+    public (Streamer value, int ID, int index) this[int ID]
     {
         get
         {
             return streamers.GetTByID(ID);
         }
     }
+
     public Streamer Actual { get; private set; }
 
     [SerializeField]
@@ -66,48 +80,80 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     Timer delay;
 
-    public static void Execute(string action, string direction)
+    //RPC REAL
+    public static void Execute(string json)
     {
-        var srch = Search(direction);
+        DataRpc dataRpc = JsonUtility.FromJson<DataRpc>(json);
 
-        switch (action)
+        UnityEngine.Debug.Log($"recibido:\n{dataRpc}");
+
+        var srch = Search(dataRpc.direction);
+
+        switch (dataRpc.action)
         {
+            case Actions.AddUser:
+                {
+                    srch.Streamer.AddUser(dataRpc.data);
+                }
+                break;
+
+            case Actions.RemoveUser:
+                {
+                    srch.Streamer.RemoveUser(srch.user.index);
+                }
+                break;
+
             case Actions.Ban:
-                srch.user.Ban(srch.comment.ID);
+                {
+                    srch.User.Ban();
+                }
                 break;
 
             case Actions.Admonition:
-                srch.user.Admonition(srch.comment.ID);
+                {
+                    srch.User.Admonition(srch.comment.index);
+                }
                 break;
+
+            case Actions.AddComment:
+                {
+                    srch.User.AddComment(dataRpc.data);
+                }
+                break;
+
+            case Actions.RemoveComment:
+                {
+                    srch.User.RemoveComment(srch.comment.index);
+                }
+                break;
+
         }
     }
+    
+    
 
-    public static (Streamer streamer, User user, CommentData comment) Search(string dir)
+    public static SearchResult Search(string dir)
     {
         var splirDir = dir.Split('.');
 
-        Streamer stream = null;
-
-        User user =null;
-
-        CommentData comment =  null;
+        SearchResult searchResult = new SearchResult();
 
         if(splirDir.Length > 0)
         {
-            stream = instance[int.Parse(splirDir[0])];
+            searchResult.streamer = instance[int.Parse(splirDir[0])];
 
-            if(stream!=null && splirDir.Length > 1)
+            if(searchResult.Streamer != null && splirDir.Length > 1)
             {
-                user = stream[int.Parse(splirDir[1])];
+                searchResult.user = searchResult.Streamer[int.Parse(splirDir[1])];
 
-                if(user!=null && splirDir.Length > 2)
+                if(searchResult.User != null && splirDir.Length > 2)
                 {
-                    comment = user[int.Parse(splirDir[2])];
+                    searchResult.comment = searchResult.User[int.Parse(splirDir[2])];
                 }
             }
         }
 
-        return (stream, user, comment);
+        return searchResult;
     }
 
 
@@ -150,13 +196,13 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         indexStreamWatch = index;
 
-        var aux = streamers.GetTByIndex(previus);
+        var aux = streamers.GetTByIndex(previus).value;
 
         aux.onCreateComment -= CommentCreateQueue;
 
         aux.onLeaveComment -= CommentLeaveQueue;
 
-        aux = streamers.GetTByIndex(indexStreamWatch);
+        aux = streamers.GetTByIndex(indexStreamWatch).value;
 
         aux.onCreateComment += CommentCreateQueue;
 
@@ -167,6 +213,15 @@ public class StreamerManager : SingletonMono<StreamerManager>
     void CommentCreateQueue(CommentData commentData)
     {
         onCreateComment.delegato.Invoke(commentData);
+
+        //si autoridad de estado bla bla bla
+
+        var timerDestroy = TimersManager.Create(30, () =>
+        {
+            commentData.user.Aplicate(commentData.comment.Views, commentData.comment.Damage, commentData.textIP);
+        });
+
+        commentData.onDestroy += () => timerDestroy.Stop();
     }
 
     void CommentLeaveQueue(CommentData commentData)
@@ -236,5 +291,45 @@ public class Actions
 
     public const string Admonition = "Admonition";
 
+    public const string AddUser = "AddUser";
+
+    public const string RemoveUser = "RemoveUser";
+
+    public const string AddComment = "AddComment";
+
+    public const string RemoveComment = "RemoveComment";
+
     //public const string Ban = "Ban";
+}
+
+public struct DataRpc
+{
+    public string action;
+
+    public string direction;
+
+    public string data;
+
+    public static void Create(string action, string direction)
+    {
+        UnityEngine.Debug.Log(action + ": " + direction);
+        StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction }));
+    }
+
+    public static void Create(string action, string direction, string data)
+    {
+        UnityEngine.Debug.Log(action + ": " + direction + " " + data);
+        StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction , data = data}));
+    }
+
+    public static void Create(string action, string direction, object data)
+    {
+        UnityEngine.Debug.Log(action + ": " + direction + " " + JsonUtility.ToJson(data, true));
+        StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = JsonUtility.ToJson(data) }));
+    }
+
+    public override string ToString()
+    {
+        return $"accion: {action}\ndireccion: {direction}\ndata: {data}";
+    }
 }

@@ -21,11 +21,13 @@ public class PopUpModerator : PopUpElement
 
         callsManager.DestroyAll();
 
+        
+
         if (comment.Enable)
-            callsManager.Create("Ban" , () => StreamerManager.Execute(Actions.Ban, comment.textIP));
+            callsManager.Create("Ban" , () => DataRpc.Create(Actions.Ban, comment.textIP));
 
         
-        callsManager.Create("Admonition", () => StreamerManager.Execute(Actions.Admonition, comment.textIP));
+        callsManager.Create("Admonition", () => DataRpc.Create(Actions.Admonition, comment.textIP));
 
         //callsManager.Create("Eliminate", () => eliminate.delegato.Invoke(comment));
     }

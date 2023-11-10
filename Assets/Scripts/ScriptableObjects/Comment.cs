@@ -25,6 +25,9 @@ public class Comment : SuperScriptableObject
     [field: SerializeField]
     public float Deley { get; private set; }
 
+    [field: SerializeField]
+    public float MoralIndex { get; private set; }
+
 
     /////////////////////////////////////////////////////////////////////////
     ///
@@ -70,7 +73,8 @@ public class Comment : SuperScriptableObject
         if (float.TryParse(param["Deley"], out var aux2))
             Deley = aux2;
 
-        UnBan = param["Unban"];
+        if (float.TryParse(param["Indice Moral"], out var aux5))
+            MoralIndex = aux5;
 
         Text = param["Comentario"];
 

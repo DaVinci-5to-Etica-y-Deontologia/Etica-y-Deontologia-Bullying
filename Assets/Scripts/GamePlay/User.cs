@@ -44,7 +44,7 @@ public class User : IDirection
 
     public float CoolDown { get=>_coolDown.current; set=> _coolDown.Set(value); }
 
-    public CommentData this[int ID]
+    public (CommentData value, int ID, int index) this[int ID]
     {
         get
         {
@@ -66,42 +66,76 @@ public class User : IDirection
         }
     }
 
-    
-
     int _admonition;
 
     Timer _coolDown;
 
     Streamer stream;
-
-    public override string ToString()
-    {
-        return Name + " " + comments.Count;
-    }
+    
 
     #region Moderator
 
-    public void Admonition(int ID)
+    public void Admonition(int index)
     {
         _admonition++;
         CoolDown = 30;
-        LeaveComment(ID);
+        RemoveComment(index);
     }
 
-    public void Ban(int ID)
+    public void Ban()
     {
-        Ban();
+        for (int i = comments.Count - 1; i >= 0; i--)
+        {
+            RemoveComment(i);
+        }
+
+        Destroy();
     }
 
     #endregion
 
-    public void Aplicate(CommentData commentView)
+    #region Instigator
+    
+        //algo a futuro
+
+    #endregion
+
+    #region rpc
+    public void AddComment(string json)
+    {
+        var newCommentData = poolCommentData.Obtain().Self;
+
+        JsonUtility.FromJsonOverwrite(json, newCommentData);
+
+        newCommentData.Init(stream.ID, ID);
+
+        var auxPic = new Internal.Pictionary<int, CommentData>(newCommentData.ID, newCommentData);
+
+        comments.Add(auxPic);
+
+        onCreateComment?.Invoke(newCommentData);
+    }
+
+    public void RemoveComment(int index)
+    {
+        CommentData comment = comments.GetTByIndex(index).value;
+
+        onLeaveComment?.Invoke(comment);
+
+        comments.RemoveAt(index);
+
+        comment.Destroy();
+    }
+
+    #endregion
+
+    public void Aplicate(int views, int damage ,string textIP)
     {
         //Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
 
-        stream.Users(commentView.comment.Views);
+        stream.Users(views);
 
-        LeaveComment(commentView.ID);
+        DataRpc.Create(Actions.RemoveComment, textIP);
     }
 
 
@@ -111,16 +145,6 @@ public class User : IDirection
         Enable = false;
         stream.users.Remove(ID);
     }
-
-    void Ban()
-    {
-        for (int i = comments.Count - 1; i >= 0; i--)
-        {
-            LeaveComment(comments.GetTByIndex(i).ID);
-        }
-
-        Destroy();
-    }    
 
     public void CreateComment()
     {
@@ -133,35 +157,21 @@ public class User : IDirection
 
             var newCommentData = poolCommentData.Obtain().Self;
 
-            var auxPic = comments.Add(newCommentData);
-
-            newCommentData.Create(auxPic.Key, aux);
-
-            newCommentData.Init(stream.ID, ID);
-
-            var timerDestroy = TimersManager.Create(30, () => Aplicate(newCommentData));
-
-            newCommentData.onDestroy += () => timerDestroy.Stop();
+            newCommentData.Create(comments.lastID + 1, aux);
 
             CoolDown = newCommentData.Delay;
 
-            onCreateComment?.Invoke(newCommentData);
+            DataRpc.Create(Actions.AddComment, textIP, newCommentData);
+
+            newCommentData.Destroy();
         };
 
         StreamerManager.eventQueue.Enqueue(lambda);
     }
 
-    public void LeaveComment(int id)
+    public override string ToString()
     {
-        var index = comments.GetIndexByID(id);
-
-        var comment = comments.GetTByIndex(index);
-
-        onLeaveComment?.Invoke(comment);
-
-        comments.RemoveAt(index);
-
-        comment.Destroy();
+        return Name + " " + comments.Count;
     }
 
     public void Init(Streamer stream)

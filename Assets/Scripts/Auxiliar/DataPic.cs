@@ -15,36 +15,22 @@ public class DataPic<T> : IEnumerable<Pictionary<int, T>>
 
     public List<Pictionary<int, T>> GetList() => _data.GetList();
 
-    public T GetTByIndex(int index)
+    public (T value, int ID, int index ) GetTByIndex(int index)
     {
-        return _data.GetPicByIndex(index).Value;
+        var data = _data.GetPicByIndex(index);
+
+        return (data.Value, data.Key, index);
     }
 
-    public T GetTByID(int ID)
+    public (T value, int ID, int index) GetTByID(int ID)
     {
-        if(!_data.TryGetValue(ID, out var value))
+        if(!_data.ContainsKey(ID, out var index))
         {
             Debug.LogError("no se encontro el ID: " + ID);
             return default;
         }
 
-        return value;
-    }
-
-    public int GetIDByIndex(int index)
-    {
-        return _data.GetPicByIndex(index).Key;
-    }
-
-    public int GetIndexByID(int ID)
-    {
-        if (!_data.ContainsKey(ID, out var value))
-        {
-            Debug.LogError("no se encontro el ID: " + ID);
-            return -1;
-        }
-
-        return value;
+        return GetTByIndex(index);
     }
 
     public Pictionary<int, T> Add(T value)
