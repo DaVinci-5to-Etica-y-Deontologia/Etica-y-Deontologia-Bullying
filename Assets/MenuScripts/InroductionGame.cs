@@ -17,9 +17,8 @@ public class InroductionGame : MonoBehaviour
 
     void Start()
     {
+        TransitionManager.instance.SetTransition("SquaresEnd", 0.8f, ActiveIntro);
         EnableDisableButtons(false);
-
-        ActiveIntro();
     }
 
     void ActiveIntro()
@@ -31,7 +30,7 @@ public class InroductionGame : MonoBehaviour
     {
         mainButtons[0].transform.DOScaleX(1, timerToAppear).SetEase(easeType).SetDelay(1f);
         mainButtons[0].GetComponent<RectTransform>()
-        .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 50), timerToMove)
+        .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
         .SetEase(easeType)
         .SetDelay(1.5f)
         .OnComplete(() =>
@@ -39,12 +38,12 @@ public class InroductionGame : MonoBehaviour
             mainButtons[1].transform.DOScaleX(1, timerToAppear).SetEase(easeType);
 
             mainButtons[0].GetComponent<RectTransform>()
-            .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 50), timerToMove)
+            .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
             .SetDelay(0.5f)
             .SetEase(easeType);
 
             mainButtons[1].transform.GetComponent<RectTransform>()
-            .DOAnchorPos(mainButtons[1].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 50), timerToMove)
+            .DOAnchorPos(mainButtons[1].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
             .SetDelay(0.5f)
             .SetEase(easeType)
             .OnComplete(() =>
