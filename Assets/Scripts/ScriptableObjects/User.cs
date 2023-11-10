@@ -5,26 +5,26 @@ using UnityEngine;
 /// <summary>
 /// Clase destinada a ser un user
 /// </summary>
-public class User : SuperScriptableObject
+[System.Serializable]
+public class User : IDirection
 {
-    #region NO TOCAR
+    static LinkedPool<CommentData> poolCommentData = new LinkedPool<CommentData>(new CommentData());
+
+    public int ID;
 
     [field: SerializeField]
-    public Comment[] comments { get; private set; }
+    public DataPic<CommentData> comments { get; private set; }
 
-    #endregion
-
-    ////////////////////////////////////////////////////////
-    //Colocar las variables para el usuario
-
-    [field: SerializeField]
     public string Name { get; private set; }
 
     [field: SerializeField]
-    public bool Ban { get; set; }
+    public float MoralIndex { get; set; }
 
     [field: SerializeField]
-    public bool Enable { get; set; }
+    public float MoralRange { get; set; }
+
+    [field: SerializeField]
+    public bool Enable { get; set; } = true;
 
     [field: SerializeField]
     public Sprite Perfil { get; set; }
@@ -32,64 +32,158 @@ public class User : SuperScriptableObject
     [field: SerializeField]
     public Color colorText { get; set; } = new Color{ a=1 };
 
+    public event System.Action<CommentData> onCreateComment;
 
-    //////////////////////////////////////////////////////
+    public event System.Action<CommentData> onLeaveComment;
 
-    public new BD Parent => (BD)base.Parent;
+    BD database => stream.dataBase;
 
-    public bool Chck => Enable && !Ban;
+    public EventManager eventManager => stream.eventManager;
 
-    public override string ToString()
+    public string textIP => $"{stream.textIP}.{ID}";
+
+    public float CoolDown { get=>_coolDown.current; set=> _coolDown.Set(value); }
+
+    public CommentData this[int ID]
     {
-        return Name + " " + comments.Length;
+        get
+        {
+            return comments.GetTByID(ID);
+        }
     }
 
-#if UNITY_EDITOR
-
-    public User Initilize(List<PDO<string, string>> param)
+    int _Admonition
     {
-        //////////////////////////////////////////////////////////////////////////////////
-        //Colocar aqui el seteo de las variables para el usuario
-
-        Name = name;
-        Enable = true;
-
-
-
-
-        //Fin
-        //////////////////////////////////////////////////////////////////////////////////
-
-        //No tocar
-        InternalSet(param);
-        return this;
+        get => _admonition;
+        set
+        {
+            if (_admonition + value <= 2)
+            {
+                _admonition += value;
+            }
+            else 
+                Destroy();
+        }
     }
 
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
-    #region NO TOCAR
-    public override void DeleteThis()
-    {
-        comments?.Delete();
 
-        base.DeleteThis();
+    int _admonition;
+
+    Timer _coolDown;
+
+    Streamer stream;
+
+    public override string ToString()
+    {
+        return Name + " " + comments.Count;
     }
 
-    /// <summary>
-    /// recive una lista de todos los comentarios separados reglones, con sus parametros dentro del array
-    /// </summary>
-    /// <param name="param"></param>
-    void InternalSet(List<PDO<string, string>> param)
+    #region Moderator
+
+    public void Admonition(int ID)
     {
-        comments = new Comment[param.Count];
-        for (int i = 0; i < comments.Length; i++)
-        {
-            comments[i] = MakeNewChild<Comment>(param[i][0], (comments) => comments.Initilize(param[i]));
-        }
+        _admonition++;
+        CoolDown = 30;
+        LeaveComment(ID);
     }
+
+    public void Ban(int ID)
+    {
+        Ban();
+    }
+
     #endregion
 
-#endif
+    public void Aplicate(CommentData commentView)
+    {
+        //Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
 
+        stream.Users(commentView.comment.Views);
+
+        LeaveComment(commentView.ID);
+    }
+
+
+    public void Destroy()
+    {
+        _coolDown.Stop();
+        Enable = false;
+        stream.users.Remove(ID);
+    }
+
+    void Ban()
+    {
+        for (int i = comments.Count - 1; i >= 0; i--)
+        {
+            LeaveComment(comments.GetTByIndex(i).ID);
+        }
+
+        Destroy();
+    }    
+
+    public void CreateComment()
+    {
+        System.Action lambda = () => 
+        {
+            if (!Enable)
+                return;
+
+            var aux = database.SelectComment(MoralIndex, MoralRange);
+
+            var newCommentData = poolCommentData.Obtain().Self;
+
+            var auxPic = comments.Add(newCommentData);
+
+            newCommentData.Create(auxPic.Key, aux);
+
+            newCommentData.Init(stream.ID, ID);
+
+            var timerDestroy = TimersManager.Create(30, () => Aplicate(newCommentData));
+
+            newCommentData.onDestroy += () => timerDestroy.Stop();
+
+            CoolDown = newCommentData.Delay;
+
+            onCreateComment?.Invoke(newCommentData);
+        };
+
+        StreamerManager.eventQueue.Enqueue(lambda);
+    }
+
+    public void LeaveComment(int id)
+    {
+        var index = comments.GetIndexByID(id);
+
+        var comment = comments.GetTByIndex(index);
+
+        onLeaveComment?.Invoke(comment);
+
+        comments.RemoveAt(index);
+
+        comment.Destroy();
+    }
+
+    public void Init(Streamer stream)
+    {
+        this.stream = stream;
+
+        comments = new();
+
+        _coolDown = TimersManager.Create(Random.Range(10, 15), CreateComment);
+    }
+
+    public User(int id)
+    {
+        this.ID = id;
+
+        int rng = Random.Range(5,8);
+
+        string chars = "abcdefghijklmnñopqrstuvwxyz";
+
+        for (int i = 0; i < rng; i++)
+        {
+            Name += chars[Random.Range(0, chars.Length)];
+        }
+    }
 }

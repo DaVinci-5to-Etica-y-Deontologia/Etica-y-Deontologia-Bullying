@@ -197,7 +197,7 @@ public class Pictionarys<K, V> : IEnumerable<Pictionary<K, V>>
             return default;
     }
 
-    public Pictionary<K, V> GetPic(int index)
+    public Pictionary<K, V> GetPicByIndex(int index)
     {
         return pictionaries[index];
     }
@@ -309,6 +309,16 @@ public class Pictionarys<K, V> : IEnumerable<Pictionary<K, V>>
     public void Clear()
     {
         pictionaries.Clear();
+    }
+
+    public List<Pictionary<K, V>> GetList()
+    {
+        return pictionaries;
+    }
+
+    public void SetList(List<Pictionary<K, V>> pictionaries)
+    {
+        this.pictionaries = pictionaries;
     }
 
     IEnumerator IEnumerable.GetEnumerator()

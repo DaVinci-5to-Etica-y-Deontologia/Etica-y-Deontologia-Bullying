@@ -45,7 +45,7 @@ namespace Euler
 
     public class SpecificEvent<T> : SpecificEventParent where T : System.Delegate
     {
-        new public T delegato { get => (T)base.delegato; set => base.delegato = value; }
+        public new T delegato { get => (T)base.delegato; set => base.delegato = value; }
 
         public void Suscribe(T action)
         {

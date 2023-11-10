@@ -113,6 +113,9 @@ public class TimersManager : SingletonScript<TimersManager>
     {
         for (int i = timersList.Count-1; i >= 0; i--)
         {
+            while (i >= timersList.Count)
+                i--;
+
             timersList[i].SubsDeltaTime(i);
         }
     }
