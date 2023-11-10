@@ -9,16 +9,16 @@ public class MenuManager : MonoBehaviour
 
     public void StartButton()
     {
-        TransitionManager.instance.SetTransition("SquaresStart", 0.8f, () => ScenesLoader.instance.LoadDefaultScene());
+        TransitionManager.instance.SetTransition(TransitionManager.SquaresStart, 0.8f, () => ScenesLoader.instance.LoadDefaultScene());
     }
 
     public void OptionsButton()
     {
-        TransitionManager.instance.SetTransition("Lines", 0.8f,() => { optionsMenu.SetActive(true); optionsMenu.GetComponent<CanvasGroup>().alpha = 1; });
+        TransitionManager.instance.SetTransition(TransitionManager.Lines, 0.8f,() => { optionsMenu.SetActive(true); optionsMenu.GetComponent<CanvasGroup>().alpha = 1; });
     }
 
     public void QuitButton()
     {
-        TransitionManager.instance.SetTransition("LinesStart", 1.8f, () => Application.Quit());
+        TransitionManager.instance.SetTransition(TransitionManager.LinesStart, 1.8f, () => Application.Quit());
     }
 }

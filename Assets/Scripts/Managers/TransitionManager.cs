@@ -7,6 +7,13 @@ public class TransitionManager : SingletonMono<TransitionManager>
 {
     Animator animator;
 
+    public const string Squares = "Squares";
+    public const string SquaresStart = "SquaresStart";
+    public const string SquaresEnd = "SquaresEnd";
+    public const string Lines = "Lines";
+    public const string LinesStart = "LinesStart";
+    public const string LinesEnd = "LinesEnd";
+
     protected override void Awake()
     {
         base.Awake();
