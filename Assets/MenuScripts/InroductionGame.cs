@@ -17,7 +17,8 @@ public class InroductionGame : MonoBehaviour
 
     void Start()
     {
-        TransitionManager.instance.SetTransition("SquaresEnd", 0.8f, ActiveIntro);
+        TimersManager.Create(0.8f, ActiveIntro);
+
         EnableDisableButtons(false);
     }
 

@@ -11,7 +11,7 @@ public class Comment : SuperScriptableObject
     //////////////////////////////////////////////////////////////////////////
     ///Colocar aqui las variables para los comentarios
     [field: SerializeField, TextArea(3,6)]
-    public string Comentario { get; private set; }
+    public string Text { get; private set; }
 
     [field: SerializeField, TextArea(3, 6)]
     public string UnBan { get; private set; }
@@ -25,22 +25,34 @@ public class Comment : SuperScriptableObject
     [field: SerializeField]
     public float Deley { get; private set; }
 
-    /*
-    [field: SerializeField]
-    public User[] ToRespond { get; private set; }
-    */
-
-
 
     /////////////////////////////////////////////////////////////////////////
     ///
-    public new User Parent => (User)base.Parent;
-
-    public bool Chck => Parent.Chck;
+    public new BD Parent => (BD)base.Parent;
 
     public override string ToString()
     {
         return JsonUtility.ToJson(this, true);
+    }
+
+    private void OnValidate()
+    {
+        if(Parent!=null)
+        {
+            bool destroy = true;
+            for (int i = 0; i < Parent.comments.Length; i++)
+            {
+                if (Parent.comments[i]==this)
+                    destroy = false;
+            }
+
+            if(!destroy)
+            {
+                return;
+            }
+        }
+
+        DestroyImmediate(this,true);
     }
 
 #if UNITY_EDITOR
@@ -60,25 +72,8 @@ public class Comment : SuperScriptableObject
 
         UnBan = param["Unban"];
 
-        Comentario = param["Comentario"];
+        Text = param["Comentario"];
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        Parent.Parent.OnFinishSet += (bd) => 
-        {
-            /*
-            List<User> users = new List<User>();
-
-            foreach (var item in param["Condicion necesaria"].Split(","))
-            {
-                users.Add(bd[item]);
-            }
-            
-            ToRespond = users.ToArray();
-            */
-        };
-        /////////////////////////////////////////////////////////////////////////
-        ///
         return this;
     }
 
