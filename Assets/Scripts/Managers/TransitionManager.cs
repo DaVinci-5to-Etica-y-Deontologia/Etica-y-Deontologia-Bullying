@@ -20,7 +20,12 @@ public class TransitionManager : SingletonMono<TransitionManager>
         animator = GetComponent<Animator>();
     }
 
-    public void SetTransition(string triggerName, float animationTime, Action endAction = null)
+    public void SetTransition(string triggerName)
+    {
+        StartCoroutine(PLayAnimation(triggerName, 0, null));
+    }
+
+    public void SetTransition(string triggerName, float animationTime, Action endAction)
     {
         StartCoroutine(PLayAnimation(triggerName, animationTime, endAction));
     }
