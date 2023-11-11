@@ -24,9 +24,9 @@ public class CommentData : IDirection, IPoolElement<CommentData>
 
     public string textName => user.Name.RichText("color", "#" + ColorUtility.ToHtmlStringRGBA(user.colorText));
 
-    public Sprite perfil => user.Perfil;
+    public BD database => user.database;
 
-    EventManager eventManager => user.eventManager;
+    public EventManager eventManager => user.eventManager;
 
     public LinkedPool<CommentData> Parent { get; set; }
     public IPoolElement<CommentData> Next { get; set; }
@@ -36,11 +36,6 @@ public class CommentData : IDirection, IPoolElement<CommentData>
     public event System.Action onDestroy;
 
     User _user;
-
-    public void OnClick()
-    {
-        eventManager.events.SearchOrCreate<EventParam<CommentData>>("onclickcomment").delegato.Invoke(this);
-    }
 
     public void Destroy()
     {

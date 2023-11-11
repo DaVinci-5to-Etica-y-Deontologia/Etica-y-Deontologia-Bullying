@@ -308,6 +308,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
         onStreamerCreate = eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamcreate");
 
         GameManager.instance.StartCoroutine(pool.CreatePool(30, ()=> eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato.Invoke()));
+
+        GameManager.instance.StartCoroutine(User.LoadPerfilSprite());
     }
 
     public void EndLoad()

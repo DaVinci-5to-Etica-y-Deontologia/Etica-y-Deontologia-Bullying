@@ -15,10 +15,13 @@ using UnityEditor;
 public class BD : SuperScriptableObject
 {
     [field: SerializeField]
-    public Comment[] comments { get; private set; }
+    public Material materialForUsers;
 
     [field: SerializeField]
     public Streamer[] Streamers { get; private set; }
+
+    [field: SerializeField]
+    public Comment[] comments { get; private set; }
 
     public void OnDisable()
     {

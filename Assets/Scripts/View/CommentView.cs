@@ -10,7 +10,19 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
     TextMeshProUGUI textMesh;
 
     [SerializeField]
-    Image perfil;
+    Image cuerpo;
+
+    [SerializeField]
+    Image cabeza;
+
+    [SerializeField]
+    Image ojos;
+
+    [SerializeField]
+    Image boquitas;
+
+    [SerializeField]
+    Image accesorios;
 
     [SerializeField]
     Button button;
@@ -35,7 +47,15 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
             if (_commentData == null)
                 return;
 
-            perfil.sprite = _commentData.perfil;
+            _commentData.user.SetCuerpo(cuerpo, _commentData.database.materialForUsers);
+
+            _commentData.user.SetAccesorio(accesorios, _commentData.database.materialForUsers);
+
+            _commentData.user.SetBoquita(boquitas, _commentData.database.materialForUsers);
+
+            _commentData.user.SetCabeza(cabeza, _commentData.database.materialForUsers);
+
+            _commentData.user.SetOjos(ojos, _commentData.database.materialForUsers);
 
             textMesh.text = _commentData.textComment;
 
@@ -59,7 +79,7 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 
     public void OnClick()
     {
-        _commentData.OnClick();
+        commentData.eventManager.events.SearchOrCreate<EventParam<CommentView>>("onclickcomment").delegato.Invoke(this);
     }
 
 
