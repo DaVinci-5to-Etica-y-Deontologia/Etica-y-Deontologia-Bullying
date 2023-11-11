@@ -47,15 +47,15 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
             if (_commentData == null)
                 return;
 
-            _commentData.user.SetCuerpo(cuerpo, _commentData.database.materialForUsers);
+            _commentData.user.SetCuerpo(cuerpo);
 
-            _commentData.user.SetAccesorio(accesorios, _commentData.database.materialForUsers);
+            _commentData.user.SetAccesorio(accesorios);
 
-            _commentData.user.SetBoquita(boquitas, _commentData.database.materialForUsers);
+            _commentData.user.SetBoquita(boquitas);
 
-            _commentData.user.SetCabeza(cabeza, _commentData.database.materialForUsers);
+            _commentData.user.SetCabeza(cabeza);
 
-            _commentData.user.SetOjos(ojos, _commentData.database.materialForUsers);
+            _commentData.user.SetOjos(ojos);
 
             textMesh.text = _commentData.textComment;
 

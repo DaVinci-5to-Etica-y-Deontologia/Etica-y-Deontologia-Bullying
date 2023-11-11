@@ -8,7 +8,7 @@ using System.Linq;
 /// Clase destinada a ser un user
 /// </summary>
 [System.Serializable]
-public class User : UserIcon , IDirection
+public class UserParent : IDirection
 {
     static LinkedPool<CommentData> poolCommentData = new LinkedPool<CommentData>(new CommentData());
 
@@ -189,7 +189,7 @@ public class User : UserIcon , IDirection
         colorText=colorText.ChangeAlphaCopy(1);
     }
 
-    public User(int id)
+    public UserParent(int id)
     {
         this.ID = id;
 
@@ -205,7 +205,7 @@ public class User : UserIcon , IDirection
 }
 
 
-public class UserIcon
+public class User : UserParent
 {
     static protected Sprite[] cuerpos;
     static protected Sprite[] cabezas;
@@ -273,38 +273,38 @@ public class UserIcon
         yield return null;
     }
 
-    public void SetCuerpo(UnityEngine.UI.Image image, Material material)
+    public void SetCuerpo(UnityEngine.UI.Image image)
     {
         image.sprite = cuerpos[cuerpo.index];
 
-        cuerpo.SetImage(image, material);
+        cuerpo.SetImage(image, database.materialForUsers);
     }
-    public void SetCabeza(UnityEngine.UI.Image image, Material material)
+    public void SetCabeza(UnityEngine.UI.Image image)
     {
         image.sprite = cabezas[cabeza.index];
 
-        cabeza.SetImage(image, material);
+        cabeza.SetImage(image, database.materialForUsers);
     }
-    public void SetOjos(UnityEngine.UI.Image image, Material material)
+    public void SetOjos(UnityEngine.UI.Image image)
     {
         image.sprite = ojos[ojo.index];
 
-        ojo.SetImage(image, material);
+        ojo.SetImage(image, database.materialForUsers);
     }
-    public void SetAccesorio(UnityEngine.UI.Image image, Material material)
+    public void SetAccesorio(UnityEngine.UI.Image image)
     {
         image.sprite = accesorios[accesorio.index];
 
-        accesorio.SetImage(image, material);
+        accesorio.SetImage(image, database.materialForUsers);
     }
-    public void SetBoquita(UnityEngine.UI.Image image, Material material)
+    public void SetBoquita(UnityEngine.UI.Image image)
     {
         image.sprite = boquitas[boquita.index];
 
-        boquita.SetImage(image, material);
+        boquita.SetImage(image, database.materialForUsers);
     }
 
-    public UserIcon()
+    public User(int id) : base(id)
     {
         ojo.Set(ojos.Length);
         boquita.Set(boquitas.Length);
