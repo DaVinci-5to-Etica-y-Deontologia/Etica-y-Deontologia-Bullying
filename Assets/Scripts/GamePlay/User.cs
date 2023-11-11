@@ -204,7 +204,7 @@ public class UserParent : IDirection
     }
 }
 
-
+[System.Serializable]
 public class User : UserParent
 {
     static protected Sprite[] cuerpos;
