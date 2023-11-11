@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Euler;
+using System.Linq;
 
 #if UNITY_EDITOR 
 using UnityEditor;
@@ -16,15 +17,31 @@ public class BD : SuperScriptableObject
     [field: SerializeField]
     public Comment[] comments { get; private set; }
 
-    public int Length => comments.Length;
+    [field: SerializeField]
+    public Streamer[] Streamers { get; private set; }
 
-    public Comment this[int index]
+    public void OnDisable()
     {
-        get
+        for (int i = 0; i < Streamers.Length; i++)
         {
-            return comments[index];
+            Streamers[i].inUse = false;
         }
     }
+
+    public int SelectStreamer()
+    {
+        var index = -1;
+
+        do
+        {
+            index = Random.Range(0, Streamers.Length);
+        } while(Streamers[index].inUse);
+
+        Streamers[index].inUse = true;
+
+        return index;
+    }
+
 
     /// <summary>
     /// Adaptar al nuevo sistema

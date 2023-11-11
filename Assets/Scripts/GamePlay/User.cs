@@ -70,7 +70,7 @@ public class User : IDirection
 
     Timer _coolDown;
 
-    Streamer stream;
+    StreamerData stream;
     
 
     #region Moderator
@@ -177,7 +177,7 @@ public class User : IDirection
         return Name + " " + comments.Count;
     }
 
-    public void Init(Streamer stream)
+    public void Init(StreamerData stream)
     {
         this.stream = stream;
 

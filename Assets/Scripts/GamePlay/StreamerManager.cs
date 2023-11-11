@@ -8,11 +8,11 @@ public class StreamerManager : SingletonMono<StreamerManager>
 {
     public struct SearchResult
     {
-        public (Streamer value, int ID, int index) streamer;
+        public (StreamerData value, int ID, int index) streamer;
         public (User value, int ID, int index) user;
         public (CommentData value, int ID, int index) comment;
 
-        public Streamer Streamer => streamer.value;
+        public StreamerData Streamer => streamer.value;
 
         public User User => user.value;
 
@@ -25,6 +25,12 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     public static Queue<System.Action> eventQueue = new();
 
+    public EventParam<StreamerData> onStreamerChange;
+
+    public EventParam<CommentData> onCreateComment;
+
+    public EventParam<CommentData> onLeaveComment;
+
     [SerializeField]
     CommentView prefab;
 
@@ -35,16 +41,14 @@ public class StreamerManager : SingletonMono<StreamerManager>
     ChatContentRefresh contain;
 
     [SerializeField]
-    DataPic<Streamer> streamers = new();
+    DataPic<StreamerData> streamers = new();
 
     [SerializeField]
     float multiply = 1;
 
     LinkedPool<CommentView> pool;
 
-    EventParam<CommentData> onCreateComment;
-
-    EventParam<CommentData> onLeaveComment;
+    
 
     Stopwatch watchdog;
 
@@ -65,7 +69,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
         }
     }
 
-    public (Streamer value, int ID, int index) this[int ID]
+    public (StreamerData value, int ID, int index) this[int ID]
     {
         get
         {
@@ -75,10 +79,10 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     public int Count => streamers.Count;
 
-    public Streamer Actual { get; private set; }
+    public StreamerData Actual { get; private set; }
 
     [SerializeField]
-    int _indexStreamWatch = 0;
+    int _indexStreamWatch = -1;
 
     Timer delay;
 
@@ -129,10 +133,14 @@ public class StreamerManager : SingletonMono<StreamerManager>
                 }
                 break;
 
+            case Actions.AddStream:
+                {
+                    instance.AddStream(dataRpc.data);
+                }
+                break;
+
         }
     }
-    
-    
 
     public static SearchResult Search(string dir)
     {
@@ -140,7 +148,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         SearchResult searchResult = new SearchResult();
 
-        if(splirDir.Length > 0)
+        if(splirDir.Length > 0 && dir!=string.Empty)
         {
             searchResult.streamer = instance[int.Parse(splirDir[0])];
 
@@ -157,6 +165,22 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         return searchResult;
     }
+
+    //rpc
+    public void AddStream(string json)
+    {
+        var streamer = JsonUtility.FromJson<StreamerData>(json);
+
+        streamers.Add(streamer);
+
+        streamer.Create(streamers.lastID);
+
+        //autoridad de estado y esas cosas
+
+        streamer.onCreateComment += CommentDataDelete_onCreateComment;
+    }
+
+   
 
 
     /// <summary>
@@ -185,11 +209,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     public void CreateStream()
     {
-        var streamer = new Streamer();
-
-        streamers.Add(streamer);
-
-        streamer.Create(streamers.lastID , Random.Range(5,10));
+        DataRpc.Create(Actions.AddStream, "", new StreamerData(dataBase.SelectStreamer()));
     }
 
     public void ChangeStream(int index)
@@ -198,43 +218,46 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         indexStreamWatch = index;
 
-        var aux = streamers.GetTByIndex(previus).value;
+        StreamerData aux;
 
-        aux.onCreateComment -= CommentCreateQueue;
+        if (previus>=0)
+        {
+            aux = streamers.GetTByIndex(previus).value;
 
-        aux.onLeaveComment -= CommentLeaveQueue;
+            aux.onCreateComment -= CommentCreateQueue;
+
+            aux.onLeaveComment -= CommentLeaveQueue;
+        }
 
         aux = streamers.GetTByIndex(indexStreamWatch).value;
 
         aux.onCreateComment += CommentCreateQueue;
 
         aux.onLeaveComment += CommentLeaveQueue;
+
         Actual = aux;
+
+        onStreamerChange.delegato?.Invoke(Actual);
     }
 
     void CommentCreateQueue(CommentData commentData)
     {
         onCreateComment.delegato.Invoke(commentData);
+    }
 
-        //si autoridad de estado bla bla bla
+    void CommentLeaveQueue(CommentData commentData)
+    {
+        onLeaveComment.delegato.Invoke(commentData);
+    }
 
+    void CommentDataDelete_onCreateComment(CommentData commentData)
+    {
         var timerDestroy = TimersManager.Create(30, () =>
         {
             commentData.user.Aplicate(commentData.comment.Views, commentData.comment.Damage, commentData.textIP);
         });
 
         commentData.onDestroy += () => timerDestroy.Stop();
-    }
-
-    void CommentLeaveQueue(CommentData commentData)
-    {
-        onLeaveComment.delegato.Invoke(commentData);
-
-        /*
-        while (watchdog.ElapsedMilliseconds < (1f / 20) && LeaveCommentQueue.Count > 0)
-        {
-            
-        }*/
     }
 
     void MyStart()
@@ -269,6 +292,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         onLeaveComment = eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment");
 
+        onStreamerChange = eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamchange");
+
         GameManager.instance.StartCoroutine(pool.CreatePool(30, ()=> eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato.Invoke()));
     }
 
@@ -300,6 +325,10 @@ public class Actions
     public const string AddComment = "AddComment";
 
     public const string RemoveComment = "RemoveComment";
+
+    public const string AddStream = "AddStream";
+
+    public const string RemoveStream = "RemoveStream";
 
     //public const string Ban = "Ban";
 }

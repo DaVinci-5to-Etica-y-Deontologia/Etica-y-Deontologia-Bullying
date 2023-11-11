@@ -42,7 +42,7 @@ public class ChatContentRefresh : MonoBehaviour
 
     List<CommentData> commentDatas;
 
-    Streamer Actual => StreamerManager.instance.Actual;
+    StreamerData Actual => StreamerManager.instance.Actual;
 
     IEnumerable<CommentData> comments => Actual.commentViews.Select((pic)=>pic.Value);
 
@@ -144,6 +144,9 @@ public class ChatContentRefresh : MonoBehaviour
 
         commentDatas = this.comments.Skip(min).Take(max - min).ToList();
 
+        var commentViews = this.commentViews.Where((commentView) => commentView.commentData != null)
+            .OrderBy((commentView) => commentView.commentData.timeOnCreate).ToArray();
+
         for (int i = 0; i < commentViews.Length; i++)
         {
             bool _break=false;
@@ -153,6 +156,7 @@ public class ChatContentRefresh : MonoBehaviour
                 if(commentDatas[j] == commentViews[i].commentData)
                 {
                     commentDatas.RemoveAt(j);
+                    commentViews[i].transform.SetAsLastSibling();
                     _break = true;
                     break;
                 }
@@ -209,5 +213,7 @@ public class ChatContentRefresh : MonoBehaviour
         eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment").delegato += OnLeaveComment;
 
         eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato += () => commentViews = GetComponentsInChildren<CommentView>(true);
+
+        eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamchange").delegato += (streamer) => { flagScroll = true; middle = 0;};
     }
 }

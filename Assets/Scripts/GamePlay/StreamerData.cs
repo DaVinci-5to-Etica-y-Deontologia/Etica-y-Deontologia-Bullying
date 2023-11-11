@@ -5,9 +5,11 @@ using UnityEngine.Events;
 using System.Linq;
 
 [System.Serializable]
-public class Streamer : IDirection
+public class StreamerData : IDirection
 {
     public int ID;
+
+    public int streamID;
 
     public DataPic<User> users = new();
 
@@ -26,15 +28,12 @@ public class Streamer : IDirection
 
     public EventManager eventManager => streamerManager.eventManager;
 
+    public Streamer streamer => dataBase.Streamers[streamID];
+
     public string textIP => ID.ToString();
 
 
     StreamerManager streamerManager;
-
-    public Streamer()
-    {
-        this.streamerManager = StreamerManager.instance;
-    }
 
     public (User value, int ID, int index) this[int ID]
     {
@@ -44,11 +43,11 @@ public class Streamer : IDirection
         }
     }
 
-    public void Create(int ID , int users)
+    public void Create(int ID)
     {
         this.ID = ID;
-
-        TimersManager.Create(5, ()=> CreateUsers(users));
+        this.streamerManager = StreamerManager.instance;
+        CreateUsers(streamer.minimalViews * 2);
     }
 
     public void Users(int number)
@@ -100,5 +99,10 @@ public class Streamer : IDirection
     public void RemoveUser(int index)
     {
         users.GetTByIndex(index).value.Destroy();
+    }
+
+    public StreamerData(int streamID)
+    {
+        this.streamID = streamID;
     }
 }
