@@ -1,0 +1,181 @@
+Comentario	Eje Moral (Siempre tiene que ser de 0 a 1)
+KEKW	0
+PogChamp	0
+eh??	0
+Cómo me suscribo??	0
+para cuando el juego de terror?	0,2
+casi me caigo del sueño	0,75
+Tienes el carisma de una piedra lol	0,9
+no se escucha	0
+hey. holaa	0
+habla menos que cansas demasiado	0,5
+dios mio. Es que eres insoportable	0,6
+xdd	0
+No me entero de nada	0,2
+Eyy, cuando empezo el directito?	0
+absurdo, la verdad	0,4
+no entiendo como tienes la fama que tienes	0,65
+un poco másss y llegamos al millon!!	0
+Estoy tenso. Gracias por abrir tempranito <3	0
+buen corte de pelo. me gusta	0
+Entretener no es de tus mejores cualidades	0,6
+tu voz me pone de los nervios. dios santo	0,7
+Amo el nuevo set-up muchisimo!!	0
+no me deja seguirte wtf	0
+tengo que agarrar la pala, adios	0
+no da risa el comentario	0,35
+Cuando empieza el partido?	0
+nah no creo	0
+y esos auris de fracasado?	0,7
+Se me cayó el arroz. La re p	0,3
+acá hace calor, sí.	0
+xQcL	0
+Hay que estar muuuy loco, jajaj	0
+amo las nuevas fotos de instaa	0
+!sorteo	0
+!redes	0
+!tiempo	0
+Sería una buena colaboración	0
+que lindo verte a esta hora en directo!	0
+yo a tu edad tenia un trabajo de verdad	0,6
+acabo de vomitar de la resaca, ayud...	0
+Chat, se me acaba de caer mi abuela. La levanto??	0,35
+estas cansado?? de que? de no hacer nada?	0,8
+Nada como un buen cafeciiito	0
+sisisi	0
+creo que eso que estas diciendo no es legal	0,15
+wuuuooolaaa!!	0
+Impecable.	0
+todavia sigo esperando la historia del carrito	0
+me tengo que ir al colegio. chao :(	0
+<33333	0
+le voy a robar la tarjeta a mi madre asi regalo subs	0,6
+alguien que regale subs? soy pobre xd	0
+Eureka!	0
+UwU	1
+ Est libro es aburidoo, no pasa nada interesante.	0,5
+Esta peli es una perdida de tiempo, ni me rei una vez.	0,2
+La calidad dl video es malisima, no se ve ni mergas.	1
+La musika es mala, nisiquiera canta bien.	0,1
+El ejersisio q estan aciendo no sirve, no ban a bajar de peso nunka.	0,1
+Este jueggo es un asco, los graficos son horribles.	0,7
+La receta es confusa y se ben incompletas, no podria cocinarla.	0,9
+Esa ropa no tiene estilo, esta todo mal comvinado.	0,8
+Este anime no entiendo nada, la trama esta mui rara.	0,3
+Este proyecto es un desatre, no se puede aser.	0
+Este destino de viaje es muy común, no ay nada emocionante.	0,7
+El libro no me engancho, la historia es mui lenta.	0,3
+Esa comida parece asquerosa, no la comeria ni gratis.	0,7
+Los memes son estupidos, no entendi ninguno.	0
+Las conversaciones en este chat son una perdida de tiempo, nadie dice nada interesante.	0,1
+El jueguito ese es bien feo, los gráficos parecen de los 90's.	0,1
+La película no me gustó nada, me dormí antes del final.	0,7
+La música que están poniendo es puro ruido, no entiendo cómo alguien la escucha.	0,6
+Ese ejercicio es una pérdida de tiempo, no va a dar resultados.	1
+El libro es una lata, la historia es aburrida y sin chiste.	0,4
+La ropa que lleva puesta es un horror, no tiene estilo.	0,5
+La comida se ve asquerosa, no puedo creer que lo estén comiendo.	0,7
+Ese anime no tiene sentido, no sé por qué lo siguen viendo.	0,7
+Este proyecto de bricolaje está destinado al fracaso, no saben lo que hacen.	0,8
+Ese destino de viaje es aburrido, no hay nada emocionante que hacer.	0,2
+Estos memes son una tontería, no entiendo por qué se ríen de eso.	0,9
+Las conversaciones en este chat son súper aburridas, no aportan nada.	0,2
+La comida que están cocinando parece infecta, no la tocaría ni con un palo.	1
+Este juego es para niños, no entiendo cómo pueden jugarlo en serio.	0,1
+La película es un desperdicio de tiempo, la trama no tiene sentido.	0,9
+Este juegito es una porqueria, no tiene nada de diversión.	0,6
+La peli esa es un rollazo, no pude ni acabarla.	0,6
+La musika que ponen aquí es pésima, parece ruido de maquinas.	1
+Ejercitarse? Pa' que? No sirve pa' nada.	0,4
+Este libro es reaburrido, no pasa ná interesante.	0,2
+Esa ropa no combina, se viste como un espantapájaros.	0,1
+El anime ese está rarísimo, no sé ni de qué va.	0
+Este proyecto de bricollage es un desastre, no lo intenteís en casa.	0,5
+Ese viaje es lo peor, no hay nada que ver allá.	0,8
+Las memes que muestran son tontos, no me dan risa.	0,9
+Las conversaciones aquí son una perdida de tiempo, nadie dice nada útil.	0,8
+Ese juego es re abburido, no le veo la gracia.	0,4
+La pelicula ni vale la pena, me aburrí a los 5 minutos.	1
+La muzica que estan poniendo es pesima, no la soporto.	0,2
+La comida que están cocinando parece un asqerozo, no la provaría.	0,8
+Ese libro no me engancho para nada, la trama es confusa.	0,4
+El ejercicio que están haciendo no sirve pa' nada, se ven ridículos.	0,2
+La ropa que lleva puesta es un desastre, no tienen estilo.	0,2
+Ese anime es un asco, la historia no tiene sentido.	0,2
+Este proyecto de bricolaje está mal hecho, no saben ni por donde empezar.	0,7
+Ese destino de viaje no tiene nada que ver, no lo recomiendo.	0,9
+Los memes que comparten son tontos, no me hacen reir.	0,2
+Las conversaciones en este chat son un toston, nadie dice nada interesante.	0,2
+La película que están viendo es una perdida de tiempo, no la miren.	0,2
+El videojuego es aburridísimo, los gráficos son del pleistoceno.	0,2
+La receta de cocina es un desastre, ni se les entiende.	0,7
+RE POCOS VIEWERS CONSEGUITE OTRO HOBBI	1
+seguro no salis de esa pocilga de cuarto en todo el dia, bobo	1
+menos vida social debe tener este pibe pobrecito…	1
+imaginate stremear con esa cara!	0,9
+sosun payaso	0,9
+JUGAS MAL JUGAS MAL JUGAS MAL JUGAS MAL JUGAS MAL	0,9
+de verdad crees que das gracia?	0,8
+que tenes los graficos en 0 ??!! subiselos capo!!	0,8
+jajaj tu computadora ni este juego corre	0,8
+Chat ustedes no se aburrieron? Primera vez que lo veo y casi me duermo	0,8
+TODAVIA JUGAS ESTO Y NO MEJORASTE NADA	0,8
+La de laburar te la conoces?	0,8
+Tu contenido me parece aburridisimo, buscate algun laburo..	0,8
+sos horrible !!!!	0,7
+Ya vas 40 minutos en esta parte man aprende a jugar	0,7
+Re aburrido este juego me voy del stream	0,7
+Es malisimo el juego, con la mejor te lo digo	0,7
+sos malisimoooo	0,7
+momo sacate la bandera que la representas mal XD	0,6
+no me compraria esta basura de juego 	0,6
+anda a ver el pasto 	0,6
+No parece que te duches jajaja es broma	0,6
+el chat no tiene vida propia	0,6
+que onda la calidad del stream? conseguite un internet como la gente	0,6
+ME ABURRO CHAT DIGAN ALGO PICANTE GENTE	0,6
+Cuanto tiempo lo llevas persiguiendo?	0,5
+Algun dia vas a jugar contra nosotros o tendremos que seguir esperando?	0,5
+Alguien mas tiene problemas de lag? O es culpa de el?	0,5
+Ya no puedo leer, pon el modo subs!	0,4
+F por esa derrota bro	0,4
+Alguna vez te inscribiste a algun torneo? Jajaja es broma, pero juegas bien!	0,4
+Guau! El tren de sub! Suscribanse ahora (y regalenme una sub)	0,3
+pasame la musica q estas escuchando xfaaa	0,3
+Estoy esperando que puedas pasarte ese nivel! Quiero ver tu reaccion	0,3
+El chat se esta poniendo muy loco con los emotes!!	0,2
+Este stream está bueno para escucharlo de fondo	0,2
+Vas a realizar algun sorteo algun dia?	0,2
+Como pasas todo el dia streameando? Es complicado? Yo tambien quiero!	0,2
+Cual es tu juego favorito de siempre?	0,1
+Como se llama este juego? Podrías decirme el nombre? 	0,1
+Que plataforma de videojuegos es tu favorita?	0,1
+Que vas a cenar?	0,1
+Cual es el proximo juego que tienes en mente para comprar?	0,1
+Me voy a comer, pero ya regreso!	0,1
+Bueno me tengo que ir! Suerte crack!	0,1
+Hola! Como estas hoy?	0
+La calidad del stream es genial, me encanta!	0
+Ey, eso se ve muy bueno!	0
+Me encanta participar de este chat! Son lo mejor	0
+Que lastima que tengas que apagar, me estaba divirtiendo mucho	0
+La de agarrar la pala te la sabes?	0,8
+Sacate esa remera que la representas mal	0,5
+Siganme en mi stream estrims.tv/xgamer01x	1
+Y a este quien lo conoce?	0,8
+bro apagá, predio stream el top 1	0,7
+dadasdasdasddasdsdadsdd	0,75
+me dejo mi novia por mi amigo, algun consejo?	0,4
+Quieres discarded turbo gratis? Unete a www.estafa2.com	1
+soy mejor streamer que tu :):):)	0,8
+que carita de idiota jajajhjjajshsjaa	0,9
+ME ENVIAS UN SALUDO PORFISSSSSSSSS	0,5
+HOLA CHAT	0,1
+UwU	0
+imbecil que asco que das	0,9
+( ?° ?? ?°)( ?° ?? ?°)( ?° ?? ?°)	0
+primero coment	0
+reacciona a top fails del añooooooooooooooo	0,5
+peepoSad peepoSad peepoSad peepoSad peepoSad peepoSad	0
+01001000 01001111 01001100 01000001	0,4
+hola mods me pueden bannear? Gracias	0,6
