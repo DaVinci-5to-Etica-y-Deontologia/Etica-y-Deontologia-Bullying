@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/*
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerGun))]
 [RequireComponent(typeof(LifeHandler))]
@@ -58,3 +59,4 @@ public class PlayerController : NetworkBehaviour
         }
     }
 }
+*/

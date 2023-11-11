@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
+/*
 public class PlayerGun : NetworkBehaviour
 {
     [SerializeField] private Bullet _bulletPrefab;
@@ -60,3 +61,4 @@ public class PlayerGun : NetworkBehaviour
         _fireParticles.Play();
     }
 }
+*/

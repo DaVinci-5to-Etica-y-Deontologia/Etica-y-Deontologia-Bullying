@@ -73,6 +73,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
         }
     }
 
+    public int Count => streamers.Count;
+
     public Streamer Actual { get; private set; }
 
     [SerializeField]

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
 public class NicknameItem : MonoBehaviour
 {
     private const float Y_OFFSET = 2.5f;
@@ -26,3 +27,4 @@ public class NicknameItem : MonoBehaviour
         transform.position = _owner.position + Vector3.up * Y_OFFSET;
     }
 }
+*/

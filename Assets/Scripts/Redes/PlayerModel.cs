@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class PlayerModel : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rgbd;
@@ -84,3 +85,4 @@ public class PlayerModel : MonoBehaviour
         
     }
 }
+*/

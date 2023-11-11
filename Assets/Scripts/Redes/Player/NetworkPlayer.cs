@@ -2,6 +2,7 @@ using UnityEngine;
 using Fusion;
 using System;
 
+/*
 public class NetworkPlayer : NetworkBehaviour
 {
     public static NetworkPlayer Local { get; private set; }
@@ -51,3 +52,4 @@ public class NetworkPlayer : NetworkBehaviour
         OnPlayerDespawned();
     }
 }
+*/

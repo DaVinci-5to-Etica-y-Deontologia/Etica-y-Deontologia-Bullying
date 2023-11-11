@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class NicknamesHandler : MonoBehaviour
 {
     public static NicknamesHandler Instance { get; private set; }
@@ -43,3 +44,4 @@ public class NicknamesHandler : MonoBehaviour
         }
     }
 }
+*/

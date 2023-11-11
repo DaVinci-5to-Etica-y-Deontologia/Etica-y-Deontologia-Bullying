@@ -4,37 +4,30 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using System;
-
-public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
+using System.Linq;
+/*
+public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 {
-    [SerializeField] private NetworkPlayer _playerPrefab;
-    private LocalPlayerInputs _playerInputs;
+    [SerializeField] 
+    StreamerManager streamerManager;
     
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        if (runner.IsServer)
+        if (runner.IsServer && streamerManager.Count < runner.ActivePlayers.Count())
         {
-            runner.Spawn(_playerPrefab, null, null, player);
+            streamerManager.CreateStream();
         }
-    }
-
-    public void OnInput(NetworkRunner runner, NetworkInput input)
-    {
-        if (!NetworkPlayer.Local) return;
-
-        if (!_playerInputs)
-            _playerInputs = NetworkPlayer.Local.GetComponent<LocalPlayerInputs>();
-        else
-            input.Set(_playerInputs.GetLocalInputs());
     }
 
     public void OnDisconnectedFromServer(NetworkRunner runner)
     {
         runner.Shutdown();
     }
-    
+
     #region Unused Callbacks
-    
+    public void OnInput(NetworkRunner runner, NetworkInput input)
+    {
+    }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) { }
     
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
@@ -62,3 +55,4 @@ public class Spawner : MonoBehaviour, INetworkRunnerCallbacks
     
     #endregion
 }
+*/

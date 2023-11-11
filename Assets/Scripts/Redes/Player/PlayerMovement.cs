@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
+/*
 [RequireComponent(typeof(LifeHandler))]
 public class PlayerMovement : NetworkCharacterControllerPrototype
 {
@@ -54,3 +55,4 @@ public class PlayerMovement : NetworkCharacterControllerPrototype
         _mecanimAnim.Animator.SetFloat("MovementValue", Velocity.sqrMagnitude);
     }
 }
+*/

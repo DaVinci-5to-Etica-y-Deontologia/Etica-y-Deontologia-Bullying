@@ -6,6 +6,7 @@ using Fusion;
 using Fusion.Sockets;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -13,7 +14,10 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     private NetworkRunner _currentRunner;
 
     public event Action OnLobbyJoined = delegate { };
+
     public event Action<List<SessionInfo>> OnSessionListUpdate = delegate { };
+
+    StreamerManager streamerManager => StreamerManager.instance;
 
     #region LOBBY
 
@@ -80,9 +84,22 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
             Debug.LogError("[Custom Error] Unable to create/join Game");
         }
     }
-    
+
     #endregion
-    
+
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        if (runner.IsServer && streamerManager.Count < runner.ActivePlayers.Count())
+        {
+            streamerManager.CreateStream();
+        }
+    }
+
+    public void OnDisconnectedFromServer(NetworkRunner runner)
+    {
+        runner.Shutdown();
+    }
+
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
         OnSessionListUpdate(sessionList);
@@ -95,10 +112,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
         // }
     }
 
-    #region Unused Callbacks
-    
-    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) { }
-    
+    #region Unused Callbacks    
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) { }
 
@@ -109,8 +123,6 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
     
     public void OnConnectedToServer(NetworkRunner runner) { }
-
-    public void OnDisconnectedFromServer(NetworkRunner runner) { }
 
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
 

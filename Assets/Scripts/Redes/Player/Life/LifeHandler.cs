@@ -4,6 +4,7 @@ using UnityEngine;
 using Fusion;
 using System;
 
+/*
 public class LifeHandler : NetworkBehaviour
 {
     private const byte FULL_LIFE = 100;
@@ -118,3 +119,4 @@ public class LifeHandler : NetworkBehaviour
         //TODO: floating life bars.
     }
 }
+*/

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class LocalPlayerInputs : MonoBehaviour
 {
     private NetworkInputData _inputData;
@@ -41,3 +41,4 @@ public class LocalPlayerInputs : MonoBehaviour
         return _inputData;
     }
 }
+*/

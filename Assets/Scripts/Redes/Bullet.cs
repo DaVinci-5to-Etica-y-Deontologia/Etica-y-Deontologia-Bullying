@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
+/*
 public class Bullet : NetworkRigidbody
 {
     private TickTimer _expireLifeTimer = TickTimer.None;
@@ -48,3 +49,4 @@ public class Bullet : NetworkRigidbody
         DespawnObject();
     }
 }
+*/
