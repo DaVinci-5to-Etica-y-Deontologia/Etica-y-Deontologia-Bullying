@@ -2169,6 +2169,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7048007248468095418, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: _networkRunnerHandler
+      value: 
+      objectReference: {fileID: 669340542}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

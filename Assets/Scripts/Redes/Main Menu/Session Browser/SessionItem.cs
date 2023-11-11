@@ -2,11 +2,12 @@ using Fusion;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class SessionItem : MonoBehaviour
 {
-    [SerializeField] private Text _sessionName;
-    [SerializeField] private Text _playersAmount;
+    [SerializeField] private TextMeshProUGUI _sessionName;
+    [SerializeField] private TextMeshProUGUI _playersAmount;
     [SerializeField] private Button _joinButton;
     
     public void SetInfo(SessionInfo session, Action<SessionInfo> onClick)
@@ -16,7 +17,9 @@ public class SessionItem : MonoBehaviour
         _playersAmount.text = $"{session.PlayerCount}/{session.MaxPlayers}";
         
         _joinButton.enabled = session.PlayerCount < session.MaxPlayers;
-        
-        _joinButton.onClick.AddListener(() => onClick(session));
+
+        var myEventCall = GetComponent<EventCall>();
+
+        myEventCall.eventToCall.AddListener((_joinButton) => onClick(session));
     }
 }

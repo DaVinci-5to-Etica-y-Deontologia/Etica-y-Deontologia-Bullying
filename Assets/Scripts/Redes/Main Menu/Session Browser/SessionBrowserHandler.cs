@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class SessionBrowserHandler : MonoBehaviour
 {
     [SerializeField] private NetworkRunnerHandler _networkRunnerHandler;
-
-    [SerializeField] private Text _statusText;
+    
+    [SerializeField] private TMPro.TextMeshProUGUI _statusText;
 
     [SerializeField] private SessionItem _sessionItemPrefab;
 
@@ -56,7 +56,7 @@ public class SessionBrowserHandler : MonoBehaviour
 
     void NoSessionsFound()
     {
-        _statusText.text = "No sessions found";
+        _statusText.text = "No se encontraron salas";
         _statusText.gameObject.SetActive(true);
     }
 
