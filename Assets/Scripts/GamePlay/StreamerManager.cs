@@ -25,11 +25,14 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     public static Queue<System.Action> eventQueue = new();
 
+    public EventParam<StreamerData> onStreamerCreate;
+
     public EventParam<StreamerData> onStreamerChange;
 
     public EventParam<CommentData> onCreateComment;
 
     public EventParam<CommentData> onLeaveComment;
+
 
     [SerializeField]
     CommentView prefab;
@@ -52,7 +55,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     Stopwatch watchdog;
 
-    public int indexStreamWatch
+    public int IndexStreamWatch
     {
         get => _indexStreamWatch;
 
@@ -175,6 +178,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         streamer.Create(streamers.lastID);
 
+        onStreamerCreate.delegato?.Invoke(streamer);
+
         //autoridad de estado y esas cosas
 
         streamer.onCreateComment += CommentDataDelete_onCreateComment;
@@ -212,11 +217,16 @@ public class StreamerManager : SingletonMono<StreamerManager>
         DataRpc.Create(Actions.AddStream, "", new StreamerData(dataBase.SelectStreamer()));
     }
 
+    public void ChangeStreamByID(int ID)
+    {
+        ChangeStream(streamers.GetTByID(ID).index);
+    }
+
     public void ChangeStream(int index)
     {
-        var previus = indexStreamWatch;
+        var previus = IndexStreamWatch;
 
-        indexStreamWatch = index;
+        IndexStreamWatch = index;
 
         StreamerData aux;
 
@@ -229,7 +239,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
             aux.onLeaveComment -= CommentLeaveQueue;
         }
 
-        aux = streamers.GetTByIndex(indexStreamWatch).value;
+        aux = streamers.GetTByIndex(IndexStreamWatch).value;
 
         aux.onCreateComment += CommentCreateQueue;
 
@@ -273,10 +283,11 @@ public class StreamerManager : SingletonMono<StreamerManager>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
-            ChangeStream(indexStreamWatch + 1);
+            ChangeStream(IndexStreamWatch + 1);
 
         if (Input.GetKeyDown(KeyCode.Q))
-            ChangeStream(indexStreamWatch - 1);
+            ChangeStream(IndexStreamWatch - 1);
+        
 
         while(eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16)
         {
@@ -294,14 +305,19 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         onStreamerChange = eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamchange");
 
+        onStreamerCreate = eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamcreate");
+
         GameManager.instance.StartCoroutine(pool.CreatePool(30, ()=> eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato.Invoke()));
+    }
+
+    public void EndLoad()
+    {
+        TimersManager.Create(startDeley, MyStart);
     }
 
     protected override void Awake()
     {
         base.Awake();
-
-        TimersManager.Create(startDeley, MyStart);
 
         pool = new(prefab);
 

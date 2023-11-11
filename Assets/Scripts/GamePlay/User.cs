@@ -138,6 +138,8 @@ public class User : IDirection
 
         stream.Users(views);
 
+        stream.Life.current += damage;
+
         DataRpc.Create(Actions.RemoveComment, textIP);
     }
 

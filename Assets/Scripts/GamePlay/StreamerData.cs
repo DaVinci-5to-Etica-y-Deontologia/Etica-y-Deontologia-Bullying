@@ -16,6 +16,13 @@ public class StreamerData : IDirection
     public event System.Action<CommentData> onCreateComment;
 
     public event System.Action<CommentData> onLeaveComment;
+
+    [field: SerializeField]
+    public Tim Life { get; private set; } = new();
+
+    [field: SerializeField]
+    public Tim Viewers { get; private set; } = new();
+
     public IEnumerable<Internal.Pictionary<int, CommentData>> commentViews
     {
         get
@@ -32,6 +39,7 @@ public class StreamerData : IDirection
 
     public string textIP => ID.ToString();
 
+    
 
     StreamerManager streamerManager;
 
@@ -46,18 +54,27 @@ public class StreamerData : IDirection
     public void Create(int ID)
     {
         this.ID = ID;
+
         this.streamerManager = StreamerManager.instance;
-        CreateUsers(streamer.minimalViews * 2);
+
+        Life.Set(100);
+
+        Viewers.total = streamer.maxViews;
+
+        Users(streamer.minimalViews * 2);
     }
 
     public void Users(int number)
     {
         if (number == 0)
             return;
+
         else if (number > 0)
             CreateUsers(number);
         else
             LeaveUsers(-number);
+
+        Viewers.current += number;
     }    
 
     void CreateUsers(int number)

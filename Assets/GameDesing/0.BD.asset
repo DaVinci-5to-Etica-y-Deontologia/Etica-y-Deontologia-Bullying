@@ -891,7 +891,7 @@ MonoBehaviour:
     nameStreamer: ElCuchiWea
     tagsStreamer: '#ChilePazion #Pasillo'
     minimalViews: 5
-    maxViews: 0
+    maxViews: 100
   - inUse: 0
     streamImage: {fileID: 21300000, guid: 90bfa79ffbe96df449352021c411fffc, type: 3}
     iconStreamerImage: {fileID: 21300000, guid: d09f277783c0fb641ba6247642b7321d, type: 3}
@@ -899,7 +899,7 @@ MonoBehaviour:
     nameStreamer: KKKKK
     tagsStreamer: "#Ro\xF1aldi\xF1o #Selva"
     minimalViews: 3
-    maxViews: 0
+    maxViews: 130
   - inUse: 0
     streamImage: {fileID: 21300000, guid: 33a3e066b5daa7f48abcdeaa35fdd63c, type: 3}
     iconStreamerImage: {fileID: 21300000, guid: 5e5a8b8aa97d4644e820faf984317e2c, type: 3}
@@ -907,7 +907,7 @@ MonoBehaviour:
     nameStreamer: TuVerdulero
     tagsStreamer: '#DeConfianza'
     minimalViews: 4
-    maxViews: 0
+    maxViews: 150
   _txtToParse:
     textAsset: {fileID: 4900000, guid: 9cc0a41669197274b83848e7c3a51f34, type: 3}
     separator: "\t"
