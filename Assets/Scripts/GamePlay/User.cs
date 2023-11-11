@@ -225,11 +225,11 @@ public class User : UserParent
         {
             index = Random.Range(0, max);
 
-            r = Random.ColorHSV();
+            r = Random.ColorHSV(0, 1, 0, 1, 0.3f, 1);
 
-            g = Random.ColorHSV();
+            g = Random.ColorHSV(0, 1, 0, 1, 0.3f, 1);
 
-            b = Random.ColorHSV();
+            b = Random.ColorHSV(0, 1, 0, 1, 0.3f, 1);
         }
 
         public void SetImage(UnityEngine.UI.Image image, Material material)
