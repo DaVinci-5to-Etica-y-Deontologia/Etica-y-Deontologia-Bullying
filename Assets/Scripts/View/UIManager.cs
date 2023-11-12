@@ -10,6 +10,12 @@ public class UIManager : MonoBehaviour
     StreamerManager streamerManager;
 
     [SerializeField]
+    EventCall topButton;
+
+    [SerializeField]
+    EventCall bottomButton;
+
+    [SerializeField]
     Image streamImage;
 
     [SerializeField]
@@ -37,6 +43,10 @@ public class UIManager : MonoBehaviour
     EventCallsManager eventCalls;
 
     StreamerData streamerData;
+
+    bool bottomPressed;
+    Color originalText;
+    Color originalBackGround;
 
     private void StreamerManager_onStreamerChange(StreamerData obj)
     {
@@ -74,12 +84,49 @@ public class UIManager : MonoBehaviour
         life.value = arg1.Percentage();
     }
 
+    void TopPressed(EventCall button)
+    {
+        /*
+        if (!bottomPressed)
+            return;
+
+        BottonPressed(button);
+        */
+    }
+
+    void BottonPressed(EventCall button)
+    {
+        /*
+        bottomPressed = !bottomPressed;
+
+        Color auxText = originalText;
+        Color auxBackground = originalBackGround;
+
+        if(bottomPressed)
+        {
+            auxText = originalBackGround;
+            auxBackground = originalText;
+        }
+
+        TimersManager.Create(() => button.backgroundImage.color, auxBackground, 2, Color.Lerp, (s) => button.backgroundImage.color = s);
+
+        TimersManager.Create(() => button.textMeshPro.color, auxText, 2, Color.Lerp, (s) => button.textMeshPro.color = s);
+        */
+    }
+
     private void Awake()
     {
         streamerManager.onStreamerChange.delegato += StreamerManager_onStreamerChange;
         streamerManager.onStreamerCreate.delegato += 
             (StreamerData stream) => eventCalls
             .Create(stream.streamer.iconStreamerImage , () => streamerManager.ChangeStreamByID(stream.ID));
+
+        originalText = bottomButton.textMeshPro.color;
+        originalBackGround = bottomButton.backgroundImage.color;
+
+        topButton.eventToCall.AddListener(TopPressed);
+
+        bottomButton.eventToCall.AddListener(BottonPressed);
     }
 
 }

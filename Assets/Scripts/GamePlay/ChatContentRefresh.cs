@@ -7,11 +7,7 @@ using System;
 
 public class ChatContentRefresh : MonoBehaviour
 {
-    public UnityEngine.UI.Button topButton;
-
-    public UnityEngine.UI.Button bottomButton;
-
-    public TMPro.TextMeshProUGUI commentText;
+    public UnityEngine.Events.UnityEvent<string> onCommentTextChange;
 
     public Player player;
 
@@ -114,12 +110,14 @@ public class ChatContentRefresh : MonoBehaviour
             containScrollRect.verticalNormalizedPosition = 1;
             Middle = 0;
         }
+
+        SetText();
     }
     
     void SetText()
     {
         //Mira esa concatenacion
-        commentText.text = $"Viendo comentarios {(flagClamp? "Mas recientes".RichText("color", "green") : ((Min == 0) && lenght>30 ? "Mas Antiguos".RichText("color", "red") : "con el indice: ".RichText("color", "yellow") + Actual))}";
+        onCommentTextChange.Invoke($"Viendo comentarios {(flagClamp? "Mas recientes".RichText("color", "green") : ((Min == 0) && lenght>30 ? "Mas Antiguos".RichText("color", "red") : "con el indice: ".RichText("color", "yellow") + Actual))}");
     }
 
     void BarScroll()

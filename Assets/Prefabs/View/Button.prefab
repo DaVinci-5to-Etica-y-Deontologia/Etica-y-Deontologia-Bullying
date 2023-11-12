@@ -151,7 +151,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   button: {fileID: 8874761820115736253}
+  backgroundImage: {fileID: 4171424528691019694}
   textMeshPro: {fileID: 798834770017409449}
+  image: {fileID: 0}
 --- !u!95 &8120757502272738719
 Animator:
   serializedVersion: 5

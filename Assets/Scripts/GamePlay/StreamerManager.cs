@@ -8,9 +8,9 @@ public class StreamerManager : SingletonMono<StreamerManager>
 {
     public struct SearchResult
     {
-        public (StreamerData value, int ID, int index) streamer;
-        public (User value, int ID, int index) user;
-        public (CommentData value, int ID, int index) comment;
+        public (StreamerData value, int ID, int index)  streamer;
+        public (User value, int ID, int index)          user;
+        public (CommentData value, int ID, int index)   comment;
 
         public StreamerData Streamer => streamer.value;
 
@@ -49,9 +49,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
     [SerializeField]
     float multiply = 1;
 
-    LinkedPool<CommentView> pool;
-
-    
+    LinkedPool<CommentView> pool;    
 
     Stopwatch watchdog;
 
@@ -141,7 +139,6 @@ public class StreamerManager : SingletonMono<StreamerManager>
                     instance.AddStream(dataRpc.data);
                 }
                 break;
-
         }
     }
 
@@ -184,8 +181,6 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         streamer.onCreateComment += CommentDataDelete_onCreateComment;
     }
-
-   
 
 
     /// <summary>
@@ -347,8 +342,6 @@ public class Actions
     public const string AddStream = "AddStream";
 
     public const string RemoveStream = "RemoveStream";
-
-    //public const string Ban = "Ban";
 }
 
 public struct DataRpc
@@ -363,12 +356,6 @@ public struct DataRpc
     {
         //UnityEngine.Debug.Log(action + ": " + direction);
         StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction }));
-    }
-
-    public static void Create(string action, string direction, string data)
-    {
-        //UnityEngine.Debug.Log(action + ": " + direction + " " + data);
-        StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction , data = data}));
     }
 
     public static void Create(string action, string direction, object data)
