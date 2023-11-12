@@ -13,4 +13,12 @@ MonoBehaviour:
   m_Name: Principal Event Manager
   m_EditorClassIdentifier: 
   _events:
-    pictionaries: []
+    pictionaries:
+    - Key: victory
+    - Key: close
+    - Key: defeat
+    - Key: onclickcomment
+    - Key: finishday
+    - Key: poolloaded
+    - Key: createcomment
+    - Key: leavecomment
