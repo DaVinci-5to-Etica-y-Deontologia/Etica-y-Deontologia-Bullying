@@ -11,7 +11,7 @@ using UnityEditor;
 /// <summary>
 /// Clase que representa la base de datos que contiene todos y cada uno de los usuarios con sus respectivos comentarios
 /// </summary>
-[CreateAssetMenu(menuName = "BD")]
+[CreateAssetMenu(menuName = "Managers/BD")]
 public class BD : SuperScriptableObject
 {
     [field: SerializeField]

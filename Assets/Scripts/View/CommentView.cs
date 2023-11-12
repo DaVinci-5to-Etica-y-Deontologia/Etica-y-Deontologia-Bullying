@@ -42,10 +42,13 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 
         set
         {
-            _commentData = value;
+            if(_commentData!=null)
+                _commentData.onDestroy -= Destroy;
 
-            if (_commentData == null)
+            if (value == null)
                 return;
+
+            _commentData = value;
 
             _commentData.user.SetCuerpo(cuerpo);
 
@@ -72,7 +75,7 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 
     public void Destroy()
     {
-        _commentData = null;
+        commentData = null;
         this.SetActiveGameObject(false);
         Parent.Return(this);
     }
@@ -93,7 +96,6 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
         if(_commentData!=null)
             _commentData.onDestroy -= Destroy;
     }
-
 }
 
 

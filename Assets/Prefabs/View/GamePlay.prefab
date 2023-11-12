@@ -1183,6 +1183,7 @@ MonoBehaviour:
   topButton: {fileID: 4696866741635509728}
   bottomButton: {fileID: 5425552175427111040}
   commentText: {fileID: 6068599339758406538}
+  player: {fileID: 11400000, guid: 58cac3681301b7d499ad817f59f58553, type: 2}
   eventManager: {fileID: 11400000, guid: 61a7d81338181f9409e4d385c1b3b4c5, type: 2}
   contain: {fileID: 895258726687356868}
   containScroll: {fileID: 961978212349586907}

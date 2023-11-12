@@ -12,9 +12,9 @@ public class PopUpModerator : PopUpElement
 
     GameObject old;
 
-    public override void Awake()
+    public override void MyAwake(PopUpManager popUpManager)
     {
-        base.Awake();
+        base.MyAwake(popUpManager);
         eventManager.events.SearchOrCreate<EventParam<CommentView>>("onclickcomment").delegato += PopUp;
     }
 
@@ -49,8 +49,6 @@ public class PopUpModerator : PopUpElement
             Execute();
         });
 
-        
-        //callsManager.Create("Eliminate", () => eliminate.delegato.Invoke(comment));
     }
 
     void Execute()

@@ -15,9 +15,9 @@ public class PopUpResult : PopUpElement
     [SerializeField]
     float timeToShow=1;
 
-    public override void Awake()
+    public override void MyAwake(PopUpManager popUpManager)
     {
-        base.Awake();
+        base.MyAwake(popUpManager);
         eventManager.events.SearchOrCreate<EventParam<(int, int)>>("finishday").delegato += PopUp;
     }
 

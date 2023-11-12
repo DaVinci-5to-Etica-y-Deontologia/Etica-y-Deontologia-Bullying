@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopUpManager : SingletonMono<PopUpManager>
+public class PopUpManager : MonoBehaviour
 { 
     public EventManager eventManager;
     
@@ -11,30 +11,37 @@ public class PopUpManager : SingletonMono<PopUpManager>
     [SerializeField]
     PopUpElement[] popUpElements;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
+        popUpElements = GetComponentsInChildren<PopUpElement>(true);
+
         foreach (var item in popUpElements)
         {
-            item.Awake();
+            item.MyAwake(this);
         }
     }
 }
 
 public abstract class PopUpElement : MonoBehaviour
 {
-    protected EventManager eventManager => PopUpManager.instance.eventManager;
+    public PopUpManager parent;
 
-    public EventCallsManager callsManager=> PopUpManager.instance.callsManager;
+    protected EventManager eventManager => parent.eventManager;
+
+    public EventCallsManager callsManager=> parent.callsManager;
 
 
     public UnityEngine.Events.UnityEvent onActive;
 
     public UnityEngine.Events.UnityEvent onExecute;
 
-    virtual public void Awake()
+    /// <summary>
+    /// Funcion que ejecutara el popmanager en el awake, necesario para setear el eventmanager y el callsmanager
+    /// </summary>
+    /// <param name="popUpManager"></param>
+    virtual public void MyAwake(PopUpManager popUpManager)
     {
-
+        parent = popUpManager;
     }
 }
 
