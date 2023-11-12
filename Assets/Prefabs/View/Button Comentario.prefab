@@ -735,7 +735,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   button: {fileID: 140912322178551159}
+  backgroundImage: {fileID: 0}
   textMeshPro: {fileID: 0}
+  image: {fileID: 0}
 --- !u!114 &8657474774859262774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,8 +812,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 750771010519157440}
-  perfil: {fileID: 4958837850296979702}
+  cuerpo: {fileID: 4958837850296979702}
+  cabeza: {fileID: 5779446429473202489}
+  ojos: {fileID: 7350077285269235968}
+  boquitas: {fileID: 8972498191833053462}
+  accesorios: {fileID: 2404519951988986125}
   button: {fileID: 140912322178551159}
+  _commentData:
+    ID: 0
+    comment: {fileID: 0}
+    timeOnCreate: 0
 --- !u!225 &552846352251057716
 CanvasGroup:
   m_ObjectHideFlags: 0

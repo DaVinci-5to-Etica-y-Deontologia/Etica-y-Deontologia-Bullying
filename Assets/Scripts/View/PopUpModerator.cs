@@ -7,28 +7,54 @@ public class PopUpModerator : PopUpElement
     [SerializeField]
     TMPro.TextMeshProUGUI textToShow;
 
+    [SerializeField]
+    Transform placeToCreate;
+
+    GameObject old;
+
     public override void Awake()
     {
         base.Awake();
-        eventManager.events.SearchOrCreate<EventParam<CommentData>>("onclickcomment").delegato += PopUp;
+        eventManager.events.SearchOrCreate<EventParam<CommentView>>("onclickcomment").delegato += PopUp;
     }
 
-    void PopUp(CommentData comment)
+    void PopUp(CommentView commentView)
     {
-        onActive.Invoke();
-
-        textToShow.text = $"Usuario: {comment.textName}\nComentario: {comment.textComment}";
+        var comment = commentView.commentData;
 
         callsManager.DestroyAll();
 
-        
+        foreach (Transform item in placeToCreate)
+        {
+            Destroy(item.gameObject);
+        }
+
+        Instantiate(commentView, placeToCreate.position, Quaternion.identity, placeToCreate);
+
+        onActive.Invoke();
+
+        textToShow.text = $"Usuario: {comment.textName}";
 
         if (comment.Enable)
-            callsManager.Create("Ban" , () => DataRpc.Create(Actions.Ban, comment.textIP));
+            callsManager.Create("Ban" , () =>
+            {
+                DataRpc.Create(Actions.Ban, comment.textIP); 
+                Execute();
+            });
 
         
-        callsManager.Create("Admonition", () => DataRpc.Create(Actions.Admonition, comment.textIP));
+        callsManager.Create("Admonition", () =>
+        {
+            DataRpc.Create(Actions.Admonition, comment.textIP);
+            Execute();
+        });
 
+        
         //callsManager.Create("Eliminate", () => eliminate.delegato.Invoke(comment));
+    }
+
+    void Execute()
+    {
+        onExecute.Invoke();        
     }
 }

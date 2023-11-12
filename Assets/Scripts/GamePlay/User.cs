@@ -1,12 +1,14 @@
 using Euler;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Clase destinada a ser un user
 /// </summary>
 [System.Serializable]
-public class User : IDirection
+public class UserParent : IDirection
 {
     static LinkedPool<CommentData> poolCommentData = new LinkedPool<CommentData>(new CommentData());
 
@@ -15,6 +17,7 @@ public class User : IDirection
     [field: SerializeField]
     public DataPic<CommentData> comments { get; private set; }
 
+    [field: SerializeField]
     public string Name { get; private set; }
 
     [field: SerializeField]
@@ -27,19 +30,15 @@ public class User : IDirection
     public bool Enable { get; set; } = true;
 
     [field: SerializeField]
-    public Sprite Perfil { get; set; }
-
-    [field: SerializeField]
-    public Color colorText { get; set; } = new Color{ a=1 };
+    public Color colorText { get; set; } = Random.ColorHSV();
 
     public event System.Action<CommentData> onCreateComment;
 
     public event System.Action<CommentData> onLeaveComment;
 
-    BD database => stream.dataBase;
+    public BD database => stream.dataBase;
 
     public EventManager eventManager => stream.eventManager;
-
     public string textIP => $"{stream.textIP}.{ID}";
 
     public float CoolDown { get=>_coolDown.current; set=> _coolDown.Set(value); }
@@ -71,13 +70,13 @@ public class User : IDirection
     Timer _coolDown;
 
     StreamerData stream;
-    
+
 
     #region Moderator
 
     public void Admonition(int index)
     {
-        _admonition++;
+        _Admonition++;
         CoolDown = 30;
         RemoveComment(index);
     }
@@ -131,7 +130,7 @@ public class User : IDirection
     }
 
     #endregion
-
+   
     public void Aplicate(int views, int damage ,string textIP)
     {
         //Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
@@ -186,9 +185,11 @@ public class User : IDirection
         comments = new();
 
         _coolDown = TimersManager.Create(Random.Range(10, 15), CreateComment);
+
+        colorText=colorText.ChangeAlphaCopy(1);
     }
 
-    public User(int id)
+    public UserParent(int id)
     {
         this.ID = id;
 
@@ -200,5 +201,115 @@ public class User : IDirection
         {
             Name += chars[Random.Range(0, chars.Length)];
         }
+    }
+}
+
+[System.Serializable]
+public class User : UserParent
+{
+    static protected Sprite[] cuerpos;
+    static protected Sprite[] cabezas;
+    static protected Sprite[] ojos;
+    static protected Sprite[] accesorios;
+    static protected Sprite[] boquitas;
+
+    [System.Serializable]
+    public struct DataIcon
+    {
+        public int index;
+        public Color r;
+        public Color g;
+        public Color b;
+
+        public void Set(int max)
+        {
+            index = Random.Range(0, max);
+
+            r = Random.ColorHSV(0, 1, 0, 1, 0.3f, 1);
+
+            g = Random.ColorHSV(0, 1, 0, 1, 0.3f, 1);
+
+            b = Random.ColorHSV(0, 1, 0, 1, 0.3f, 1);
+        }
+
+        public void SetImage(UnityEngine.UI.Image image, Material material)
+        {
+            image.material = new Material(material);
+
+            image.material.SetColor("_r", r);
+
+            image.material.SetColor("_g", g);
+
+            image.material.SetColor("_b", b);
+        }
+    }
+
+    [SerializeField]
+    protected DataIcon cuerpo;
+
+    [SerializeField]
+    protected DataIcon cabeza;
+
+    [SerializeField]
+    protected DataIcon ojo;
+
+    [SerializeField]
+    protected DataIcon accesorio;
+
+    [SerializeField]
+    protected DataIcon boquita;
+
+    public static IEnumerator LoadPerfilSprite()
+    {
+        cuerpos = Resources.LoadAll("Arte/Cuerpo", typeof(Sprite)).Select((r) => r as Sprite).ToArray();
+        yield return null;
+        cabezas = Resources.LoadAll("Arte/Cabeza", typeof(Sprite)).Select((r) => r as Sprite).ToArray();
+        yield return null;
+        ojos = Resources.LoadAll("Arte/Ojos", typeof(Sprite)).Select((r) => r as Sprite).ToArray();
+        yield return null;
+        accesorios = Resources.LoadAll("Arte/Accesorios", typeof(Sprite)).Select((r) => r as Sprite).ToArray();
+        yield return null;
+        boquitas = Resources.LoadAll("Arte/Boca", typeof(Sprite)).Select((r) => r as Sprite).ToArray();
+        yield return null;
+    }
+
+    public void SetCuerpo(UnityEngine.UI.Image image)
+    {
+        image.sprite = cuerpos[cuerpo.index];
+
+        cuerpo.SetImage(image, database.materialForUsers);
+    }
+    public void SetCabeza(UnityEngine.UI.Image image)
+    {
+        image.sprite = cabezas[cabeza.index];
+
+        cabeza.SetImage(image, database.materialForUsers);
+    }
+    public void SetOjos(UnityEngine.UI.Image image)
+    {
+        image.sprite = ojos[ojo.index];
+
+        ojo.SetImage(image, database.materialForUsers);
+    }
+    public void SetAccesorio(UnityEngine.UI.Image image)
+    {
+        image.sprite = accesorios[accesorio.index];
+
+        accesorio.SetImage(image, database.materialForUsers);
+    }
+    public void SetBoquita(UnityEngine.UI.Image image)
+    {
+        image.sprite = boquitas[boquita.index];
+
+        boquita.SetImage(image, database.materialForUsers);
+    }
+
+    public User(int id) : base(id)
+    {
+        ojo.Set(ojos.Length);
+        boquita.Set(boquitas.Length);
+        cabeza.Set(cabezas.Length);
+        cuerpo.Set(cuerpos.Length);
+        accesorio.Set(accesorios.Length);
     }
 }
