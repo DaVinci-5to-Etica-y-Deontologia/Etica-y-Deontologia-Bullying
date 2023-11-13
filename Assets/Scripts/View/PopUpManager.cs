@@ -84,9 +84,14 @@ public abstract class PopUpComment : PopUpElement
             Destroy(item.gameObject);
         }
 
-        var aux = Instantiate(commentView, placeToCreate.position, Quaternion.identity, placeToCreate);
+        foreach (var item in commentView.commentData.user.comments)
+        {
+            var aux = Instantiate(commentView, placeToCreate);
 
-        aux.button.interactable = false;
+            aux.button.interactable = false;
+
+            aux.commentData = item.Value;
+        }
 
         onActive.Invoke();
 

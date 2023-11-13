@@ -77,7 +77,7 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
     {
         commentData = null;
         this.SetActiveGameObject(false);
-        Parent.Return(this);
+        Parent?.Return(this);
     }
 
     public void OnClick()
