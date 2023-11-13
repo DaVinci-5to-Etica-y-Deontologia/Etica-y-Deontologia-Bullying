@@ -28,6 +28,8 @@ public class CommentData : IDirection, IPoolElement<CommentData>
 
     public EventManager eventManager => user.eventManager;
 
+    public Player player => user.player;
+
     public LinkedPool<CommentData> Parent { get; set; }
     public IPoolElement<CommentData> Next { get; set; }
     public bool inPool { get; set; }

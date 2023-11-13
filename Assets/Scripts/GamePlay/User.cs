@@ -30,19 +30,30 @@ public class UserParent : IDirection
     public bool Enable { get; set; } = true;
 
     [field: SerializeField]
+    public int Suspect { get; set; } = 0;
+
+    [field: SerializeField]
     public Color colorText { get; set; } = Random.ColorHSV();
 
     public event System.Action<CommentData> onCreateComment;
 
     public event System.Action<CommentData> onLeaveComment;
 
+    public event System.Action<float> onMoralRangeChange;
+
+    public event System.Action<float> onMoralIndexChange;
+
+    public event System.Action<int> onSuspectChange;
+
     public BD database => stream.dataBase;
 
     public EventManager eventManager => stream.eventManager;
 
+    public Player player => stream.player;
+
     public string textIP => $"{stream.textIP}.{ID}";
 
-    public float CoolDown { get=>_coolDown.current; set=> _coolDown.Set(value); }
+    public float CoolDown { get=>_coolDownToComment.current; set=> _coolDownToComment.Set(value); }
 
     public (CommentData value, int ID, int index) this[int ID]
     {
@@ -52,23 +63,26 @@ public class UserParent : IDirection
         }
     }
 
-    int _Admonition
-    {
-        get => _admonition;
-        set
-        {
-            if (_admonition + value <= 2)
-            {
-                _admonition += value;
-            }
-            else 
-                Destroy();
-        }
-    }
 
-    int _admonition;
+    [SerializeField]
+    float _moralIndex;
 
-    Timer _coolDown;
+    [SerializeField]
+    float _newMoralIndex;
+
+    [SerializeField]
+    float _moralRange;
+
+    [SerializeField]
+    float _newMoralRange;
+
+    Timer _coolDownToComment;
+
+    Timer _coolDownAdmonition;
+
+    Timer _moralIndexCooldown;
+
+    Timer _moralRangeCooldown;
 
     StreamerData stream;
 
@@ -77,8 +91,11 @@ public class UserParent : IDirection
 
     public void Admonition(int index)
     {
-        _Admonition++;
         CoolDown = 30;
+
+        if (!_coolDownAdmonition.Chck)
+            Destroy();
+
         RemoveComment(index);
     }
 
@@ -92,12 +109,45 @@ public class UserParent : IDirection
         }        
     }
 
+    public void SuspectChange(string index)
+    {
+        Suspect = int.Parse(index);
+
+        onSuspectChange?.Invoke(Suspect);
+    }
+
     #endregion
 
     #region Instigator
     
-        //algo a futuro
+    /// <summary>
+    /// Baja el rango moral a la mitad y disminuye el indice en un tercio
+    /// </summary>
+    public void ChangeMoral()
+    {
+        _moralIndexCooldown.Reset();
 
+        _moralRangeCooldown.Reset();
+
+        _newMoralRange /= 2;
+
+        _newMoralIndex -= 1f / 3;
+    }
+
+    /// <summary>
+    /// Publica un comentario en base a un indice 0.5 menor, y luego baja su indice un 0.25
+    /// </summary>
+    public void Picantear()
+    {
+        _moralIndexCooldown.Reset();
+
+        _newMoralIndex -= 0.5f;
+
+        //para publicar un comentario picante
+        _coolDownToComment.current = 0;
+
+        _newMoralIndex += 0.25f;
+    }
     #endregion
 
     #region rpc
@@ -147,7 +197,7 @@ public class UserParent : IDirection
     public void Destroy()
     {
         Enable = false;
-        _coolDown.Stop();
+        _coolDownToComment.Stop();
         
         //stream.users.Remove(ID);
     }
@@ -186,9 +236,29 @@ public class UserParent : IDirection
 
         comments = new();
 
-        _coolDown = TimersManager.Create(Random.Range(10, 15), CreateComment);
+        colorText =colorText.ChangeAlphaCopy(1);
 
-        colorText=colorText.ChangeAlphaCopy(1);
+        _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment);
+
+        _coolDownAdmonition = TimersManager.Create(15);
+
+        _moralIndexCooldown = TimersManager.Create<float>(()=>_newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s);
+
+        _moralRangeCooldown = TimersManager.Create<float>(()=>_newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s);
+
+        _moralRangeCooldown.onChange += _moralRangeCooldown_onChange;
+
+        _moralIndexCooldown.onChange += _moralIndexCooldown_onChange;
+    }
+
+    void _moralIndexCooldown_onChange(IGetPercentage arg1, float arg2)
+    {
+        onMoralIndexChange?.Invoke(MoralIndex);
+    }
+
+    void _moralRangeCooldown_onChange(IGetPercentage arg1, float arg2)
+    {
+        onMoralRangeChange?.Invoke(MoralRange);
     }
 
     public UserParent(int id)
@@ -199,7 +269,11 @@ public class UserParent : IDirection
 
         MoralIndex = Random.Range(0, 1f);
 
+        _moralIndex = MoralIndex;
+
         MoralRange = Random.Range(0, 0.5f);
+
+        _moralRange = MoralRange;
 
         string chars = "abcdefghijklmnñopqrstuvwxyz";
 

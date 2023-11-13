@@ -28,6 +28,9 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
     Image accesorios;
 
     [SerializeField]
+    Image BackGround;
+
+    [SerializeField]
     CommentData _commentData;
 
     public LinkedPool<CommentView> Parent { get; set; }
@@ -43,7 +46,17 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
         set
         {
             if(_commentData!=null)
+            {
                 _commentData.onDestroy -= Destroy;
+
+                if(_commentData.user!=null)
+                {
+                    _commentData.user.onSuspectChange -= User_onSuspectChange;
+
+                    _commentData.user.onMoralIndexChange -= User_onMoralIndexChange;
+                }
+            }
+                
 
             if (value == null)
                 return;
@@ -63,6 +76,52 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
             textMesh.text = _commentData.textComment;
 
             _commentData.onDestroy += Destroy;
+
+            _commentData.user.onSuspectChange += User_onSuspectChange;
+
+            _commentData.user.onMoralIndexChange += User_onMoralIndexChange;
+
+            User_onMoralIndexChange(_commentData.user.MoralIndex);
+
+            User_onSuspectChange(_commentData.user.Suspect);
+        }
+    }
+
+    private void User_onMoralIndexChange(float obj)
+    {
+        if (commentData.player.Moderator)
+            return;
+
+        obj *= 2;
+
+        if (obj >= 1)
+            BackGround.color = Color.Lerp(Color.yellow, Color.green, obj-1);
+        else
+            BackGround.color = Color.Lerp(Color.red, Color.yellow, obj);
+    }
+
+    private void User_onSuspectChange(int obj)
+    {
+        if (!commentData.player.Moderator)
+            return;
+
+        switch (obj)
+        {
+            case 0:
+                BackGround.color = new Color(0,0,0,0.1f);
+                break;
+
+            case 1:
+                BackGround.color = Color.green;
+                break;
+
+            case 2:
+                BackGround.color = Color.yellow;
+                break;
+
+            case 3:
+                BackGround.color = Color.red;
+                break;
         }
     }
 
@@ -93,8 +152,10 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 
     private void OnDestroy()
     {
-        if(_commentData!=null)
-            _commentData.onDestroy -= Destroy;
+        if(commentData != null)
+        {
+            commentData = null;
+        }
     }
 }
 

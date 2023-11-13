@@ -210,6 +210,7 @@ MonoBehaviour:
   textToShow: {fileID: 1267744499683379577}
   placeToCreate: {fileID: 2052974250401982819}
   commentDestroy: {r: 1, g: 0.36676446, b: 0, a: 1}
+  dropdown: {fileID: 8955716924604948224}
 --- !u!1 &319171119854605188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2227,7 +2228,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3960007181453447946}
+        m_TargetAssemblyTypeName: PopUpModerator, Assembly-CSharp
+        m_MethodName: DropDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!1 &8723965370538184356
 GameObject:

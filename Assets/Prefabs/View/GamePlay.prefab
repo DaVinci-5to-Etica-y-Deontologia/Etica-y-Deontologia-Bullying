@@ -985,6 +985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataBase: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   eventManager: {fileID: 11400000, guid: 61a7d81338181f9409e4d385c1b3b4c5, type: 2}
+  player: {fileID: 11400000, guid: 58cac3681301b7d499ad817f59f58553, type: 2}
   prefab: {fileID: 2893779287732540056, guid: c94143bf0fbd7984aae14bbcff1c15bf, type: 3}
   startDeley: 1
   contain: {fileID: 5120369268545282656}

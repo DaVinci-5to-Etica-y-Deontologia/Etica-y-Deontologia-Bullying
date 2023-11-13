@@ -187,7 +187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 257.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 325, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8628339759115402605
@@ -378,7 +378,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 162.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 225, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7522311455191187862
@@ -811,13 +811,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32946953b798ea649929b1316686ef60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 140912322178551159}
   textMesh: {fileID: 750771010519157440}
   cuerpo: {fileID: 4958837850296979702}
   cabeza: {fileID: 5779446429473202489}
   ojos: {fileID: 7350077285269235968}
   boquitas: {fileID: 8972498191833053462}
   accesorios: {fileID: 2404519951988986125}
-  button: {fileID: 140912322178551159}
+  BackGround: {fileID: 3486895204517032133}
   _commentData:
     ID: 0
     comment: {fileID: 0}

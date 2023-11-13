@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Moderator: 0
   NumerOfCommentsToView: 30
+  InstigatorCooldownFirst: 3
+  InstigatorCooldownSecond: 5

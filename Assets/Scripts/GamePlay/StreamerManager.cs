@@ -23,6 +23,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     public EventManager eventManager;
 
+    public Player player;
+
     public static Queue<System.Action> eventQueue = new();
 
     public EventParam<StreamerData> onStreamerCreate;
@@ -98,6 +100,36 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         switch (dataRpc.action)
         {
+            case Actions.Ban:
+                {
+                    srch.User.Ban();
+                }
+                break;
+
+            case Actions.Admonition:
+                {
+                    srch.User.Admonition(srch.comment.index);
+                }
+                break;
+
+            case Actions.Picantear:
+                {
+                    srch.User.Picantear();
+                }
+                break;
+
+            case Actions.Corromper:
+                {
+                    srch.User.ChangeMoral();
+                }
+                break;
+
+            case Actions.Suspect:
+                {
+                    srch.User.SuspectChange(dataRpc.data);
+                }
+                break;
+
             case Actions.AddUser:
                 {
                     srch.Streamer.AddUser(dataRpc.data);
@@ -110,17 +142,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
                 }
                 break;
 
-            case Actions.Ban:
-                {
-                    srch.User.Ban();
-                }
-                break;
 
-            case Actions.Admonition:
-                {
-                    srch.User.Admonition(srch.comment.index);
-                }
-                break;
 
             case Actions.AddComment:
                 {
@@ -331,6 +353,12 @@ public class Actions
 
     public const string Admonition = "Admonition";
 
+    public const string Picantear = "Picantear";
+
+    public const string Corromper = "Corromper";
+
+    public const string Suspect = "Sus";
+
     public const string AddUser = "AddUser";
 
     public const string RemoveUser = "RemoveUser";
@@ -356,6 +384,12 @@ public struct DataRpc
     {
         //UnityEngine.Debug.Log(action + ": " + direction);
         StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction }));
+    }
+
+    public static void Create(string action, string direction, string data)
+    {
+        //UnityEngine.Debug.Log(action + ": " + direction + " " + data);
+        StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = data }));
     }
 
     public static void Create(string action, string direction, object data)

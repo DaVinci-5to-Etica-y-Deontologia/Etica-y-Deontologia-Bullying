@@ -37,6 +37,8 @@ public class StreamerData : IDirection
 
     public Streamer streamer => dataBase.Streamers[streamID];
 
+    public Player player => streamerManager.player;
+
     public string textIP => ID.ToString();
 
     
