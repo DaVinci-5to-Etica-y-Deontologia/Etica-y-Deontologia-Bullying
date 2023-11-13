@@ -18,7 +18,7 @@ public class EventCallsManager : MonoBehaviour
     [SerializeField]
     Color original;
 
-    public void Create(string name, UnityEngine.Events.UnityAction unityAction)
+    public EventCall Create(string name, UnityEngine.Events.UnityAction unityAction)
     {
         var aux = Instantiate(prefab, transform);
 
@@ -27,9 +27,11 @@ public class EventCallsManager : MonoBehaviour
         Select(aux);
 
         eventscalls.Add(aux);
+
+        return aux;
     }
 
-    public void Create(Sprite image, UnityEngine.Events.UnityAction unityAction)
+    public EventCall Create(Sprite image, UnityEngine.Events.UnityAction unityAction)
     {
         var aux = Instantiate(prefab, transform);
 
@@ -38,6 +40,8 @@ public class EventCallsManager : MonoBehaviour
         Select(aux);
 
         eventscalls.Add(aux);
+
+        return aux;
     }
 
     void Select(EventCall eventCall)
