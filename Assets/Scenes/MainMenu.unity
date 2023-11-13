@@ -391,6 +391,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4291889835518741436, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: Flags
+      value: 2561
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291889835518741436, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: NetworkGuid.RawGuidValue.Array.data[0]
+      value: -7543750394769786616
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291889835518741436, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: NetworkGuid.RawGuidValue.Array.data[1]
+      value: 7017050038268152995
+      objectReference: {fileID: 0}
     - target: {fileID: 6592150738373019403, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
