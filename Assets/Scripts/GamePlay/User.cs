@@ -21,10 +21,10 @@ public class UserParent : IDirection
     public string Name { get; private set; }
 
     [field: SerializeField]
-    public float MoralIndex { get; set; }
+    public float MoralIndex { get; private set; }
 
     [field: SerializeField]
-    public float MoralRange { get; set; }
+    public float MoralRange { get; private set; }
 
     [field: SerializeField]
     public bool Enable { get; set; } = true;
@@ -39,6 +39,7 @@ public class UserParent : IDirection
     public BD database => stream.dataBase;
 
     public EventManager eventManager => stream.eventManager;
+
     public string textIP => $"{stream.textIP}.{ID}";
 
     public float CoolDown { get=>_coolDown.current; set=> _coolDown.Set(value); }
@@ -119,13 +120,13 @@ public class UserParent : IDirection
     {
         CommentData comment = comments.GetTByIndex(index).value;
 
-        onLeaveComment?.Invoke(comment);
+        comments.RemoveAt(index);        
 
-        comments.RemoveAt(index);
+        onLeaveComment?.Invoke(comment);
 
         comment.Destroy();
 
-        if(!Enable && comments.Count==0)
+        if (!Enable && comments.Count == 0)
             stream.users.Remove(ID);
     }
 
@@ -145,8 +146,9 @@ public class UserParent : IDirection
 
     public void Destroy()
     {
-        _coolDown.Stop();
         Enable = false;
+        _coolDown.Stop();
+        
         //stream.users.Remove(ID);
     }
 
@@ -194,6 +196,10 @@ public class UserParent : IDirection
         this.ID = id;
 
         int rng = Random.Range(5,8);
+
+        MoralIndex = Random.Range(0, 1f);
+
+        MoralRange = Random.Range(0, 0.5f);
 
         string chars = "abcdefghijklmnñopqrstuvwxyz";
 

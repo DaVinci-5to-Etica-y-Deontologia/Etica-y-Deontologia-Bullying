@@ -93,12 +93,9 @@ public class StreamerData : IDirection
         {
             var rng = Random.Range(0, users.Count);
 
-
             DataRpc.Create(Actions.RemoveUser, users.GetTByIndex(rng).value.textIP);
         }
     }
-
-
 
     //rpc
     public void AddUser(string jsonPic)

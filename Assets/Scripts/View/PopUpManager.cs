@@ -13,6 +13,8 @@ public class PopUpManager : MonoBehaviour
     [SerializeField]
     PopUpElement[] popUpElements;
 
+    public CommentView commentViewPrefab;
+
     protected void Awake()
     {
         popUpElements = GetComponentsInChildren<PopUpElement>(true);
@@ -31,6 +33,8 @@ public abstract class PopUpElement : MonoBehaviour
     protected EventManager eventManager => parent.eventManager;
 
     protected EventCallsManager callsManager=> parent.callsManager;
+
+    protected CommentView commentViewPrefab => parent.commentViewPrefab;
 
     protected Player player => parent.player;
 
@@ -64,18 +68,25 @@ public abstract class PopUpComment : PopUpElement
 
     protected CommentData comment;
 
+    protected User user;
+
     protected abstract bool ExecutePopUp { get; }
 
     public override void MyAwake(PopUpManager popUpManager)
     {
         base.MyAwake(popUpManager);
-        eventManager.events.SearchOrCreate<EventParam<CommentView>>("onclickcomment").delegato += InternalPopUp;
+       
+        eventManager.events.SearchOrCreate<EventParam<CommentData>>("createcomment").delegato += OnCreateComment;
         eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment").delegato += OnLeaveComment;
+
+        eventManager.events.SearchOrCreate<EventParam<CommentView>>("onclickcomment").delegato += InternalPopUp;
     }
 
     protected virtual void PopUp(CommentView commentView)
     {
         comment = commentView.commentData;
+
+        user = comment.user;
 
         callsManager.DestroyAll();
 
@@ -86,11 +97,7 @@ public abstract class PopUpComment : PopUpElement
 
         foreach (var item in commentView.commentData.user.comments)
         {
-            var aux = Instantiate(commentView, placeToCreate);
-
-            aux.button.interactable = false;
-
-            aux.commentData = item.Value;
+            CreateView(item.Value);
         }
 
         onActive.Invoke();
@@ -113,11 +120,27 @@ public abstract class PopUpComment : PopUpElement
 
     void OnLeaveComment(CommentData commentData)
     {
-        if (comment != null && comment == commentData)
+        if (isActiveAndEnabled && user == commentData.user && !user.Enable && user.comments.Count == 0)
         {
             callsManager.DestroyAll();
-            textToShow.text = "Comentario eliminado/viejo\n" + "No hay posibles acciones".RichTextColor(commentDestroy);
+            textToShow.text = "Se retiro el usuario y no quedan comentarios\n" + "No hay posibles acciones".RichTextColor(commentDestroy);
         }
     }
+
+    void OnCreateComment(CommentData commentData)
+    {
+        if (isActiveAndEnabled && user == commentData.user)
+            CreateView(commentData);
+    }
+
+    void CreateView(CommentData commentData)
+    {
+        var aux = Instantiate(commentViewPrefab, placeToCreate);
+
+        aux.button.interactable = false;
+
+        aux.commentData = commentData;
+    }
+
 }
 

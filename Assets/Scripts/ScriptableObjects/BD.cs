@@ -54,6 +54,9 @@ public class BD : SuperScriptableObject
     /// <returns></returns>
     public Comment SelectComment(float moralIndex, float moralRange)
     {
+        var aux = Mathf.Clamp(Random.Range(moralIndex - moralRange, moralIndex + moralRange), 0, 1);
+
+
         return comments[Random.Range(0, comments.Length)];
     }
 
