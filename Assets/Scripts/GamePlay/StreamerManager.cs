@@ -205,7 +205,7 @@ public class StreamerManager : NetworkBehaviour
         onStreamerCreate.delegato?.Invoke(streamer);
 
 
-        if (HasStateAuthority)
+        if (HasInputAuthority)
             streamer.onCreateComment += CommentDataDelete_onCreateComment;
     }
 
@@ -296,7 +296,8 @@ public class StreamerManager : NetworkBehaviour
     {
         print("Comienza el juego");
 
-        CreateStream();
+        if(HasInputAuthority)
+            CreateStream();
 
         ChangeStream(0);
     }
