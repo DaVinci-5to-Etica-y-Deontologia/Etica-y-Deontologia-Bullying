@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 {
     [SerializeField]
+    public Button button;
+
+    [SerializeField]
     TextMeshProUGUI textMesh;
 
     [SerializeField]
@@ -23,9 +26,6 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
 
     [SerializeField]
     Image accesorios;
-
-    [SerializeField]
-    Button button;
 
     [SerializeField]
     CommentData _commentData;

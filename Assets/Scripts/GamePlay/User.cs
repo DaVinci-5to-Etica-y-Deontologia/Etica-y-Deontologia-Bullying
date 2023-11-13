@@ -83,12 +83,12 @@ public class UserParent : IDirection
 
     public void Ban()
     {
+        Destroy();
+
         for (int i = comments.Count - 1; i >= 0; i--)
         {
             RemoveComment(i);
-        }
-
-        Destroy();
+        }        
     }
 
     #endregion

@@ -22,7 +22,7 @@ public class CommentData : IDirection, IPoolElement<CommentData>
 
     public string textIP => $"{user.textIP}.{ID}";
 
-    public string textName => user.Name.RichText("color", "#" + ColorUtility.ToHtmlStringRGBA(user.colorText));
+    public string textName => user.Name.RichTextColor(user.colorText);
 
     public BD database => user.database;
 

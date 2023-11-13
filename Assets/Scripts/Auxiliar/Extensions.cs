@@ -137,6 +137,11 @@ public static class Extensions
             return "<" + tag + ">" + s + "</" + tag + ">";
     }
 
+    static public string RichTextColor(this string s, Color color)
+    {
+        return s.RichText("color", "#" + ColorUtility.ToHtmlStringRGBA(color));
+    }
+
     static public string SubstringClamped(this string s, int startIndex)
     {
         startIndex = Mathf.Clamp(startIndex, 0, s.Length);

@@ -1649,6 +1649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventManager: {fileID: 11400000, guid: 61a7d81338181f9409e4d385c1b3b4c5, type: 2}
   callsManager: {fileID: 1640187352}
+  player: {fileID: 11400000, guid: 58cac3681301b7d499ad817f59f58553, type: 2}
   popUpElements:
   - {fileID: 860355045}
   - {fileID: 1263596555}
@@ -2303,6 +2304,10 @@ PrefabInstance:
     - target: {fileID: 247639796259816043, guid: f17a8a8e817f0e04796747e3d0c35298, type: 3}
       propertyPath: m_Name
       value: Moderador
+      objectReference: {fileID: 0}
+    - target: {fileID: 247639796259816043, guid: f17a8a8e817f0e04796747e3d0c35298, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 759784047171396396, guid: f17a8a8e817f0e04796747e3d0c35298, type: 3}
       propertyPath: m_Pivot.x
