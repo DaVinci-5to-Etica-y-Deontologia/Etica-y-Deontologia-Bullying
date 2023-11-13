@@ -55,7 +55,7 @@ public class EventCallsManager : MonoBehaviour
         {
             foreach (var item in eventscalls)
             {
-                if (item.button == button)
+                if (item == button)
                     item.backgroundImage.color = selected;
                 else
                     item.backgroundImage.color = original;
