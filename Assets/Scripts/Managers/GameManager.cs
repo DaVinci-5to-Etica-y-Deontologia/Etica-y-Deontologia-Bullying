@@ -144,22 +144,25 @@ public class GameManager : SingletonMono<GameManager>
     {
         base.Awake();
 
-        _fsmGameMaganer = new FSMGameMaganer(this);
-
-        var victory = _eventManager.events.SearchOrCreate<EventParam>("victory");
-        var close = _eventManager.events.SearchOrCreate<EventParam>("close");
-        var defeat = _eventManager.events.SearchOrCreate<EventParam>("defeat");
-
-        victory.delegato += Victory;
-        victory.delegato += ()=> close.delegato.Invoke();
-        defeat.delegato += Defeat;
-        defeat.delegato += ()=> close.delegato.Invoke();
-
         updateUnityEvent.AddListener(MyUpdate);
 
         fixedUpdateUnityEvent.AddListener(MyFixedUpdate);
 
-        awakeUnityEvent?.Invoke();
+        TimersManager.Create(0.1f, () => 
+        {
+            _fsmGameMaganer = new FSMGameMaganer(this);
+
+            var victory = _eventManager.events.SearchOrCreate<EventParam>("victory");
+            var close = _eventManager.events.SearchOrCreate<EventParam>("close");
+            var defeat = _eventManager.events.SearchOrCreate<EventParam>("defeat");
+
+            victory.delegato += Victory;
+            victory.delegato += () => close.delegato.Invoke();
+            defeat.delegato += Defeat;
+            defeat.delegato += () => close.delegato.Invoke();
+
+            awakeUnityEvent?.Invoke();
+        });
     }
 
     private void Update()
