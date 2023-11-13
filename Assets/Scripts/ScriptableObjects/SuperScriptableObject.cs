@@ -13,10 +13,20 @@ namespace Euler
     /// </summary>
     public abstract class SuperScriptableObject : ScriptableObject
     {
+        public ScriptableObject Parent 
+        { 
+            get=>_parent; 
+
+            private set 
+            {
+                _parent = value;
+            }
+        }
+
+        [SerializeField]
+        ScriptableObject _parent;
 
 #if UNITY_EDITOR
-
-        public ScriptableObject Parent { get; private set; }
 
 
         /// <summary>
@@ -26,7 +36,7 @@ namespace Euler
         /// <param name="actionToCreate">Callback que se ejecuta luego de crear y guardar en disco el scriptable</param>
         /// <param name="name"></param>
         /// <returns></returns>
-        protected T MakeNew<T>(string name, System.Action<T> actionToCreate) where T : SuperScriptableObject
+        protected T MakeNew<T>(string name, System.Action<T> actionToCreate = null) where T : SuperScriptableObject
         {
             if (name == string.Empty)
                 name = "Empty";
@@ -57,7 +67,7 @@ namespace Euler
         /// <typeparam name="T"></typeparam>
         /// <param name="actionToCreate">Callback que se ejecuta luego de crear y antes de guardar en disco el scriptable</param>
         /// <returns></returns>
-        protected T MakeNewChild<T>(string name, System.Action<T> actionToCreate) where T : SuperScriptableObject
+        protected T MakeNewChild<T>(string name, System.Action<T> actionToCreate = null) where T : SuperScriptableObject
         {
             var ret = CreateInstance<T>();
 

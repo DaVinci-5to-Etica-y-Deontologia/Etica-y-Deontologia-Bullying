@@ -4,36 +4,33 @@ using UnityEngine;
 
 namespace Euler
 {
-
-#if UNITY_EDITOR
-
     /// <summary>
     /// Clase auxiliar encargada de realizar el transcripto entre el texto y un formato intermedio
     /// </summary>
+    [System.Serializable]
     public class Parse
     {
         /*Hice una clase y no una funcion para separar los scripts*/
 
         /// <summary>
-        /// Lista de usuarios
+        /// Levanta cualquier archivo de texto y lo mete dentro de una lista de objetos
+        /// Se le agrega como primer parametro el ID, que vendria a ser la posicion original de las filas en el txt
         /// </summary>
-        public HashSet<string> DataUser { get; private set; }
+        public List<PDO<string, string>> DataOriginalOrder { get; private set; }
 
-        /// <summary>
-        /// los comentarios estan dentro de una lista, y sus parametros en un array
-        /// Se le agrega como primer parametro el ID
-        /// </summary>
-        public List<PDO<string, string>> DataOrdered { get; private set; }
+        [SerializeField, Tooltip("Recordad trabajar con la codificacion UTF-8")]
+        TextAsset textAsset;
 
-        public Parse(TextAsset textAsset)
+        [SerializeField, Tooltip("Separador de las columnas, por defecto en \\t (tabulaciones)")]
+        string separator = "\t";
+
+        public Parse Execute()
         {
-            DataUser = new HashSet<string>();
-
-            DataOrdered = new List<PDO<string, string>>();
+            DataOriginalOrder = new List<PDO<string, string>>();
 
             var row = textAsset.text.Trim().Split('\n');
 
-            var aux = row[0].Trim().Split('\t');
+            var aux = row[0].Trim().Split(separator);
 
             string[] keys = new string[aux.Length + 1];
 
@@ -50,7 +47,7 @@ namespace Euler
 
             for (int r = 1; r < row.Length; r++)
             {
-                auxCol = row[r].Split('\t');
+                auxCol = row[r].Split(separator);
 
                 string[] col = new string[colLength];
 
@@ -61,12 +58,22 @@ namespace Euler
 
                 col[0] = r.ToString();
 
-                DataUser.Add(col[1]);
+                PDO<string, string> pdo = new PDO<string, string>(keys, col);
 
-                PDO<string, string> pdo = new PDO<string, string>(keys,col);
-
-                DataOrdered.Add(pdo);
+                DataOriginalOrder.Add(pdo);
             }
+
+            return this;
+        }
+
+        public Parse()
+        {
+        }
+
+        public Parse(TextAsset textAsset)
+        {
+            this.textAsset = textAsset;
+            Execute();
         }
     }
 
@@ -118,9 +125,6 @@ namespace Euler
             return value.GetEnumerator();
         }
     }
-
-#endif
-
 }
 
 

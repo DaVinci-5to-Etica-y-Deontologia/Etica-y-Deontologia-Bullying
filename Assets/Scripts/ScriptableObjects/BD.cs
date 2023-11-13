@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Euler;
 
-
 #if UNITY_EDITOR 
 using UnityEditor;
 #endif
@@ -14,16 +13,10 @@ using UnityEditor;
 [CreateAssetMenu(menuName = "BD")]
 public class BD : SuperScriptableObject
 {
-    [SerializeField]
-    TextAsset _textAsset;
-
-    [field: SerializeField]
-    public User[] users { get; private set; }
-
     [field: SerializeField]
     public Comment[] comments { get; private set; }
 
-    public int Length => users.Length;
+    public int Length => comments.Length;
 
     public Comment this[int index]
     {
@@ -33,24 +26,23 @@ public class BD : SuperScriptableObject
         }
     }
 
-    public User this [string name]
+    /// <summary>
+    /// Adaptar al nuevo sistema
+    /// </summary>
+    /// <param name="moralIndex"></param>
+    /// <param name="moralRange"></param>
+    /// <returns></returns>
+    public Comment SelectComment(float moralIndex, float moralRange)
     {
-        get
-        {
-            for (int i = 0; i < users.Length; i++)
-            {
-                if (users[i].name == name)
-                    return users[i];
-            }
-
-            return null;
-        }
+        return comments[Random.Range(0, comments.Length)];
     }
-
 
     #region NO TOCAR
 
 #if UNITY_EDITOR
+
+    [SerializeField]
+    Parse _txtToParse;
 
     public event System.Action<BD> OnFinishSet;
 
@@ -59,39 +51,22 @@ public class BD : SuperScriptableObject
     {
         DeleteAll();
 
-        Parse _parse = new Parse(_textAsset);
-        
-        users = new User[_parse.DataUser.Count];
+        _txtToParse.Execute();
 
         List<Comment> comments = new List<Comment>();
 
         string debug = string.Empty;
 
-        int index = 0;
-        
-        foreach (var user in _parse.DataUser)
+        for (int i = 0; i < _txtToParse.DataOriginalOrder.Count; i++)
         {
-            List<PDO<string,string>> data = new List<PDO<string, string>>();
+            debug += _txtToParse.DataOriginalOrder[i].ToString() + "\n";
 
-            debug += user + "\n";
-
-            for (int i = _parse.DataOrdered.Count -1 ; i >= 0 ; i--)
-            {
-                debug += "\t" + _parse.DataOrdered[i].ToString() + "\n";
-
-                if (_parse.DataOrdered[i][1] == user)
-                {
-                    data.Insert(0,_parse.DataOrdered[i]);
-                    _parse.DataOrdered.RemoveAt(i);
-                }                
-            }
-
-            users[index] = MakeNew<User>(user, (userClass) => userClass.Initilize(data)); //creo en disco el scriptable
-
-            comments.AddRange(users[index].comments);
-
-            index++;
+            comments.Add(MakeNewChild<Comment>(i.ToString(), (comment)=> comment.Initilize(_txtToParse.DataOriginalOrder[i])));
         }
+
+        _txtToParse.DataOriginalOrder.Clear();
+
+        debug += "\n";
 
         comments.Sort(Sort);
 
@@ -107,7 +82,9 @@ public class BD : SuperScriptableObject
     [ContextMenu("Borrar tablas relacionadas")]
     void DeleteAll()
     {
-        users?.Delete();
+        comments?.Delete();
+
+
     }
 
     int Sort(Comment x, Comment y)
