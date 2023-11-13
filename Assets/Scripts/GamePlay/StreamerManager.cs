@@ -305,8 +305,10 @@ public class StreamerManager : NetworkBehaviour
     private void Update()
     {
         if (!HasInputAuthority)
+        {
+            eventQueue.Clear();
             return;
-        
+        }
 
         while(eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16)
         {
