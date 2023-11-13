@@ -338,7 +338,7 @@ public class StreamerManager : NetworkBehaviour
         TimersManager.Create(startDeley, MyStart);
     }
 
-    protected void Awake()
+    public override void Spawned()
     {
         instance = this;
         pool = new(prefab);
@@ -347,7 +347,6 @@ public class StreamerManager : NetworkBehaviour
 
         watchdog.Start();
     }
-
 }
 
 public class Actions
