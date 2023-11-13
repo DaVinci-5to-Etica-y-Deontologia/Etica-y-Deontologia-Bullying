@@ -91,7 +91,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     {
         if (runner.IsServer && streamerManager.Count < runner.ActivePlayers.Count())
         {
-            streamerManager.CreateStream();
+            //streamerManager.CreateStream();
         }
     }
 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.Diagnostics;
+using Fusion;
 
-public class StreamerManager : SingletonMono<StreamerManager>
+public class StreamerManager : NetworkBehaviour
 {
     public struct SearchResult
     {
@@ -18,6 +19,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         public CommentData CommentData => comment.value;
     }
+
+    public static StreamerManager instance;
 
     public BD dataBase;
 
@@ -89,8 +92,8 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
     Timer delay;
 
-    //RPC REAL
-    public static void Execute(string json)
+    [Rpc(RpcSources.All,RpcTargets.All)]
+    public static void Rpc_Execute(string json)
     {
         DataRpc dataRpc = JsonUtility.FromJson<DataRpc>(json);
 
@@ -191,7 +194,6 @@ public class StreamerManager : SingletonMono<StreamerManager>
         return searchResult;
     }
 
-    //rpc
     public void AddStream(string json)
     {
         var streamer = JsonUtility.FromJson<StreamerData>(json);
@@ -202,9 +204,9 @@ public class StreamerManager : SingletonMono<StreamerManager>
 
         onStreamerCreate.delegato?.Invoke(streamer);
 
-        //autoridad de estado y esas cosas
 
-        streamer.onCreateComment += CommentDataDelete_onCreateComment;
+        if (HasStateAuthority)
+            streamer.onCreateComment += CommentDataDelete_onCreateComment;
     }
 
 
@@ -295,8 +297,7 @@ public class StreamerManager : SingletonMono<StreamerManager>
         print("Comienza el juego");
 
         CreateStream();
-        CreateStream();
-        CreateStream();
+
         ChangeStream(0);
     }
 
@@ -337,10 +338,9 @@ public class StreamerManager : SingletonMono<StreamerManager>
         TimersManager.Create(startDeley, MyStart);
     }
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
+        instance = this;
         pool = new(prefab);
 
         watchdog = new Stopwatch();
@@ -386,19 +386,19 @@ public struct DataRpc
     public static void Create(string action, string direction)
     {
         //UnityEngine.Debug.Log(action + ": " + direction);
-        StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction }));
+        StreamerManager.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction }));
     }
 
     public static void Create(string action, string direction, string data)
     {
         //UnityEngine.Debug.Log(action + ": " + direction + " " + data);
-        StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = data }));
+        StreamerManager.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = data }));
     }
 
     public static void Create(string action, string direction, object data)
     {
         //UnityEngine.Debug.Log(action + ": " + direction + " " + JsonUtility.ToJson(data, true));
-        StreamerManager.Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = JsonUtility.ToJson(data) }));
+        StreamerManager.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = JsonUtility.ToJson(data) }));
     }
 
     public override string ToString()
