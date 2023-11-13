@@ -304,14 +304,8 @@ public class StreamerManager : NetworkBehaviour
 
     private void Update()
     {
-        if (!HasStateAuthority)
+        if (!HasInputAuthority)
             return;
-
-        if (Input.GetKeyDown(KeyCode.E))
-            ChangeStream(IndexStreamWatch + 1);
-
-        if (Input.GetKeyDown(KeyCode.Q))
-            ChangeStream(IndexStreamWatch - 1);
         
 
         while(eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16)
