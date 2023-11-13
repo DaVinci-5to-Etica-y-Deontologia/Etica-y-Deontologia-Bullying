@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using Fusion;
 
-public class GameManager : SingletonMono<GameManager>
+public class GameManager : NetworkBehaviour
 {
     public static event UnityAction onPause
     {
@@ -32,6 +33,8 @@ public class GameManager : SingletonMono<GameManager>
     }
     public static Pictionarys<MyScripts, UnityAction> fixedUpdate => instance._fixedUpdate;
     public static Pictionarys<MyScripts, UnityAction> update => instance._update;
+
+    public static GameManager instance;
 
     [SerializeField]
     EventManager _eventManager;
@@ -140,29 +143,29 @@ public class GameManager : SingletonMono<GameManager>
         MyUpdate(_fixedUpdate);
     }
 
-    protected override void Awake()
+    public override void Spawned()
     {
-        base.Awake();
+        _fsmGameMaganer = new FSMGameMaganer(this);
+
+        var victory = _eventManager.events.SearchOrCreate<EventParam>("victory");
+        var close = _eventManager.events.SearchOrCreate<EventParam>("close");
+        var defeat = _eventManager.events.SearchOrCreate<EventParam>("defeat");
+
+        victory.delegato += Victory;
+        victory.delegato += () => close.delegato.Invoke();
+        defeat.delegato += Defeat;
+        defeat.delegato += () => close.delegato.Invoke();
+
+        awakeUnityEvent?.Invoke();
 
         updateUnityEvent.AddListener(MyUpdate);
 
         fixedUpdateUnityEvent.AddListener(MyFixedUpdate);
+    }
 
-        TimersManager.Create(0.1f, () => 
-        {
-            _fsmGameMaganer = new FSMGameMaganer(this);
-
-            var victory = _eventManager.events.SearchOrCreate<EventParam>("victory");
-            var close = _eventManager.events.SearchOrCreate<EventParam>("close");
-            var defeat = _eventManager.events.SearchOrCreate<EventParam>("defeat");
-
-            victory.delegato += Victory;
-            victory.delegato += () => close.delegato.Invoke();
-            defeat.delegato += Defeat;
-            defeat.delegato += () => close.delegato.Invoke();
-
-            awakeUnityEvent?.Invoke();
-        });
+    protected void Awake()
+    {
+        instance = this;
     }
 
     private void Update()

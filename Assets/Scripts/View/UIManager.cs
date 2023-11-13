@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
         */
     }
 
-    private void Awake()
+    public void MyAwake()
     {
         streamerManager.onStreamerChange.delegato += StreamerManager_onStreamerChange;
         streamerManager.onStreamerCreate.delegato += 
@@ -128,5 +128,4 @@ public class UIManager : MonoBehaviour
 
         bottomButton.eventToCall.AddListener(BottonPressed);
     }
-
 }

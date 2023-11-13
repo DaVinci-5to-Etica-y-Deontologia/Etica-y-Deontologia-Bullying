@@ -303,6 +303,9 @@ public class StreamerManager : NetworkBehaviour
 
     private void Update()
     {
+        if (!HasStateAuthority)
+            return;
+
         if (Input.GetKeyDown(KeyCode.E))
             ChangeStream(IndexStreamWatch + 1);
 

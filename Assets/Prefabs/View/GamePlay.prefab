@@ -939,6 +939,7 @@ GameObject:
   - component: {fileID: 2304893342462186949}
   - component: {fileID: 5899004232733784290}
   - component: {fileID: 1737912113428066413}
+  - component: {fileID: 1973767078160684306}
   m_Layer: 5
   m_Name: GamePlay
   m_TagString: Untagged
@@ -983,6 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d929476e320b624eb5e64ca01369f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   dataBase: {fileID: 11400000, guid: eb907991a3abd1543ac2e5de97db4693, type: 2}
   eventManager: {fileID: 11400000, guid: 61a7d81338181f9409e4d385c1b3b4c5, type: 2}
   player: {fileID: 11400000, guid: 58cac3681301b7d499ad817f59f58553, type: 2}
@@ -1018,6 +1020,30 @@ MonoBehaviour:
   views: {fileID: 6461162180779733401}
   life: {fileID: 8097216030753555104}
   eventCalls: {fileID: 6268518921870747308}
+--- !u!114 &1973767078160684306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3496957810255365158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2305
+  NetworkGuid:
+    RawGuidValue: 9d7fef928756eda43a14f850a615edad
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 5899004232733784290}
+  SimulationBehaviours: []
 --- !u!1 &3581778470786781910
 GameObject:
   m_ObjectHideFlags: 0
