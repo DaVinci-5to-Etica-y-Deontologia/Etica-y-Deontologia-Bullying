@@ -10,4 +10,8 @@ public class Player : ScriptableObject
 
     [SerializeField, Range(10,30)]
     public int NumerOfCommentsToView = 20;
+
+    public float InstigatorCooldownFirst=3;
+
+    public float InstigatorCooldownSecond=5;
 }

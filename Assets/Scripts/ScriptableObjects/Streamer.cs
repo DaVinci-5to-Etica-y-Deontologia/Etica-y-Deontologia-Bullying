@@ -20,4 +20,6 @@ public class Streamer
     public int minimalViews;
 
     public int maxViews;
+
+    public float Life=100;
 }
