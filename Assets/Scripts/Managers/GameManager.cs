@@ -161,11 +161,15 @@ public class GameManager : NetworkBehaviour
         updateUnityEvent.AddListener(MyUpdate);
 
         fixedUpdateUnityEvent.AddListener(MyFixedUpdate);
+
+        enabled = true;
     }
 
     protected void Awake()
     {
         instance = this;
+
+        enabled = false;
     }
 
     private void Update()
