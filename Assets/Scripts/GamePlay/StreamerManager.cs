@@ -93,7 +93,7 @@ public class StreamerManager : NetworkBehaviour
     Timer delay;
 
     [Rpc(RpcSources.All,RpcTargets.All)]
-    public static void Rpc_Execute(string json)
+    public void Rpc_Execute(string json)
     {
         DataRpc dataRpc = JsonUtility.FromJson<DataRpc>(json);
 
@@ -386,19 +386,19 @@ public struct DataRpc
     public static void Create(string action, string direction)
     {
         //UnityEngine.Debug.Log(action + ": " + direction);
-        StreamerManager.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction }));
+        StreamerManager.instance.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction }));
     }
 
     public static void Create(string action, string direction, string data)
     {
         //UnityEngine.Debug.Log(action + ": " + direction + " " + data);
-        StreamerManager.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = data }));
+        StreamerManager.instance.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = data }));
     }
 
     public static void Create(string action, string direction, object data)
     {
         //UnityEngine.Debug.Log(action + ": " + direction + " " + JsonUtility.ToJson(data, true));
-        StreamerManager.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = JsonUtility.ToJson(data) }));
+        StreamerManager.instance.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action, direction = direction, data = JsonUtility.ToJson(data) }));
     }
 
     public override string ToString()
