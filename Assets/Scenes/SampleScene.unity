@@ -890,14 +890,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
-      propertyPath: onFinishLoad.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
-      propertyPath: onFinishLoad.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
       propertyPath: onStartLoad.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1477834549}
@@ -921,26 +913,6 @@ PrefabInstance:
       propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 274938516}
-    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
-      propertyPath: onFinishLoad.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
-      propertyPath: onFinishLoad.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: EndLoad
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
-      propertyPath: onFinishLoad.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: StreamerManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
-      propertyPath: onFinishLoad.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
-      propertyPath: onFinishLoad.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4074322121216960538, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
       propertyPath: m_Name
       value: GameManager

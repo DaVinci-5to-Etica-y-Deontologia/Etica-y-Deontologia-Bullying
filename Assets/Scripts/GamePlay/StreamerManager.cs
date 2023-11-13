@@ -130,6 +130,9 @@ public class StreamerManager : SingletonMono<StreamerManager>
                 }
                 break;
 
+
+
+
             case Actions.AddUser:
                 {
                     srch.Streamer.AddUser(dataRpc.data);
