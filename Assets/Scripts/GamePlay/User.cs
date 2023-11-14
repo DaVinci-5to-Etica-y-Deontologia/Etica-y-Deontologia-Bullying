@@ -187,7 +187,7 @@ public class UserParent : IDirection
     public void Aplicate(int views, float damage ,string textIP)
     {
         //Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
-        if (stream.ShowEnd)
+        if (stream.showEnd)
             return;
 
         stream.Users(views);

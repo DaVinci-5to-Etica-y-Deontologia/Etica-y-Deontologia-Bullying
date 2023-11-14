@@ -259,12 +259,55 @@ public class StreamerManager : NetworkBehaviour
     {
         foreach (var item in streamers)
         {
-            if(!item.Value.ShowEnd)
+            if(!item.Value.showEnd)
             {
                 ChangeStreamByID(item.Key);
                 return;
             }
         }
+    }
+
+    public List<StreamerData> FinishedStreams()
+    {
+        var list = new List<StreamerData>();
+        
+        foreach (var item in streamers)
+        {
+            if (item.Value.showEnd)
+            {
+                list.Add(item.Value);
+            }
+        }
+
+        return list;
+    }
+
+    /// <summary>
+    /// Devuelve quién ganó la partida o si fue un empate basado en 3 números
+    /// 0 - Empate
+    /// 1 - Ganaron los mods
+    /// 2 - Ganaron los instigadores
+    /// </summary>
+    /// <returns></returns>
+    public int MatchResults()
+    {
+        int modsWins = 0;
+        int instigatorsWins = 0;
+
+        foreach (var item in FinishedStreams())
+        {
+            if (item.showEnd && !item.defeat)
+                modsWins++;
+            else
+                instigatorsWins++;
+        }
+
+        if (modsWins == instigatorsWins)
+            return 0;
+        else if (modsWins > instigatorsWins)
+            return 1;
+        else
+            return 2;
     }
 
     public void ChangeStream(int index)
@@ -298,13 +341,16 @@ public class StreamerManager : NetworkBehaviour
 
         onStreamerChange.delegato?.Invoke(Actual);
 
-        if (aux.ShowEnd)
+        if (aux.showEnd)
             Aux_onEndStream(aux);
     }
 
     void Aux_onEndStream(StreamerData obj)
     {
         onStreamEnd.delegato.Invoke(obj);
+
+        if (streamers.Count == FinishedStreams().Count)
+            FinishDay();
     }
 
     void CommentCreateQueue(CommentData commentData)

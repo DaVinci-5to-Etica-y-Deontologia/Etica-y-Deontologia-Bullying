@@ -46,8 +46,9 @@ public class StreamerData : IDirection
 
     public string textIP => ID.ToString();
 
-    public bool ShowEnd => Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total;
+    public bool showEnd => defeat || Viewers.current == Viewers.total;
 
+    public bool defeat => Life.current == 0 || Viewers.current <= streamer.minimalViews;
 
     StreamerManager streamerManager;
 
@@ -118,7 +119,7 @@ public class StreamerData : IDirection
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        if (ShowEnd)
+        if (showEnd)
         {
             Stop();
             onEndStream?.Invoke(this);
