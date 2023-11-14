@@ -57,7 +57,7 @@ public class FadeOnOff : Init
 
     public void Stop()
     {
-        timerOn.Stop();
-        fadeOn.Stop();
+        timerOn?.Stop();
+        fadeOn?.Stop();
     }
 }

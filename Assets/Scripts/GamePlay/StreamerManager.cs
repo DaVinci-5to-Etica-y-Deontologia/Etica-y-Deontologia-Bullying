@@ -38,6 +38,10 @@ public class StreamerManager : NetworkBehaviour
 
     public EventParam<CommentData> onLeaveComment;
 
+    public EventParam<StreamerData> onStreamEnd;
+
+    public EventParam onFinishDay;
+
 
     [SerializeField]
     CommentView prefab;
@@ -83,7 +87,9 @@ public class StreamerManager : NetworkBehaviour
         }
     }
 
-    public int Count => streamers.Count;
+    public int Count { get; private set; }
+
+    public bool IsServer => Runner != null && Runner.IsServer;
 
     public StreamerData Actual { get; private set; }
 
@@ -204,9 +210,14 @@ public class StreamerManager : NetworkBehaviour
 
         onStreamerCreate.delegato?.Invoke(streamer);
 
+        Count++;
 
-        if (HasInputAuthority)
+        streamer.onEndStream += (s) => Count--;
+
+        if (IsServer)
+        {
             streamer.onCreateComment += CommentDataDelete_onCreateComment;
+        }
     }
 
 
@@ -215,7 +226,7 @@ public class StreamerManager : NetworkBehaviour
     /// </summary>
     public void FinishDay()
     {
-        //onFinishDay.delegato.Invoke(sumSeed);
+        onFinishDay.delegato.Invoke();
     }
 
     static public CommentView SpawnComment()
@@ -244,6 +255,18 @@ public class StreamerManager : NetworkBehaviour
         ChangeStream(streamers.GetTByID(ID).index);
     }
 
+    public void NextStreamer()
+    {
+        foreach (var item in streamers)
+        {
+            if(!item.Value.ShowEnd)
+            {
+                ChangeStreamByID(item.Key);
+                return;
+            }
+        }
+    }
+
     public void ChangeStream(int index)
     {
         var previus = IndexStreamWatch;
@@ -259,6 +282,8 @@ public class StreamerManager : NetworkBehaviour
             aux.onCreateComment -= CommentCreateQueue;
 
             aux.onLeaveComment -= CommentLeaveQueue;
+
+            aux.onEndStream -= Aux_onEndStream;
         }
 
         aux = streamers.GetTByIndex(IndexStreamWatch).value;
@@ -267,9 +292,19 @@ public class StreamerManager : NetworkBehaviour
 
         aux.onLeaveComment += CommentLeaveQueue;
 
+        aux.onEndStream += Aux_onEndStream;
+
         Actual = aux;
 
         onStreamerChange.delegato?.Invoke(Actual);
+
+        if (aux.ShowEnd)
+            Aux_onEndStream(aux);
+    }
+
+    void Aux_onEndStream(StreamerData obj)
+    {
+        onStreamEnd.delegato.Invoke(obj);
     }
 
     void CommentCreateQueue(CommentData commentData)
@@ -296,15 +331,15 @@ public class StreamerManager : NetworkBehaviour
     {
         print("Comienza el juego");
 
-        if(HasInputAuthority)
-            CreateStream();
+        
+        CreateStream();
 
         ChangeStream(0);
     }
 
     private void Update()
     {
-        if (!HasInputAuthority)
+        if (!IsServer)
         {
             eventQueue.Clear();
             return;
@@ -320,6 +355,8 @@ public class StreamerManager : NetworkBehaviour
 
     public void Load()
     {
+        onFinishDay = eventManager.events.SearchOrCreate<EventParam>("finishday");
+
         onCreateComment = eventManager.events.SearchOrCreate<EventParam<CommentData>>("createcomment");
 
         onLeaveComment = eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment");
@@ -327,6 +364,8 @@ public class StreamerManager : NetworkBehaviour
         onStreamerChange = eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamchange");
 
         onStreamerCreate = eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamcreate");
+
+        onStreamEnd = eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamend");
 
         GameManager.instance.StartCoroutine(pool.CreatePool(30, ()=> eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato.Invoke()));
 
@@ -340,12 +379,18 @@ public class StreamerManager : NetworkBehaviour
 
     public override void Spawned()
     {
+        watchdog.Start();
+
+        UnityEngine.Debug.Log("server: " + IsServer);
+    }
+
+    private void Awake()
+    {
         instance = this;
+
         pool = new(prefab);
 
         watchdog = new Stopwatch();
-
-        watchdog.Start();
     }
 }
 

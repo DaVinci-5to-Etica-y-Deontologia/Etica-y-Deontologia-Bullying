@@ -17,15 +17,15 @@ public class PopUpModerator : PopUpComment
 
         callsManager.Create("Ban" , () =>
         {
-            DataRpc.Create(Actions.Ban, comment.textIP); 
             Execute();
+            DataRpc.Create(Actions.Ban, comment.textIP); 
         });
 
         
         callsManager.Create("Admonition", () =>
         {
-            DataRpc.Create(Actions.Admonition, comment.textIP);
             Execute();
+            DataRpc.Create(Actions.Admonition, comment.textIP);
         });
     }
 

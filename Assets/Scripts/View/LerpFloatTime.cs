@@ -19,9 +19,11 @@ public class LerpFloatTime : MonoBehaviour
 
     public void On()
     {
+        gameObject.SetActive(true);
         enabled = true;
         for (int i = 0; i < fillAmounts.Length; i++)
         {
+            fillAmounts[i].Stop();
             fillAmounts[i].On();
         }
     }
@@ -30,6 +32,7 @@ public class LerpFloatTime : MonoBehaviour
     {
         for (int i = 0; i < fillAmounts.Length; i++)
         {
+            fillAmounts[i].Stop();
             fillAmounts[i].Off();
         }
     }
@@ -95,6 +98,11 @@ public class FillAmount
             enable = false;
             fadeOn.FadeOff();
         }
+    }
+
+    public void Stop()
+    {
+        fadeOn.Stop();
     }
 
     void InternalFade()

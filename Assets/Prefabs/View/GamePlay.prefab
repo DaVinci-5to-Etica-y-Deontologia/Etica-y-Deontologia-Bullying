@@ -1017,6 +1017,7 @@ MonoBehaviour:
   nameStreamer: {fileID: 8531840333979990514}
   tagsStreamer: {fileID: 5035461619934219568}
   remanentTime: {fileID: 1799108302350020293}
+  viewsText: {fileID: 8692249278991119355}
   views: {fileID: 6461162180779733401}
   life: {fileID: 8097216030753555104}
   eventCalls: {fileID: 6268518921870747308}
@@ -2584,7 +2585,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 31321653249387882, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}
       propertyPath: m_Name
-      value: Views Text (1)
+      value: Views Text
       objectReference: {fileID: 0}
     - target: {fileID: 1312211822815977936, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}
       propertyPath: m_Pivot.x
@@ -2716,6 +2717,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1312211822815977936, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}
   m_PrefabInstance: {fileID: 1129226089262219845}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8692249278991119355 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8577883460788367806, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}
+  m_PrefabInstance: {fileID: 1129226089262219845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1987631420353386080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4008,7 +4020,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 31321653249387882, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}
       propertyPath: m_Name
-      value: Views Text
+      value: Text
       objectReference: {fileID: 0}
     - target: {fileID: 1312211822815977936, guid: 1f28f23c37d237e4c8c6bafb1540e6ae, type: 3}
       propertyPath: m_Pivot.x

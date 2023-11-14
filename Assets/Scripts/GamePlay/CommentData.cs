@@ -30,6 +30,8 @@ public class CommentData : IDirection, IPoolElement<CommentData>
 
     public Player player => user.player;
 
+    public bool IsServer => user.IsServer;
+
     public LinkedPool<CommentData> Parent { get; set; }
     public IPoolElement<CommentData> Next { get; set; }
     public bool inPool { get; set; }

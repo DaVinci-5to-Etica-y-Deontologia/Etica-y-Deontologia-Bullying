@@ -89,10 +89,6 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        if (runner.IsServer && streamerManager.Count < runner.ActivePlayers.Count())
-        {
-            //streamerManager.CreateStream();
-        }
     }
 
     public void OnDisconnectedFromServer(NetworkRunner runner)

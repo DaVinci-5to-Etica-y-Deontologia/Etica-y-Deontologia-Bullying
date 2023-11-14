@@ -51,6 +51,8 @@ public class UserParent : IDirection
 
     public Player player => stream.player;
 
+    public bool IsServer => stream.IsServer;
+
     public string textIP => $"{stream.textIP}.{ID}";
 
     public float CoolDown { get=>_coolDownToComment.current; set=> _coolDownToComment.Set(value); }
@@ -193,17 +195,23 @@ public class UserParent : IDirection
         DataRpc.Create(Actions.RemoveComment, textIP);
     }
 
+    public void Stop()
+    {
+        _coolDownToComment?.Stop();
+    }
 
     public void Destroy()
     {
         Enable = false;
-        _coolDownToComment.Stop();
-        
-        //stream.users.Remove(ID);
+        stream.Viewers.current--;
+        Stop();
     }
 
     public void CreateComment()
     {
+        if (!IsServer)
+            return;
+
         System.Action lambda = () => 
         {
             if (!Enable)
@@ -238,7 +246,8 @@ public class UserParent : IDirection
 
         colorText =colorText.ChangeAlphaCopy(1);
 
-        _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment);
+        if(IsServer)
+            _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment);
 
         _coolDownAdmonition = TimersManager.Create(15);
 
@@ -249,6 +258,8 @@ public class UserParent : IDirection
         _moralRangeCooldown.onChange += _moralRangeCooldown_onChange;
 
         _moralIndexCooldown.onChange += _moralIndexCooldown_onChange;
+
+        stream.Viewers.current++;
     }
 
     void _moralIndexCooldown_onChange(IGetPercentage arg1, float arg2)

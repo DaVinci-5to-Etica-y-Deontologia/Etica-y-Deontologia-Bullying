@@ -173,7 +173,6 @@ public class GameManager : NetworkBehaviour
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex != 1)
             Spawned();
-            
     }
 
     private void Update()

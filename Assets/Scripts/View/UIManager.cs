@@ -34,6 +34,9 @@ public class UIManager : MonoBehaviour
     TextMeshProUGUI remanentTime;
 
     [SerializeField]
+    TextMeshProUGUI viewsText;
+
+    [SerializeField]
     Slider views;
 
     [SerializeField]
@@ -77,6 +80,8 @@ public class UIManager : MonoBehaviour
     private void Viewers_onChange(IGetPercentage arg1, float arg2)
     {
         views.value = arg1.Percentage();
+
+        viewsText.text = arg1.current + "/" + arg1.total;
     }
 
     private void Life_onChange(IGetPercentage arg1, float arg2)

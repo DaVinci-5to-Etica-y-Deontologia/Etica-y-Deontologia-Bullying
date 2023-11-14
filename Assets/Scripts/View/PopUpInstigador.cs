@@ -33,9 +33,9 @@ public class PopUpInstigador : PopUpComment
         if (cooldownFirstHability.Chck && isActiveAndEnabled)
             callsManager.Create("Corromper", () =>
             {
-                DataRpc.Create(Actions.Corromper, comment.textIP);
-                cooldownFirstHability.Reset();
                 Execute();
+                cooldownFirstHability.Reset();
+                DataRpc.Create(Actions.Corromper, comment.textIP);
             });
     }
 
@@ -44,9 +44,9 @@ public class PopUpInstigador : PopUpComment
         if (cooldownSecondHability.Chck && isActiveAndEnabled)
             callsManager.Create("Picantear", () =>
             {
-                DataRpc.Create(Actions.Picantear, comment.textIP);
-                cooldownSecondHability.Reset();
                 Execute();
+                cooldownSecondHability.Reset();
+                DataRpc.Create(Actions.Picantear, comment.textIP);
             });
     }
 

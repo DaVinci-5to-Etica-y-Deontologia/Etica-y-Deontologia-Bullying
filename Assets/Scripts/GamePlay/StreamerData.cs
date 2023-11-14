@@ -17,11 +17,14 @@ public class StreamerData : IDirection
 
     public event System.Action<CommentData> onLeaveComment;
 
+    public event System.Action<StreamerData> onEndStream;
+
     [field: SerializeField]
     public Tim Life { get; private set; } = new();
 
     [field: SerializeField]
     public Tim Viewers { get; private set; } = new();
+
 
     public IEnumerable<Internal.Pictionary<int, CommentData>> commentViews
     {
@@ -39,9 +42,12 @@ public class StreamerData : IDirection
 
     public Player player => streamerManager.player;
 
+    public bool IsServer => streamerManager.IsServer;
+
     public string textIP => ID.ToString();
 
-    
+    public bool ShowEnd => Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total;
+
 
     StreamerManager streamerManager;
 
@@ -53,30 +59,23 @@ public class StreamerData : IDirection
         }
     }
 
-    public void Create(int ID)
+    public void Stop()
     {
-        this.ID = ID;
-
-        this.streamerManager = StreamerManager.instance;
-
-        Life.Set(100);
-
-        Viewers.total = streamer.maxViews;
-
-        Users(streamer.minimalViews * 2);
-    }
+        foreach (var item in users)
+        {
+            item.Value.Stop();
+        }
+    }    
 
     public void Users(int number)
     {
-        if (number == 0)
+        if (number == 0 && !IsServer)
             return;
 
         else if (number > 0)
             CreateUsers(number);
         else
-            LeaveUsers(-number);
-
-        Viewers.current += number;
+            LeaveUsers(-number);        
     }    
 
     void CreateUsers(int number)
@@ -115,6 +114,32 @@ public class StreamerData : IDirection
     public void RemoveUser(int index)
     {
         users.GetTByIndex(index).value.Destroy();
+    }
+
+    void InternalShowEnd(IGetPercentage percentage , float dif)
+    {
+        if (ShowEnd)
+        {
+            Stop();
+            onEndStream?.Invoke(this);
+        }
+    }
+
+    public void Create(int ID)
+    {
+        this.ID = ID;
+
+        this.streamerManager = StreamerManager.instance;
+
+        Life.Set(streamer.Life);
+
+        Viewers.total = streamer.maxViews;
+
+        Life.onChange += InternalShowEnd;
+
+        Viewers.onChange += InternalShowEnd;
+
+        Users(streamer.minimalViews * 2);
     }
 
     public StreamerData(int streamID)
