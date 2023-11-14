@@ -182,7 +182,7 @@ public class UserParent : IDirection
 
     #endregion
    
-    public void Aplicate(int views, int damage ,string textIP)
+    public void Aplicate(int views, float damage ,string textIP)
     {
         //Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
 
