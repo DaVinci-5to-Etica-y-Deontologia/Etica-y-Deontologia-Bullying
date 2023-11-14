@@ -1,14 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PopUpInstigador : PopUpComment
 {
+    [SerializeField]
+    Slider leftSlider;
+
+    [SerializeField]
+    Slider middleSlider;
+
+    [SerializeField]
+    Slider rightSlider;
+
+    float leftSliderValue
+    {
+        set
+        {
+            leftSlider.value = Mathf.Clamp(value, 0, 1);
+        }
+    }
+
+    float rightSliderValue
+    {
+        set
+        {
+            rightSlider.value = Mathf.Clamp(value, 0, 1);
+        }
+    }
+
     protected override bool ExecutePopUp => !player.Moderator;
 
     Timer cooldownFirstHability;
 
     Timer cooldownSecondHability;
+
+
     public override void MyAwake(PopUpManager popUpManager)
     {
         base.MyAwake(popUpManager);
@@ -16,6 +44,12 @@ public class PopUpInstigador : PopUpComment
         cooldownFirstHability = TimersManager.Create(player.InstigatorCooldownFirst, First);
 
         cooldownSecondHability = TimersManager.Create(player.InstigatorCooldownSecond, Second);
+
+        onExecute.AddListener(() =>
+        {
+            user.onMoralIndexChange -= RefreshMoralIndex;
+            user.onMoralRangeChange -= RefreshMoralRange;
+        });
     }
 
 
@@ -26,6 +60,12 @@ public class PopUpInstigador : PopUpComment
         First();
 
         Second();
+
+        RefreshMoralIndex(user.MoralIndex);
+        RefreshMoralRange(user.MoralRange);
+
+        user.onMoralIndexChange += RefreshMoralIndex;
+        user.onMoralRangeChange += RefreshMoralRange;
     }
 
     void First()
@@ -48,6 +88,17 @@ public class PopUpInstigador : PopUpComment
                 cooldownSecondHability.Reset();
                 DataRpc.Create(Actions.Picantear, comment.textIP);
             });
+    }
+
+    void RefreshMoralIndex(float moralIndex)
+    {
+        middleSlider.value = moralIndex;
+    }
+
+    void RefreshMoralRange(float moralRange)
+    {
+        leftSliderValue = middleSlider.value - moralRange;
+        rightSliderValue = middleSlider.value + moralRange;
     }
 
 }

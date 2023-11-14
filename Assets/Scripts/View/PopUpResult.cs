@@ -32,6 +32,12 @@ public class PopUpResult : PopUpElement
     {
         onActive.Invoke();
         callsManager.DestroyAll();
+
+        callsManager.Create("Cambiar de stream", () =>
+        {
+            StreamerManager.instance.NextStreamer();
+        });
+
         StartCoroutine(ViewerNumber(resultado));
     }
 

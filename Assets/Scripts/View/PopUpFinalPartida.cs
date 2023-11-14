@@ -36,7 +36,11 @@ public class PopUpFinalPartida : PopUpElement
     {
         onActive.Invoke();
         callsManager.DestroyAll();
-        MakeSummary();
+
+        foreach (Transform item in container)
+        {
+            Destroy(item.gameObject);
+        }
 
         callsManager.Create("Volver a jugar", () =>
         {
@@ -46,14 +50,14 @@ public class PopUpFinalPartida : PopUpElement
 
         callsManager.Create("Volver al menú", () =>
         {
-            ScenesLoader.instance.LoadScene("MainMenu");
+            StreamerManager.instance.Runner.Shutdown();
             TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
-            //Destruir sesion
+            ScenesLoader.instance.LoadScene("MainMenu");
         });
 
-        var result = StreamerManager.instance.MatchResults();
+        var result = MakeSummary();
 
-        if (result == 0)
+        if (result == StreamState.Empate)
         {
             titleTMP.text = "Empate";
             summaryTMP.text = "Ningun equipo consigió superar al otro\n\n Empate técnico";
@@ -62,7 +66,7 @@ public class PopUpFinalPartida : PopUpElement
 
         if (player.Moderator)
         {
-            if (result == 1)
+            if (result == StreamState.Completado)
             {
                 titleTMP.text = "Victoria";
                 summaryTMP.text = "Lograste cazar a los haters y evitar que el odio destruya a los streamers\n\n ¡Felicidades eres un gran moderador!";
@@ -75,7 +79,7 @@ public class PopUpFinalPartida : PopUpElement
         }
         else
         {
-            if (result == 2)
+            if (result == StreamState.Fallido)
             {
                 titleTMP.text = "Victoria";
                 summaryTMP.text = "Superaste a los moderadores y corrompiste a los usuarios\n\n ¡Felicidades destruiste a los streamers!";
@@ -88,27 +92,51 @@ public class PopUpFinalPartida : PopUpElement
         }
     }
 
-    void MakeSummary()
+    StreamState MakeSummary()
     {
-        foreach (var item in StreamerManager.instance.FinishedStreams())
+        int modsWins = 0;
+        int instigatorsWins = 0;
+        int draws = 0;
+
+        foreach (var item in StreamerManager.instance.streamers)
         {
             var summItem = Instantiate(summaryItem, container);
             (string, Color) data;
 
-            if (!item.defeat)
+            if (item.Value.State == StreamState.Completado)
             {
                 data.Item1 = "Vivo";
                 data.Item2 = victoryColor;
+                modsWins++;
             }
-            else
+            else if (item.Value.State == StreamState.Fallido)
             {
                 data.Item1 = "Muerto";
                 data.Item2 = defeatColor;
+                instigatorsWins++;
+            }
+            else
+            {
+                data.Item1 = "Empate";
+                data.Item2 = drawColor;
+                draws++;
             }
 
-            summItem.SetItem(data.Item1, item.streamer.iconStreamerImage, data.Item2);
+            summItem.SetItem(data.Item1, item.Value.streamer.iconStreamerImage, data.Item2);
         }
-        //Streams Empatados
-    }
 
+        if (modsWins == instigatorsWins)
+            return StreamState.Empate;
+        else if (modsWins > instigatorsWins)
+            return StreamState.Completado;
+        else
+            return StreamState.Fallido;
+    }
+}
+
+public enum StreamState
+{
+    Empate,
+    Completado,
+    Fallido
 }

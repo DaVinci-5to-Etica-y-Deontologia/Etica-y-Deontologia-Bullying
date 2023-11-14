@@ -54,10 +54,16 @@ public class BD : SuperScriptableObject
     /// <returns></returns>
     public Comment SelectComment(float moralIndex, float moralRange)
     {
-        var aux = Mathf.Clamp(Random.Range(moralIndex - moralRange, moralIndex + moralRange), 0, 1);
+        //var aux = Mathf.Clamp(Random.Range(moralIndex - moralRange, moralIndex + moralRange), 0, 1);
 
+        var aux2 = comments.Where((comment) => comment.MoralIndex >= moralIndex - moralRange && comment.MoralIndex <= moralIndex + moralRange).ToArray();
+        
+        if (aux2.Length == 0)
+            return comments[0];
 
-        return comments[Random.Range(0, comments.Length)];
+        var aux3 = Random.Range(0, aux2.Length);
+
+        return aux2[aux3];
     }
 
     #region NO TOCAR
@@ -112,7 +118,7 @@ public class BD : SuperScriptableObject
 
     int Sort(Comment x, Comment y)
     {
-        return int.Parse(x.name) <= int.Parse(y.name) ? -1 : 1;
+        return x.MoralIndex < y.MoralIndex ? -1 : (x.MoralIndex > y.MoralIndex) ? 1 : 0;
     }
 
 #endif

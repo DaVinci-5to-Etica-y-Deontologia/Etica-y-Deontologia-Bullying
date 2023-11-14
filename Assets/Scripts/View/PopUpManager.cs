@@ -107,7 +107,7 @@ public abstract class PopUpComment : PopUpElement
         textToShow.text = "Posibles acciones:";
     }
 
-    protected void Execute()
+    public void Execute()
     {
         onExecute.Invoke();
     }

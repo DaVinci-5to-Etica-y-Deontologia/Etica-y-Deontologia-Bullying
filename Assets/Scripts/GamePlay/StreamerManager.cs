@@ -42,6 +42,10 @@ public class StreamerManager : NetworkBehaviour
 
     public EventParam onFinishDay;
 
+    public bool gameEnd;
+
+    [SerializeField]
+    public DataPic<StreamerData> streamers = new();
 
     [SerializeField]
     CommentView prefab;
@@ -51,9 +55,6 @@ public class StreamerManager : NetworkBehaviour
 
     [SerializeField]
     ChatContentRefresh contain;
-
-    [SerializeField]
-    DataPic<StreamerData> streamers = new();
 
     [SerializeField]
     float multiply = 1;
@@ -227,6 +228,13 @@ public class StreamerManager : NetworkBehaviour
     public void FinishDay()
     {
         onFinishDay.delegato.Invoke();
+
+        gameEnd = true;
+
+        foreach (var item in streamers)
+        {
+            item.Value.Stop();
+        }
     }
 
     static public CommentView SpawnComment()
@@ -259,7 +267,7 @@ public class StreamerManager : NetworkBehaviour
     {
         foreach (var item in streamers)
         {
-            if(!item.Value.showEnd)
+            if(!item.Value.ShowEnd)
             {
                 ChangeStreamByID(item.Key);
                 return;
@@ -273,7 +281,7 @@ public class StreamerManager : NetworkBehaviour
         
         foreach (var item in streamers)
         {
-            if (item.Value.showEnd)
+            if (item.Value.ShowEnd)
             {
                 list.Add(item.Value);
             }
@@ -289,27 +297,7 @@ public class StreamerManager : NetworkBehaviour
     /// 2 - Ganaron los instigadores
     /// </summary>
     /// <returns></returns>
-    public int MatchResults()
-    {
-        int modsWins = 0;
-        int instigatorsWins = 0;
-
-        foreach (var item in FinishedStreams())
-        {
-            if (item.showEnd && !item.defeat)
-                modsWins++;
-            else
-                instigatorsWins++;
-        }
-
-        if (modsWins == instigatorsWins)
-            return 0;
-        else if (modsWins > instigatorsWins)
-            return 1;
-        else
-            return 2;
-    }
-
+   
     public void ChangeStream(int index)
     {
         var previus = IndexStreamWatch;
@@ -341,7 +329,7 @@ public class StreamerManager : NetworkBehaviour
 
         onStreamerChange.delegato?.Invoke(Actual);
 
-        if (aux.showEnd)
+        if (aux.ShowEnd)
             Aux_onEndStream(aux);
     }
 
@@ -349,7 +337,7 @@ public class StreamerManager : NetworkBehaviour
     {
         onStreamEnd.delegato.Invoke(obj);
 
-        if (streamers.Count == FinishedStreams().Count)
+        if (Count <= 0)
             FinishDay();
     }
 
