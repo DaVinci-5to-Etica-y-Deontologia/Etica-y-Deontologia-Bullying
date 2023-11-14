@@ -253,9 +253,9 @@ public class UserParent : IDirection
 
         _coolDownAdmonition = TimersManager.Create(15);
 
-        _moralIndexCooldown = TimersManager.Create<float>(()=>_newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s);
+        _moralIndexCooldown = TimersManager.Create<float>(()=>_newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s).Stop();
 
-        _moralRangeCooldown = TimersManager.Create<float>(()=>_newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s);
+        _moralRangeCooldown = TimersManager.Create<float>(()=>_newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s).Stop();
 
         _moralRangeCooldown.onChange += _moralRangeCooldown_onChange;
 
