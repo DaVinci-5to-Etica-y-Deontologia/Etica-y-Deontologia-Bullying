@@ -20,6 +20,6 @@ public class SessionItem : MonoBehaviour
 
         var myEventCall = GetComponent<EventCall>();
 
-        myEventCall.eventToCall.AddListener((_joinButton) => onClick(session));
+        myEventCall.eventToCall.AddListener((_joinButton) => { onClick(session); TransitionManager.instance.SetTransition("SquaresStart");});
     }
 }
