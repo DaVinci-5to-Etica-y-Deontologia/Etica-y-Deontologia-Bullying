@@ -47,6 +47,8 @@ public class StreamerManager : NetworkBehaviour
     [SerializeField]
     public DataPic<StreamerData> streamers = new();
 
+    public Timer endGame;
+
     [SerializeField]
     CommentView prefab;
 
@@ -98,6 +100,25 @@ public class StreamerManager : NetworkBehaviour
     int _indexStreamWatch = -1;
 
     Timer delay;
+
+    
+
+    static public CommentView SpawnComment()
+    {
+        return Instantiate(instance.prefab, instance.contain.transform);
+    }
+
+    static public void CreateComment(CommentData obj)
+    {
+        var aux = instance.pool.Obtain().Self;
+
+        aux.transform.SetAsLastSibling();
+
+        aux.commentData = obj;
+
+        aux.SetActiveGameObject(true);
+    }
+
 
     [Rpc(RpcSources.All,RpcTargets.All)]
     public void Rpc_Execute(string json)
@@ -223,7 +244,7 @@ public class StreamerManager : NetworkBehaviour
 
 
     /// <summary>
-    /// Calcula la sumatoria final de todo el danio y la cantidad de viewers
+    /// Ejecuta el llamado para terminar la partida
     /// </summary>
     public void FinishDay()
     {
@@ -231,27 +252,13 @@ public class StreamerManager : NetworkBehaviour
 
         gameEnd = true;
 
+        endGame.Stop();
+
         foreach (var item in streamers)
         {
             item.Value.Stop();
         }
-    }
-
-    static public CommentView SpawnComment()
-    {
-        return Instantiate(instance.prefab, instance.contain.transform);
-    }
-
-    static public void CreateComment(CommentData obj)
-    {
-        var aux = instance.pool.Obtain().Self;
-
-        aux.transform.SetAsLastSibling();
-
-        aux.commentData = obj;
-
-        aux.SetActiveGameObject(true);
-    }
+    }  
 
     public void CreateStream()
     {
@@ -289,14 +296,6 @@ public class StreamerManager : NetworkBehaviour
 
         return list;
     }
-
-    /// <summary>
-    /// Devuelve quién ganó la partida o si fue un empate basado en 3 números
-    /// 0 - Empate
-    /// 1 - Ganaron los mods
-    /// 2 - Ganaron los instigadores
-    /// </summary>
-    /// <returns></returns>
    
     public void ChangeStream(int index)
     {
@@ -365,7 +364,8 @@ public class StreamerManager : NetworkBehaviour
     {
         print("Comienza el juego");
 
-        
+        endGame.Reset();
+
         CreateStream();
 
         ChangeStream(0);
@@ -408,7 +408,7 @@ public class StreamerManager : NetworkBehaviour
 
     public void EndLoad()
     {
-        TimersManager.Create(startDeley, MyStart);
+        MyStart();
     }
 
     public override void Spawned()
@@ -416,6 +416,8 @@ public class StreamerManager : NetworkBehaviour
         watchdog.Start();
 
         UnityEngine.Debug.Log("server: " + IsServer);
+
+        endGame = TimersManager.Create(5 * 60, FinishDay).Stop();
     }
 
     private void Awake()

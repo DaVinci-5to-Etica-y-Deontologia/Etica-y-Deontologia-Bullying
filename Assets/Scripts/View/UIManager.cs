@@ -127,6 +127,11 @@ public class UIManager : MonoBehaviour
         */
     }
 
+    private void EndGame_onChange(IGetPercentage arg1, float arg2)
+    {
+        remanentTime.text = ((int)(arg1.current / 60)).ToString() + ":" + ((int)(arg1.current % 60)).ToString();
+    }
+
     public void MyAwake()
     {
         streamerManager.onStreamerChange.delegato += StreamerManager_onStreamerChange;
@@ -140,5 +145,7 @@ public class UIManager : MonoBehaviour
         topButton.eventToCall.AddListener(TopPressed);
 
         bottomButton.eventToCall.AddListener(BottonPressed);
+
+        streamerManager.endGame.onChange += EndGame_onChange;
     }
 }
