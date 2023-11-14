@@ -79,9 +79,17 @@ public class UIManager : MonoBehaviour
 
     private void Viewers_onChange(IGetPercentage arg1, float arg2)
     {
-        views.value = arg1.Percentage();
+        var current = arg1.current - streamerData.streamer.minimalViews;
 
-        viewsText.text = arg1.current + "/" + arg1.total;
+        var max = arg1.total - streamerData.streamer.minimalViews;
+
+        views.value = current / max;
+
+        var actual = arg1.current.ToString();
+
+        actual = actual.RichTextColor(Color.Lerp(Color.red, Color.green, views.value));
+
+        viewsText.text = actual + "/" + arg1.total;
     }
 
     private void Life_onChange(IGetPercentage arg1, float arg2)
