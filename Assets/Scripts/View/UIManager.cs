@@ -146,6 +146,6 @@ public class UIManager : MonoBehaviour
 
         bottomButton.eventToCall.AddListener(BottonPressed);
 
-        streamerManager.endGame.onChange += EndGame_onChange;
+        streamerManager.streamersData.endGame.onChange += EndGame_onChange;
     }
 }

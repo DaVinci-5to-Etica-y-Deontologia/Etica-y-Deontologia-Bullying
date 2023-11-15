@@ -50,7 +50,7 @@ public class StreamerData : IDirection
 
     public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : (Life.current == 0 || Viewers.current <= streamer.minimalViews ? StreamState.Fallido : StreamState.Empate);
 
-    StreamerManager streamerManager;
+    StreamerManager.Data streamerManager;
 
     public (User value, int ID, int index) this[int ID]
     {
@@ -104,7 +104,7 @@ public class StreamerData : IDirection
     {
         var aux = JsonUtility.FromJson<Internal.Pictionary<int, User>>(jsonPic);
 
-        users.Add(aux).Value.Init(this);
+        users.Add(aux).Value.Create(this);
 
         aux.Value.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
 
@@ -126,19 +126,24 @@ public class StreamerData : IDirection
         }
     }
 
-    public void Create(int ID)
+    public void Init()
     {
-        this.ID = ID;
-
-        this.streamerManager = StreamerManager.instance;
-
-        Life.Set(streamer.Life);
-
-        Viewers.total = streamer.maxViews;
+        this.streamerManager = StreamerManager.instance.streamersData;
 
         Life.onChange += InternalShowEnd;
 
         Viewers.onChange += InternalShowEnd;
+    }
+
+    public void Create(int ID)
+    {
+        this.ID = ID;
+
+        Init();
+
+        Life.Set(streamer.Life);
+
+        Viewers.total = streamer.maxViews;
 
         Users(streamer.minimalViews * 2);
     }

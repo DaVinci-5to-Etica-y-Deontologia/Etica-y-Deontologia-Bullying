@@ -12,7 +12,7 @@ using Internal;
 public class Pictionarys<K, V> : IEnumerable<Pictionary<K, V>>
 {
     [SerializeField]
-    List<Pictionary<K, V>> pictionaries;
+    protected List<Pictionary<K, V>> pictionaries;
 
     Stack<Pictionary<K, V>> auxiliarObjects;
 

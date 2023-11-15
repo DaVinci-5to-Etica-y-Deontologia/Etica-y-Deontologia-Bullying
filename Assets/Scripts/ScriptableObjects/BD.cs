@@ -51,19 +51,28 @@ public class BD : SuperScriptableObject
     /// </summary>
     /// <param name="moralIndex"></param>
     /// <param name="moralRange"></param>
-    /// <returns></returns>
-    public Comment SelectComment(float moralIndex, float moralRange)
+    /// <returns>id del comentario seleccionado</returns>
+    public int SelectComment(float moralIndex, float moralRange)
     {
-        //var aux = Mathf.Clamp(Random.Range(moralIndex - moralRange, moralIndex + moralRange), 0, 1);
+        var min = Mathf.Clamp((moralIndex - moralRange), 0, 1);
 
-        var aux2 = comments.Where((comment) => comment.MoralIndex >= moralIndex - moralRange && comment.MoralIndex <= moralIndex + moralRange).ToArray();
-        
-        if (aux2.Length == 0)
-            return comments[0];
+        var max = Mathf.Clamp((moralIndex + moralRange), 0, 1);
 
-        var aux3 = Random.Range(0, aux2.Length);
+        int minIndex = -1;
 
-        return aux2[aux3];
+        int maxIndex = comments.Length-1;
+
+        for (int i = 0; i < comments.Length; i++)
+        {
+            if (comments[i].MoralIndex < min)
+                minIndex = i;
+            else if (comments[i].MoralIndex < max)
+                maxIndex = i;
+            else
+                break;
+        }
+
+        return Random.Range(minIndex + 1, maxIndex + 1);
     }
 
     #region NO TOCAR

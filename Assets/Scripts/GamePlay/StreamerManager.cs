@@ -18,6 +18,34 @@ public class StreamerManager : NetworkBehaviour
         public User User => user.value;
 
         public CommentData CommentData => comment.value;
+
+
+    }
+
+    [System.Serializable]
+    public class Data
+    {
+        [SerializeField]
+        public DataPic<StreamerData> streamers = new();
+
+        public Timer endGame;
+
+        public bool gameEnd;
+
+        public BD dataBase => streamerManager.dataBase;
+
+        public EventManager eventManager => streamerManager.eventManager;
+
+        public Player player => streamerManager.player;
+
+        public bool IsServer => streamerManager.IsServer;
+
+        StreamerManager streamerManager;
+
+        public Data(StreamerManager streamerManager)
+        {
+            this.streamerManager = streamerManager;
+        }
     }
 
     public static StreamerManager instance;
@@ -42,12 +70,7 @@ public class StreamerManager : NetworkBehaviour
 
     public EventParam onFinishDay;
 
-    public bool gameEnd;
-
-    [SerializeField]
-    public DataPic<StreamerData> streamers = new();
-
-    public Timer endGame;
+    public Data streamersData;
 
     [SerializeField]
     CommentView prefab;
@@ -83,9 +106,9 @@ public class StreamerManager : NetworkBehaviour
             _indexStreamWatch = value;
 
             if (_indexStreamWatch < 0)
-                _indexStreamWatch = streamers.Count - 1;
+                _indexStreamWatch = streamersData.streamers.Count - 1;
             
-            else if(_indexStreamWatch >= streamers.Count)
+            else if(_indexStreamWatch >= streamersData.streamers.Count)
                 _indexStreamWatch = 0;
             
         }
@@ -95,7 +118,7 @@ public class StreamerManager : NetworkBehaviour
     {
         get
         {
-            return streamers.GetTByID(ID);
+            return streamersData.streamers.GetTByID(ID);
         }
     }
 
@@ -205,7 +228,7 @@ public class StreamerManager : NetworkBehaviour
             case Actions.UpdateStreamers:
                 {
                     if (IsServer)
-                        instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(this)));
+                        instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
                 }
                 break;
         }
@@ -242,9 +265,9 @@ public class StreamerManager : NetworkBehaviour
     {
         var streamer = JsonUtility.FromJson<StreamerData>(json);
 
-        streamers.Add(streamer);
+        streamersData.streamers.Add(streamer);
 
-        streamer.Create(streamers.lastID);
+        streamer.Create(streamersData.streamers.lastID);
 
         onStreamerCreate.delegato?.Invoke(streamer);
 
@@ -266,11 +289,11 @@ public class StreamerManager : NetworkBehaviour
     {
         onFinishDay.delegato.Invoke();
 
-        gameEnd = true;
+        streamersData.gameEnd = true;
 
-        endGame.Stop();
+        streamersData.endGame.Stop();
 
-        foreach (var item in streamers)
+        foreach (var item in streamersData.streamers)
         {
             item.Value.Stop();
         }
@@ -329,22 +352,41 @@ public class StreamerManager : NetworkBehaviour
                     UnityEngine.Debug.LogError("No se recupero el dato: " + i);
             }
 
-            JsonUtility.FromJsonOverwrite(newJson, this);
-            started = true;
-            ChangeStream(0);
-            CreateStream();
             buffer.Clear();
+
+            JsonUtility.FromJsonOverwrite(newJson, streamersData);
+
+            started = true;
+
+            foreach (var stream in streamersData.streamers)
+            {
+                stream.Value.Init();
+
+                foreach (var user in stream.Value.users)
+                {
+                    user.Value.Init(stream.Value);
+
+                    foreach (var comment in user.Value.comments)
+                    {
+                        comment.Value.Init(stream.Key, user.Key);
+                    }
+                }
+            }
+
+            CreateStream();
+            ChangeStream(0);
+
         }
     }
 
     public void ChangeStreamByID(int ID)
     {
-        ChangeStream(streamers.GetTByID(ID).index);
+        ChangeStream(streamersData.streamers.GetTByID(ID).index);
     }
 
     public void NextStreamer()
     {
-        foreach (var item in streamers)
+        foreach (var item in streamersData.streamers)
         {
             if(!item.Value.ShowEnd)
             {
@@ -358,7 +400,7 @@ public class StreamerManager : NetworkBehaviour
     {
         var list = new List<StreamerData>();
         
-        foreach (var item in streamers)
+        foreach (var item in streamersData.streamers)
         {
             if (item.Value.ShowEnd)
             {
@@ -379,7 +421,7 @@ public class StreamerManager : NetworkBehaviour
 
         if (previus>=0)
         {
-            aux = streamers.GetTByIndex(previus).value;
+            aux = streamersData.streamers.GetTByIndex(previus).value;
 
             aux.onCreateComment -= CommentCreateQueue;
 
@@ -388,7 +430,7 @@ public class StreamerManager : NetworkBehaviour
             aux.onEndStream -= Aux_onEndStream;
         }
 
-        aux = streamers.GetTByIndex(IndexStreamWatch).value;
+        aux = streamersData.streamers.GetTByIndex(IndexStreamWatch).value;
 
         aux.onCreateComment += CommentCreateQueue;
 
@@ -436,7 +478,7 @@ public class StreamerManager : NetworkBehaviour
     {
         print("Comienza el juego");
 
-        endGame.Reset();
+        streamersData.endGame.Reset();
 
         if (IsServer)
             CreateFirstStream();
@@ -489,12 +531,14 @@ public class StreamerManager : NetworkBehaviour
 
         UnityEngine.Debug.Log("server: " + IsServer);
 
-        endGame = TimersManager.Create(5 * 60, FinishDay).Stop();
+        streamersData.endGame = TimersManager.Create(5 * 60, FinishDay).Stop();
     }
 
     private void Awake()
     {
         instance = this;
+
+        streamersData = new(this);
 
         pool = new(prefab);
 

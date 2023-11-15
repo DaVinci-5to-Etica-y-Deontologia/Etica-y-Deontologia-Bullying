@@ -15,7 +15,7 @@ public class UserParent : IDirection
     public int ID;
 
     [field: SerializeField]
-    public DataPic<CommentData> comments { get; private set; }
+    public DataPic<CommentData> comments { get; private set; } = new();
 
     [field: SerializeField]
     public string Name { get; private set; }
@@ -163,6 +163,9 @@ public class UserParent : IDirection
 
         var auxPic = new Internal.Pictionary<int, CommentData>(newCommentData.ID, newCommentData);
 
+        if (IsServer)
+            CoolDown = newCommentData.Delay;
+
         comments.Add(auxPic);
 
         onCreateComment?.Invoke(newCommentData);
@@ -225,8 +228,6 @@ public class UserParent : IDirection
 
             newCommentData.Create(comments.lastID + 1, aux);
 
-            CoolDown = newCommentData.Delay;
-
             DataRpc.Create(Actions.AddComment, textIP, newCommentData);
 
             newCommentData.Destroy();
@@ -240,29 +241,7 @@ public class UserParent : IDirection
         return Name + " " + comments.Count;
     }
 
-    public void Init(StreamerData stream)
-    {
-        this.stream = stream;
-
-        comments = new();
-
-        colorText =colorText.ChangeAlphaCopy(1);
-
-        if(IsServer)
-            _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment);
-
-        _coolDownAdmonition = TimersManager.Create(15);
-
-        _moralIndexCooldown = TimersManager.Create<float>(()=>_newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s).Stop();
-
-        _moralRangeCooldown = TimersManager.Create<float>(()=>_newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s).Stop();
-
-        _moralRangeCooldown.onChange += _moralRangeCooldown_onChange;
-
-        _moralIndexCooldown.onChange += _moralIndexCooldown_onChange;
-
-        stream.Viewers.current++;
-    }
+    
 
     void _moralIndexCooldown_onChange(IGetPercentage arg1, float arg2)
     {
@@ -272,6 +251,33 @@ public class UserParent : IDirection
     void _moralRangeCooldown_onChange(IGetPercentage arg1, float arg2)
     {
         onMoralRangeChange?.Invoke(MoralRange);
+    }
+
+    public void Init(StreamerData stream)
+    {
+        this.stream = stream;
+
+        _coolDownAdmonition = TimersManager.Create(15);
+
+        _moralIndexCooldown = TimersManager.Create<float>(() => _newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s).Stop();
+
+        _moralRangeCooldown = TimersManager.Create<float>(() => _newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s).Stop();
+
+        _moralRangeCooldown.onChange += _moralRangeCooldown_onChange;
+
+        _moralIndexCooldown.onChange += _moralIndexCooldown_onChange;
+    }
+
+    public void Create(StreamerData stream)
+    {
+        Init(stream);
+
+        colorText = colorText.ChangeAlphaCopy(1);
+
+        if (IsServer)
+            _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment);
+
+        stream.Viewers.current++;
     }
 
     public UserParent(int id)

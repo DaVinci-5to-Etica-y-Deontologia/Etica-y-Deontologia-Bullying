@@ -7,8 +7,7 @@ public class CommentData : IDirection, IPoolElement<CommentData>
 {
     public int ID;
 
-    [SerializeReference]
-    public Comment comment;
+    public int commentID;
 
     public float timeOnCreate;
 
@@ -23,6 +22,8 @@ public class CommentData : IDirection, IPoolElement<CommentData>
     public string textIP => $"{user.textIP}.{ID}";
 
     public string textName => user.Name.RichTextColor(user.colorText);
+
+    public Comment comment => database.comments[commentID];
 
     public BD database => user.database;
 
@@ -52,19 +53,20 @@ public class CommentData : IDirection, IPoolElement<CommentData>
         return new CommentData();
     }
 
-    public void Create(int id, Comment comment)
-    {
-        this.ID = id;
-
-        this.comment = comment;
-
-        timeOnCreate = Time.realtimeSinceStartup;
-    }
-
     public void Init(int idStream, int idUser)
     {
         _user = StreamerManager.instance[idStream].value?[idUser].value;
     }
+
+    public void Create(int id, int idComment)
+    {
+        this.ID = id;
+
+        commentID = idComment;
+
+        timeOnCreate = Time.realtimeSinceStartup;
+    }
+
 }
 
 public interface IDirection

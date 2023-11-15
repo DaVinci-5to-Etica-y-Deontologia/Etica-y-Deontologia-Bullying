@@ -98,7 +98,7 @@ public class PopUpFinalPartida : PopUpElement
         int instigatorsWins = 0;
         int draws = 0;
 
-        foreach (var item in StreamerManager.instance.streamers)
+        foreach (var item in StreamerManager.instance.streamersData.streamers)
         {
             var summItem = Instantiate(summaryItem, container);
             (string, Color) data;
