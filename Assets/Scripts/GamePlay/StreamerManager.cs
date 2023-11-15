@@ -402,9 +402,14 @@ public class StreamerManager : NetworkBehaviour
             }
 
             UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
-            DataRpc.Create(Actions.EndUpdateStreamers);
-            CreateStream();
-            ChangeStream(0);            
+
+            eventQueue.Enqueue(
+                ()=> 
+                {
+                    DataRpc.Create(Actions.EndUpdateStreamers);
+                    CreateStream();
+                    ChangeStream(0);
+                });
         }
     }
 
