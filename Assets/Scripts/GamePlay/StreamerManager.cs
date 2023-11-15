@@ -229,7 +229,7 @@ public class StreamerManager : NetworkBehaviour
                     if (IsServer)
                     {
                         //ejecuto la pausa para todos con un rpc
-                        //Rpc_GlobalPause();
+                        Rpc_GlobalPause();
                         instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
                     }
                 }
@@ -354,8 +354,6 @@ public class StreamerManager : NetworkBehaviour
         while (json.Length > 500);
 
         Rpc_RequestUpdate(json, order, true);
-        new WaitForSeconds(15);
-        DataRpc.Create(Actions.EndUpdateStreamers);
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
@@ -403,10 +401,10 @@ public class StreamerManager : NetworkBehaviour
                 }
             }
 
-            CreateStream();
-            ChangeStream(0);
-
             UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
+            DataRpc.Create(Actions.EndUpdateStreamers);
+            CreateStream();
+            ChangeStream(0);            
         }
     }
 
