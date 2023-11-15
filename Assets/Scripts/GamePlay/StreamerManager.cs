@@ -462,37 +462,43 @@ public class StreamerManager : NetworkBehaviour
    
     public void ChangeStream(int index)
     {
-        var previus = IndexStreamWatch;
-
-        IndexStreamWatch = index;
-
-        StreamerData aux;
-
-        if (previus>=0)
+        eventQueue.Enqueue(
+        ()=> 
         {
-            aux = streamersData.streamers.GetTByIndex(previus).value;
+            var previus = IndexStreamWatch;
 
-            aux.onCreateComment -= CommentCreateQueue;
+            IndexStreamWatch = index;
 
-            aux.onLeaveComment -= CommentLeaveQueue;
+            StreamerData aux;
 
-            aux.onEndStream -= Aux_onEndStream;
-        }
+            if (previus >= 0)
+            {
+                aux = streamersData.streamers.GetTByIndex(previus).value;
 
-        aux = streamersData.streamers.GetTByIndex(IndexStreamWatch).value;
+                aux.onCreateComment -= CommentCreateQueue;
 
-        aux.onCreateComment += CommentCreateQueue;
+                aux.onLeaveComment -= CommentLeaveQueue;
 
-        aux.onLeaveComment += CommentLeaveQueue;
+                aux.onEndStream -= Aux_onEndStream;
+            }
 
-        aux.onEndStream += Aux_onEndStream;
+            aux = streamersData.streamers.GetTByIndex(IndexStreamWatch).value;
 
-        Actual = aux;
+            aux.onCreateComment += CommentCreateQueue;
 
-        onStreamerChange.delegato?.Invoke(Actual);
+            aux.onLeaveComment += CommentLeaveQueue;
 
-        if (aux.ShowEnd)
-            Aux_onEndStream(aux);
+            aux.onEndStream += Aux_onEndStream;
+
+            Actual = aux;
+
+            onStreamerChange.delegato?.Invoke(Actual);
+
+            if (aux.ShowEnd)
+                Aux_onEndStream(aux);
+        });
+
+       
     }
 
     void Aux_onEndStream(StreamerData obj)
