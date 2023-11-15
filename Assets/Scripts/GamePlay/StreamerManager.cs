@@ -229,6 +229,7 @@ public class StreamerManager : NetworkBehaviour
 
             case Actions.AddStream:
                 {
+                    UnityEngine.Debug.Log("se ejecuto el add");
                     instance.AddStream(dataRpc.data);
                 }
                 break;
