@@ -61,9 +61,18 @@ public class StreamerManager : NetworkBehaviour
     [SerializeField]
     float multiply = 1;
 
+    [SerializeField]
+    int _indexStreamWatch = -1;
+
     LinkedPool<CommentView> pool;    
 
     Stopwatch watchdog;
+
+    bool started;
+
+    Timer delay;
+
+    Dictionary<int,string> buffer = new();
 
     public int IndexStreamWatch
     {
@@ -92,15 +101,9 @@ public class StreamerManager : NetworkBehaviour
 
     public int Count { get; private set; }
 
-    public bool IsServer => Runner != null && Runner.IsServer;
+    public bool IsServer => Runner.IsServer || Runner.IsSinglePlayer;
 
     public StreamerData Actual { get; private set; }
-
-    [SerializeField]
-    int _indexStreamWatch = -1;
-
-    Timer delay;
-
     
 
     static public CommentView SpawnComment()
@@ -123,6 +126,9 @@ public class StreamerManager : NetworkBehaviour
     [Rpc(RpcSources.All,RpcTargets.All)]
     public void Rpc_Execute(string json)
     {
+        if (!started)
+            return;
+
         DataRpc dataRpc = JsonUtility.FromJson<DataRpc>(json);
 
         //UnityEngine.Debug.Log($"recibido:\n{dataRpc}");
@@ -195,16 +201,26 @@ public class StreamerManager : NetworkBehaviour
                     instance.AddStream(dataRpc.data);
                 }
                 break;
+
+            case Actions.UpdateStreamers:
+                {
+                    if (IsServer)
+                        instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(this)));
+                }
+                break;
         }
     }
 
     public static SearchResult Search(string dir)
     {
-        var splirDir = dir.Split('.');
-
         SearchResult searchResult = new SearchResult();
 
-        if(splirDir.Length > 0 && dir!=string.Empty)
+        if (dir == string.Empty)
+            return searchResult;
+
+        var splirDir = dir.Split('.');
+
+        if(splirDir.Length > 0)
         {
             searchResult.streamer = instance[int.Parse(splirDir[0])];
 
@@ -260,9 +276,65 @@ public class StreamerManager : NetworkBehaviour
         }
     }  
 
+
+    public void CreateFirstStream()
+    {
+        started = true;
+        CreateStream();
+        ChangeStream(0);
+    }
+
     public void CreateStream()
     {
         DataRpc.Create(Actions.AddStream, "", new StreamerData(dataBase.SelectStreamer()));
+    }
+
+    public IEnumerator PrependUpdate(string json)
+    {
+        int order = 0;
+
+        do
+        {
+            Rpc_RequestUpdate(json.SubstringClamped(0, 500), order , false);
+            json = json.SubstringClamped(500);
+            yield return null;
+            order++;
+        }
+        while (json.Length > 500);
+
+        Rpc_RequestUpdate(json, order, true);
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void Rpc_RequestUpdate(string json , int order, bool end)
+    {
+        if (started)
+            return;
+
+        if(!end)
+        {
+            buffer.Add(order, json);
+        }
+        else 
+        {
+            buffer.Add(order, json);
+
+            var newJson = string.Empty;
+
+            for (int i = 0; i < buffer.Count; i++)
+            {
+                if (buffer.TryGetValue(i, out var s))
+                    newJson += s;
+                else
+                    UnityEngine.Debug.LogError("No se recupero el dato: " + i);
+            }
+
+            JsonUtility.FromJsonOverwrite(newJson, this);
+            started = true;
+            ChangeStream(0);
+            CreateStream();
+            buffer.Clear();
+        }
     }
 
     public void ChangeStreamByID(int ID)
@@ -366,16 +438,16 @@ public class StreamerManager : NetworkBehaviour
 
         endGame.Reset();
 
-        CreateStream();
-
-        ChangeStream(0);
+        if (IsServer)
+            CreateFirstStream();
+        else
+            DataRpc.Create(Actions.UpdateStreamers, "");
     }
 
     private void Update()
     {
-        if (!IsServer)
+        if (!started)
         {
-            eventQueue.Clear();
             return;
         }
 
@@ -453,6 +525,8 @@ public class Actions
     public const string AddStream = "AddStream";
 
     public const string RemoveStream = "RemoveStream";
+
+    public const string UpdateStreamers = "UpdateStreamers";
 }
 
 public struct DataRpc

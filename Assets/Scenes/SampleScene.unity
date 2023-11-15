@@ -735,8 +735,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillAmounts:
   - fadeOn:
-      durationAnim: 5
-      durationWait: 3
+      durationAnim: 3
+      durationWait: 1
       timerOn:
         rid: -2
       unscaled: 0
