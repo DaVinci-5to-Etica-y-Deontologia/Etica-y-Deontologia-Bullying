@@ -248,8 +248,8 @@ public class StreamerManager : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void Rpc_GlobalPause()
     {
-        TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
         GameManager.instance.Pause(true);
+        TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
 
         UnityEngine.Debug.Log("El juego se pauso");
     }
@@ -615,10 +615,8 @@ public struct DataRpc
 
     public static void Create(string action)
     {
-        //UnityEngine.Debug.Log(action + ": " + direction);
+        UnityEngine.Debug.Log(action);
         StreamerManager.instance.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action}));
-
-        UnityEngine.Debug.Log("Se creo la accion: " + action);
     }
 
     public static void Create(string action, string direction)
