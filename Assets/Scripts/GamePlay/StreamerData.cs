@@ -25,6 +25,8 @@ public class StreamerData : IDirection
     [field: SerializeField]
     public Tim Viewers { get; private set; } = new();
 
+    public bool Enable { get; private set; }
+
 
     public IEnumerable<Internal.Pictionary<int, CommentData>> commentViews
     {
@@ -46,7 +48,7 @@ public class StreamerData : IDirection
 
     public string textIP => ID.ToString();
 
-    public bool ShowEnd => State != StreamState.Empate || streamerManager.gameEnd;
+    public bool ShowEnd => (State != StreamState.Empate || streamerManager.gameEnd) && Enable;
 
     public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : (Life.current == 0 || Viewers.current <= streamer.minimalViews ? StreamState.Fallido : StreamState.Empate);
 
@@ -81,11 +83,15 @@ public class StreamerData : IDirection
 
     void CreateUsers(int number)
     {
-        for (int i = number - 1; i >= 0; i--)
+        for (int i = 1; i <= number; i++)
         {
-            Internal.Pictionary<int, User> idUser = new(users.lastID+1, new User(users.lastID + 1));
+            Internal.Pictionary<int, User> idUser = new(users.lastID+ i, new User(users.lastID + i));
 
-            DataRpc.Create(Actions.AddUser, textIP, idUser);
+            string action = Actions.AddUser;
+
+            string ip = textIP;
+
+            StreamerManager.eventQueue.Enqueue(() => DataRpc.Create(action, ip, idUser));
         }
     }
 
@@ -146,6 +152,8 @@ public class StreamerData : IDirection
         Viewers.total = streamer.maxViews;
 
         Users(streamer.minimalViews * 2);
+
+        StreamerManager.eventQueue.Enqueue(() => Enable = true);
     }
 
     public StreamerData(int streamID)
