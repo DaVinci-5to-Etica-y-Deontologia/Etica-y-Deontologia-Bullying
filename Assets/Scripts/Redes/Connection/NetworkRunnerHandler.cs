@@ -11,6 +11,9 @@ using System.Linq;
 public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkRunner _runnerPrefab;
+
+    [SerializeField] private Player _player;
+
     private NetworkRunner _currentRunner;
 
     public event Action OnLobbyJoined = delegate { };
@@ -57,6 +60,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public void JoinGame(SessionInfo session)
     {
+        _player.Moderator = session.PlayerCount % 2 == 0;
         var clientTask = InitializeGame(GameMode.Client, session.Name);
     }
     

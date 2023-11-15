@@ -523,7 +523,7 @@ public class StreamerManager : NetworkBehaviour
     {
         var timerDestroy = TimersManager.Create(30, () =>
         {
-            commentData.user.Aplicate(commentData.comment.Views, commentData.comment.Damage, commentData.textIP);
+            eventQueue.Enqueue(()=>commentData.user.Aplicate(commentData.comment.Views, commentData.comment.Damage, commentData.textIP));
         });
 
         commentData.onDestroy += () => timerDestroy.Stop();
@@ -536,7 +536,10 @@ public class StreamerManager : NetworkBehaviour
         streamersData.endGame.Reset();
 
         if (IsServer)
+        {
             CreateFirstStream();
+            Rpc_GlobalPause();
+        } 
         else
             DataRpc.Create(Actions.StartUpdateStreamers);
             

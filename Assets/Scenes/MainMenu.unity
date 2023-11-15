@@ -1153,6 +1153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _runnerPrefab: {fileID: 8450276107960502634, guid: 42cbdf37bacadf24ea7574204a340a62, type: 3}
+  _player: {fileID: 11400000, guid: 58cac3681301b7d499ad817f59f58553, type: 2}
 --- !u!4 &669340543
 Transform:
   m_ObjectHideFlags: 0

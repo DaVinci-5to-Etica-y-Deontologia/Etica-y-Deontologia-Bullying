@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5926e2d2b5c2a8a498fbc3db302e2878, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  Moderator: 0
+  Moderator: 1
   NumerOfCommentsToView: 30
   InstigatorCooldownFirst: 3
   InstigatorCooldownSecond: 5
