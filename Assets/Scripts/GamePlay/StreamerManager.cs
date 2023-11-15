@@ -223,7 +223,9 @@ public class StreamerManager : NetworkBehaviour
             case Actions.CreateStream:
                 {
                     if (IsServer)
-                        DataRpc.Create(Actions.AddStream, "", new StreamerData(dataBase.SelectStreamer()));
+                    {
+                        eventQueue.Enqueue(() => DataRpc.Create(Actions.AddStream, "", new StreamerData(dataBase.SelectStreamer())));
+                    }
                 }
                 break;
 
