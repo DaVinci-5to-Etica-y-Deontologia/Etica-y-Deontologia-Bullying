@@ -218,11 +218,22 @@ public class StreamerManager : NetworkBehaviour
                 }
                 break;
 
+
+
+            case Actions.CreateStream:
+                {
+                    if (IsServer)
+                        DataRpc.Create(Actions.AddStream, "", new StreamerData(dataBase.SelectStreamer()));
+                }
+                break;
+
             case Actions.AddStream:
                 {
                     instance.AddStream(dataRpc.data);
                 }
                 break;
+
+
 
             case Actions.StartUpdateStreamers:
                 {
@@ -242,6 +253,7 @@ public class StreamerManager : NetworkBehaviour
                     GlobalUnPause();
                 }
                 break;
+
         }
     }
 
@@ -337,7 +349,7 @@ public class StreamerManager : NetworkBehaviour
 
     public void CreateStream()
     {
-        DataRpc.Create(Actions.AddStream, "", new StreamerData(dataBase.SelectStreamer()));
+        DataRpc.Create(Actions.CreateStream);
     }
 
     public IEnumerator PrependUpdate(string json)
@@ -407,8 +419,8 @@ public class StreamerManager : NetworkBehaviour
                 ()=> 
                 {
                     DataRpc.Create(Actions.EndUpdateStreamers);
-                    CreateStream();
                     ChangeStream(0);
+                    CreateStream();
                 });
         }
     }
@@ -600,6 +612,8 @@ public class Actions
     public const string AddComment = "AddComment";
 
     public const string RemoveComment = "RemoveComment";
+
+    public const string CreateStream = "CreateStream";
 
     public const string AddStream = "AddStream";
 
