@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TabGroup : MonoBehaviour
+public class TabGroupMenuOptions : MonoBehaviour
 {
     public List<Tabs> _TabButtons = new();
     public List<Tab> _Tabs;
 
-    private TabButton _selectedTab;
+    private TabButtonMenuOptions _selectedTab;
 
-    public void Subscribe(TabButton button)
+    public void Subscribe(TabButtonMenuOptions button)
     {
         Tabs holder = new()
         {
@@ -20,14 +20,14 @@ public class TabGroup : MonoBehaviour
     }
 
 
-    public void OnTabEnter(TabButton button)
+    public void OnTabEnter(TabButtonMenuOptions button)
     {
     }
-    public void OnTabExit(TabButton button)
+    public void OnTabExit(TabButtonMenuOptions button)
     {
     }
 
-    public void OnTabSelected(TabButton button)
+    public void OnTabSelected(TabButtonMenuOptions button)
     {
         _selectedTab = button;
 
@@ -49,7 +49,7 @@ public class TabGroup : MonoBehaviour
     [System.Serializable]
     public class Tabs
     {
-        public TabButton Button;
+        public TabButtonMenuOptions Button;
         public Tab Tab;
     }
 }

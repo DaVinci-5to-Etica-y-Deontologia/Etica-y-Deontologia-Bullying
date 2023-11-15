@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Animator))]
-public class TabButton : MonoBehaviour
+public class TabButtonMenuOptions : MonoBehaviour
 {
-    public TabGroup _TabGroup;
+    public TabGroupMenuOptions _TabGroup;
 
     public Tab tabToLoad;
 
