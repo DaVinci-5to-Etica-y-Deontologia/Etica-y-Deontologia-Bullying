@@ -277,6 +277,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitionsManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6505427315418285195, guid: 11e99d3eeb679ec41b8cb491d23887c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7035466568250780967, guid: 11e99d3eeb679ec41b8cb491d23887c7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

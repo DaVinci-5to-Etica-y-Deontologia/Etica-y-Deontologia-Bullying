@@ -229,18 +229,37 @@ public class StreamerManager : NetworkBehaviour
                     if (IsServer)
                     {
                         //ejecuto la pausa para todos con un rpc
+                        //Rpc_GlobalPause();
                         instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
                     }
-                        
                 }
                 break;
 
             case Actions.EndUpdateStreamers:
                 {
+                    UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
                     //Reanudo la partida para todos
+                    GlobalUnPause();
                 }
                 break;
         }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void Rpc_GlobalPause()
+    {
+        TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
+        GameManager.instance.Pause(true);
+
+        UnityEngine.Debug.Log("El juego se pauso");
+    }
+    
+    public void GlobalUnPause()
+    {
+        GameManager.instance.Pause(false);
+        TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
+        
+        UnityEngine.Debug.Log("El juego se des pauso");
     }
 
     public static SearchResult Search(string dir)
@@ -324,7 +343,7 @@ public class StreamerManager : NetworkBehaviour
     public IEnumerator PrependUpdate(string json)
     {
         int order = 0;
-
+        UnityEngine.Debug.Log("EMPEZO A CARGAR LOS DATOS");
         do
         {
             Rpc_RequestUpdate(json.SubstringClamped(0, 500), order , false);
@@ -335,6 +354,8 @@ public class StreamerManager : NetworkBehaviour
         while (json.Length > 500);
 
         Rpc_RequestUpdate(json, order, true);
+        new WaitForSeconds(15);
+        DataRpc.Create(Actions.EndUpdateStreamers);
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
@@ -343,7 +364,7 @@ public class StreamerManager : NetworkBehaviour
         if (started)
             return;
 
-        if(!end)
+        if (!end)
         {
             buffer.Add(order, json);
         }
@@ -382,10 +403,10 @@ public class StreamerManager : NetworkBehaviour
                 }
             }
 
-            DataRpc.Create(Actions.EndUpdateStreamers);
-
             CreateStream();
             ChangeStream(0);
+
+            UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
         }
     }
 
@@ -494,6 +515,7 @@ public class StreamerManager : NetworkBehaviour
             CreateFirstStream();
         else
             DataRpc.Create(Actions.StartUpdateStreamers);
+            
     }
 
     private void Update()
@@ -597,6 +619,8 @@ public struct DataRpc
     {
         //UnityEngine.Debug.Log(action + ": " + direction);
         StreamerManager.instance.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action}));
+
+        UnityEngine.Debug.Log("Se creo la accion: " + action);
     }
 
     public static void Create(string action, string direction)

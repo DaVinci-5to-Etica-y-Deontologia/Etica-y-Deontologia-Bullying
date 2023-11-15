@@ -89,6 +89,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
+        
     }
 
     public void OnDisconnectedFromServer(NetworkRunner runner)

@@ -2149,6 +2149,34 @@ PrefabInstance:
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1285700369}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 250317694}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7048007248468095418, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
       propertyPath: _networkRunnerHandler
       value: 

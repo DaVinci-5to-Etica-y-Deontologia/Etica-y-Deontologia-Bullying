@@ -13,6 +13,8 @@ public class TransitionManager : SingletonMono<TransitionManager>
     public const string Lines = "Lines";
     public const string LinesStart = "LinesStart";
     public const string LinesEnd = "LinesEnd";
+    public const string WaitStart = "WaitStart";
+    public const string WaitEnd = "WaitEnd";
 
     protected override void Awake()
     {
