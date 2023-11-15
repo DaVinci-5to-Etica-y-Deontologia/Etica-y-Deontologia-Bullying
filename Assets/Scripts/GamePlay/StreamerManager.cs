@@ -1,9 +1,8 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
 using System.Diagnostics;
-using Fusion;
+using UnityEngine;
 
 public class StreamerManager : NetworkBehaviour
 {
@@ -225,10 +224,20 @@ public class StreamerManager : NetworkBehaviour
                 }
                 break;
 
-            case Actions.UpdateStreamers:
+            case Actions.StartUpdateStreamers:
                 {
                     if (IsServer)
+                    {
+                        //ejecuto la pausa para todos con un rpc
                         instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
+                    }
+                        
+                }
+                break;
+
+            case Actions.EndUpdateStreamers:
+                {
+                    //Reanudo la partida para todos
                 }
                 break;
         }
@@ -373,9 +382,10 @@ public class StreamerManager : NetworkBehaviour
                 }
             }
 
+            DataRpc.Create(Actions.EndUpdateStreamers);
+
             CreateStream();
             ChangeStream(0);
-
         }
     }
 
@@ -483,7 +493,7 @@ public class StreamerManager : NetworkBehaviour
         if (IsServer)
             CreateFirstStream();
         else
-            DataRpc.Create(Actions.UpdateStreamers, "");
+            DataRpc.Create(Actions.StartUpdateStreamers);
     }
 
     private void Update()
@@ -570,7 +580,9 @@ public class Actions
 
     public const string RemoveStream = "RemoveStream";
 
-    public const string UpdateStreamers = "UpdateStreamers";
+    public const string StartUpdateStreamers = "StartUpdateStreamers";
+
+    public const string EndUpdateStreamers = "EndUpdateStreamers";
 }
 
 public struct DataRpc
@@ -580,6 +592,12 @@ public struct DataRpc
     public string direction;
 
     public string data;
+
+    public static void Create(string action)
+    {
+        //UnityEngine.Debug.Log(action + ": " + direction);
+        StreamerManager.instance.Rpc_Execute(JsonUtility.ToJson(new DataRpc() { action = action}));
+    }
 
     public static void Create(string action, string direction)
     {

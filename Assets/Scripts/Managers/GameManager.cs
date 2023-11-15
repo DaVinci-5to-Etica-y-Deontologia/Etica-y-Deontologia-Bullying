@@ -251,7 +251,7 @@ public class Pause : IState<FSMGameMaganer>
 
     public void OnEnterState(FSMGameMaganer param)
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         onPause?.Invoke();
         param.context.enabled = false;
     }
@@ -259,7 +259,7 @@ public class Pause : IState<FSMGameMaganer>
     public void OnExitState(FSMGameMaganer param)
     {
         onPlay?.Invoke();
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         param.context.enabled = true;
     }
 
