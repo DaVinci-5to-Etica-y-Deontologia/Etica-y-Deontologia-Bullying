@@ -249,6 +249,7 @@ public class StreamerManager : NetworkBehaviour
                         if (IsServer)
                         {
                             //ejecuto la pausa para todos con un rpc
+                            UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
                             Rpc_GlobalPause();
                             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
                         }
@@ -278,7 +279,7 @@ public class StreamerManager : NetworkBehaviour
     {
         GameManager.instance.Pause(true);
 
-        TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
+        //TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
 
         UnityEngine.Debug.Log("El juego se pauso");
     }
@@ -286,7 +287,7 @@ public class StreamerManager : NetworkBehaviour
     public void GlobalUnPause()
     {
         GameManager.instance.Pause(false);
-        TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
+        //TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
         
         UnityEngine.Debug.Log("El juego se des pauso");
     }
@@ -433,7 +434,7 @@ public class StreamerManager : NetworkBehaviour
             UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
 
             DataRpc.Create(Actions.EndUpdateStreamers);
-            ChangeStream(0);
+            DataRpc.Create(Actions.ChangeToFirstStream);
             CreateStream();
         }
     }
@@ -491,10 +492,6 @@ public class StreamerManager : NetworkBehaviour
         //-----------------------------
         UnityEngine.Debug.Log("*************STREAMERS LENGHT: " + Count);
         UnityEngine.Debug.Log("***************TRY INDEX: " + IndexStreamWatch);
-
-        if (Count < 1)
-            ChangeStream(index);
-
         //-----------------------------
         aux = streamersData.streamers.GetTByIndex(IndexStreamWatch).value;
 
@@ -510,6 +507,7 @@ public class StreamerManager : NetworkBehaviour
 
         if (aux.ShowEnd)
             Aux_onEndStream(aux);
+            
     }
 
     void Aux_onEndStream(StreamerData obj)
@@ -552,8 +550,10 @@ public class StreamerManager : NetworkBehaviour
             Rpc_GlobalPause();
         } 
         else
+        {
+            print("Creo StartUpdateStreamers");
             DataRpc.Create(Actions.StartUpdateStreamers);
-            
+        }
     }
 
     private void Update()
