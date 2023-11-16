@@ -87,11 +87,11 @@ public class StreamerData : IDirection
         {
             Internal.Pictionary<int, User> idUser = new(users.lastID+ i, new User(users.lastID + i));
 
-            string action = Actions.AddUser;
+            Actions action = Actions.AddUser;
 
             string ip = textIP;
 
-            StreamerManager.eventQueue.Enqueue(() => DataRpc.Create(action, ip, idUser));
+            DataRpc.Create(action, ip, idUser);
         }
     }
 
@@ -110,7 +110,7 @@ public class StreamerData : IDirection
     {
         var aux = JsonUtility.FromJson<Internal.Pictionary<int, User>>(jsonPic);
 
-        users.Add(aux).Value.Create(this);
+        StreamerManager.eventQueue.Enqueue(() => users.Add(aux).Value.Create(this));
 
         aux.Value.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
 
