@@ -34,12 +34,12 @@ public class TransitionManager : SingletonMono<TransitionManager>
 
     IEnumerator PLayAnimation(string triggerName, float animationTime, Action endAction)
     {
-        Debug.Log("llamo a trigger: " + triggerName);
+        //Debug.Log("llamo a trigger: " + triggerName);
         animator.SetTrigger(triggerName);
 
         yield return new WaitForSeconds(animationTime);
 
-        Debug.Log("espere la cantidad de " + animationTime);
+        //Debug.Log("espere la cantidad de " + animationTime);
 
         endAction?.Invoke();
     }

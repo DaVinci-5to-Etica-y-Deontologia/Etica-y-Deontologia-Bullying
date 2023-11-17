@@ -33,9 +33,16 @@ public class DataPic<T> : Pictionarys<int, T>
         return Add(lastID, value);
     }
 
-    new public Pictionary<int, T> Add(Internal.Pictionary<int, T> pictionary)
+    public Pictionary<int, T> Prepare(T value)
     {
         lastID++;
+        return new Pictionary<int, T>(lastID, value);
+    }
+
+    new public Pictionary<int, T> Add(Internal.Pictionary<int, T> pictionary)
+    {
+        if (pictionary.Key > lastID)
+            lastID = pictionary.Key;
         return base.Add(pictionary);
     }
 }

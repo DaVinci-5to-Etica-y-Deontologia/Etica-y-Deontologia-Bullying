@@ -8,11 +8,9 @@ using System.Linq;
 /// Clase destinada a ser un user
 /// </summary>
 [System.Serializable]
-public class UserParent : IDirection
+public class UserParent : DataElement<UserParent>
 {
     static LinkedPool<CommentData> poolCommentData = new LinkedPool<CommentData>(new CommentData());
-
-    public int ID;
 
     [field: SerializeField]
     public DataPic<CommentData> comments { get; private set; } = new();
@@ -26,8 +24,7 @@ public class UserParent : IDirection
     [field: SerializeField]
     public float MoralRange { get; private set; }
 
-    [field: SerializeField]
-    public bool Enable { get; set; } = true;
+
 
     [field: SerializeField]
     public int Suspect { get; set; } = 0;
@@ -45,17 +42,14 @@ public class UserParent : IDirection
 
     public event System.Action<int> onSuspectChange;
 
-    public BD database => stream.dataBase;
 
-    public EventManager eventManager => stream.eventManager;
+    public override string textIP => $"{stream.textIP}.{ID}";
 
-    public Player player => stream.player;
 
-    public bool IsServer => stream.IsServer;
-
-    public string textIP => $"{stream.textIP}.{ID}";
 
     public float CoolDown { get=>_coolDownToComment.current; set=> _coolDownToComment.Set(value); }
+
+    protected override IDataElement parent => stream;
 
     public (CommentData value, int ID, int index) this[int ID]
     {
@@ -157,11 +151,11 @@ public class UserParent : IDirection
     {
         var newCommentData = poolCommentData.Obtain().Self;
 
-        JsonUtility.FromJsonOverwrite(json, newCommentData);
+        var auxPic = new Internal.Pictionary<int, CommentData>(0, newCommentData);
+
+        JsonUtility.FromJsonOverwrite(json, auxPic);
 
         newCommentData.Init(stream.ID, ID);
-
-        var auxPic = new Internal.Pictionary<int, CommentData>(newCommentData.ID, newCommentData);
 
         if (IsServer)
             CoolDown = newCommentData.Delay;
@@ -214,7 +208,7 @@ public class UserParent : IDirection
 
     public void CreateComment()
     {
-        if (!IsServer)
+        if (!IsServer && !Enable)
             return;
 
         System.Action lambda = () => 
@@ -222,13 +216,15 @@ public class UserParent : IDirection
             if (!Enable)
                 return;
 
-            var aux = database.SelectComment(MoralIndex, MoralRange);
+            var aux = dataBase.SelectComment(MoralIndex, MoralRange);
 
             var newCommentData = poolCommentData.Obtain().Self;
 
-            newCommentData.Create(comments.lastID + 1, aux);
+            var auxPic = comments.Prepare(newCommentData);
 
-            DataRpc.Create(Actions.AddComment, textIP, newCommentData);
+            newCommentData.Create(auxPic.Key, aux);
+
+            DataRpc.Create(Actions.AddComment, textIP, auxPic);
 
             newCommentData.Destroy();
         };
@@ -272,12 +268,12 @@ public class UserParent : IDirection
     {
         Init(stream);
 
+        stream.Viewers.current++;
+
         colorText = colorText.ChangeAlphaCopy(1);
 
         if (IsServer)
             _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment);
-
-        stream.Viewers.current++;
     }
 
     public UserParent(int id)
@@ -376,31 +372,31 @@ public class User : UserParent
     {
         image.sprite = cuerpos[cuerpo.index];
 
-        cuerpo.SetImage(image, database.materialForUsers);
+        cuerpo.SetImage(image, dataBase.materialForUsers);
     }
     public void SetCabeza(UnityEngine.UI.Image image)
     {
         image.sprite = cabezas[cabeza.index];
 
-        cabeza.SetImage(image, database.materialForUsers);
+        cabeza.SetImage(image, dataBase.materialForUsers);
     }
     public void SetOjos(UnityEngine.UI.Image image)
     {
         image.sprite = ojos[ojo.index];
 
-        ojo.SetImage(image, database.materialForUsers);
+        ojo.SetImage(image, dataBase.materialForUsers);
     }
     public void SetAccesorio(UnityEngine.UI.Image image)
     {
         image.sprite = accesorios[accesorio.index];
 
-        accesorio.SetImage(image, database.materialForUsers);
+        accesorio.SetImage(image, dataBase.materialForUsers);
     }
     public void SetBoquita(UnityEngine.UI.Image image)
     {
         image.sprite = boquitas[boquita.index];
 
-        boquita.SetImage(image, database.materialForUsers);
+        boquita.SetImage(image, dataBase.materialForUsers);
     }
 
     public User(int id) : base(id)

@@ -21,7 +21,7 @@ public class StreamerManager : NetworkBehaviour
     }
 
     [System.Serializable]
-    public class Data
+    public class Data : IDataElement
     {
         [SerializeField]
         public DataPic<StreamerData> streamers = new();
@@ -30,6 +30,8 @@ public class StreamerManager : NetworkBehaviour
 
         public bool gameEnd;
 
+        StreamerManager streamerManager;
+
         public BD dataBase => streamerManager.dataBase;
 
         public EventManager eventManager => streamerManager.eventManager;
@@ -37,13 +39,11 @@ public class StreamerManager : NetworkBehaviour
         public Player player => streamerManager.player;
 
         public bool IsServer => streamerManager.IsServer;
-
-        StreamerManager streamerManager;
-
         public Data(StreamerManager streamerManager)
         {
             this.streamerManager = streamerManager;
         }
+
     }
 
     public static StreamerManager instance;
@@ -94,6 +94,9 @@ public class StreamerManager : NetworkBehaviour
     Timer delay;
 
     Dictionary<int,string> buffer = new();
+
+    [SerializeField]
+    AuxWrapper<DataRpc[]> listRpc;
 
     public int IndexStreamWatch
     {
@@ -150,125 +153,123 @@ public class StreamerManager : NetworkBehaviour
         if (!started)
             return;
 
-        AuxWrapper<string[]> listRpc = JsonUtility.FromJson<AuxWrapper<string[]>>(json);
+        listRpc = JsonUtility.FromJson<AuxWrapper<DataRpc[]>>(json);
 
-        //UnityEngine.Debug.Log($"recibido:\n{dataRpc}");
+        
 
         for (int i = 0; i < listRpc.data.Length; i++)
         {
-            var dataRpc = JsonUtility.FromJson<SerializedDataRpc>(listRpc.data[i]);
-            var rpcAction = JsonUtility.FromJson<AuxWrapper<Actions>>(dataRpc.newAction);
+            var dataRpc = listRpc.data[i];
 
             var srch = Search(dataRpc.direction);
 
-            switch (rpcAction.data)
+            UnityEngine.Debug.Log($"recibido:\n{dataRpc}");
+
+            switch (dataRpc.action)
             {
                 case ActBan:
-                    {
-                        srch.User.Ban();
-                    }
-                    break;
+                {
+                    srch.User.Ban();
+                }
+                break;
 
                 case ActAdmonition:
-                    {
-                        srch.User.Admonition(srch.comment.index);
-                    }
-                    break;
+                {
+                    srch.User.Admonition(srch.comment.index);
+                }
+                break;
 
                 case ActPicantear:
-                    {
-                        srch.User.Picantear();
-                    }
-                    break;
+                {
+                    srch.User.Picantear();
+                }
+                break;
 
                 case ActCorromper:
-                    {
-                        srch.User.ChangeMoral();
-                    }
-                    break;
+                {
+                    srch.User.ChangeMoral();
+                }
+                break;
 
                 case ActSus:
-                    {
-                        srch.User.SuspectChange(dataRpc.data);
-                    }
-                    break;
-
-
-
+                {
+                    srch.User.SuspectChange(dataRpc.data);
+                }
+                break;
 
                 case ActAddUser:
-                    {
-                        srch.Streamer.AddUser(dataRpc.data);
-                    }
-                    break;
+                {
+                    srch.Streamer.AddUser(dataRpc.data);
+                }
+                break;
 
                 case ActRemoveUser:
-                    {
-                        srch.Streamer.RemoveUser(srch.user.index);
-                    }
-                    break;
-
-
+                {
+                    srch.Streamer.RemoveUser(srch.user.index);
+                }
+                break;
 
                 case ActAddComment:
-                    {
-                        srch.User.AddComment(dataRpc.data);
-                    }
-                    break;
+                {
+                    srch.User.AddComment(dataRpc.data);
+                }
+                break;
 
                 case ActRemoveComment:
-                    {
-                        srch.User.RemoveComment(srch.comment.index);
-                    }
-                    break;
-
-
-
-                case ActAddStream:
-                    {
-                        UnityEngine.Debug.Log("Se ejecuto el add stream");
-                        instance.AddStream(dataRpc.data);
-                    }
-                    break;
+                {
+                    srch.User.RemoveComment(srch.comment.index);
+                }
+                break;
 
                 case ActCreateStream:
+                {
+                    if (IsServer)
                     {
-                        if (IsServer)
-                        {
-                            DataRpc.Create(Actions.AddStream, "", new StreamerData(dataBase.SelectStreamer()));
-                        }
+                        DataRpc.Create(Actions.AddStream, "", streamersData.streamers.Prepare(new StreamerData(dataBase.SelectStreamer())));
                     }
-                    break;
+                }
+                break;
 
+                case ActAddStream:
+                {
+                    UnityEngine.Debug.Log("Se ejecuto el add stream");
 
+                    bool aux = Count == 0;
 
-                case ActStartUpdateStreamers:
-                    {
-                        if (IsServer)
-                        {
-                            //ejecuto la pausa para todos con un rpc
-                            UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
-                            //Rpc_GlobalPause();
-                            instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
-                        }
-                    }
-                    break;
+                    instance.AddStream(dataRpc.data);
 
-                case ActEndUpdateStreamers:
-                    {
-                        UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
-                        //Reanudo la partida para todos
-                        GlobalUnPause();
-                    }
-                    break;
-
-                case ActChangeToFirstStream:
+                    if (aux)
                     {
                         ChangeStream(0);
                     }
-                    break;
+                }
+                break;
 
-            }
+                case ActEnableStream:
+                {
+                    srch.streamer.value.SetEnable();
+                }
+                break;
+
+                case ActStartUpdateStreamers:
+                {
+                    if (IsServer)
+                    {
+                        UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
+                        Rpc_GlobalPause();
+                        instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
+                    }
+                }
+                break;
+
+                case ActEndUpdateStreamers:
+                {
+                    //Reanudo la partida para todos
+                    UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
+                    GlobalUnPause();
+                }
+                break;
+            }            
         }
     }
 
@@ -276,7 +277,7 @@ public class StreamerManager : NetworkBehaviour
     public void Rpc_GlobalPause()
     {
         GameManager.instance.Pause(true);
-        //TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
+        TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
 
         UnityEngine.Debug.Log("El juego se pauso");
     }
@@ -284,7 +285,7 @@ public class StreamerManager : NetworkBehaviour
     public void GlobalUnPause()
     {
         GameManager.instance.Pause(false);
-        //TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
+        TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
         
         UnityEngine.Debug.Log("El juego se des pauso");
     }
@@ -293,7 +294,7 @@ public class StreamerManager : NetworkBehaviour
     {
         SearchResult searchResult = new SearchResult();
 
-        if (dir == string.Empty)
+        if (string.IsNullOrEmpty(dir))
             return searchResult;
 
         var splirDir = dir.Split('.');
@@ -318,17 +319,17 @@ public class StreamerManager : NetworkBehaviour
 
     public void AddStream(string json)
     {
-        var streamer = JsonUtility.FromJson<StreamerData>(json);
+        var streamerPic = JsonUtility.FromJson<Internal.Pictionary<int, StreamerData>>(json);
 
-        streamersData.streamers.Add(streamer);
+        streamersData.streamers.Add(streamerPic);
 
-        streamer.Create(streamersData.streamers.lastID);
+        streamerPic.Value.Create(streamerPic.Key);
 
-        onStreamerCreate.delegato?.Invoke(streamer);
+        onStreamerCreate.delegato?.Invoke(streamerPic.Value);
 
         Count++;
 
-        streamer.onEndStream += (s) =>
+        streamerPic.Value.onEndStream += (s) =>
         {
             if (Count > 0)
                 Count--;
@@ -336,7 +337,7 @@ public class StreamerManager : NetworkBehaviour
 
         if (IsServer)
         {
-            streamer.onCreateComment += CommentDataDelete_onCreateComment;
+            streamerPic.Value.onCreateComment += CommentDataDelete_onCreateComment;
         }
     }
 
@@ -362,14 +363,12 @@ public class StreamerManager : NetworkBehaviour
         {
             item.Value.Stop();
         }
-    }  
-
+    }
 
     public void CreateFirstStream()
     {
         started = true;
         CreateStream();
-        DataRpc.Create(Actions.ChangeToFirstStream);
     }
 
     public void CreateStream()
@@ -441,7 +440,6 @@ public class StreamerManager : NetworkBehaviour
             UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
 
             DataRpc.Create(Actions.EndUpdateStreamers);
-            DataRpc.Create(Actions.ChangeToFirstStream);
             CreateStream();
         }
     }
@@ -480,14 +478,6 @@ public class StreamerManager : NetworkBehaviour
 
     public void ChangeStream(int index)
     {
-        //-----------------------------
-        if (Count == 0)
-        {
-            DataRpc.Create(Actions.ChangeToFirstStream);
-            return;
-        }
-
-        //-----------------------------
         var previus = IndexStreamWatch;
 
         IndexStreamWatch = index;
@@ -504,10 +494,7 @@ public class StreamerManager : NetworkBehaviour
 
             aux.onEndStream -= Aux_onEndStream;
         }
-        //-----------------------------
-        UnityEngine.Debug.Log("*************STREAMERS LENGHT: " + Count);
-        UnityEngine.Debug.Log("***************TRY INDEX: " + IndexStreamWatch);
-        //-----------------------------
+
         aux = streamersData.streamers.GetTByIndex(IndexStreamWatch).value;
 
         aux.onCreateComment += CommentCreateQueue;
@@ -528,7 +515,7 @@ public class StreamerManager : NetworkBehaviour
 
     void Aux_onEndStream(StreamerData obj)
     {
-        print("SE EJECUTÓ: Aux_onEndStream");
+        //print("SE EJECUTÓ: Aux_onEndStream");
         onStreamEnd.delegato.Invoke(obj);
 
         if (Count <= 0)
@@ -571,13 +558,18 @@ public class StreamerManager : NetworkBehaviour
         } 
         else
         {
-            print("Creo StartUpdateStreamers");
+            //print("Creo StartUpdateStreamers");
             DataRpc.Create(Actions.StartUpdateStreamers);
         }
     }
 
     private void Update()
     {
+        while (FilterRpc.Count > 0)
+        {
+            instance.Rpc_Execute(FilterRpc.definitiveList);
+        }
+
         if (!started)
         {
             return;
@@ -586,11 +578,6 @@ public class StreamerManager : NetworkBehaviour
         while(eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16)
         {
             eventQueue.Dequeue().Invoke();
-        }
-
-        while (FilterRpc.Count > 0)
-        {
-            instance.Rpc_Execute(FilterRpc.definitiveList);
         }
 
         watchdog.Restart();
@@ -645,47 +632,66 @@ public class StreamerManager : NetworkBehaviour
 [System.Serializable]
 public class Actions
 {
-    [SerializeField]
-    public static Actions Ban = new ActBan();
-    [SerializeField]
-    public static Actions Admonition = new ActAdmonition();
-    [SerializeField]
-    public static Actions Picantear = new ActPicantear();
-    [SerializeField]
-    public static Actions Corromper = new ActCorromper();
-    [SerializeField]
-    public static Actions Suspect = new ActSus();
-    [SerializeField]
-    public static Actions AddUser = new ActAddUser();
-    [SerializeField]
-    public static Actions RemoveUser = new ActRemoveUser();
-    [SerializeField]
-    public static Actions AddComment = new ActAddComment();
-    [SerializeField]
-    public static Actions RemoveComment = new ActRemoveComment();
-    [SerializeField]
-    public static Actions CreateStream = new ActCreateStream();
-    [SerializeField]
-    public static Actions AddStream = new ActAddStream();
-    [SerializeField]
-    public static Actions RemoveStream = new ActRemoveStream();
-    [SerializeField]
-    public static Actions StartUpdateStreamers = new ActStartUpdateStreamers();
-    [SerializeField]
-    public static Actions EndUpdateStreamers = new ActEndUpdateStreamers();
-    [SerializeField]
-    public static Actions ChangeToFirstStream = new ActChangeToFirstStream();
+    public static Actions Ban { get; private set; } = new ActBan();
+
+    public static Actions Admonition { get; private set; } = new ActAdmonition();
+
+    public static Actions Picantear { get; private set; } = new ActPicantear();
+
+    public static Actions Corromper { get; private set; } = new ActCorromper();
+
+    public static Actions Suspect { get; private set; } = new ActSus();
+
+    public static Actions AddUser { get; private set; } = new ActAddUser();
+
+    public static Actions RemoveUser { get; private set; } = new ActRemoveUser();
+
+    public static Actions AddComment { get; private set; } = new ActAddComment();
+
+    public static Actions RemoveComment { get; private set; } = new ActRemoveComment();
+
+    public static Actions CreateStream { get; private set; } = new ActCreateStream();
+
+    public static Actions AddStream { get; private set; } = new ActAddStream();
+
+    public static Actions RemoveStream { get; private set; } = new ActRemoveStream();
+
+    public static Actions StartUpdateStreamers { get; private set; } = new ActStartUpdateStreamers();
+
+    public static Actions EndUpdateStreamers { get; private set; } = new ActEndUpdateStreamers();
+
+    public static Actions ActEnableStream { get; private set; } = new ActEnableStream();
+
+    public override bool Equals(object obj)
+    {
+        return this.GetType() == obj.GetType();
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
+    public string className;
+    public Actions()
+    {
+        className = this.GetType().Name;
+    }
 }
 [System.Serializable] public class ActionStream : Actions { }
+[System.Serializable] public class ActionUser : Actions { }
+[System.Serializable] public class ActionComment : Actions { }
+
+
 [System.Serializable] public class ActCreateStream : ActionStream { }
+
 [System.Serializable] public class ActAddStream : ActionStream { }
 [System.Serializable] public class ActRemoveStream : ActionStream { }
-[System.Serializable] public class ActChangeToFirstStream : ActionComment { }
 [System.Serializable] public class ActStartUpdateStreamers : ActionStream { }
 [System.Serializable] public class ActEndUpdateStreamers : ActionStream { }
+[System.Serializable] public class ActEnableStream : ActionComment { }
 
 
-[System.Serializable] public class ActionUser : Actions { }
 [System.Serializable] public class ActAddUser : ActionUser { }
 [System.Serializable] public class ActRemoveUser : ActionUser { }
 [System.Serializable] public class ActBan : ActionUser { }
@@ -695,108 +701,114 @@ public class Actions
 [System.Serializable] public class ActSus : ActionUser { }
 
 
-[System.Serializable] public class ActionComment : Actions { }
+
 [System.Serializable] public class ActAddComment : ActionComment { }
 [System.Serializable] public class ActRemoveComment : ActionComment { }
 
-[System.Serializable]
-public class SerializedDataRpc
-{
-    [SerializeField]
-    public string newAction;
-    [SerializeField]
-    public string direction;
-    [SerializeField]
-    public string data;
-}
+
 
 [System.Serializable]
-public class DataRpc
+public struct DataRpc
 {
     [SerializeReference]
-    public Actions newAction;
+    public Actions action;
 
     public string direction;
 
     public string data;
 
-    public static void Create<T>(T action) where T : Actions
+    public static void Create(Actions action)
     {
         //UnityEngine.Debug.Log(action);
-
-        var myAction = JsonUtility.ToJson(new AuxWrapper<T>(action));
-        FilterRpc.Filter(JsonUtility.ToJson(new SerializedDataRpc() { newAction = myAction}), action);
+        FilterRpc.Filter(new DataRpc() { action = action });
     }
-    public static void Create<T>(T action, string direction) where T : Actions
+    public static void Create(Actions action, string direction)
     {
-        //UnityEngine.Debug.Log(action + ": " + direction);
-
-        var myAction = JsonUtility.ToJson(new AuxWrapper<T>(action));
-        FilterRpc.Filter(JsonUtility.ToJson(new SerializedDataRpc() { newAction = myAction, direction = direction }), action);
+        //UnityEngine.Debug.Log(action + ": " + direction)
+        FilterRpc.Filter(new DataRpc() { action = action, direction = direction });
     }
 
-    public static void Create<T>(T action, string direction, string data) where T : Actions
+    public static void Create(Actions action, string direction, string data)
     {
-        //UnityEngine.Debug.Log(action + ": " + direction + " " + data);
-
-        var myAction = JsonUtility.ToJson(new AuxWrapper<T>(action));
-        FilterRpc.Filter(JsonUtility.ToJson(new SerializedDataRpc() { newAction = myAction, direction = direction, data = data }), action);
+        FilterRpc.Filter(new DataRpc() { action = action, direction = direction, data = data });
     }
 
-    public static void Create<T>(T action, string direction, object data) where T : Actions
+    public static void Create(Actions action, string direction, object data)
     {
         //UnityEngine.Debug.Log(action + ": " + direction + " " + JsonUtility.ToJson(data, true));
-
-        var myAction = JsonUtility.ToJson(new AuxWrapper<T>(action));
-        FilterRpc.Filter(JsonUtility.ToJson(new SerializedDataRpc() { newAction = myAction, direction = direction, data = JsonUtility.ToJson(data) }), action);
+        FilterRpc.Filter(new DataRpc() { action = action, direction = direction, data = JsonUtility.ToJson(data) });
     }
 
     public override string ToString()
     {
-        return $"accion: {newAction}\ndireccion: {direction}\ndata: {data}";
+        return $"accion: {action}\ndireccion: {direction}\ndata: {data}";
     }
 }
 
 
 public class FilterRpc
-{
-    static bool isProcesing = false;
-    
-    static List<string> streamsRequests = new List<string>();
-    static List<string> usersRequests = new List<string>();
-    static List<string> commentsRequests = new List<string>();
+{    
+    static Queue<DataRpc> streamsRequests = new();
+    static Queue<DataRpc> usersRequests = new();
+    static Queue<DataRpc> commentsRequests = new();
+
+    static List<DataRpc> _definitiveList = new();
 
     public static int Count => streamsRequests.Count + usersRequests.Count + commentsRequests.Count;
+
+    const int limitRpc = 2;
+
+    static int sum;
+
+    //static bool finish;
+
+    static void Concat(Queue<DataRpc> dataRpcs)
+    {
+        while (dataRpcs.Count > 0 && sum < limitRpc)
+        {
+            _definitiveList.Add(dataRpcs.Dequeue());
+
+            sum++;
+        }
+    }
 
     public static string definitiveList
     {
         get
         {
-            var aux = JsonUtility.ToJson(new AuxWrapper<string[]>(streamsRequests.Concat(usersRequests).Concat(commentsRequests).ToArray()), true);
-            //UnityEngine.Debug.Log("JSON emviado: \n" + aux + "\n\n");
+            Concat(streamsRequests);
+            Concat(usersRequests);
+            Concat(commentsRequests);
 
+            var aux = JsonUtility.ToJson(new AuxWrapper<DataRpc[]>(_definitiveList.ToArray()));
+
+            
+            UnityEngine.Debug.Log("JSON enviado: \n" + aux + "\n\n");
+
+            /*
             UnityEngine.Debug.Log("Streamer Request Count: " + streamsRequests.Count);
             UnityEngine.Debug.Log("Users Request Count: " + usersRequests.Count);
             UnityEngine.Debug.Log("Comments Request Count: " + commentsRequests.Count);
+            */
 
-            streamsRequests.Clear();
-            usersRequests.Clear();
-            commentsRequests.Clear();
+            _definitiveList.Clear();
+            sum = 0;
+            //finish = false;
 
             return aux;
         }
     }
     
-    public static void Filter(string data, Actions action)
+    public static void Filter(DataRpc dataRpc)
     {
-        UnityEngine.Debug.Log("Recibí la petición de: " + action.ToString());
+        //UnityEngine.Debug.Log("Recibí la petición de: " + dataRpc.ToString());
 
-        if (action is ActionStream)
-            streamsRequests.Add(data);
-        else if (action is ActionUser)
-            usersRequests.Add(data);
-        else if (action is ActionComment)
-            commentsRequests.Add(data);
+        if (dataRpc.action is ActionStream)
+            streamsRequests.Enqueue(dataRpc);
+        else if (dataRpc.action is ActionUser)
+            usersRequests.Enqueue(dataRpc);
+        else if (dataRpc.action is ActionComment)
+            commentsRequests.Enqueue(dataRpc);
     }
 }
 
@@ -805,7 +817,7 @@ public class FilterRpc
 [System.Serializable]
 public struct AuxWrapper<T>
 {
-    [SerializeReference]
+    [SerializeField]
     public T data;
 
     public AuxWrapper(T data)

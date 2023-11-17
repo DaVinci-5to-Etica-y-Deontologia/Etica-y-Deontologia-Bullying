@@ -5,10 +5,8 @@ using UnityEngine.Events;
 using System.Linq;
 
 [System.Serializable]
-public class StreamerData : IDirection
+public class StreamerData : DataElement<StreamerData>
 {
-    public int ID;
-
     public int streamID;
 
     public DataPic<User> users = new();
@@ -25,8 +23,6 @@ public class StreamerData : IDirection
     [field: SerializeField]
     public Tim Viewers { get; private set; } = new();
 
-    public bool Enable { get; private set; } = false;
-
 
     public IEnumerable<Internal.Pictionary<int, CommentData>> commentViews
     {
@@ -36,21 +32,16 @@ public class StreamerData : IDirection
         }
     }
 
-    public BD dataBase => streamerManager.dataBase;
-
-    public EventManager eventManager => streamerManager.eventManager;
 
     public Streamer streamer => dataBase.Streamers[streamID];
 
-    public Player player => streamerManager.player;
-
-    public bool IsServer => streamerManager.IsServer;
-
-    public string textIP => ID.ToString();
+    public override string textIP => ID.ToString();
 
     public bool ShowEnd => (State != StreamState.Empate || streamerManager.gameEnd) && Enable;
 
     public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : (Life.current == 0 || Viewers.current <= streamer.minimalViews ? StreamState.Fallido : StreamState.Empate);
+
+    protected override IDataElement parent => streamerManager;
 
     StreamerManager.Data streamerManager;
 
@@ -72,10 +63,7 @@ public class StreamerData : IDirection
 
     public void Users(int number)
     {
-        if (number == 0 && !IsServer)
-            return;
-
-        else if (number > 0)
+        if (number > 0)
             CreateUsers(number);
         else
             LeaveUsers(-number);        
@@ -83,11 +71,9 @@ public class StreamerData : IDirection
 
     void CreateUsers(int number)
     {
-        Debug.Log("Enable antes del for: " + Enable);
-
         for (int i = 1; i <= number; i++)
         {
-            Internal.Pictionary<int, User> idUser = new(users.lastID+ i, new User(users.lastID + i));
+            var idUser = users.Prepare(new User(users.lastID + 1));
 
             Actions action = Actions.AddUser;
 
@@ -95,8 +81,6 @@ public class StreamerData : IDirection
 
             DataRpc.Create(action, ip, idUser);
         }
-
-        Debug.Log("Enable despues del for: " + Enable);
     }
 
     void LeaveUsers(int number)
@@ -114,15 +98,17 @@ public class StreamerData : IDirection
     {
         var aux = JsonUtility.FromJson<Internal.Pictionary<int, User>>(jsonPic);
 
-        StreamerManager.eventQueue.Enqueue(() => users.Add(aux).Value.Create(this));
+        users.Add(aux).Value.Create(this);
 
         aux.Value.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
 
-        aux.Value.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);
+        aux.Value.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);        
+    }
 
-        if(Viewers.current <= streamer.minimalViews && !Enable)
-            StreamerManager.eventQueue.Enqueue(() => Enable = true);
-        
+    //rpc
+    public void SetEnable()
+    {
+        Enable = true;
     }
 
     //rpc
@@ -133,11 +119,11 @@ public class StreamerData : IDirection
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        if (ShowEnd && Enable)
+        if (ShowEnd)
         {
             Stop();
             onEndStream?.Invoke(this);
-            Debug.Log("SE EJECUTÓ: InternalShowEnd");
+            //Debug.Log("SE EJECUTÓ: InternalShowEnd");
         }
     }
 
@@ -160,11 +146,60 @@ public class StreamerData : IDirection
 
         Viewers.total = streamer.maxViews;
 
+        if (!IsServer)
+            return;
+
         Users(streamer.minimalViews * 2);
+
+        DataRpc.Create(Actions.ActEnableStream, textIP);
     }
 
     public StreamerData(int streamID)
     {
         this.streamID = streamID;
     }
+}
+
+
+
+public abstract class DataElement<T> : IDataElement,IDirection where T: DataElement<T>
+{
+    public int ID;
+
+    public abstract string textIP { get; }
+
+    protected abstract IDataElement parent { get; }
+
+    [field: SerializeField]
+    public virtual bool Enable { get; set; } = true;
+
+    public BD dataBase => parent.dataBase;
+
+    public EventManager eventManager => parent.eventManager;
+
+    public Player player => parent.player;
+    
+    public bool IsServer => parent.IsServer;
+
+    public Internal.Pictionary<int, T> Prepare()
+    {
+        return new Internal.Pictionary<int, T>(ID, (T)this);
+    }
+
+}
+
+public interface IDataElement
+{
+    public BD dataBase { get; }
+
+    public EventManager eventManager { get; }
+
+    public Player player { get; }
+
+    public bool IsServer { get; }
+}
+
+public interface IDirection
+{
+    public string textIP { get; }
 }

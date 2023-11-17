@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CommentData : IDirection, IPoolElement<CommentData>
+public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
 {
-    public int ID;
-
     public int commentID;
 
     public float timeOnCreate;
@@ -17,26 +15,19 @@ public class CommentData : IDirection, IPoolElement<CommentData>
 
     public string textComment => comment.Text;
 
-    public bool Enable => user.Enable;
+    public override bool Enable => user.Enable;
 
-    public string textIP => $"{user.textIP}.{ID}";
+    public override string textIP => $"{user.textIP}.{ID}";
 
     public string textName => user.Name.RichTextColor(user.colorText);
 
-    public Comment comment => database.comments[commentID];
-
-    public BD database => user.database;
-
-    public EventManager eventManager => user.eventManager;
-
-    public Player player => user.player;
-
-    public bool IsServer => user.IsServer;
+    public Comment comment => dataBase.comments[commentID];
 
     public LinkedPool<CommentData> Parent { get; set; }
     public IPoolElement<CommentData> Next { get; set; }
     public bool inPool { get; set; }
 
+    protected override IDataElement parent => _user;
 
     public event System.Action onDestroy;
 
@@ -66,10 +57,6 @@ public class CommentData : IDirection, IPoolElement<CommentData>
 
         timeOnCreate = Time.realtimeSinceStartup;
     }
-
 }
 
-public interface IDirection
-{
-    public string textIP { get; }
-}
+
