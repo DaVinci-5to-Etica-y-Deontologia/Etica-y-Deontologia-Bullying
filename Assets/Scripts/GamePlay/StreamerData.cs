@@ -25,7 +25,7 @@ public class StreamerData : IDirection
     [field: SerializeField]
     public Tim Viewers { get; private set; } = new();
 
-    public bool Enable { get; private set; }
+    public bool Enable { get; private set; } = false;
 
 
     public IEnumerable<Internal.Pictionary<int, CommentData>> commentViews
@@ -83,6 +83,8 @@ public class StreamerData : IDirection
 
     void CreateUsers(int number)
     {
+        Debug.Log("Enable antes del for: " + Enable);
+
         for (int i = 1; i <= number; i++)
         {
             Internal.Pictionary<int, User> idUser = new(users.lastID+ i, new User(users.lastID + i));
@@ -93,6 +95,8 @@ public class StreamerData : IDirection
 
             DataRpc.Create(action, ip, idUser);
         }
+
+        Debug.Log("Enable despues del for: " + Enable);
     }
 
     void LeaveUsers(int number)
@@ -115,6 +119,10 @@ public class StreamerData : IDirection
         aux.Value.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
 
         aux.Value.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);
+
+        if(Viewers.current <= streamer.minimalViews && !Enable)
+            StreamerManager.eventQueue.Enqueue(() => Enable = true);
+        
     }
 
     //rpc
@@ -125,10 +133,11 @@ public class StreamerData : IDirection
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        if (ShowEnd)
+        if (ShowEnd && Enable)
         {
             Stop();
             onEndStream?.Invoke(this);
+            Debug.Log("SE EJECUTÓ: InternalShowEnd");
         }
     }
 
@@ -152,8 +161,6 @@ public class StreamerData : IDirection
         Viewers.total = streamer.maxViews;
 
         Users(streamer.minimalViews * 2);
-
-        StreamerManager.eventQueue.Enqueue(() => Enable = true);
     }
 
     public StreamerData(int streamID)

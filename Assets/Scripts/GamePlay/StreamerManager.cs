@@ -18,8 +18,6 @@ public class StreamerManager : NetworkBehaviour
         public User User => user.value;
 
         public CommentData CommentData => comment.value;
-
-
     }
 
     [System.Serializable]
@@ -250,7 +248,7 @@ public class StreamerManager : NetworkBehaviour
                         {
                             //ejecuto la pausa para todos con un rpc
                             UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
-                            Rpc_GlobalPause();
+                            //Rpc_GlobalPause();
                             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
                         }
                     }
@@ -266,7 +264,7 @@ public class StreamerManager : NetworkBehaviour
 
                 case ActChangeToFirstStream:
                     {
-                        eventQueue.Enqueue(() => ChangeStream(0));
+                        ChangeStream(0);
                     }
                     break;
 
@@ -278,7 +276,6 @@ public class StreamerManager : NetworkBehaviour
     public void Rpc_GlobalPause()
     {
         GameManager.instance.Pause(true);
-
         //TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
 
         UnityEngine.Debug.Log("El juego se pauso");
@@ -331,7 +328,11 @@ public class StreamerManager : NetworkBehaviour
 
         Count++;
 
-        streamer.onEndStream += (s) => Count--;
+        streamer.onEndStream += (s) =>
+        {
+            if (Count > 0)
+                Count--;
+        };
 
         if (IsServer)
         {
@@ -345,6 +346,12 @@ public class StreamerManager : NetworkBehaviour
     /// </summary>
     public void FinishDay()
     {
+        foreach (var item in streamersData.streamers)
+        {
+            if (!item.Value.Enable)
+                return;
+        }
+
         onFinishDay.delegato.Invoke();
 
         streamersData.gameEnd = true;
@@ -470,9 +477,17 @@ public class StreamerManager : NetworkBehaviour
 
         return list;
     }
-   
+
     public void ChangeStream(int index)
     {
+        //-----------------------------
+        if (Count == 0)
+        {
+            DataRpc.Create(Actions.ChangeToFirstStream);
+            return;
+        }
+
+        //-----------------------------
         var previus = IndexStreamWatch;
 
         IndexStreamWatch = index;
@@ -506,16 +521,21 @@ public class StreamerManager : NetworkBehaviour
         onStreamerChange.delegato?.Invoke(Actual);
 
         if (aux.ShowEnd)
+        {
             Aux_onEndStream(aux);
-            
+        }
     }
 
     void Aux_onEndStream(StreamerData obj)
     {
+        print("SE EJECUTÓ: Aux_onEndStream");
         onStreamEnd.delegato.Invoke(obj);
 
         if (Count <= 0)
+        {
             FinishDay();
+        }
+            
     }
 
     void CommentCreateQueue(CommentData commentData)
@@ -547,7 +567,7 @@ public class StreamerManager : NetworkBehaviour
         if (IsServer)
         {
             CreateFirstStream();
-            Rpc_GlobalPause();
+            //Rpc_GlobalPause();
         } 
         else
         {
@@ -738,8 +758,10 @@ public class DataRpc
 }
 
 
-public static class FilterRpc
+public class FilterRpc
 {
+    static bool isProcesing = false;
+    
     static List<string> streamsRequests = new List<string>();
     static List<string> usersRequests = new List<string>();
     static List<string> commentsRequests = new List<string>();
@@ -753,6 +775,10 @@ public static class FilterRpc
             var aux = JsonUtility.ToJson(new AuxWrapper<string[]>(streamsRequests.Concat(usersRequests).Concat(commentsRequests).ToArray()), true);
             //UnityEngine.Debug.Log("JSON emviado: \n" + aux + "\n\n");
 
+            UnityEngine.Debug.Log("Streamer Request Count: " + streamsRequests.Count);
+            UnityEngine.Debug.Log("Users Request Count: " + usersRequests.Count);
+            UnityEngine.Debug.Log("Comments Request Count: " + commentsRequests.Count);
+
             streamsRequests.Clear();
             usersRequests.Clear();
             commentsRequests.Clear();
@@ -763,6 +789,8 @@ public static class FilterRpc
     
     public static void Filter(string data, Actions action)
     {
+        UnityEngine.Debug.Log("Recibí la petición de: " + action.ToString());
+
         if (action is ActionStream)
             streamsRequests.Add(data);
         else if (action is ActionUser)
@@ -771,6 +799,7 @@ public static class FilterRpc
             commentsRequests.Add(data);
     }
 }
+
 
 
 [System.Serializable]
