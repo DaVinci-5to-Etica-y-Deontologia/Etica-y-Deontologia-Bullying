@@ -290,6 +290,8 @@ public class UserParent : DataElement<UserParent>
 
         _moralRange = MoralRange;
 
+        Enable = true;
+
         string chars = "abcdefghijklmnñopqrstuvwxyz";
 
         for (int i = 0; i < rng; i++)

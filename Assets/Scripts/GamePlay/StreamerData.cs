@@ -171,7 +171,7 @@ public abstract class DataElement<T> : IDataElement,IDirection where T: DataElem
     protected abstract IDataElement parent { get; }
 
     [field: SerializeField]
-    public virtual bool Enable { get; set; } = true;
+    public virtual bool Enable { get; set; } = false;
 
     public BD dataBase => parent.dataBase;
 
