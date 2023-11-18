@@ -425,6 +425,7 @@ public class StreamerManager : NetworkBehaviour
             foreach (var stream in streamersData.streamers)
             {
                 stream.Value.Init();
+                onStreamerCreate?.delegato.Invoke(stream.Value);
 
                 foreach (var user in stream.Value.users)
                 {
@@ -439,8 +440,10 @@ public class StreamerManager : NetworkBehaviour
 
             UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
 
-            DataRpc.Create(Actions.EndUpdateStreamers);
             CreateStream();
+            ChangeStream(0);
+
+            DataRpc.Create(Actions.EndUpdateStreamers);
         }
     }
 

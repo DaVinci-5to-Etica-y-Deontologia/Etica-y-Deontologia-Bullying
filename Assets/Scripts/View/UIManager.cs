@@ -94,6 +94,8 @@ public class UIManager : MonoBehaviour
 
     private void Life_onChange(IGetPercentage arg1, float arg2)
     {
+        print("Se llamo a LIFE ON CHANGE");
+
         life.value = arg1.Percentage();
     }
 

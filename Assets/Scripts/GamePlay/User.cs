@@ -183,7 +183,7 @@ public class UserParent : DataElement<UserParent>
    
     public void Aplicate(int views, float damage ,string textIP)
     {
-        //Debug.Log($"Aplicar el danio: {commentView.comment.Damage} ganancia de viewers: {commentView.comment.Views}");
+        Debug.Log($"Aplicar el danio: {damage} ganancia de viewers: {views}");
         if (stream.ShowEnd)
             return;
 

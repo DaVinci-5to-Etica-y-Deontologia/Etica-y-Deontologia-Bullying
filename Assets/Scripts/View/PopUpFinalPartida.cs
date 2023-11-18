@@ -42,11 +42,13 @@ public class PopUpFinalPartida : PopUpElement
             Destroy(item.gameObject);
         }
 
+        /*
         callsManager.Create("Volver a jugar", () =>
         {
             ScenesLoader.instance.ReloadCurrentScene();
             TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
         });
+        */
 
         callsManager.Create("Volver al menú", () =>
         {
