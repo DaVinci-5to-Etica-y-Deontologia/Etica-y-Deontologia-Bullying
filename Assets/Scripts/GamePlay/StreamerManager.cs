@@ -244,12 +244,6 @@ public class StreamerManager : NetworkBehaviour
     /// </summary>
     public void FinishDay()
     {
-        foreach (var item in streamersData.streamers)
-        {
-            if (!item.Value.Enable)
-                return;
-        }
-
         onFinishDay.delegato.Invoke();
 
         streamersData.gameEnd = true;
