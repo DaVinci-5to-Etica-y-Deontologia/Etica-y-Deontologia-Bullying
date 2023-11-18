@@ -84,12 +84,12 @@ public class UserParent : DataElement<UserParent>
 
     #region suscription
 
-    public static void Ban(DataRpc dataRpc, StreamerManager.SearchResult srch)
+    public static void Ban(string jsonData, StreamerManager.SearchResult srch)
     {
         srch.User.Ban();
     }
 
-    public static void Admonition(DataRpc dataRpc, StreamerManager.SearchResult srch)
+    public static void Admonition(string jsonData, StreamerManager.SearchResult srch)
     {
         srch.User.Admonition(srch.comment.index);
     }

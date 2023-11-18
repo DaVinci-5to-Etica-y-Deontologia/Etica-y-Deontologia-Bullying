@@ -48,7 +48,7 @@ public class StreamerManager : NetworkBehaviour
 
     public static StreamerManager instance;
 
-    public static Dictionary<string, System.Action<DataRpc, SearchResult>> actionsMap = new();
+    public static Dictionary<string, System.Action<string, SearchResult>> actionsMap = new();
 
     public BD dataBase;
 
