@@ -9,7 +9,7 @@ public class StreamerData : DataElement<StreamerData>
 {
     public int streamID;
 
-    public DataPic<User> users = new();
+    public DataPic<UserData> users = new();
 
     public event System.Action<CommentData> onCreateComment;
 
@@ -45,7 +45,7 @@ public class StreamerData : DataElement<StreamerData>
 
     StreamerManager.Data streamerManager;
 
-    public (User value, int ID, int index) this[int ID]
+    public (UserData value, int ID, int index) this[int ID]
     {
         get
         {
@@ -73,7 +73,7 @@ public class StreamerData : DataElement<StreamerData>
     {
         for (int i = 1; i <= number; i++)
         {
-            var idUser = users.Prepare(new User(users.lastID + 1));
+            var idUser = users.Prepare(new UserData(users.lastID + 1));
 
             Actions action = Actions.AddUser;
 
@@ -96,7 +96,7 @@ public class StreamerData : DataElement<StreamerData>
     //rpc
     public void AddUser(string jsonPic)
     {
-        var aux = JsonUtility.FromJson<Internal.Pictionary<int, User>>(jsonPic);
+        var aux = JsonUtility.FromJson<Internal.Pictionary<int, UserData>>(jsonPic);
 
         users.Add(aux).Value.Create(this);
 

@@ -10,12 +10,12 @@ public class StreamerManager : NetworkBehaviour
     public struct SearchResult
     {
         public (StreamerData value, int ID, int index)  streamer;
-        public (User value, int ID, int index)          user;
+        public (UserData value, int ID, int index)          user;
         public (CommentData value, int ID, int index)   comment;
 
         public StreamerData Streamer => streamer.value;
 
-        public User User => user.value;
+        public UserData User => user.value;
 
         public CommentData CommentData => comment.value;
     }
@@ -543,7 +543,7 @@ public class StreamerManager : NetworkBehaviour
         var timerDestroy = TimersManager.Create(30, () =>
         {
             commentData.user.Aplicate(commentData.comment.Views, commentData.comment.Damage, commentData.textIP);
-        });
+        }).SetMultiply(player.multiply);
 
         commentData.onDestroy += () => timerDestroy.Stop();
     }
@@ -602,7 +602,7 @@ public class StreamerManager : NetworkBehaviour
 
         GameManager.instance.StartCoroutine(pool.CreatePool(30, ()=> eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato.Invoke()));
 
-        GameManager.instance.StartCoroutine(User.LoadPerfilSprite());
+        GameManager.instance.StartCoroutine(UserData.LoadPerfilSprite());
     }
 
     public void EndLoad()

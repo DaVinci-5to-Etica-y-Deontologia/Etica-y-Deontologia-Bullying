@@ -9,7 +9,7 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
 
     public float timeOnCreate;
 
-    public User user => _user;
+    public UserData user => _user;
 
     public float Delay => comment.Deley;
 
@@ -31,7 +31,7 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
 
     public event System.Action onDestroy;
 
-    User _user;
+    UserData _user;
 
     public void Destroy()
     {

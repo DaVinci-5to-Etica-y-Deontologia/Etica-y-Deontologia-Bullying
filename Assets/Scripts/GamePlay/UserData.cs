@@ -253,11 +253,11 @@ public class UserParent : DataElement<UserParent>
     {
         this.stream = stream;
 
-        _coolDownAdmonition = TimersManager.Create(15);
+        _coolDownAdmonition = TimersManager.Create(15).SetInitCurrent(0).SetMultiply(player.multiply);
 
-        _moralIndexCooldown = TimersManager.Create<float>(() => _newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s).Stop();
+        _moralIndexCooldown = TimersManager.Create<float>(() => _newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s).SetMultiply(player.multiply).Stop();
 
-        _moralRangeCooldown = TimersManager.Create<float>(() => _newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s).Stop();
+        _moralRangeCooldown = TimersManager.Create<float>(() => _newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s).SetMultiply(player.multiply).Stop();
 
         _moralRangeCooldown.onChange += _moralRangeCooldown_onChange;
 
@@ -273,7 +273,7 @@ public class UserParent : DataElement<UserParent>
         colorText = colorText.ChangeAlphaCopy(1);
 
         if (IsServer)
-            _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment);
+            _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment).SetMultiply(player.multiply);
     }
 
     public UserParent(int id)
@@ -302,7 +302,7 @@ public class UserParent : DataElement<UserParent>
 }
 
 [System.Serializable]
-public class User : UserParent
+public class UserData : UserParent
 {
     static protected Sprite[] cuerpos;
     static protected Sprite[] cabezas;
@@ -401,7 +401,7 @@ public class User : UserParent
         boquita.SetImage(image, dataBase.materialForUsers);
     }
 
-    public User(int id) : base(id)
+    public UserData(int id) : base(id)
     {
         ojo.Set(ojos.Length);
         boquita.Set(boquitas.Length);

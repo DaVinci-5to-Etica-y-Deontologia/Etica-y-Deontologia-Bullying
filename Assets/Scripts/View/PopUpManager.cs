@@ -68,7 +68,7 @@ public abstract class PopUpComment : PopUpElement
 
     protected CommentData comment;
 
-    protected User user;
+    protected UserData user;
 
     protected abstract bool ExecutePopUp { get; }
 
