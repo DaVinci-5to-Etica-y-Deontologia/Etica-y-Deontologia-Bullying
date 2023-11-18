@@ -48,6 +48,8 @@ public class StreamerManager : NetworkBehaviour
 
     public static StreamerManager instance;
 
+    public static Dictionary<string, System.Action<DataRpc, SearchResult>> actionsMap = new();
+
     public BD dataBase;
 
     public EventManager eventManager;
@@ -94,6 +96,8 @@ public class StreamerManager : NetworkBehaviour
     Timer delay;
 
     Dictionary<int,string> buffer = new();
+
+
 
     [SerializeField]
     AuxWrapper<DataRpc[]> listRpc;
@@ -165,17 +169,19 @@ public class StreamerManager : NetworkBehaviour
 
             UnityEngine.Debug.Log($"recibido:\n{dataRpc}");
 
+            actionsMap[dataRpc.action].Invoke(dataRpc, srch);
+
             switch (dataRpc.action)
             {
-                case ActBan:
+                case Actions.Ban.className:
                 {
-                    srch.User.Ban();
+                    
                 }
                 break;
 
                 case ActAdmonition:
                 {
-                    srch.User.Admonition(srch.comment.index);
+                    
                 }
                 break;
 
@@ -568,9 +574,9 @@ public class StreamerManager : NetworkBehaviour
 
     private void Update()
     {
-        while (FilterRpc.Count > 0)
+        while (DataRpc.Count > 0)
         {
-            instance.Rpc_Execute(FilterRpc.definitiveList);
+            instance.Rpc_Execute(DataRpc.definitiveList);
         }
 
         if (!started)
@@ -603,6 +609,10 @@ public class StreamerManager : NetworkBehaviour
         GameManager.instance.StartCoroutine(pool.CreatePool(30, ()=> eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato.Invoke()));
 
         GameManager.instance.StartCoroutine(UserData.LoadPerfilSprite());
+
+        actionsMap.Add(Actions.Ban.className, UserData.Ban);
+        actionsMap.Add(Actions.Ban.className, UserData.Ban);
+        actionsMap.Add(Actions.Ban.className, UserData.Ban);
     }
 
     public void EndLoad()
@@ -713,44 +723,14 @@ public class Actions
 [System.Serializable]
 public struct DataRpc
 {
-    [SerializeReference]
-    public Actions action;
+    public string action;
 
     public string direction;
 
     public string data;
 
-    public static void Create(Actions action)
-    {
-        //UnityEngine.Debug.Log(action);
-        FilterRpc.Filter(new DataRpc() { action = action });
-    }
-    public static void Create(Actions action, string direction)
-    {
-        //UnityEngine.Debug.Log(action + ": " + direction)
-        FilterRpc.Filter(new DataRpc() { action = action, direction = direction });
-    }
+    Actions _action;
 
-    public static void Create(Actions action, string direction, string data)
-    {
-        FilterRpc.Filter(new DataRpc() { action = action, direction = direction, data = data });
-    }
-
-    public static void Create(Actions action, string direction, object data)
-    {
-        //UnityEngine.Debug.Log(action + ": " + direction + " " + JsonUtility.ToJson(data, true));
-        FilterRpc.Filter(new DataRpc() { action = action, direction = direction, data = JsonUtility.ToJson(data) });
-    }
-
-    public override string ToString()
-    {
-        return $"accion: {action}\ndireccion: {direction}\ndata: {data}";
-    }
-}
-
-
-public class FilterRpc
-{    
     static Queue<DataRpc> streamsRequests = new();
     static Queue<DataRpc> usersRequests = new();
     static Queue<DataRpc> commentsRequests = new();
@@ -759,9 +739,37 @@ public class FilterRpc
 
     public static int Count => streamsRequests.Count + usersRequests.Count + commentsRequests.Count;
 
-    const int limitRpc = 5;
+    const int limitRpc = 3000; // el limite de caracteres es de: 32767
 
     static int sum;
+
+    public static void Create(Actions action)
+    {
+        //UnityEngine.Debug.Log(action);
+        Filter(new DataRpc() { _action = action });
+    }
+    public static void Create(Actions action, string direction)
+    {
+        //UnityEngine.Debug.Log(action + ": " + direction)
+        Filter(new DataRpc() { _action = action, direction = direction });
+    }
+
+    public static void Create(Actions action, string direction, string data)
+    {
+        Filter(new DataRpc() { _action = action, direction = direction, data = data });
+    }
+
+    public static void Create(Actions action, string direction, object data)
+    {
+        //UnityEngine.Debug.Log(action + ": " + direction + " " + JsonUtility.ToJson(data, true));
+        Filter(new DataRpc() { _action = action, direction = direction, data = JsonUtility.ToJson(data) });
+    }
+
+    public override string ToString()
+    {
+        return $"accion: {_action}\ndireccion: {direction}\ndata: {data}";
+    }
+   
 
     //static bool finish;
 
@@ -785,7 +793,7 @@ public class FilterRpc
 
             var aux = JsonUtility.ToJson(new AuxWrapper<DataRpc[]>(_definitiveList.ToArray()));
 
-            
+
             UnityEngine.Debug.Log("JSON enviado: \n" + aux + "\n\n");
 
             /*
@@ -801,19 +809,24 @@ public class FilterRpc
             return aux;
         }
     }
-    
+
+
     public static void Filter(DataRpc dataRpc)
     {
         //UnityEngine.Debug.Log("Recibí la petición de: " + dataRpc.ToString());
 
-        if (dataRpc.action is ActionStream)
+        dataRpc.action = dataRpc._action.className;
+
+        if (dataRpc._action is ActionStream)
             streamsRequests.Enqueue(dataRpc);
-        else if (dataRpc.action is ActionUser)
+        else if (dataRpc._action is ActionUser)
             usersRequests.Enqueue(dataRpc);
-        else if (dataRpc.action is ActionComment)
+        else if (dataRpc._action is ActionComment)
             commentsRequests.Enqueue(dataRpc);
     }
 }
+
+
 
 
 

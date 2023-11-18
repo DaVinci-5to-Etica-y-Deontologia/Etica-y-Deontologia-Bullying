@@ -82,6 +82,20 @@ public class UserParent : DataElement<UserParent>
 
     StreamerData stream;
 
+    #region suscription
+
+    public static void Ban(DataRpc dataRpc, StreamerManager.SearchResult srch)
+    {
+        srch.User.Ban();
+    }
+
+    public static void Admonition(DataRpc dataRpc, StreamerManager.SearchResult srch)
+    {
+        srch.User.Admonition(srch.comment.index);
+    }
+
+    #endregion  
+
 
     #region Moderator
 
