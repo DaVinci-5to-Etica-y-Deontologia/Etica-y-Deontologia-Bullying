@@ -683,7 +683,7 @@ public struct DataRpc
 
     public static int Count => streamsRequests.Count + usersRequests.Count + commentsRequests.Count;
 
-    const int limitRpc = 3000; // el limite de caracteres es de: 32767
+    const int limitRpc = 30000; // el limite de caracteres es de: 32767
 
     static int sum;
 
@@ -715,15 +715,24 @@ public struct DataRpc
     }
    
 
-    //static bool finish;
+    static bool finish;
 
     static void Concat(Queue<DataRpc> dataRpcs)
     {
-        while (dataRpcs.Count > 0 && sum < limitRpc)
+        while (dataRpcs.Count > 0 && !finish)
         {
-            _definitiveList.Add(dataRpcs.Dequeue());
+            if((sum + dataRpcs.Peek().data.Length) < limitRpc)
+            {
+                sum += dataRpcs.Peek().data.Length;
+            }
+            else
+            {
+                finish = true;
+                break;
+            }
+            
 
-            sum++;
+            _definitiveList.Add(dataRpcs.Dequeue());
         }
     }
 
@@ -748,7 +757,7 @@ public struct DataRpc
 
             _definitiveList.Clear();
             sum = 0;
-            //finish = false;
+            finish = false;
 
             return aux;
         }
