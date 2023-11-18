@@ -149,6 +149,32 @@ public class StreamerManager : NetworkBehaviour
         aux.SetActiveGameObject(true);
     }
 
+    public static SearchResult Search(string dir)
+    {
+        SearchResult searchResult = new SearchResult();
+
+        if (string.IsNullOrEmpty(dir))
+            return searchResult;
+
+        var splirDir = dir.Split('.');
+
+        if (splirDir.Length > 0)
+        {
+            searchResult.streamer = instance[int.Parse(splirDir[0])];
+
+            if (searchResult.Streamer != null && splirDir.Length > 1)
+            {
+                searchResult.user = searchResult.Streamer[int.Parse(splirDir[1])];
+
+                if (searchResult.User != null && splirDir.Length > 2)
+                {
+                    searchResult.comment = searchResult.User[int.Parse(splirDir[2])];
+                }
+            }
+        }
+
+        return searchResult;
+    }
 
     [Rpc(RpcSources.All,RpcTargets.All)]
     public void Rpc_Execute(string json)
@@ -171,56 +197,6 @@ public class StreamerManager : NetworkBehaviour
     }
 
 
-    //*********************************************
-    void AddUser(string jsonData, StreamerManager.SearchResult srch)
-    {
-        srch.Streamer.AddUser(jsonData);
-    }
-    void RemoveUser(string jsonData, StreamerManager.SearchResult srch)
-    {
-        srch.Streamer.RemoveUser(srch.user.index);
-    }
-    void CreateStream(string jsonData, StreamerManager.SearchResult srch)
-    {
-        if (IsServer)
-        {
-            DataRpc.Create(Actions.AddStream, "", new StreamerData(streamersData.streamers.Prepare(), dataBase.SelectStreamer()));
-        }
-    }
-    void AddNewStream(string jsonData, StreamerManager.SearchResult srch)
-    {
-        UnityEngine.Debug.Log("Se ejecuto el add stream");
-
-        bool aux = Count == 0;
-
-        instance.AddStream(jsonData);
-
-        if (aux)
-        {
-            ChangeStream(0);
-        }
-    }
-    void EnableStream(string jsonData, StreamerManager.SearchResult srch)
-    {
-        srch.streamer.value.SetEnable();
-    }
-    void StartUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
-    {
-        if (IsServer)
-        {
-            UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
-            Rpc_GlobalPause();
-            instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
-        }
-    }
-    void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
-    {
-        UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
-        GlobalUnPause();
-    }
-    //*********************************************
-
-
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void Rpc_GlobalPause()
     {
@@ -236,33 +212,6 @@ public class StreamerManager : NetworkBehaviour
         TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
         
         UnityEngine.Debug.Log("El juego se des pauso");
-    }
-
-    public static SearchResult Search(string dir)
-    {
-        SearchResult searchResult = new SearchResult();
-
-        if (string.IsNullOrEmpty(dir))
-            return searchResult;
-
-        var splirDir = dir.Split('.');
-
-        if(splirDir.Length > 0)
-        {
-            searchResult.streamer = instance[int.Parse(splirDir[0])];
-
-            if(searchResult.Streamer != null && splirDir.Length > 1)
-            {
-                searchResult.user = searchResult.Streamer[int.Parse(splirDir[1])];
-
-                if(searchResult.User != null && splirDir.Length > 2)
-                {
-                    searchResult.comment = searchResult.User[int.Parse(splirDir[2])];
-                }
-            }
-        }
-
-        return searchResult;
     }
 
     public void AddStream(string streamJson)
@@ -494,6 +443,53 @@ public class StreamerManager : NetworkBehaviour
         }).SetMultiply(player.multiply);
 
         commentData.onDestroy += () => timerDestroy.Stop();
+    }
+
+    void AddUser(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.Streamer.AddUser(jsonData);
+    }
+    void RemoveUser(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.Streamer.RemoveUser(srch.user.index);
+    }
+    void CreateStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        if (IsServer)
+        {
+            DataRpc.Create(Actions.AddStream, "", new StreamerData(streamersData.streamers.Prepare(), dataBase.SelectStreamer()));
+        }
+    }
+    void AddNewStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        UnityEngine.Debug.Log("Se ejecuto el add stream");
+
+        bool aux = Count == 0;
+
+        instance.AddStream(jsonData);
+
+        if (aux)
+        {
+            ChangeStream(0);
+        }
+    }
+    void EnableStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.streamer.value.SetEnable();
+    }
+    void StartUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
+    {
+        if (IsServer)
+        {
+            UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
+            Rpc_GlobalPause();
+            instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
+        }
+    }
+    void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
+    {
+        UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
+        GlobalUnPause();
     }
 
     void MyStart()
