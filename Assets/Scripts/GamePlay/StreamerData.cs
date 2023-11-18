@@ -145,7 +145,7 @@ public class StreamerData : DataElement<StreamerData>
 
         Users(streamer.minimalViews * 2);
 
-        DataRpc.Create(Actions.ActEnableStream, textIP);
+        DataRpc.Create(Actions.EnableStream, textIP);
     }
 
     public StreamerData(int ID, int streamID)

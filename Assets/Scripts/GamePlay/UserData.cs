@@ -88,13 +88,34 @@ public class UserParent : DataElement<UserParent>
     {
         srch.User.Ban();
     }
-
     public static void Admonition(string jsonData, StreamerManager.SearchResult srch)
     {
         srch.User.Admonition(srch.comment.index);
     }
+    public static void Picantear(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.User.Picantear();
+    }
+    public static void ChangeMoral(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.User.ChangeMoral();
+    }
+    public static void SuspectChange(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.User.SuspectChange(jsonData);
+    }
+    public static void AddComment(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.User.AddComment(jsonData);
+    }
+    public static void RemoveComment(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.User.RemoveComment(srch.comment.index);
+    }
 
-    #endregion  
+
+
+    #endregion
 
 
     #region Moderator

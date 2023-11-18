@@ -98,7 +98,6 @@ public class StreamerManager : NetworkBehaviour
     Dictionary<int,string> buffer = new();
 
 
-
     [SerializeField]
     AuxWrapper<DataRpc[]> listRpc;
 
@@ -159,125 +158,68 @@ public class StreamerManager : NetworkBehaviour
 
         listRpc = JsonUtility.FromJson<AuxWrapper<DataRpc[]>>(json);
 
-        
-
         for (int i = 0; i < listRpc.data.Length; i++)
         {
             var dataRpc = listRpc.data[i];
 
             var srch = Search(dataRpc.direction);
 
-            UnityEngine.Debug.Log($"recibido:\n{dataRpc}");
+            UnityEngine.Debug.Log($"Recibido:\n{dataRpc}");
 
-            actionsMap[dataRpc.action].Invoke(dataRpc, srch);
-
-            switch (dataRpc.action)
-            {
-                case Actions.Ban.className:
-                {
-                    
-                }
-                break;
-
-                case ActAdmonition:
-                {
-                    
-                }
-                break;
-
-                case ActPicantear:
-                {
-                    srch.User.Picantear();
-                }
-                break;
-
-                case ActCorromper:
-                {
-                    srch.User.ChangeMoral();
-                }
-                break;
-
-                case ActSus:
-                {
-                    srch.User.SuspectChange(dataRpc.data);
-                }
-                break;
-
-                case ActAddUser:
-                {
-                    srch.Streamer.AddUser(dataRpc.data);
-                }
-                break;
-
-                case ActRemoveUser:
-                {
-                    srch.Streamer.RemoveUser(srch.user.index);
-                }
-                break;
-
-                case ActAddComment:
-                {
-                    srch.User.AddComment(dataRpc.data);
-                }
-                break;
-
-                case ActRemoveComment:
-                {
-                    srch.User.RemoveComment(srch.comment.index);
-                }
-                break;
-
-                case ActCreateStream:
-                {
-                    if (IsServer)
-                    {
-                        DataRpc.Create(Actions.AddStream, "", new StreamerData(streamersData.streamers.Prepare(), dataBase.SelectStreamer()));
-                    }
-                }
-                break;
-
-                case ActAddStream:
-                {
-                    UnityEngine.Debug.Log("Se ejecuto el add stream");
-
-                    bool aux = Count == 0;
-
-                    instance.AddStream(dataRpc.data);
-
-                    if (aux)
-                    {
-                        ChangeStream(0);
-                    }
-                }
-                break;
-
-                case ActEnableStream:
-                {
-                    srch.streamer.value.SetEnable();
-                }
-                break;
-
-                case ActStartUpdateStreamers:
-                {
-                    if (IsServer)
-                    {
-                        UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
-                        Rpc_GlobalPause();
-                        instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
-                    }
-                }
-                break;
-
-                case ActEndUpdateStreamers:
-                {
-                    //Reanudo la partida para todos
-                    UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
-                    GlobalUnPause();
-                }
-                break;
-            }            
+            actionsMap[dataRpc.action].Invoke(dataRpc.data, srch);
         }
     }
+
+
+    //*********************************************
+    void AddUser(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.Streamer.AddUser(jsonData);
+    }
+    void RemoveUser(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.Streamer.RemoveUser(srch.user.index);
+    }
+    void CreateStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        if (IsServer)
+        {
+            DataRpc.Create(Actions.AddStream, "", new StreamerData(streamersData.streamers.Prepare(), dataBase.SelectStreamer()));
+        }
+    }
+    void AddNewStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        UnityEngine.Debug.Log("Se ejecuto el add stream");
+
+        bool aux = Count == 0;
+
+        instance.AddStream(jsonData);
+
+        if (aux)
+        {
+            ChangeStream(0);
+        }
+    }
+    void EnableStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.streamer.value.SetEnable();
+    }
+    void StartUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
+    {
+        if (IsServer)
+        {
+            UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
+            Rpc_GlobalPause();
+            instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
+        }
+    }
+    void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
+    {
+        UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
+        GlobalUnPause();
+    }
+    //*********************************************
+
 
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void Rpc_GlobalPause()
@@ -611,8 +553,20 @@ public class StreamerManager : NetworkBehaviour
         GameManager.instance.StartCoroutine(UserData.LoadPerfilSprite());
 
         actionsMap.Add(Actions.Ban.className, UserData.Ban);
-        actionsMap.Add(Actions.Ban.className, UserData.Ban);
-        actionsMap.Add(Actions.Ban.className, UserData.Ban);
+        actionsMap.Add(Actions.Admonition.className, UserData.Admonition);
+        actionsMap.Add(Actions.Picantear.className, UserData.Picantear);
+        actionsMap.Add(Actions.Corromper.className, UserData.ChangeMoral);
+        actionsMap.Add(Actions.Suspect.className, UserData.SuspectChange);
+        actionsMap.Add(Actions.AddComment.className, UserData.AddComment);
+        actionsMap.Add(Actions.RemoveComment.className, UserData.RemoveComment);
+
+        actionsMap.Add(Actions.AddUser.className, AddUser);
+        actionsMap.Add(Actions.RemoveUser.className, RemoveUser);
+        actionsMap.Add(Actions.CreateStream.className, CreateStream);
+        actionsMap.Add(Actions.AddStream.className, AddNewStream);
+        actionsMap.Add(Actions.EnableStream.className, EnableStream);
+        actionsMap.Add(Actions.StartUpdateStreamers.className, StartUpdateStreamers);
+        actionsMap.Add(Actions.EndUpdateStreamers.className, EndUpdateStreamers);
     }
 
     public void EndLoad()
@@ -673,7 +627,7 @@ public class Actions
 
     public static Actions EndUpdateStreamers { get; private set; } = new ActEndUpdateStreamers();
 
-    public static Actions ActEnableStream { get; private set; } = new ActEnableStream();
+    public static Actions EnableStream { get; private set; } = new ActEnableStream();
 
     public override bool Equals(object obj)
     {
