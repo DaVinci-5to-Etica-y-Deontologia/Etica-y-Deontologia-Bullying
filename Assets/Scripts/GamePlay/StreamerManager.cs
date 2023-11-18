@@ -690,12 +690,12 @@ public struct DataRpc
     public static void Create(Actions action)
     {
         //UnityEngine.Debug.Log(action);
-        Filter(new DataRpc() { _action = action });
+        Filter(new DataRpc() { _action = action, data = string.Empty });
     }
     public static void Create(Actions action, string direction)
     {
         //UnityEngine.Debug.Log(action + ": " + direction)
-        Filter(new DataRpc() { _action = action, direction = direction });
+        Filter(new DataRpc() { _action = action, direction = direction, data = string.Empty });
     }
 
     public static void Create(Actions action, string direction, string data)
