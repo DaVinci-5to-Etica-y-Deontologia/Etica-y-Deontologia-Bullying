@@ -504,9 +504,9 @@ public class StreamerManager : NetworkBehaviour
         }
     }
 
-    private void Update()
+    public override void FixedUpdateNetwork()
     {
-        while (DataRpc.Count > 0)
+        if (DataRpc.Count > 0)
         {
             instance.Rpc_Execute(DataRpc.definitiveList);
         }
@@ -516,7 +516,7 @@ public class StreamerManager : NetworkBehaviour
             return;
         }
 
-        while(eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16)
+        while (eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16)
         {
             eventQueue.Dequeue().Invoke();
         }
