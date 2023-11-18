@@ -711,7 +711,7 @@ public struct DataRpc
 
     public override string ToString()
     {
-        return $"accion: {_action}\ndireccion: {direction}\ndata: {data}";
+        return $"accion: {action}\ndireccion: {direction}\ndata: {data}";
     }
    
 
@@ -747,7 +747,7 @@ public struct DataRpc
             var aux = JsonUtility.ToJson(new AuxWrapper<DataRpc[]>(_definitiveList.ToArray()));
 
 
-            UnityEngine.Debug.Log("JSON enviado: \n" + aux + "\n\n");
+            UnityEngine.Debug.Log($"JSON enviado: {aux.Length} de {sum} \n  {aux}  \n\n");
 
             /*
             UnityEngine.Debug.Log("Streamer Request Count: " + streamsRequests.Count);
