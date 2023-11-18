@@ -33,6 +33,8 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
 
     UserData _user;
 
+
+
     public void Destroy()
     {
         onDestroy?.Invoke();

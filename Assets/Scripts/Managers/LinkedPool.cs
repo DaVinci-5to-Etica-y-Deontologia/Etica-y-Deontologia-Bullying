@@ -45,7 +45,7 @@ public class LinkedPool<T> where T : IPoolElement<T>
         action?.Invoke();
     }
 
-    public IPoolElement<T> Obtain()
+    public T Obtain()
     {
         if (first == null)
         {
@@ -62,7 +62,7 @@ public class LinkedPool<T> where T : IPoolElement<T>
 
         ret.inPool = false;
 
-        return ret;
+        return (T)ret;
     }
 
     public void Return(IPoolElement<T> poolElement)
@@ -133,8 +133,6 @@ public interface IPoolElement<T> where T : IPoolElement<T>
     void Destroy();
 
     bool inPool { get; set; }
-
-    T Self => (T)this;
 }
 
 

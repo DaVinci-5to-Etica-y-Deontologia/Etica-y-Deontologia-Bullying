@@ -147,20 +147,18 @@ public class UserParent : DataElement<UserParent>
     #endregion
 
     #region rpc
-    public void AddComment(string json)
+    public void AddComment(string jsonCommentData)
     {
-        var newCommentData = poolCommentData.Obtain().Self;
+        var newCommentData = poolCommentData.Obtain();
 
-        var auxPic = new Internal.Pictionary<int, CommentData>(0, newCommentData);
-
-        JsonUtility.FromJsonOverwrite(json, auxPic);
+        JsonUtility.FromJsonOverwrite(jsonCommentData, newCommentData);
 
         newCommentData.Init(stream.ID, ID);
 
         if (IsServer)
             CoolDown = newCommentData.Delay;
 
-        comments.Add(auxPic);
+        comments.Add(newCommentData.CreatePic());
 
         onCreateComment?.Invoke(newCommentData);
     }
@@ -216,15 +214,13 @@ public class UserParent : DataElement<UserParent>
             if (!Enable)
                 return;
 
-            var aux = dataBase.SelectComment(MoralIndex, MoralRange);
+            var auxFlyweight = dataBase.SelectComment(MoralIndex, MoralRange);
 
-            var newCommentData = poolCommentData.Obtain().Self;
+            var newCommentData = poolCommentData.Obtain();
 
-            var auxPic = comments.Prepare(newCommentData);
+            newCommentData.Create(comments.Prepare(), auxFlyweight);
 
-            newCommentData.Create(auxPic.Key, aux);
-
-            DataRpc.Create(Actions.AddComment, textIP, auxPic);
+            DataRpc.Create(Actions.AddComment, textIP, newCommentData);
 
             newCommentData.Destroy();
         };

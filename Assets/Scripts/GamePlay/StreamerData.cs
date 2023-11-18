@@ -73,13 +73,9 @@ public class StreamerData : DataElement<StreamerData>
     {
         for (int i = 1; i <= number; i++)
         {
-            var idUser = users.Prepare(new UserData(users.lastID + 1));
+            var userData = new UserData(users.Prepare());
 
-            Actions action = Actions.AddUser;
-
-            string ip = textIP;
-
-            DataRpc.Create(action, ip, idUser);
+            DataRpc.Create(Actions.AddUser, textIP, userData);
         }
     }
 
@@ -94,15 +90,15 @@ public class StreamerData : DataElement<StreamerData>
     }
 
     //rpc
-    public void AddUser(string jsonPic)
+    public void AddUser(string jsonUser)
     {
-        var aux = JsonUtility.FromJson<Internal.Pictionary<int, UserData>>(jsonPic);
+        var aux = JsonUtility.FromJson<UserData>(jsonUser);
 
-        users.Add(aux).Value.Create(this);
+        users.Add(aux.CreatePic<UserData>()).Value.Create(this);
 
-        aux.Value.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
+        aux.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
 
-        aux.Value.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);        
+        aux.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);        
     }
 
     //rpc
@@ -136,10 +132,8 @@ public class StreamerData : DataElement<StreamerData>
         Viewers.onChange += InternalShowEnd;
     }
 
-    public void Create(int ID)
+    public void Create()
     {
-        this.ID = ID;
-
         Init();
 
         Life.Set(streamer.Life);
@@ -154,8 +148,9 @@ public class StreamerData : DataElement<StreamerData>
         DataRpc.Create(Actions.ActEnableStream, textIP);
     }
 
-    public StreamerData(int streamID)
+    public StreamerData(int ID, int streamID)
     {
+        this.ID = ID;
         this.streamID = streamID;
     }
 }
@@ -181,11 +176,15 @@ public abstract class DataElement<T> : IDataElement,IDirection where T: DataElem
     
     public bool IsServer => parent.IsServer;
 
-    public Internal.Pictionary<int, T> Prepare()
+    public Internal.Pictionary<int, T> CreatePic()
     {
         return new Internal.Pictionary<int, T>(ID, (T)this);
     }
 
+    public Internal.Pictionary<int, H> CreatePic<H>() where H : T
+    {
+        return new Internal.Pictionary<int, H>(ID, (H)this);
+    }
 }
 
 public interface IDataElement

@@ -137,7 +137,7 @@ public class StreamerManager : NetworkBehaviour
 
     static public void CreateComment(CommentData obj)
     {
-        var aux = instance.pool.Obtain().Self;
+        var aux = instance.pool.Obtain();
 
         aux.transform.SetAsLastSibling();
 
@@ -225,7 +225,7 @@ public class StreamerManager : NetworkBehaviour
                 {
                     if (IsServer)
                     {
-                        DataRpc.Create(Actions.AddStream, "", streamersData.streamers.Prepare(new StreamerData(dataBase.SelectStreamer())));
+                        DataRpc.Create(Actions.AddStream, "", new StreamerData(streamersData.streamers.Prepare(), dataBase.SelectStreamer()));
                     }
                 }
                 break;
@@ -317,19 +317,19 @@ public class StreamerManager : NetworkBehaviour
         return searchResult;
     }
 
-    public void AddStream(string json)
+    public void AddStream(string streamJson)
     {
-        var streamerPic = JsonUtility.FromJson<Internal.Pictionary<int, StreamerData>>(json);
+        var streamer = JsonUtility.FromJson<StreamerData>(streamJson);
 
-        streamersData.streamers.Add(streamerPic);
+        streamersData.streamers.Add(streamer.CreatePic());
 
-        streamerPic.Value.Create(streamerPic.Key);
+        streamer.Create();
 
-        onStreamerCreate.delegato?.Invoke(streamerPic.Value);
+        onStreamerCreate.delegato?.Invoke(streamer);
 
         Count++;
 
-        streamerPic.Value.onEndStream += (s) =>
+        streamer.onEndStream += (s) =>
         {
             if (Count > 0)
                 Count--;
@@ -337,7 +337,7 @@ public class StreamerManager : NetworkBehaviour
 
         if (IsServer)
         {
-            streamerPic.Value.onCreateComment += CommentDataDelete_onCreateComment;
+            streamer.onCreateComment += CommentDataDelete_onCreateComment;
         }
     }
 
@@ -759,7 +759,7 @@ public class FilterRpc
 
     public static int Count => streamsRequests.Count + usersRequests.Count + commentsRequests.Count;
 
-    const int limitRpc = 2;
+    const int limitRpc = 5;
 
     static int sum;
 
