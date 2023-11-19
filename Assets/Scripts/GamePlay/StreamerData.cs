@@ -41,7 +41,7 @@ public class StreamerData : DataElement<StreamerData>
 
     //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) && Enable ? StreamState.Fallido : StreamState.Empate);
 
-    public StreamState State => !Enable ? StreamState.Empate : ( (Life.current == 0 || Viewers.current <= streamer.minimalViews)  ? StreamState.Fallido : StreamState.Completado);
+    public StreamState State => Enable ? StreamState.Empate : ( (Life.current == 0 || Viewers.current <= streamer.minimalViews)  ? StreamState.Fallido : StreamState.Completado);
 
     protected override IDataElement parent => streamerManager;
 
@@ -125,7 +125,7 @@ public class StreamerData : DataElement<StreamerData>
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        if ((Life.current == 0 || Viewers.current <= streamer.minimalViews) && Enable)
+        if ((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable)
         {
             Stop();
             Enable = false;
@@ -177,7 +177,7 @@ public abstract class DataElement<T> : IDataElement,IDirection where T: DataElem
     protected abstract IDataElement parent { get; }
 
     [field: SerializeField]
-    public virtual bool Enable { get; set; } = false;
+    public virtual bool Enable { get; protected set; } = false;
 
     public BD dataBase => parent.dataBase;
 
