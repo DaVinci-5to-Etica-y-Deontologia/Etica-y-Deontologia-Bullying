@@ -104,6 +104,12 @@ public class StreamerManager : NetworkBehaviour
     [SerializeField]
     AuxWrapper<DataRpc[]> listRpc;
 
+
+    [field: SerializeField]
+    public int Count { get; set; }
+
+    public StreamerData Actual { get; private set; }
+
     public int IndexStreamWatch
     {
         get => _indexStreamWatch;
@@ -129,12 +135,8 @@ public class StreamerManager : NetworkBehaviour
         }
     }
 
-    [field: SerializeField]
-    public int Count { get; set; }
-
     public bool IsServer => Runner.IsServer || Runner.IsSinglePlayer;
 
-    public StreamerData Actual { get; private set; }
     
 
     static public CommentView SpawnComment()
@@ -193,8 +195,6 @@ public class StreamerManager : NetworkBehaviour
         streamer.Create();
 
         instance.onStreamerCreate.delegato?.Invoke(streamer);
-
-        instance.Count++;
     }
 
 
@@ -354,7 +354,6 @@ public class StreamerManager : NetworkBehaviour
             {
                 stream.Value.Init();
                 onStreamerCreate?.delegato.Invoke(stream.Value);
-                Count++;
 
                 foreach (var user in stream.Value.users)
                 {

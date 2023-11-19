@@ -170,6 +170,8 @@ public class StreamerData : DataElement<StreamerData>
         if (IsServer)
             Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
 
+        streamerParent.streamerManager.Count++;
+
         onEndStream += (s) =>
         {
             if (streamerParent.streamerManager.Count > 0)
