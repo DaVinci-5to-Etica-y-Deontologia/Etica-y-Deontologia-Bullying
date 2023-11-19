@@ -364,6 +364,7 @@ public class StreamerManager : NetworkBehaviour
 
                     foreach (var comment in user.Value.comments)
                     {
+                        comment.Value.Parent = UserData.poolCommentData;
                         comment.Value.Init(stream.Key, user.Key);
                     }
                 }

@@ -10,7 +10,7 @@ using System.Linq;
 [System.Serializable]
 public class UserParent : DataElement<UserParent>
 {
-    static LinkedPool<CommentData> poolCommentData = new LinkedPool<CommentData>(new CommentData());
+    public static LinkedPool<CommentData> poolCommentData = new LinkedPool<CommentData>(new CommentData());
 
     [field: SerializeField]
     public DataPic<CommentData> comments { get; private set; } = new();
@@ -110,7 +110,7 @@ public class UserParent : DataElement<UserParent>
     }
     public static void RemoveComment(string jsonData, StreamerManager.SearchResult srch)
     {
-        Debug.Log("user: " + (srch.User!=null) + " Comment: " + (srch.CommentData != null));
+        //Debug.Log("user: " + (srch.User!=null) + " Comment: " + (srch.CommentData != null));
         srch.User.RemoveComment(srch.comment.index);
     }
 
@@ -124,7 +124,7 @@ public class UserParent : DataElement<UserParent>
 
         JsonUtility.FromJsonOverwrite(jsonCommentData, newCommentData);
 
-        Debug.Log("Tengo un padre desp de overrider? " + (poolCommentData != null));
+        //Debug.Log("Tengo un padre desp de overrider? " + (poolCommentData != null));
 
         newCommentData.Init(stream.ID, ID);
 
