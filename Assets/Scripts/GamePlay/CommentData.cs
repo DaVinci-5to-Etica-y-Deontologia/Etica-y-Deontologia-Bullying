@@ -35,14 +35,6 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
 
     Timer timerDestroy;
 
-    public CommentData()
-    {
-        timerDestroy = TimersManager.Create(30, () =>
-        {
-            user.Aplicate(comment.Views, comment.Damage, textIP);
-        }).SetMultiply(player.multiply).Stop();
-    }
-
     public void Destroy()
     {
         timerDestroy?.Stop();
@@ -59,7 +51,10 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
     {
         _user = StreamerManager.instance[idStream].value?[idUser].value;
         if(IsServer)
-            timerDestroy?.Reset();
+            timerDestroy = TimersManager.Create(30, () =>
+            {
+                user.Aplicate(comment.Views, comment.Damage, textIP);
+            }).Stop().SetMultiply(player.multiply);
     }
 
     public void Create(int id, int idComment)
