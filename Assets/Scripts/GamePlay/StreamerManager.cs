@@ -463,6 +463,8 @@ public class StreamerManager : NetworkBehaviour
 
         streamersData.endGame.Reset();
 
+        player.Moderator = !(Runner.SessionInfo.PlayerCount % 2 == 0);
+
         if (IsServer)
         {
             CreateFirstStream();

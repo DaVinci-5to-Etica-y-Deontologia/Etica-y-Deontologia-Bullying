@@ -122,11 +122,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
     
-    public void OnConnectedToServer(NetworkRunner runner) 
-    {
-        //Debug.Log("ON COONECTED TO SERVER[Custom Msg] PLAYERS COUNT: " + runner.SessionInfo.PlayerCount + "  -  " + (runner.SessionInfo.PlayerCount % 2 == 0));
-        _player.Moderator = !(runner.SessionInfo.PlayerCount % 2 == 0);
-    }
+    public void OnConnectedToServer(NetworkRunner runner) { }
 
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) 
     {
