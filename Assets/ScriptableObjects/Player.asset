@@ -16,3 +16,4 @@ MonoBehaviour:
   NumerOfCommentsToView: 30
   InstigatorCooldownFirst: 3
   InstigatorCooldownSecond: 5
+  multiply: 1
