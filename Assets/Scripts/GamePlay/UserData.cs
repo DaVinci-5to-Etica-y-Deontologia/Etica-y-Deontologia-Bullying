@@ -188,6 +188,8 @@ public class UserParent : DataElement<UserParent>
 
         JsonUtility.FromJsonOverwrite(jsonCommentData, newCommentData);
 
+        newCommentData.Parent = poolCommentData;
+
         newCommentData.Init(stream.ID, ID);
 
         if (IsServer)

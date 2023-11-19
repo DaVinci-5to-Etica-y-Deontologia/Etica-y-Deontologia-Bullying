@@ -231,11 +231,6 @@ public class StreamerManager : NetworkBehaviour
             if (Count > 0)
                 Count--;
         };
-
-        if (IsServer)
-        {
-            streamer.onCreateComment += CommentDataDelete_onCreateComment;
-        }
     }
 
 
@@ -427,16 +422,6 @@ public class StreamerManager : NetworkBehaviour
     void CommentLeaveQueue(CommentData commentData)
     {
         onLeaveComment.delegato.Invoke(commentData);
-    }
-
-    void CommentDataDelete_onCreateComment(CommentData commentData)
-    {
-        var timerDestroy = TimersManager.Create(30, () =>
-        {
-            commentData.user.Aplicate(commentData.comment.Views, commentData.comment.Damage, commentData.textIP);
-        }).SetMultiply(player.multiply);
-
-        commentData.onDestroy += () => timerDestroy.Stop();
     }
 
     void AddUser(string jsonData, StreamerManager.SearchResult srch)
