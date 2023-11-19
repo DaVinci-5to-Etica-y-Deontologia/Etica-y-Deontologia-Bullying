@@ -477,16 +477,13 @@ public class StreamerManager : NetworkBehaviour
         }
     }
 
-    public override void FixedUpdateNetwork()
+    private void Update()
     {
         while (DataRpc.Count > 0)
         {
             instance.Rpc_Execute(DataRpc.definitiveList);
         }
-    }
 
-    private void Update()
-    {
         if (!started)
         {
             return;
