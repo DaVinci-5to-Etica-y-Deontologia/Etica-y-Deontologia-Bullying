@@ -37,11 +37,13 @@ public class StreamerData : DataElement<StreamerData>
 
     public override string textIP => ID.ToString();
 
-    public bool ShowEnd => (State != StreamState.Empate || streamerManager.gameEnd);
+    public bool ShowEnd => (Finished || streamerManager.gameEnd);
 
-    //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) && Enable ? StreamState.Fallido : StreamState.Empate);
+    //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) ? StreamState.Fallido : StreamState.Empate);
 
-    public StreamState State => Enable ? StreamState.Empate : ( (Life.current == 0 || Viewers.current <= streamer.minimalViews)  ? StreamState.Fallido : StreamState.Completado);
+    public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
+
+    public bool Finished { get; private set; } = false;
 
     protected override IDataElement parent => streamerManager;
 
@@ -128,7 +130,7 @@ public class StreamerData : DataElement<StreamerData>
         if ((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable)
         {
             Stop();
-            Enable = false;
+            Finished = true;
             onEndStream?.Invoke(this);
             //Debug.Log("SE EJECUTÓ: InternalShowEnd");
         }
