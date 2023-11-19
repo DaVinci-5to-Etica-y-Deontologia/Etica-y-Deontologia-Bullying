@@ -37,11 +37,10 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
 
     public CommentData()
     {
-        if(IsServer)
-            timerDestroy = TimersManager.Create(30, () =>
-            {
-                user.Aplicate(comment.Views, comment.Damage, textIP);
-            }).SetMultiply(player.multiply).Stop();
+        timerDestroy = TimersManager.Create(30, () =>
+        {
+            user.Aplicate(comment.Views, comment.Damage, textIP);
+        }).SetMultiply(player.multiply).Stop();
     }
 
     public void Destroy()
