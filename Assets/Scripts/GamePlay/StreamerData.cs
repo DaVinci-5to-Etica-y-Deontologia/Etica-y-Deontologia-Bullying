@@ -37,9 +37,11 @@ public class StreamerData : DataElement<StreamerData>
 
     public override string textIP => ID.ToString();
 
-    public bool ShowEnd => (State != StreamState.Empate || streamerManager.gameEnd) && Enable;
+    public bool ShowEnd => (State != StreamState.Empate || streamerManager.gameEnd);
 
-    public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : (Life.current == 0 || Viewers.current <= streamer.minimalViews ? StreamState.Fallido : StreamState.Empate);
+    //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) && Enable ? StreamState.Fallido : StreamState.Empate);
+
+    public StreamState State => !Enable ? StreamState.Empate : ( (Life.current == 0 || Viewers.current <= streamer.minimalViews)  ? StreamState.Fallido : StreamState.Completado);
 
     protected override IDataElement parent => streamerManager;
 
@@ -123,9 +125,10 @@ public class StreamerData : DataElement<StreamerData>
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        if (ShowEnd)
+        if ((Life.current == 0 || Viewers.current <= streamer.minimalViews) && Enable)
         {
             Stop();
+            Enable = false;
             onEndStream?.Invoke(this);
             //Debug.Log("SE EJECUTÓ: InternalShowEnd");
         }
