@@ -41,14 +41,14 @@ public class StreamerData : DataElement<StreamerData>
 
     public override string textIP => ID.ToString();
 
-    public bool ShowEnd => (Finished || streamerManager.gameEnd);
+    public bool ShowEnd => (Finished || streamerParent.gameEnd);
 
     //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) ? StreamState.Fallido : StreamState.Empate);
 
     public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
-    protected override IDataElement parent => streamerManager;
+    protected override IDataElement parent => streamerParent;
 
-    StreamerManager.Data streamerManager;
+    StreamerManager.Data streamerParent;
 
     public (UserData value, int ID, int index) this[int ID]
     {
@@ -161,7 +161,7 @@ public class StreamerData : DataElement<StreamerData>
 
     public void Init()
     {
-        this.streamerManager = StreamerManager.instance.streamersData;
+        this.streamerParent = StreamerManager.instance.streamersData;
 
         Life.onChange += InternalShowEnd;
 
@@ -169,6 +169,12 @@ public class StreamerData : DataElement<StreamerData>
 
         if (IsServer)
             Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
+
+        onEndStream += (s) =>
+        {
+            if (streamerParent.streamerManager.Count > 0)
+                streamerParent.streamerManager.Count--;
+        };
     }
 
     public void Create()

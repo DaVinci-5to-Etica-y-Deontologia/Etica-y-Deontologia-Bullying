@@ -30,7 +30,7 @@ public class StreamerManager : NetworkBehaviour
 
         public bool gameEnd;
 
-        StreamerManager streamerManager;
+        public StreamerManager streamerManager;
 
         public BD dataBase => streamerManager.dataBase;
 
@@ -126,7 +126,8 @@ public class StreamerManager : NetworkBehaviour
         }
     }
 
-    public int Count { get; private set; }
+    [field: SerializeField]
+    public int Count { get; set; }
 
     public bool IsServer => Runner.IsServer || Runner.IsSinglePlayer;
 
@@ -191,12 +192,6 @@ public class StreamerManager : NetworkBehaviour
         instance.onStreamerCreate.delegato?.Invoke(streamer);
 
         instance.Count++;
-
-        streamer.onEndStream += (s) =>
-        {
-            if (instance.Count > 0)
-                instance.Count--;
-        };
     }
 
 
