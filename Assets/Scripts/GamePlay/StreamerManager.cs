@@ -312,6 +312,7 @@ public class StreamerManager : NetworkBehaviour
             {
                 stream.Value.Init();
                 onStreamerCreate?.delegato.Invoke(stream.Value);
+                Count++;
 
                 foreach (var user in stream.Value.users)
                 {
@@ -348,21 +349,6 @@ public class StreamerManager : NetworkBehaviour
                 return;
             }
         }
-    }
-
-    public List<StreamerData> FinishedStreams()
-    {
-        var list = new List<StreamerData>();
-        
-        foreach (var item in streamersData.streamers)
-        {
-            if (item.Value.ShowEnd)
-            {
-                list.Add(item.Value);
-            }
-        }
-
-        return list;
     }
 
     public void ChangeStream(int index)
