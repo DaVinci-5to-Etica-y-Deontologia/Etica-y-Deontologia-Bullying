@@ -83,9 +83,16 @@ public class StreamerData : DataElement<StreamerData>
     {
         for (int i = Mathf.Clamp(number - 1, 0 , users.Count - 1); i >= 0; i--)
         {
-            var rng = Random.Range(0, users.Count);
+            var usersFiltered = users.Where((u) => u.Value.Enable).ToArray();
 
-            DataRpc.Create(Actions.RemoveUser, users.GetTByIndex(rng).value.textIP);
+            if (usersFiltered.Length == 0)
+                return;
+
+            var rng = Random.Range(0, usersFiltered.Length);
+
+            usersFiltered[rng].Value.Destroy();
+
+            DataRpc.Create(Actions.RemoveUser, usersFiltered[rng].Value.textIP);
         }
     }
 
@@ -96,6 +103,7 @@ public class StreamerData : DataElement<StreamerData>
 
         users.Add(aux.CreatePic<UserData>()).Value.Create(this);
 
+                
         aux.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
 
         aux.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);        

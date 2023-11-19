@@ -239,6 +239,9 @@ public class UserParent : DataElement<UserParent>
 
     public void Destroy()
     {
+        if (!Enable)
+            return;
+
         Enable = false;
         stream.Viewers.current--;
         Stop();
