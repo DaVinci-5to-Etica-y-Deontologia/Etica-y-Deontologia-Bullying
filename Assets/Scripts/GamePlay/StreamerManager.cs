@@ -506,7 +506,7 @@ public class StreamerManager : NetworkBehaviour
 
     private void Update()
     {
-        if (DataRpc.Count > 0)
+        while (DataRpc.Count > 0)
         {
             instance.Rpc_Execute(DataRpc.definitiveList);
         }
@@ -683,7 +683,7 @@ public struct DataRpc
 
     public static int Count => streamsRequests.Count + usersRequests.Count + commentsRequests.Count;
 
-    const int limitRpc = 30000; // el limite de caracteres es de: 32767
+    const int limitRpc = 10000; // el limite de caracteres es de: 32767
 
     static int sum;
 
@@ -747,7 +747,7 @@ public struct DataRpc
             var aux = JsonUtility.ToJson(new AuxWrapper<DataRpc[]>(_definitiveList.ToArray()));
 
 
-            UnityEngine.Debug.Log($"JSON enviado: {aux.Length} de {sum} \n  {aux}  \n\n");
+            UnityEngine.Debug.Log($"JSON enviado: {sum} de {aux.Length}  \n  {aux}  \n\n");
 
             /*
             UnityEngine.Debug.Log("Streamer Request Count: " + streamsRequests.Count);
