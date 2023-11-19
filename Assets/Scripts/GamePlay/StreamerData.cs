@@ -57,6 +57,19 @@ public class StreamerData : DataElement<StreamerData>
         }
     }
 
+    static public void AddUser(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.Streamer.AddUser(jsonData);
+    }
+    static public void RemoveUser(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.Streamer.RemoveUser(srch.user.index);
+    }
+    static public void EnableStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.streamer.value.SetEnable();
+    }
+
     public void Stop()
     {
         foreach (var item in users)
@@ -100,34 +113,11 @@ public class StreamerData : DataElement<StreamerData>
         }
     }
 
-    //rpc
-    public void AddUser(string jsonUser)
-    {
-        var aux = JsonUtility.FromJson<UserData>(jsonUser);
 
-        users.Add(aux.CreatePic<UserData>()).Value.Create(this);
-
-                
-        aux.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
-
-        aux.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);        
-    }
-
-    //rpc
-    public void SetEnable()
-    {
-        Enable = true;
-    }
-
-    //rpc
-    public void RemoveUser(int index)
-    {
-        users.GetTByIndex(index).value.Destroy();
-    }
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        if ((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable)
+        if ((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable && !Finished)
         {
             Stop();
             Finished = true;
@@ -135,6 +125,32 @@ public class StreamerData : DataElement<StreamerData>
             //Debug.Log("SE EJECUTÓ: InternalShowEnd");
         }
     }
+
+    //rpc
+    void AddUser(string jsonUser)
+    {
+        var aux = JsonUtility.FromJson<UserData>(jsonUser);
+
+        users.Add(aux.CreatePic<UserData>()).Value.Create(this);
+
+
+        aux.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
+
+        aux.onLeaveComment += (comment) => onLeaveComment?.Invoke(comment);
+    }
+
+    //rpc
+    void SetEnable()
+    {
+        Enable = true;
+    }
+
+    //rpc
+    void RemoveUser(int index)
+    {
+        users.GetTByIndex(index).value.Destroy();
+    }
+
 
     public void Init()
     {

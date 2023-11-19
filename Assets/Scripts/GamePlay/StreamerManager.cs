@@ -400,7 +400,6 @@ public class StreamerManager : NetworkBehaviour
         }
             
     }
-
     void CommentCreateQueue(CommentData commentData)
     {
         onCreateComment.delegato.Invoke(commentData);
@@ -411,14 +410,8 @@ public class StreamerManager : NetworkBehaviour
         onLeaveComment.delegato.Invoke(commentData);
     }
 
-    void AddUser(string jsonData, StreamerManager.SearchResult srch)
-    {
-        srch.Streamer.AddUser(jsonData);
-    }
-    void RemoveUser(string jsonData, StreamerManager.SearchResult srch)
-    {
-        srch.Streamer.RemoveUser(srch.user.index);
-    }
+    #region Actions Functions
+    
     void CreateStream(string jsonData, StreamerManager.SearchResult srch)
     {
         if (IsServer)
@@ -426,6 +419,7 @@ public class StreamerManager : NetworkBehaviour
             DataRpc.Create(Actions.AddStream, "", new StreamerData(streamersData.streamers.Prepare(), dataBase.SelectStreamer()));
         }
     }
+
     void AddNewStream(string jsonData, StreamerManager.SearchResult srch)
     {
         UnityEngine.Debug.Log("Se ejecuto el add stream");
@@ -439,10 +433,7 @@ public class StreamerManager : NetworkBehaviour
             ChangeStream(0);
         }
     }
-    void EnableStream(string jsonData, StreamerManager.SearchResult srch)
-    {
-        srch.streamer.value.SetEnable();
-    }
+
     void StartUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
     {
         if (IsServer)
@@ -457,6 +448,8 @@ public class StreamerManager : NetworkBehaviour
         UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
         GlobalUnPause();
     }
+
+    #endregion
 
     void MyStart()
     {
@@ -522,11 +515,12 @@ public class StreamerManager : NetworkBehaviour
         actionsMap.Add(Actions.AddComment.className, UserData.AddComment);
         actionsMap.Add(Actions.RemoveComment.className, UserData.RemoveComment);
 
-        actionsMap.Add(Actions.AddUser.className, AddUser);
-        actionsMap.Add(Actions.RemoveUser.className, RemoveUser);
+        actionsMap.Add(Actions.AddUser.className, StreamerData.AddUser);
+        actionsMap.Add(Actions.RemoveUser.className, StreamerData.RemoveUser);
+        actionsMap.Add(Actions.EnableStream.className, StreamerData.EnableStream);
+
         actionsMap.Add(Actions.CreateStream.className, CreateStream);
         actionsMap.Add(Actions.AddStream.className, AddNewStream);
-        actionsMap.Add(Actions.EnableStream.className, EnableStream);
         actionsMap.Add(Actions.StartUpdateStreamers.className, StartUpdateStreamers);
         actionsMap.Add(Actions.EndUpdateStreamers.className, EndUpdateStreamers);
     }
