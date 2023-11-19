@@ -39,6 +39,9 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
     {
         timerDestroy?.Stop();
         onDestroy?.Invoke();
+
+        Debug.Log("Tengo un padre cuando voy a destruirme? " + (Parent != null));
+
         Parent.Return(this);
     }
 

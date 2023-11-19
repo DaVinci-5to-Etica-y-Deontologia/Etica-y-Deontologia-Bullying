@@ -124,9 +124,7 @@ public class UserParent : DataElement<UserParent>
 
         JsonUtility.FromJsonOverwrite(jsonCommentData, newCommentData);
 
-        newCommentData.Parent = poolCommentData;
-
-        Debug.Log("guardo un padre? " + (poolCommentData != null));
+        Debug.Log("Tengo un padre desp de overrider? " + (poolCommentData != null));
 
         newCommentData.Init(stream.ID, ID);
 
@@ -262,7 +260,7 @@ public class UserParent : DataElement<UserParent>
 
             var newCommentData = poolCommentData.Obtain();
 
-            Debug.Log("tengo un padre? " + (newCommentData.Parent != null));
+            Debug.Log("tengo un padre desp de obtener? " + (newCommentData.Parent != null));
 
             newCommentData.Create(comments.Prepare(), auxFlyweight);
 
