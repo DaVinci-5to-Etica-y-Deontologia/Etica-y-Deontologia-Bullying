@@ -345,7 +345,8 @@ public class StreamerManager : NetworkBehaviour
         {
             if(!item.Value.ShowEnd)
             {
-                ChangeStreamByID(item.Key);
+                UIManager.PressButtonByID(item.Key);
+                //ChangeStreamByID(item.Key);
                 return;
             }
         }

@@ -47,9 +47,26 @@ public class UIManager : MonoBehaviour
 
     StreamerData streamerData;
 
+    static List<(int, EventCall)> streamsButtons = new List<(int, EventCall)>();
+    //static Dictionary<int, EventCall> streamsButtons = new Dictionary<int, EventCall>();
+
     bool bottomPressed;
     Color originalText;
     Color originalBackGround;
+
+    public static void PressButtonByID(int ID)
+    {
+        //streamsButtons[ID].button.onClick.Invoke();
+
+        foreach (var item in streamsButtons)
+        {
+            if (item.Item1 == ID)
+            {
+                item.Item2.button.onClick.Invoke();
+                return;
+            }
+        }
+    }
 
     private void StreamerManager_onStreamerChange(StreamerData obj)
     {
@@ -137,9 +154,8 @@ public class UIManager : MonoBehaviour
     public void MyAwake()
     {
         streamerManager.onStreamerChange.delegato += StreamerManager_onStreamerChange;
-        streamerManager.onStreamerCreate.delegato += 
-            (StreamerData stream) => eventCalls
-            .Create(stream.streamer.iconStreamerImage , () => streamerManager.ChangeStreamByID(stream.ID));
+        streamerManager.onStreamerCreate.delegato +=
+            (StreamerData stream) => CreateStreamButton(stream);
 
         originalText = bottomButton.textMeshPro.color;
         originalBackGround = bottomButton.backgroundImage.color;
@@ -149,5 +165,16 @@ public class UIManager : MonoBehaviour
         bottomButton.eventToCall.AddListener(BottonPressed);
 
         streamerManager.streamersData.endGame.onChange += EndGame_onChange;
+    }
+
+    EventCall CreateStreamButton(StreamerData stream)
+    {
+        var button = eventCalls.Create(stream.streamer.iconStreamerImage, () =>
+        {
+            streamerManager.ChangeStreamByID(stream.ID);
+        });
+        streamsButtons.Add((stream.ID,button));
+
+        return button;
     }
 }
