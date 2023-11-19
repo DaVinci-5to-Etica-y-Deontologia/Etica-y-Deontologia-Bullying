@@ -16,6 +16,9 @@ public class TransitionManager : SingletonMono<TransitionManager>
     public const string WaitStart = "WaitStart";
     public const string WaitEnd = "WaitEnd";
 
+    [SerializeField]
+    public TMPro.TextMeshProUGUI texto;
+
     protected override void Awake()
     {
         base.Awake();
@@ -44,4 +47,8 @@ public class TransitionManager : SingletonMono<TransitionManager>
         endAction?.Invoke();
     }
 
+    public void ChangeText(string str)
+    {
+        texto.text = str;
+    }
 }

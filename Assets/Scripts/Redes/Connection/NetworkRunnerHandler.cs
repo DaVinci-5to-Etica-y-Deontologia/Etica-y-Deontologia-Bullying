@@ -124,11 +124,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     
     public void OnConnectedToServer(NetworkRunner runner) { }
 
-    public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) 
-    {
-        if (runner.IsServer && GameManager.instance._fsmGameMaganer.CurrentState != GameManager.instance._fsmGameMaganer.pause)
-            streamerManager.Rpc_GlobalPause();
-    }
+    public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
 
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
 

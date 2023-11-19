@@ -42,6 +42,8 @@ public class PopUpFinalPartida : PopUpElement
             Destroy(item.gameObject);
         }
 
+        StreamerManager.instance.Runner.Shutdown();
+
         /*
         callsManager.Create("Volver a jugar", () =>
         {
@@ -52,7 +54,6 @@ public class PopUpFinalPartida : PopUpElement
 
         callsManager.Create("Volver al menú", () =>
         {
-            StreamerManager.instance.Runner.Shutdown();
             TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
             ScenesLoader.instance.LoadScene("MainMenu");
         });

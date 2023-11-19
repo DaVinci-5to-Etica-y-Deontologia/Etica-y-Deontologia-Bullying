@@ -230,7 +230,8 @@ public class StreamerManager : NetworkBehaviour
         if (instance.IsServer)
         {
             //UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
-            //Rpc_GlobalPause();
+            TransitionManager.instance.ChangeText("Un jugador nuevo se esta uniendo a la partida");
+            instance.Rpc_GlobalPause();
             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(instance.streamersData)));
         }
     }
@@ -467,7 +468,8 @@ public class StreamerManager : NetworkBehaviour
         if (IsServer)
         {
             CreateFirstStream();
-            //Rpc_GlobalPause();
+            TransitionManager.instance.ChangeText("Esperando a otro jugador para empezar la partida");
+            Rpc_GlobalPause();
         } 
         else
         {
