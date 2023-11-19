@@ -176,7 +176,7 @@ public class StreamerManager : NetworkBehaviour
         return searchResult;
     }
 
-    [Rpc(RpcSources.All,RpcTargets.All)]
+    [Rpc(RpcSources.All,RpcTargets.All, TickAligned = false)]
     public void Rpc_Execute(string json)
     {
         if (!started)
