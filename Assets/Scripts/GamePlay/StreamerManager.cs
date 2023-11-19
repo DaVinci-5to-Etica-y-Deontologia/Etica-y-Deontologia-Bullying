@@ -518,6 +518,7 @@ public class StreamerManager : NetworkBehaviour
         actionsMap.Add(Actions.AddUser.className, StreamerData.AddUser);
         actionsMap.Add(Actions.RemoveUser.className, StreamerData.RemoveUser);
         actionsMap.Add(Actions.EnableStream.className, StreamerData.EnableStream);
+        actionsMap.Add(Actions.UpdateLifeStream.className, StreamerData.LifeUpdate);
 
         actionsMap.Add(Actions.CreateStream.className, CreateStream);
         actionsMap.Add(Actions.AddStream.className, AddNewStream);
@@ -585,6 +586,8 @@ public class Actions
 
     public static Actions EnableStream { get; private set; } = new ActEnableStream();
 
+    public static Actions UpdateLifeStream { get; private set; } = new ActUpdateLifeStream();
+
     public override bool Equals(object obj)
     {
         return this.GetType() == obj.GetType();
@@ -607,11 +610,11 @@ public class Actions
 
 
 [System.Serializable] public class ActCreateStream : ActionStream { }
-
 [System.Serializable] public class ActAddStream : ActionStream { }
 [System.Serializable] public class ActRemoveStream : ActionStream { }
 [System.Serializable] public class ActStartUpdateStreamers : ActionStream { }
 [System.Serializable] public class ActEndUpdateStreamers : ActionStream { }
+[System.Serializable] public class ActUpdateLifeStream : ActionStream { }
 [System.Serializable] public class ActEnableStream : ActionComment { }
 
 

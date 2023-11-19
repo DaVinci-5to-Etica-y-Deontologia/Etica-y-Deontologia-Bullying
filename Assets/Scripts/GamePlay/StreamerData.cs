@@ -24,6 +24,10 @@ public class StreamerData : DataElement<StreamerData>
     public Tim Viewers { get; private set; } = new();
 
 
+    [field: SerializeField]
+    public bool Finished { get; private set; } = false;
+
+
     public IEnumerable<Internal.Pictionary<int, CommentData>> commentViews
     {
         get
@@ -42,9 +46,6 @@ public class StreamerData : DataElement<StreamerData>
     //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) ? StreamState.Fallido : StreamState.Empate);
 
     public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
-
-    public bool Finished { get; private set; } = false;
-
     protected override IDataElement parent => streamerManager;
 
     StreamerManager.Data streamerManager;
@@ -68,6 +69,12 @@ public class StreamerData : DataElement<StreamerData>
     static public void EnableStream(string jsonData, StreamerManager.SearchResult srch)
     {
         srch.streamer.value.SetEnable();
+    }
+
+    static public void LifeUpdate(string intString, StreamerManager.SearchResult srch)
+    {
+        if(!srch.streamer.value.IsServer) //el server ya se encarga de esta logica, de no aplicar esto me daria un bucle infinito
+            srch.streamer.value.Life.current = int.Parse(intString);
     }
 
     public void Stop()
@@ -159,6 +166,9 @@ public class StreamerData : DataElement<StreamerData>
         Life.onChange += InternalShowEnd;
 
         Viewers.onChange += InternalShowEnd;
+
+        if (IsServer)
+            Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
     }
 
     public void Create()
