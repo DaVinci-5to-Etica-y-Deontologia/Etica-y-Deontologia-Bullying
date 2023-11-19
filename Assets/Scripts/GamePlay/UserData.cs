@@ -260,7 +260,7 @@ public class UserParent : DataElement<UserParent>
 
             var newCommentData = poolCommentData.Obtain();
 
-            Debug.Log("tengo un padre desp de obtener? " + (newCommentData.Parent != null));
+            //Debug.Log("tengo un padre desp de obtener? " + (newCommentData.Parent != null));
 
             newCommentData.Create(comments.Prepare(), auxFlyweight);
 

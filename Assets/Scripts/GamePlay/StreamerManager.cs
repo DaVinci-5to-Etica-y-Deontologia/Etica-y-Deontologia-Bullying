@@ -243,7 +243,7 @@ public class StreamerManager : NetworkBehaviour
     #endregion
 
 
-    [Rpc(RpcSources.All,RpcTargets.All, TickAligned = false)]
+    [Rpc(RpcSources.All,RpcTargets.All)]
     public void Rpc_Execute(string json)
     {
         if (!started)
@@ -257,9 +257,9 @@ public class StreamerManager : NetworkBehaviour
 
             var srch = Search(dataRpc.direction);
 
-            //UnityEngine.Debug.Log($"Recibido:\n{dataRpc}");
-
             actionsMap[dataRpc.action].Invoke(dataRpc.data, srch);
+
+            //UnityEngine.Debug.Log($"Recibido:\n{dataRpc}");
         }
     }
 
@@ -475,13 +475,16 @@ public class StreamerManager : NetworkBehaviour
         }
     }
 
-    private void Update()
+    public override void FixedUpdateNetwork()
     {
         while (DataRpc.Count > 0)
         {
             instance.Rpc_Execute(DataRpc.definitiveList);
         }
+    }
 
+    private void Update()
+    {
         if (!started)
         {
             return;
