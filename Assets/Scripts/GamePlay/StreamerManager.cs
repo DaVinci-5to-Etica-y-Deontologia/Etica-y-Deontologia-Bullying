@@ -30,7 +30,7 @@ public class StreamerManager : NetworkBehaviour
 
         public bool gameEnd;
 
-        public StreamerManager streamerManager;
+        public StreamerManager streamerManager => _streamerManager;
 
         public BD dataBase => streamerManager.dataBase;
 
@@ -38,10 +38,13 @@ public class StreamerManager : NetworkBehaviour
 
         public Player player => streamerManager.player;
 
+
+        StreamerManager _streamerManager;
+
         public bool IsServer => streamerManager.IsServer;
         public Data(StreamerManager streamerManager)
         {
-            this.streamerManager = streamerManager;
+            _streamerManager = streamerManager;
         }
 
     }
