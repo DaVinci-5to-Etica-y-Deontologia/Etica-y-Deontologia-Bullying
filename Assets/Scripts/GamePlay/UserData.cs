@@ -113,84 +113,19 @@ public class UserParent : DataElement<UserParent>
         srch.User.RemoveComment(srch.comment.index);
     }
 
-
-
     #endregion
-
-
-    #region Moderator
-
-    public void Admonition(int index)
-    {
-        CoolDown = 30;
-
-        if (!_coolDownAdmonition.Chck)
-            Destroy();
-
-        RemoveComment(index);
-    }
-
-    public void Ban()
-    {
-        Destroy();
-
-        for (int i = comments.Count - 1; i >= 0; i--)
-        {
-            RemoveComment(i);
-        }        
-    }
-
-    public void SuspectChange(string index)
-    {
-        Suspect = int.Parse(index);
-
-        onSuspectChange?.Invoke(Suspect);
-    }
-
-    #endregion
-
-    #region Instigator
     
-    /// <summary>
-    /// Baja el rango moral a la mitad y disminuye el indice en un tercio
-    /// </summary>
-    public void ChangeMoral()
-    {
-        _moralIndexCooldown.Reset();
-
-        _moralRangeCooldown.Reset();
-
-        _newMoralRange /= 2;
-
-        _newMoralIndex -= 1f / 3;
-    }
-
-    /// <summary>
-    /// Publica un comentario en base a un indice 0.5 menor, y luego baja su indice un 0.25
-    /// </summary>
-    public void Picantear()
-    {
-        _moralIndexCooldown.Reset();
-
-        _newMoralIndex -= 0.5f;
-
-        //para publicar un comentario picante
-
-        if(IsServer)
-            _coolDownToComment.current = 0;
-
-        _newMoralIndex += 0.25f;
-    }
-    #endregion
 
     #region rpc
-    public void AddComment(string jsonCommentData)
+    void AddComment(string jsonCommentData)
     {
         var newCommentData = poolCommentData.Obtain();
 
         JsonUtility.FromJsonOverwrite(jsonCommentData, newCommentData);
 
         newCommentData.Parent = poolCommentData;
+
+        Debug.Log("guardo un padre? " + poolCommentData != null);
 
         newCommentData.Init(stream.ID, ID);
 
@@ -202,7 +137,7 @@ public class UserParent : DataElement<UserParent>
         onCreateComment?.Invoke(newCommentData);
     }
 
-    public void RemoveComment(int index)
+    void RemoveComment(int index)
     {
         CommentData comment = comments.GetTByIndex(index).value;
 
@@ -216,8 +151,73 @@ public class UserParent : DataElement<UserParent>
             stream.users.Remove(ID);
     }
 
+    #region Moderator
+
+    void Admonition(int index)
+    {
+        CoolDown = 30;
+
+        if (!_coolDownAdmonition.Chck)
+            Destroy();
+
+        RemoveComment(index);
+    }
+
+    void Ban()
+    {
+        Destroy();
+
+        for (int i = comments.Count - 1; i >= 0; i--)
+        {
+            RemoveComment(i);
+        }
+    }
+
+    void SuspectChange(string index)
+    {
+        Suspect = int.Parse(index);
+
+        onSuspectChange?.Invoke(Suspect);
+    }
+
     #endregion
-   
+
+    #region Instigator
+
+    /// <summary>
+    /// Baja el rango moral a la mitad y disminuye el indice en un tercio
+    /// </summary>
+    void ChangeMoral()
+    {
+        _moralIndexCooldown.Reset();
+
+        _moralRangeCooldown.Reset();
+
+        _newMoralRange /= 2;
+
+        _newMoralIndex -= 1f / 3;
+    }
+
+    /// <summary>
+    /// Publica un comentario en base a un indice 0.5 menor, y luego baja su indice un 0.25
+    /// </summary>
+    void Picantear()
+    {
+        _moralIndexCooldown.Reset();
+
+        _newMoralIndex -= 0.5f;
+
+        //para publicar un comentario picante
+
+        if (IsServer)
+            _coolDownToComment.current = 0;
+
+        _newMoralIndex += 0.25f;
+    }
+    #endregion
+
+    #endregion
+
     public void Aplicate(int views, float damage ,string textIP)
     {
         if (stream.ShowEnd)
@@ -260,6 +260,8 @@ public class UserParent : DataElement<UserParent>
             var auxFlyweight = dataBase.SelectComment(MoralIndex, MoralRange);
 
             var newCommentData = poolCommentData.Obtain();
+
+            Debug.Log("tengo un padre? " + newCommentData.Parent != null);
 
             newCommentData.Create(comments.Prepare(), auxFlyweight);
 

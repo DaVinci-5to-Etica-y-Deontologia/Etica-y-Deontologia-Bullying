@@ -111,39 +111,7 @@ public class UIManager : MonoBehaviour
 
     private void Life_onChange(IGetPercentage arg1, float arg2)
     {
-        print("Se llamo a LIFE ON CHANGE");
-
         life.value = arg1.Percentage();
-    }
-
-    void TopPressed(EventCall button)
-    {
-        /*
-        if (!bottomPressed)
-            return;
-
-        BottonPressed(button);
-        */
-    }
-
-    void BottonPressed(EventCall button)
-    {
-        /*
-        bottomPressed = !bottomPressed;
-
-        Color auxText = originalText;
-        Color auxBackground = originalBackGround;
-
-        if(bottomPressed)
-        {
-            auxText = originalBackGround;
-            auxBackground = originalText;
-        }
-
-        TimersManager.Create(() => button.backgroundImage.color, auxBackground, 2, Color.Lerp, (s) => button.backgroundImage.color = s);
-
-        TimersManager.Create(() => button.textMeshPro.color, auxText, 2, Color.Lerp, (s) => button.textMeshPro.color = s);
-        */
     }
 
     private void EndGame_onChange(IGetPercentage arg1, float arg2)
@@ -159,10 +127,6 @@ public class UIManager : MonoBehaviour
 
         originalText = bottomButton.textMeshPro.color;
         originalBackGround = bottomButton.backgroundImage.color;
-
-        topButton.eventToCall.AddListener(TopPressed);
-
-        bottomButton.eventToCall.AddListener(BottonPressed);
 
         streamerManager.streamersData.endGame.onChange += EndGame_onChange;
     }

@@ -259,7 +259,7 @@ public class StreamerManager : NetworkBehaviour
 
             var srch = Search(dataRpc.direction);
 
-            UnityEngine.Debug.Log($"Recibido:\n{dataRpc}");
+            //UnityEngine.Debug.Log($"Recibido:\n{dataRpc}");
 
             actionsMap[dataRpc.action].Invoke(dataRpc.data, srch);
         }
@@ -634,7 +634,7 @@ public struct DataRpc
             var aux = JsonUtility.ToJson(new AuxWrapper<DataRpc[]>(_definitiveList.ToArray()));
 
 
-            UnityEngine.Debug.Log($"JSON enviado: {sum} de {aux.Length}  \n  {aux}  \n\n");
+            //UnityEngine.Debug.Log($"JSON enviado: {sum} de {aux.Length}  \n  {aux}  \n\n");
 
             /*
             UnityEngine.Debug.Log("Streamer Request Count: " + streamsRequests.Count);
