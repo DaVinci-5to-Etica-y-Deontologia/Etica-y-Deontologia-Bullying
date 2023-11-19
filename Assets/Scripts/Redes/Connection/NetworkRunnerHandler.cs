@@ -60,7 +60,6 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public void JoinGame(SessionInfo session)
     {
-        _player.Moderator = session.PlayerCount % 2 == 0;
         var clientTask = InitializeGame(GameMode.Client, session.Name);
     }
     
@@ -123,9 +122,17 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
     
-    public void OnConnectedToServer(NetworkRunner runner) { }
+    public void OnConnectedToServer(NetworkRunner runner) 
+    {
+        //Debug.Log("ON COONECTED TO SERVER[Custom Msg] PLAYERS COUNT: " + runner.SessionInfo.PlayerCount + "  -  " + (runner.SessionInfo.PlayerCount % 2 == 0));
+        _player.Moderator = !(runner.SessionInfo.PlayerCount % 2 == 0);
+    }
 
-    public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
+    public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) 
+    {
+        if (runner.IsServer && GameManager.instance._fsmGameMaganer.CurrentState != GameManager.instance._fsmGameMaganer.pause)
+            streamerManager.Rpc_GlobalPause();
+    }
 
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
 

@@ -447,7 +447,7 @@ public class StreamerManager : NetworkBehaviour
         if (IsServer)
         {
             UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
-            Rpc_GlobalPause();
+            //Rpc_GlobalPause();
             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
         }
     }
