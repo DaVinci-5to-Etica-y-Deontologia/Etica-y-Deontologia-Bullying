@@ -74,7 +74,7 @@ public class StreamerData : DataElement<StreamerData>
     static public void LifeUpdate(string intString, StreamerManager.SearchResult srch)
     {
         if(!srch.streamer.value.IsServer) //el server ya se encarga de esta logica, de no aplicar esto me daria un bucle infinito
-            srch.streamer.value.Life.current = int.Parse(intString);
+            srch.streamer.value.Life.current = float.Parse(intString);
     }
 
     public void Stop()

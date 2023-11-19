@@ -176,6 +176,75 @@ public class StreamerManager : NetworkBehaviour
         return searchResult;
     }
 
+
+
+    #region Actions Functions
+
+    static void AddStream(string streamJson)
+    {
+        var streamer = JsonUtility.FromJson<StreamerData>(streamJson);
+
+        instance.streamersData.streamers.Add(streamer.CreatePic());
+
+        streamer.Create();
+
+        instance.onStreamerCreate.delegato?.Invoke(streamer);
+
+        instance.Count++;
+
+        streamer.onEndStream += (s) =>
+        {
+            if (instance.Count > 0)
+                instance.Count--;
+        };
+    }
+
+
+    static public void CreateStream()
+    {
+        DataRpc.Create(Actions.CreateStream);
+    }
+
+    static public void CreateStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        if (instance.IsServer)
+        {
+            DataRpc.Create(Actions.AddStream, "", new StreamerData(instance.streamersData.streamers.Prepare(), instance.dataBase.SelectStreamer()));
+        }
+    }
+
+    static public void AddNewStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        UnityEngine.Debug.Log("Se ejecuto el add stream");
+
+        bool aux = instance.Count == 0;
+
+        AddStream(jsonData);
+
+        if (aux)
+        {
+            instance.ChangeStream(0);
+        }
+    }
+
+    static public void StartUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
+    {
+        if (instance.IsServer)
+        {
+            UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
+            //Rpc_GlobalPause();
+            instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(instance.streamersData)));
+        }
+    }
+    static public void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
+    {
+        UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
+        instance.GlobalUnPause();
+    }
+
+    #endregion
+
+
     [Rpc(RpcSources.All,RpcTargets.All, TickAligned = false)]
     public void Rpc_Execute(string json)
     {
@@ -214,24 +283,6 @@ public class StreamerManager : NetworkBehaviour
         UnityEngine.Debug.Log("El juego se des pauso");
     }
 
-    public void AddStream(string streamJson)
-    {
-        var streamer = JsonUtility.FromJson<StreamerData>(streamJson);
-
-        streamersData.streamers.Add(streamer.CreatePic());
-
-        streamer.Create();
-
-        onStreamerCreate.delegato?.Invoke(streamer);
-
-        Count++;
-
-        streamer.onEndStream += (s) =>
-        {
-            if (Count > 0)
-                Count--;
-        };
-    }
 
 
     /// <summary>
@@ -255,11 +306,6 @@ public class StreamerManager : NetworkBehaviour
     {
         started = true;
         CreateStream();
-    }
-
-    public void CreateStream()
-    {
-        DataRpc.Create(Actions.CreateStream);
     }
 
     public IEnumerator PrependUpdate(string json)
@@ -410,46 +456,7 @@ public class StreamerManager : NetworkBehaviour
         onLeaveComment.delegato.Invoke(commentData);
     }
 
-    #region Actions Functions
     
-    void CreateStream(string jsonData, StreamerManager.SearchResult srch)
-    {
-        if (IsServer)
-        {
-            DataRpc.Create(Actions.AddStream, "", new StreamerData(streamersData.streamers.Prepare(), dataBase.SelectStreamer()));
-        }
-    }
-
-    void AddNewStream(string jsonData, StreamerManager.SearchResult srch)
-    {
-        UnityEngine.Debug.Log("Se ejecuto el add stream");
-
-        bool aux = Count == 0;
-
-        instance.AddStream(jsonData);
-
-        if (aux)
-        {
-            ChangeStream(0);
-        }
-    }
-
-    void StartUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
-    {
-        if (IsServer)
-        {
-            UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
-            //Rpc_GlobalPause();
-            instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(streamersData)));
-        }
-    }
-    void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
-    {
-        UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
-        GlobalUnPause();
-    }
-
-    #endregion
 
     void MyStart()
     {
@@ -506,24 +513,6 @@ public class StreamerManager : NetworkBehaviour
         GameManager.instance.StartCoroutine(pool.CreatePool(30, ()=> eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato.Invoke()));
 
         GameManager.instance.StartCoroutine(UserData.LoadPerfilSprite());
-
-        actionsMap.Add(Actions.Ban.className, UserData.Ban);
-        actionsMap.Add(Actions.Admonition.className, UserData.Admonition);
-        actionsMap.Add(Actions.Picantear.className, UserData.Picantear);
-        actionsMap.Add(Actions.Corromper.className, UserData.ChangeMoral);
-        actionsMap.Add(Actions.Suspect.className, UserData.SuspectChange);
-        actionsMap.Add(Actions.AddComment.className, UserData.AddComment);
-        actionsMap.Add(Actions.RemoveComment.className, UserData.RemoveComment);
-
-        actionsMap.Add(Actions.AddUser.className, StreamerData.AddUser);
-        actionsMap.Add(Actions.RemoveUser.className, StreamerData.RemoveUser);
-        actionsMap.Add(Actions.EnableStream.className, StreamerData.EnableStream);
-        actionsMap.Add(Actions.UpdateLifeStream.className, StreamerData.LifeUpdate);
-
-        actionsMap.Add(Actions.CreateStream.className, CreateStream);
-        actionsMap.Add(Actions.AddStream.className, AddNewStream);
-        actionsMap.Add(Actions.StartUpdateStreamers.className, StartUpdateStreamers);
-        actionsMap.Add(Actions.EndUpdateStreamers.className, EndUpdateStreamers);
     }
 
     public void EndLoad()
@@ -553,83 +542,7 @@ public class StreamerManager : NetworkBehaviour
 }
 
 
-[System.Serializable]
-public class Actions
-{
-    public static Actions Ban { get; private set; } = new ActBan();
 
-    public static Actions Admonition { get; private set; } = new ActAdmonition();
-
-    public static Actions Picantear { get; private set; } = new ActPicantear();
-
-    public static Actions Corromper { get; private set; } = new ActCorromper();
-
-    public static Actions Suspect { get; private set; } = new ActSus();
-
-    public static Actions AddUser { get; private set; } = new ActAddUser();
-
-    public static Actions RemoveUser { get; private set; } = new ActRemoveUser();
-
-    public static Actions AddComment { get; private set; } = new ActAddComment();
-
-    public static Actions RemoveComment { get; private set; } = new ActRemoveComment();
-
-    public static Actions CreateStream { get; private set; } = new ActCreateStream();
-
-    public static Actions AddStream { get; private set; } = new ActAddStream();
-
-    public static Actions RemoveStream { get; private set; } = new ActRemoveStream();
-
-    public static Actions StartUpdateStreamers { get; private set; } = new ActStartUpdateStreamers();
-
-    public static Actions EndUpdateStreamers { get; private set; } = new ActEndUpdateStreamers();
-
-    public static Actions EnableStream { get; private set; } = new ActEnableStream();
-
-    public static Actions UpdateLifeStream { get; private set; } = new ActUpdateLifeStream();
-
-    public override bool Equals(object obj)
-    {
-        return this.GetType() == obj.GetType();
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public string className;
-    public Actions()
-    {
-        className = this.GetType().Name;
-    }
-}
-[System.Serializable] public class ActionStream : Actions { }
-[System.Serializable] public class ActionUser : Actions { }
-[System.Serializable] public class ActionComment : Actions { }
-
-
-[System.Serializable] public class ActCreateStream : ActionStream { }
-[System.Serializable] public class ActAddStream : ActionStream { }
-[System.Serializable] public class ActRemoveStream : ActionStream { }
-[System.Serializable] public class ActStartUpdateStreamers : ActionStream { }
-[System.Serializable] public class ActEndUpdateStreamers : ActionStream { }
-[System.Serializable] public class ActUpdateLifeStream : ActionStream { }
-[System.Serializable] public class ActEnableStream : ActionComment { }
-
-
-[System.Serializable] public class ActAddUser : ActionUser { }
-[System.Serializable] public class ActRemoveUser : ActionUser { }
-[System.Serializable] public class ActBan : ActionUser { }
-[System.Serializable] public class ActAdmonition : ActionUser { }
-[System.Serializable] public class ActPicantear : ActionUser { }
-[System.Serializable] public class ActCorromper : ActionUser { }
-[System.Serializable] public class ActSus : ActionUser { }
-
-
-
-[System.Serializable] public class ActAddComment : ActionComment { }
-[System.Serializable] public class ActRemoveComment : ActionComment { }
 
 
 
