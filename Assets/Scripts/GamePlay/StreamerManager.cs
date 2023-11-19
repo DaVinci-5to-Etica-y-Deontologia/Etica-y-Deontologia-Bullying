@@ -215,8 +215,6 @@ public class StreamerManager : NetworkBehaviour
 
     static public void AddNewStream(string jsonData, StreamerManager.SearchResult srch)
     {
-        UnityEngine.Debug.Log("Se ejecuto el add stream");
-
         bool aux = instance.Count == 0;
 
         AddStream(jsonData);
@@ -231,14 +229,14 @@ public class StreamerManager : NetworkBehaviour
     {
         if (instance.IsServer)
         {
-            UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
+            //UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
             //Rpc_GlobalPause();
             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(instance.streamersData)));
         }
     }
     static public void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
     {
-        UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
+        //UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
         instance.GlobalUnPause();
     }
 
@@ -272,7 +270,7 @@ public class StreamerManager : NetworkBehaviour
         GameManager.instance.Pause(true);
         TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
 
-        UnityEngine.Debug.Log("El juego se pauso");
+        //UnityEngine.Debug.Log("El juego se pauso");
     }
     
     public void GlobalUnPause()
@@ -280,7 +278,7 @@ public class StreamerManager : NetworkBehaviour
         GameManager.instance.Pause(false);
         TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
         
-        UnityEngine.Debug.Log("El juego se des pauso");
+        //UnityEngine.Debug.Log("El juego se des pauso");
     }
 
 
@@ -311,7 +309,7 @@ public class StreamerManager : NetworkBehaviour
     public IEnumerator PrependUpdate(string json)
     {
         int order = 0;
-        UnityEngine.Debug.Log("EMPEZO A CARGAR LOS DATOS");
+        //UnityEngine.Debug.Log("EMPEZO A CARGAR LOS DATOS");
         do
         {
             Rpc_RequestUpdate(json.SubstringClamped(0, 500), order , false);
@@ -371,7 +369,7 @@ public class StreamerManager : NetworkBehaviour
                 }
             }
 
-            UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
+            //UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
 
             CreateStream();
             ChangeStream(0);

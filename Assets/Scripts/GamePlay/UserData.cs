@@ -110,6 +110,7 @@ public class UserParent : DataElement<UserParent>
     }
     public static void RemoveComment(string jsonData, StreamerManager.SearchResult srch)
     {
+        Debug.Log("user: " + (srch.User!=null) + " Comment: " + (srch.CommentData != null));
         srch.User.RemoveComment(srch.comment.index);
     }
 
@@ -223,7 +224,7 @@ public class UserParent : DataElement<UserParent>
         if (stream.ShowEnd)
             return;
 
-        Debug.Log($"Aplicar el danio: {damage} ganancia de viewers: {views}");
+        //Debug.Log($"Aplicar el danio: {damage} ganancia de viewers: {views}");
 
         stream.Users(views);
 
