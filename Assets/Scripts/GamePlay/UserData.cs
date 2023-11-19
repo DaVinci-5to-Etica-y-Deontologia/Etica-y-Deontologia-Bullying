@@ -125,7 +125,7 @@ public class UserParent : DataElement<UserParent>
 
         newCommentData.Parent = poolCommentData;
 
-        Debug.Log("guardo un padre? " + poolCommentData != null);
+        Debug.Log("guardo un padre? " + (poolCommentData != null));
 
         newCommentData.Init(stream.ID, ID);
 
@@ -261,7 +261,7 @@ public class UserParent : DataElement<UserParent>
 
             var newCommentData = poolCommentData.Obtain();
 
-            Debug.Log("tengo un padre? " + newCommentData.Parent != null);
+            Debug.Log("tengo un padre? " + (newCommentData.Parent != null));
 
             newCommentData.Create(comments.Prepare(), auxFlyweight);
 
