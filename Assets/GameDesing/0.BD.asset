@@ -1726,6 +1726,42 @@ MonoBehaviour:
     minimalViews: 4
     maxViews: 150
     Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: fb72de671fc52174f8a15b05c50cb1a2, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 39e480324d4557045a4595694d8c2bda, type: 3}
+    title: doggo
+    nameStreamer: Poni
+    tagsStreamer: '#dogdoggo'
+    minimalViews: 5
+    maxViews: 100
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 0eb480e489164df449225740b2ca9d8f, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 2c6faa03e9b9d2e43854c08ee6bb9987, type: 3}
+    title: La inmortalidad del cangrejo
+    nameStreamer: Sebas Tian
+    tagsStreamer: '#sabadoalanoche'
+    minimalViews: 6
+    maxViews: 120
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: aac210b93aee2394f958312983beb5f9, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 4fd52b1c43e2ae94383f49db3608c369, type: 3}
+    title: todos son mis perras
+    nameStreamer: roberto
+    tagsStreamer: '#bitches'
+    minimalViews: 3
+    maxViews: 103
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 7644125542c2c1845af9608dff8b056e, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: d03edb9f785ba2a438b1c1360f255d2f, type: 3}
+    title: aguante vacalin vieja
+    nameStreamer: Lechuga
+    tagsStreamer: '#muerteaserenisima'
+    minimalViews: 2
+    maxViews: 98
+    Life: 100
   <comments>k__BackingField:
   - {fileID: -5407973723330329128}
   - {fileID: 8130293094755209960}
