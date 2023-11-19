@@ -58,7 +58,8 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
     public void Init(int idStream, int idUser)
     {
         _user = StreamerManager.instance[idStream].value?[idUser].value;
-        timerDestroy?.Reset();
+        if(IsServer)
+            timerDestroy?.Reset();
     }
 
     public void Create(int id, int idComment)
