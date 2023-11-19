@@ -170,12 +170,10 @@ public class StreamerData : DataElement<StreamerData>
         if (IsServer)
             Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
 
-        streamerParent.streamerManager.Count++;
-
         onEndStream += (s) =>
         {
-            if (streamerParent.streamerManager.Count > 0)
-                streamerParent.streamerManager.Count--;
+            if (streamerParent.Count > 0)
+                streamerParent.Count--;
         };
     }
 
@@ -186,6 +184,8 @@ public class StreamerData : DataElement<StreamerData>
         Life.Set(streamer.Life);
 
         Viewers.total = streamer.maxViews;
+
+        streamerParent.Count++;
 
         if (!IsServer)
             return;

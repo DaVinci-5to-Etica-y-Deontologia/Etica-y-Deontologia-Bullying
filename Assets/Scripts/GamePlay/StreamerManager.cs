@@ -30,6 +30,9 @@ public class StreamerManager : NetworkBehaviour
 
         public bool gameEnd;
 
+        [field: SerializeField]
+        public int Count { get; set; }
+
         public StreamerManager streamerManager => _streamerManager;
 
         public BD dataBase => streamerManager.dataBase;
@@ -105,8 +108,7 @@ public class StreamerManager : NetworkBehaviour
     AuxWrapper<DataRpc[]> listRpc;
 
 
-    [field: SerializeField]
-    public int Count { get; set; }
+
 
     public StreamerData Actual { get; private set; }
 
@@ -213,7 +215,7 @@ public class StreamerManager : NetworkBehaviour
 
     static public void AddNewStream(string jsonData, StreamerManager.SearchResult srch)
     {
-        bool aux = instance.Count == 0;
+        bool aux = instance.streamersData.Count == 0;
 
         AddStream(jsonData);
 
@@ -436,7 +438,7 @@ public class StreamerManager : NetworkBehaviour
         //print("SE EJECUTÓ: Aux_onEndStream");
         onStreamEnd.delegato.Invoke(obj);
 
-        if (Count <= 0)
+        if (streamersData.Count <= 0)
         {
             FinishDay();
         }
