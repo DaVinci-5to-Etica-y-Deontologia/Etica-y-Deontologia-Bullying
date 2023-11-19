@@ -175,7 +175,9 @@ public class UserParent : DataElement<UserParent>
         _newMoralIndex -= 0.5f;
 
         //para publicar un comentario picante
-        _coolDownToComment.current = 0;
+
+        if(IsServer)
+            _coolDownToComment.current = 0;
 
         _newMoralIndex += 0.25f;
     }
