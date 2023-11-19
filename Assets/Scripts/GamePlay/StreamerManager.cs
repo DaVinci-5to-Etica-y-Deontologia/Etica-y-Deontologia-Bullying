@@ -504,7 +504,7 @@ public class StreamerManager : NetworkBehaviour
         }
     }
 
-    public override void FixedUpdateNetwork()
+    private void Update()
     {
         if (DataRpc.Count > 0)
         {
