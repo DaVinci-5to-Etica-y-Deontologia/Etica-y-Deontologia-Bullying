@@ -53,9 +53,11 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     #region CREATE/JOIN GAME
     
-    public void CreateGame(string sessionName, string sceneName)
+
+
+    public void CreateGame(GameMode gameMode, string sessionName, string sceneName)
     {
-        var clientTask = InitializeGame(GameMode.Host, sessionName, SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneName}"));
+        var clientTask = InitializeGame(gameMode, sessionName, SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneName}"));
     }
 
     public void JoinGame(SessionInfo session)
@@ -68,6 +70,8 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
         var sceneManager = _currentRunner.GetComponent<NetworkSceneManagerDefault>();
 
         _currentRunner.ProvideInput = true;
+
+        Debug.Log("Se ejecuto InitializeGame");
 
         var result = await _currentRunner.StartGame(new StartGameArgs()
         {

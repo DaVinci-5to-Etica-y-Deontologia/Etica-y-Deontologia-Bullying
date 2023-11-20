@@ -57,6 +57,7 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
             timerDestroy = TimersManager.Create(30, () =>
             {
                 user.Aplicate(comment.Views, comment.Damage, textIP);
+
             }).SetMultiply(player.multiply);
     }
 

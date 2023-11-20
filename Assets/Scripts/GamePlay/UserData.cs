@@ -216,13 +216,13 @@ public class UserParent : DataElement<UserParent>
     #endregion
 
     #endregion
-
+    
     public void Aplicate(int views, float damage ,string textIP)
     {
         if (stream.ShowEnd)
             return;
 
-        //Debug.Log($"Aplicar el danio: {damage} ganancia de viewers: {views}");
+        Debug.Log($"Aplicar el danio: {damage} ganancia de viewers: {views}");
 
         stream.Users(views);
 

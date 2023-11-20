@@ -439,6 +439,7 @@ public class StreamerManager : NetworkBehaviour
     {
         //print("SE EJECUTÓ: Aux_onEndStream");
         onStreamEnd.delegato.Invoke(obj);
+        //DataRpc.Create(Actions.FinishStream);
 
         if (streamersData.Count <= 0)
         {
@@ -464,13 +465,15 @@ public class StreamerManager : NetworkBehaviour
 
         streamersData.endGame.Reset();
 
-        player.Moderator = !(Runner.SessionInfo.PlayerCount % 2 == 0);
-
         if (IsServer)
         {
             CreateFirstStream();
-            TransitionManager.instance.ChangeText("Esperando a otro jugador para empezar la partida");
-            Rpc_GlobalPause();
+
+            if (Runner.GameMode == GameMode.Host)
+            {
+                TransitionManager.instance.ChangeText("Esperando a otro jugador para empezar la partida");
+                Rpc_GlobalPause();
+            }
         } 
         else
         {
@@ -528,6 +531,8 @@ public class StreamerManager : NetworkBehaviour
         watchdog.Start();
 
         UnityEngine.Debug.Log("server: " + IsServer);
+
+        player.Moderator = !(Runner.SessionInfo.PlayerCount % 2 == 0) || Runner.SessionInfo.PlayerCount == 0;
 
         streamersData.endGame = TimersManager.Create(5 * 60, Rpc_FinishDay).Stop();
     }

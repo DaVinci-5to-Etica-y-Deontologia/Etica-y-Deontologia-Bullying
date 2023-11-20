@@ -2464,6 +2464,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: -12
       objectReference: {fileID: 0}
+    - target: {fileID: 5988540234830251744, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6119716173727787874, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -2508,6 +2512,10 @@ PrefabInstance:
       propertyPath: _networkRunnerHandler
       value: 
       objectReference: {fileID: 669340542}
+    - target: {fileID: 7902542633542969838, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

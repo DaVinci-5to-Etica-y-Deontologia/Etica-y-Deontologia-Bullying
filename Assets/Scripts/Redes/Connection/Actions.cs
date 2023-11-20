@@ -38,6 +38,7 @@ public class Actions
 
     public static Actions UpdateLifeStream { get; private set; } = new ActUpdateLifeStream(StreamerData.LifeUpdate);
 
+    public static Actions FinishStream { get; private set; } = new ActFinishStream(StreamerData.FinishStream);
 
 
     public string className;
@@ -127,6 +128,13 @@ public class ActEndUpdateStreamers : ActionStream
 public class ActUpdateLifeStream : ActionStream
 {
     public ActUpdateLifeStream(System.Action<string, StreamerManager.SearchResult> action) : base(action)
+    {
+    }
+}
+[System.Serializable]
+public class ActFinishStream : ActionStream
+{
+    public ActFinishStream(System.Action<string, StreamerManager.SearchResult> action) : base(action)
     {
     }
 }

@@ -865,9 +865,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  streamerName: {fileID: 7218297990268110636}
+  streamerIcon: {fileID: 7805619075133330716}
   damageNumber: {fileID: 6564117133092195480}
   viwersNumber: {fileID: 6717543942074803032}
-  timeToShow: 3
+  timeToShow: 1
 --- !u!1 &5293386043713740906
 GameObject:
   m_ObjectHideFlags: 0

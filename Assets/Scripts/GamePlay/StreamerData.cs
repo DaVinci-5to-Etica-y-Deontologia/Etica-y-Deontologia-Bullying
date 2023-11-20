@@ -77,6 +77,11 @@ public class StreamerData : DataElement<StreamerData>
             srch.streamer.value.Life.current = float.Parse(intString);
     }
 
+    static public void FinishStream(string jsonData, StreamerManager.SearchResult srch)
+    {
+        srch.streamer.value.FinishStream(srch);
+    }
+
     public void Stop()
     {
         foreach (var item in users)
@@ -152,6 +157,13 @@ public class StreamerData : DataElement<StreamerData>
         Enable = true;
     }
 
+    void FinishStream(StreamerManager.SearchResult srch)
+    {
+        Viewers.current = srch.Streamer.Viewers.current;
+        Life.current = srch.Streamer.Life.current;
+        Finished = srch.Streamer.Finished;
+    }
+
     //rpc
     void RemoveUser(int index)
     {
@@ -169,9 +181,6 @@ public class StreamerData : DataElement<StreamerData>
 
         if (IsServer)
             Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
-
-        if (Enable && IsServer)
-            return;
 
         onEndStream += (s) =>
         {

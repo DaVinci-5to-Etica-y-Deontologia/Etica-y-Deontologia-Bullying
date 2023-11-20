@@ -54,7 +54,14 @@ public class MenuManager : MonoBehaviour
 
     public void HostGame()
     {
-        TransitionManager.instance.SetTransition(TransitionManager.SquaresStart, 0.8f, () => _networkRunnerHandler.CreateGame(_sessionNameField.text, "SampleScene"));
+        TransitionManager.instance.SetTransition(TransitionManager.SquaresStart, 0.8f, () => _networkRunnerHandler.CreateGame(Fusion.GameMode.Host, _sessionNameField.text, "SampleScene"));
     }
+
+    public void SingleGame()
+    {
+        _networkRunnerHandler.JoinLobby();
+        TransitionManager.instance.SetTransition(TransitionManager.SquaresStart, 0.8f, () => _networkRunnerHandler.CreateGame(Fusion.GameMode.Single, _sessionNameField.text, "SampleScene"));
+    }
+
 
 }

@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.UI;
 
 public class PopUpResult : PopUpElement
 {
+    [SerializeField]
+    TMPro.TextMeshProUGUI streamerName;
+    [SerializeField]
+    Image streamerIcon;
+
     [SerializeField]
     TMPro.TextMeshProUGUI damageNumber;
 
@@ -13,7 +19,7 @@ public class PopUpResult : PopUpElement
     TMPro.TextMeshProUGUI viwersNumber;
 
     [SerializeField]
-    float timeToShow=1;
+    float timeToShow = 1f;
 
     public override void MyAwake(PopUpManager popUpManager)
     {
@@ -32,6 +38,9 @@ public class PopUpResult : PopUpElement
     {
         onActive.Invoke();
         callsManager.DestroyAll();
+
+        streamerName.text = resultado.streamer.nameStreamer;
+        streamerIcon.sprite = resultado.streamer.iconStreamerImage;
 
         callsManager.Create("Cambiar de stream", () =>
         {
@@ -67,7 +76,7 @@ public class PopUpResult : PopUpElement
             }
         }
 
-        damageNumber.text = resultado.Life.current.ToString();
+        damageNumber.text = ((int)resultado.Life.current).ToString();
 
         if (resultado.Life.current <= 0)
             damageNumber.text = damageNumber.text.RichText("color", "red");
