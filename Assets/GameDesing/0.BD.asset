@@ -1729,7 +1729,7 @@ MonoBehaviour:
   - inUse: 0
     streamImage: {fileID: 21300000, guid: fb72de671fc52174f8a15b05c50cb1a2, type: 3}
     iconStreamerImage: {fileID: 21300000, guid: 39e480324d4557045a4595694d8c2bda, type: 3}
-    title: doggo
+    title: doge
     nameStreamer: Poni
     tagsStreamer: '#dogdoggo'
     minimalViews: 5
@@ -1737,7 +1737,7 @@ MonoBehaviour:
     Life: 100
   - inUse: 0
     streamImage: {fileID: 21300000, guid: 0eb480e489164df449225740b2ca9d8f, type: 3}
-    iconStreamerImage: {fileID: 21300000, guid: 2c6faa03e9b9d2e43854c08ee6bb9987, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: fc789aa2a91e92a419997f0d3975d650, type: 3}
     title: La inmortalidad del cangrejo
     nameStreamer: Sebas Tian
     tagsStreamer: '#sabadoalanoche'
@@ -1747,7 +1747,7 @@ MonoBehaviour:
   - inUse: 0
     streamImage: {fileID: 21300000, guid: aac210b93aee2394f958312983beb5f9, type: 3}
     iconStreamerImage: {fileID: 21300000, guid: 4fd52b1c43e2ae94383f49db3608c369, type: 3}
-    title: todos son mis perras
+    title: todos pillos
     nameStreamer: roberto
     tagsStreamer: '#bitches'
     minimalViews: 3
@@ -1758,9 +1758,126 @@ MonoBehaviour:
     iconStreamerImage: {fileID: 21300000, guid: d03edb9f785ba2a438b1c1360f255d2f, type: 3}
     title: aguante vacalin vieja
     nameStreamer: Lechuga
-    tagsStreamer: '#muerteaserenisima'
+    tagsStreamer: '#fueraserenisima'
     minimalViews: 2
     maxViews: 98
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: dbe12da3df05799409b9ddd7f44b6872, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: aabbf5dfa30a61440aceb1c7b358351d, type: 3}
+    title: La vida es una lenteja
+    nameStreamer: Zaz
+    tagsStreamer: '#oLaTomas #oLaDejas'
+    minimalViews: 6
+    maxViews: 130
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 7303562f810bbdb4d9d1a6d905263852, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 3a3ffca9711efcd4e95bb8ed9d0df3e1, type: 3}
+    title: 'Challenge: 0 death?'
+    nameStreamer: GothicGhoulTV
+    tagsStreamer: '#mori'
+    minimalViews: 7
+    maxViews: 150
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 99cbd9213c5fd604c8a08d8bd3724eac, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: eccd25969e2190441a7c700b927e6ce1, type: 3}
+    title: persiste y venceras
+    nameStreamer: FemmeFrights
+    tagsStreamer: '#eso-dicen'
+    minimalViews: 5
+    maxViews: 162
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 2b7eca41d070e86489b55977874d7a2e, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 4e24d2e30a8fa844891bddafd29c2ffd, type: 3}
+    title: Recargando baterias Zzz
+    nameStreamer: VolcaRx07
+    tagsStreamer: '#ineeddormir'
+    minimalViews: 6
+    maxViews: 127
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 647f71fd125b29c45b0d118cd0345f9e, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 3f228ffb3febb9e4da56ed9a858012ab, type: 3}
+    title: "hab\xEDa una vez"
+    nameStreamer: truz
+    tagsStreamer: '#quisieraserunpez'
+    minimalViews: 3
+    maxViews: 115
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 9293d2213f3183f4da5d34491d50416a, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 163aa8f22d1aa744c8ba602abcda20f8, type: 3}
+    title: bootcamp roster announced
+    nameStreamer: troki
+    tagsStreamer: '#TeamfightTactics'
+    minimalViews: 6
+    maxViews: 122
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 413b05bf09b1f3d43826c8d36c6c4857, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 47e25e0ae54f77447955156dbeda9d66, type: 3}
+    title: Vibing
+    nameStreamer: QuantumChic
+    tagsStreamer: '#chill'
+    minimalViews: 2
+    maxViews: 136
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 95d3693e8820fe74fbe43901bdab82c1, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 282016dc71794d840b42b29ab5ac30bb, type: 3}
+    title: its me.. !mario
+    nameStreamer: CAHOS
+    tagsStreamer: '#laconcentreishon'
+    minimalViews: 5
+    maxViews: 130
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 77a6cd041f58c8e4c90097ff06e4756d, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 275fbe88a54be1c4bb9ccafd32f43ba9, type: 3}
+    title: dale agus ponele ganas
+    nameStreamer: agusAnado
+    tagsStreamer: '#quepaja'
+    minimalViews: 4
+    maxViews: 100
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: fc6d66a566b9f1446ad17d1e87d49243, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: fad6f18d6926cd846a25188d9e16328d, type: 3}
+    title: que bonitos ojos tienes
+    nameStreamer: z_Krip
+    tagsStreamer: '#completalafrase'
+    minimalViews: 5
+    maxViews: 110
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 32442269b5a8f9b48b50f1f0cdfda643, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 1f8aa474ea7842541ae14d35cb1f7e91, type: 3}
+    title: :)
+    nameStreamer: lokoferru1
+    tagsStreamer: '#trolleando #randoms'
+    minimalViews: 2
+    maxViews: 150
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: cc13e80711121064caf907a0b998879e, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 39e480324d4557045a4595694d8c2bda, type: 3}
+    title: Experimento hardcore
+    nameStreamer: Fuzoh
+    tagsStreamer: '#dia3'
+    minimalViews: 8
+    maxViews: 128
+    Life: 100
+  - inUse: 0
+    streamImage: {fileID: 21300000, guid: 3b8876bdda3f7254a931806de7909985, type: 3}
+    iconStreamerImage: {fileID: 21300000, guid: 5b9f6f44795bbeb45af36a3e0432b243, type: 3}
+    title: "LETHALCOMPANY WITH FUN SQUAD! \uFFFD\u2642l"
+    nameStreamer: XenoFeing
+    tagsStreamer: '#epic'
+    minimalViews: 6
+    maxViews: 105
     Life: 100
   <comments>k__BackingField:
   - {fileID: -5407973723330329128}
