@@ -170,10 +170,19 @@ public class StreamerData : DataElement<StreamerData>
         if (IsServer)
             Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
 
+        if (Enable && IsServer)
+            return;
+
         onEndStream += (s) =>
         {
             if (streamerParent.Count > 0)
+            {
                 streamerParent.Count--;
+                Debug.Log("Count disminuyó. Nuevo valor Count: " + streamerParent.Count);
+            }
+            else
+                Debug.Log("Count no pudo disminuir debido a que Count es <= que 0. Count value: " + streamerParent.Count);
+
         };
     }
 
@@ -186,6 +195,7 @@ public class StreamerData : DataElement<StreamerData>
         Viewers.total = streamer.maxViews;
 
         streamerParent.Count++;
+        Debug.Log("Count incrementó. Nuevo valor Count: " + streamerParent.Count);
 
         if (!IsServer)
             return;

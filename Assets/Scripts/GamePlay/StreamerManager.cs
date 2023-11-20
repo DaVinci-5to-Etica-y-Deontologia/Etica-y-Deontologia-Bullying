@@ -287,7 +287,8 @@ public class StreamerManager : NetworkBehaviour
     /// <summary>
     /// Ejecuta el llamado para terminar la partida
     /// </summary>
-    public void FinishDay()
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void Rpc_FinishDay()
     {
         onFinishDay.delegato.Invoke();
 
@@ -441,7 +442,7 @@ public class StreamerManager : NetworkBehaviour
 
         if (streamersData.Count <= 0)
         {
-            FinishDay();
+            Rpc_FinishDay();
         }
             
     }
@@ -528,7 +529,7 @@ public class StreamerManager : NetworkBehaviour
 
         UnityEngine.Debug.Log("server: " + IsServer);
 
-        streamersData.endGame = TimersManager.Create(5 * 60, FinishDay).Stop();
+        streamersData.endGame = TimersManager.Create(5 * 60, Rpc_FinishDay).Stop();
     }
 
     private void Awake()

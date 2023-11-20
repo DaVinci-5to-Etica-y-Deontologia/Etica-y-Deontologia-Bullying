@@ -218,6 +218,7 @@ public class ChatContentRefresh : MonoBehaviour
         {
             Middle = this.comments.Count();
             flagScroll = true;
+            Scroll();
         }
     }
 
@@ -228,7 +229,7 @@ public class ChatContentRefresh : MonoBehaviour
         if (flagScroll)
         {
             Scroll();
-            flagScroll = false;
+            //flagScroll = false;
         }
     }
     
