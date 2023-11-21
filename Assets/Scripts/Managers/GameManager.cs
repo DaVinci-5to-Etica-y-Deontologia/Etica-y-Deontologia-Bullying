@@ -75,7 +75,7 @@ public class GameManager : NetworkBehaviour
     [Tooltip("Evento llamado cuando se la condicion de derrota")]
     public UnityEvent defeat;
 
-    public FSMGameMaganer _fsmGameMaganer;
+    FSMGameMaganer _fsmGameMaganer;
 
     Pictionarys<MyScripts, UnityAction> _update = new Pictionarys<MyScripts, UnityAction>();
 

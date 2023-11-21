@@ -231,11 +231,8 @@ public class StreamerManager : NetworkBehaviour
         {
             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(instance.streamersData)));
 
-            if(GameManager.instance._fsmGameMaganer.CurrentState != GameManager.instance._fsmGameMaganer.pause)
-            {
-                TransitionManager.instance.ChangeText("Un jugador nuevo se esta uniendo a la partida");
-                instance.Rpc_GlobalPause();
-            }
+            TransitionManager.instance.ChangeText("Un jugador nuevo se esta uniendo a la partida");
+            instance.Rpc_GlobalPause();
         }
     }
     static public void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
@@ -523,7 +520,7 @@ public class StreamerManager : NetworkBehaviour
 
     public void EndLoad()
     {
-        MyStart();
+        TimersManager.Create(0.1f, MyStart);
     }
 
     public override void Spawned()
