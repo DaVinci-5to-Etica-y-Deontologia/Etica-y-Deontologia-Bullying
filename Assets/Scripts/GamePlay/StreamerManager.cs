@@ -229,15 +229,17 @@ public class StreamerManager : NetworkBehaviour
     {
         if (instance.IsServer)
         {
-            //UnityEngine.Debug.Log("SE EJECUTÓ ActStartUpdateStreamers");
-            TransitionManager.instance.ChangeText("Un jugador nuevo se esta uniendo a la partida");
-            instance.Rpc_GlobalPause();
             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(instance.streamersData)));
+
+            if(GameManager.instance._fsmGameMaganer.CurrentState != GameManager.instance._fsmGameMaganer.pause)
+            {
+                TransitionManager.instance.ChangeText("Un jugador nuevo se esta uniendo a la partida");
+                instance.Rpc_GlobalPause();
+            }
         }
     }
     static public void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
     {
-        //UnityEngine.Debug.Log("SE EJECUTÓ EndUpdateStreamers");
         instance.GlobalUnPause();
     }
 
@@ -287,12 +289,9 @@ public class StreamerManager : NetworkBehaviour
     /// <summary>
     /// Ejecuta el llamado para terminar la partida
     /// </summary>
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    public void Rpc_FinishDay()
+    public void FinishDay()
     {
-        onFinishDay.delegato.Invoke();
-
-        streamersData.gameEnd = true;
+        //streamersData.gameEnd = true;
 
         streamersData.endGame.Stop();
 
@@ -300,6 +299,8 @@ public class StreamerManager : NetworkBehaviour
         {
             item.Value.Stop();
         }
+
+        onFinishDay.delegato.Invoke();
     }
 
     public void CreateFirstStream()
@@ -401,8 +402,10 @@ public class StreamerManager : NetworkBehaviour
     public void ChangeStream(int index)
     {
         var previus = IndexStreamWatch;
+        //print("Previous index: " + previus);
 
         IndexStreamWatch = index;
+        //print("Index Stream Watch: " + IndexStreamWatch);
 
         StreamerData aux;
 
@@ -429,6 +432,8 @@ public class StreamerManager : NetworkBehaviour
 
         onStreamerChange.delegato?.Invoke(Actual);
 
+        //print("ShowEnd del stream " + aux.ID + " : " + aux.ShowEnd);
+
         if (aux.ShowEnd)
         {
             Aux_onEndStream(aux);
@@ -440,12 +445,6 @@ public class StreamerManager : NetworkBehaviour
         //print("SE EJECUTÓ: Aux_onEndStream");
         onStreamEnd.delegato.Invoke(obj);
         //DataRpc.Create(Actions.FinishStream);
-
-        if (streamersData.Count <= 0)
-        {
-            Rpc_FinishDay();
-        }
-            
     }
     void CommentCreateQueue(CommentData commentData)
     {
@@ -534,7 +533,7 @@ public class StreamerManager : NetworkBehaviour
 
         player.Moderator = !(Runner.SessionInfo.PlayerCount % 2 == 0) || Runner.SessionInfo.PlayerCount == 0;
 
-        streamersData.endGame = TimersManager.Create(5 * 60, Rpc_FinishDay).Stop();
+        streamersData.endGame = TimersManager.Create(5 * 60, FinishDay).Stop();
     }
 
     private void Awake()

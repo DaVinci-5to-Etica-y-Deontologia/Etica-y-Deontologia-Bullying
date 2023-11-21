@@ -44,7 +44,6 @@ public class StreamerData : DataElement<StreamerData>
     public bool ShowEnd => (Finished || streamerParent.gameEnd);
 
     //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) ? StreamState.Fallido : StreamState.Empate);
-
     public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
     protected override IDataElement parent => streamerParent;
 
@@ -129,12 +128,19 @@ public class StreamerData : DataElement<StreamerData>
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
+        Debug.Log("Stream " + ID + " current views: " + Viewers.current);
         if ((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable && !Finished)
         {
+            Debug.Log("ENTRO EN EL IF DE InternalShowEnd, ENTRO DEBIDO A: LIFE " + (Life.current == 0) + "\n Current views: " + Viewers.current + "  Minimal views: " + streamer.minimalViews);
+            Debug.Log(" VIEWS DEFEAT: " + (Viewers.current <= streamer.minimalViews) + "\n VIEWS WIN: " + (Viewers.current == Viewers.total) + " ENABLE: " + Enable + " FINISHED: " + Finished);
+            onEndStream?.Invoke(this);
             Stop();
             Finished = true;
-            onEndStream?.Invoke(this);
-            //Debug.Log("SE EJECUTÓ: InternalShowEnd");
+            
+            if (StreamerManager.instance.streamersData.Count <= 0)
+            {
+                StreamerManager.instance.FinishDay();
+            }
         }
     }
 
@@ -182,9 +188,9 @@ public class StreamerData : DataElement<StreamerData>
         if (IsServer)
             Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
 
-        onEndStream += (s) =>
+        onEndStream += (streamData) =>
         {
-            if (streamerParent.Count > 0)
+            if (streamerParent.Count > 0 && !streamData.Finished && streamData.Enable  )
             {
                 streamerParent.Count--;
                 Debug.Log("Count disminuyó. Nuevo valor Count: " + streamerParent.Count);
