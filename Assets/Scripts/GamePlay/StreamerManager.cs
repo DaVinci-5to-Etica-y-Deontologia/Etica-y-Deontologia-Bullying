@@ -273,7 +273,7 @@ public class StreamerManager : NetworkBehaviour
         GameManager.instance.Pause(true);
         TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
 
-        //UnityEngine.Debug.Log("El juego se pauso");
+        UnityEngine.Debug.Log("El juego se pauso");
     }
     
     public void GlobalUnPause()
@@ -467,6 +467,7 @@ public class StreamerManager : NetworkBehaviour
         if (IsServer)
         {
             CreateFirstStream();
+            print("Game mode: " + Runner.GameMode);
 
             if (Runner.GameMode == GameMode.Host)
             {
