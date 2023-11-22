@@ -134,13 +134,13 @@ public class UserParent : DataElement<UserParent>
 
         srch.User.RemoveComment(srch.comment.index);
 
-        srch.Streamer.Viewers.current = data.Item1;
+        srch.Streamer.Viewers.current += data.Item1;
 
-        srch.Streamer.Life.current = data.Item2;
+        srch.Streamer.Life.current += data.Item2;
 
         if (srch.Streamer.IsServer)
         {
-            srch.Streamer.Users(data.Item1 - (int)srch.Streamer.Viewers.current);
+            srch.Streamer.Users(data.Item1);            
         }
     }
 
