@@ -491,10 +491,12 @@ public class StreamerManager : NetworkBehaviour
             return;
         }
 
-        while (eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16)
+        do
         {
-            eventQueue.Dequeue().Invoke();
+            if (eventQueue.TryDequeue(out var action))
+                action();
         }
+        while (eventQueue.Count > 0 && watchdog.Elapsed.TotalMilliseconds < 16);
 
         watchdog.Restart();
     }
