@@ -198,8 +198,6 @@ public class StreamerData : DataElement<StreamerData>
             Life.onChange += InternalShowEnd;
 
             Viewers.onChange += InternalShowEnd;
-
-            Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
         }
     }
 
