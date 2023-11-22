@@ -288,7 +288,7 @@ public class StreamerManager : NetworkBehaviour
     /// </summary>
     public void FinishDay()
     {
-        //streamersData.gameEnd = true;
+        streamersData.gameEnd = true;
 
         streamersData.endGame.Stop();
 
@@ -399,10 +399,10 @@ public class StreamerManager : NetworkBehaviour
     public void ChangeStream(int index)
     {
         var previus = IndexStreamWatch;
-        //print("Previous index: " + previus);
+        print("Previous index: " + previus);
 
         IndexStreamWatch = index;
-        //print("Index Stream Watch: " + IndexStreamWatch);
+        print("Index Stream Watch: " + IndexStreamWatch);
 
         StreamerData aux;
 
@@ -429,7 +429,7 @@ public class StreamerManager : NetworkBehaviour
 
         onStreamerChange.delegato?.Invoke(Actual);
 
-        //print("ShowEnd del stream " + aux.ID + " : " + aux.ShowEnd);
+        print("ShowEnd del stream " + aux.ID + " : " + aux.ShowEnd);
 
         if (aux.ShowEnd)
         {
@@ -577,7 +577,7 @@ public struct DataRpc
     public static void Create(Actions action)
     {
         //UnityEngine.Debug.Log(action);
-        Filter(new DataRpc() { _action = action, data = string.Empty });
+        Filter(new DataRpc() { _action = action, data = string.Empty, direction = string.Empty });
     }
     public static void Create(Actions action, string direction)
     {

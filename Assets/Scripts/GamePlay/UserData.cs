@@ -154,7 +154,8 @@ public class UserParent : DataElement<UserParent>
 
     void Admonition(int index)
     {
-        CoolDown = 30;
+        if (IsServer)
+            CoolDown = 30;
 
         if (!_coolDownAdmonition.Chck)
             Destroy();

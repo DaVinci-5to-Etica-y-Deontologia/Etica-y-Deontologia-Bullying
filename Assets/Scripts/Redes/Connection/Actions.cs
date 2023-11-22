@@ -132,7 +132,7 @@ public class ActUpdateLifeStream : ActionStream
     }
 }
 [System.Serializable]
-public class ActFinishStream : ActionStream
+public class ActFinishStream : ActionComment
 {
     public ActFinishStream(System.Action<string, StreamerManager.SearchResult> action) : base(action)
     {

@@ -41,10 +41,12 @@ public class StreamerData : DataElement<StreamerData>
 
     public override string textIP => ID.ToString();
 
-    public bool ShowEnd => (Finished || streamerParent.gameEnd);
+    public bool ShowEnd => (State != StreamState.Empate) && Finished;
 
     //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) ? StreamState.Fallido : StreamState.Empate);
-    public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
+    //public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
+    public StreamState State => (Viewers.current == Viewers.total) ? StreamState.Completado : (Viewers.current <= streamer.minimalViews || Life.current == 0) ? StreamState.Fallido : StreamState.Empate;
+
     protected override IDataElement parent => streamerParent;
 
     StreamerManager.Data streamerParent;
@@ -128,19 +130,14 @@ public class StreamerData : DataElement<StreamerData>
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        Debug.Log("Stream " + ID + " current views: " + Viewers.current);
-        if ((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable && !Finished)
+        //Debug.Log("Stream " + ID + " current views: " + Viewers.current);
+        if (State != StreamState.Empate && Enable && !Finished)
         {
-            Debug.Log("ENTRO EN EL IF DE InternalShowEnd, ENTRO DEBIDO A: LIFE " + (Life.current == 0) + "\n Current views: " + Viewers.current + "  Minimal views: " + streamer.minimalViews);
-            Debug.Log(" VIEWS DEFEAT: " + (Viewers.current <= streamer.minimalViews) + "\n VIEWS WIN: " + (Viewers.current == Viewers.total) + " ENABLE: " + Enable + " FINISHED: " + Finished);
-            onEndStream?.Invoke(this);
-            Stop();
             Finished = true;
-            
-            if (StreamerManager.instance.streamersData.Count <= 0)
-            {
-                StreamerManager.instance.FinishDay();
-            }
+            Debug.Log("Stream " + ID + " InternalShowEnd: LIFE " + (Life.current == 0) + "\n Current views: " + Viewers.current + "  Minimal views: " + streamer.minimalViews);
+            Debug.Log(" VIEWS DEFEAT: " + (Viewers.current <= streamer.minimalViews) + "\n VIEWS WIN: " + (Viewers.current == Viewers.total) + " ENABLE: " + Enable + " FINISHED: " + Finished);
+
+            DataRpc.Create(Actions.FinishStream, textIP);
         }
     }
 
@@ -165,9 +162,26 @@ public class StreamerData : DataElement<StreamerData>
 
     void FinishStream(StreamerManager.SearchResult srch)
     {
+        Finished = true;
         Viewers.current = srch.Streamer.Viewers.current;
         Life.current = srch.Streamer.Life.current;
-        Finished = srch.Streamer.Finished;
+
+        onEndStream?.Invoke(this);
+
+        if (streamerParent.Count > 0)
+        {
+            streamerParent.Count--;
+            Debug.Log("Count disminuyó. Nuevo valor Count: " + streamerParent.Count);
+        }
+        else
+            Debug.Log("Count no pudo disminuir debido a que Count es <= que 0. Count value: " + streamerParent.Count);
+
+        Stop();
+
+        if (streamerParent.Count <= 0)
+        {
+            streamerParent.streamerManager.FinishDay();
+        }
     }
 
     //rpc
@@ -181,24 +195,14 @@ public class StreamerData : DataElement<StreamerData>
     {
         this.streamerParent = StreamerManager.instance.streamersData;
 
-        Life.onChange += InternalShowEnd;
-
-        Viewers.onChange += InternalShowEnd;
-
         if (IsServer)
-            Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
-
-        onEndStream += (streamData) =>
         {
-            if (streamerParent.Count > 0 && !streamData.Finished && streamData.Enable  )
-            {
-                streamerParent.Count--;
-                Debug.Log("Count disminuyó. Nuevo valor Count: " + streamerParent.Count);
-            }
-            else
-                Debug.Log("Count no pudo disminuir debido a que Count es <= que 0. Count value: " + streamerParent.Count);
+            Life.onChange += InternalShowEnd;
 
-        };
+            Viewers.onChange += InternalShowEnd;
+
+            Life.onChange += (p, d) => DataRpc.Create(Actions.UpdateLifeStream, textIP, p.current.ToString());
+        }
     }
 
     public void Create()
