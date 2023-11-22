@@ -52,11 +52,14 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
 
     public void Init(int idStream, int idUser)
     {
-        _user = StreamerManager.instance[idStream].value?[idUser].value;
-        if(IsServer)
+        var stream = StreamerManager.instance[idStream].value;
+
+        _user = stream?[idUser].value;
+
+        if (IsServer)
             timerDestroy = TimersManager.Create(30, () =>
             {
-                DataRpc.Create(Actions.Aplicate, textIP, (comment.Views, comment.Damage));
+                DataRpc.Create(Actions.Aplicate, textIP, (stream.Viewers.current + comment.Views , stream.Life.current + comment.Damage));
             }).SetMultiply(player.multiply);
     }
 
