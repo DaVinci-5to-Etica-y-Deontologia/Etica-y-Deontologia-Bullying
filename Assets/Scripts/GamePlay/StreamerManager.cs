@@ -399,10 +399,10 @@ public class StreamerManager : NetworkBehaviour
     public void ChangeStream(int index)
     {
         var previus = IndexStreamWatch;
-        print("Previous index: " + previus);
+        //print("Previous index: " + previus);
 
         IndexStreamWatch = index;
-        print("Index Stream Watch: " + IndexStreamWatch);
+        //print("Index Stream Watch: " + IndexStreamWatch);
 
         StreamerData aux;
 
@@ -429,9 +429,7 @@ public class StreamerManager : NetworkBehaviour
 
         onStreamerChange.delegato?.Invoke(Actual);
 
-        print("ShowEnd del stream " + aux.ID + " : " + aux.ShowEnd);
-
-        if (aux.ShowEnd)
+        if (Actual.ShowEnd)
         {
             Aux_onEndStream(aux);
         }
@@ -439,7 +437,6 @@ public class StreamerManager : NetworkBehaviour
 
     void Aux_onEndStream(StreamerData obj)
     {
-        //print("SE EJECUTÓ: Aux_onEndStream");
         onStreamEnd.delegato.Invoke(obj);
         //DataRpc.Create(Actions.FinishStream);
     }

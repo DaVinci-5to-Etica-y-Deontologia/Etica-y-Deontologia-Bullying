@@ -77,8 +77,9 @@ public class ChatContentRefresh : MonoBehaviour
 
         SetText();
 
-        if (flagClamp)
+        if (flagClamp && valueY < 0.35f)
         {
+            Bottom();
             return;
         }
 
@@ -90,14 +91,13 @@ public class ChatContentRefresh : MonoBehaviour
         }
     }
 
+
     public void SetClamp(bool _clampBotton)
     {
         if (_clampBotton && !flagClamp)
         {
             flagClamp = true;
-            containScroll.value = 0;
-            containScrollRect.verticalNormalizedPosition = 0;
-            Middle = this.comments.Count();
+            Bottom();
         }
         else
         {
@@ -113,7 +113,15 @@ public class ChatContentRefresh : MonoBehaviour
 
         SetText();
     }
-    
+
+    void Bottom()
+    {
+        containScroll.value = 0;
+        containScrollRect.verticalNormalizedPosition = 0;
+        Middle = this.comments.Count();
+        flagScroll = true;
+    }
+
     void SetText()
     {
         //Mira esa concatenacion
@@ -216,20 +224,22 @@ public class ChatContentRefresh : MonoBehaviour
 
         if(flagClamp)
         {
-            Middle = this.comments.Count();
-            flagScroll = true;
-            Scroll();
+            //Middle = this.comments.Count();
+            //flagScroll = true;
+            //Scroll();
+
+            Bottom();
         }
     }
 
     private void LateUpdate()
     {
-        //contain.enabled = !contain.enabled;
+        contain.enabled = !contain.enabled;
 
         if (flagScroll)
         {
             Scroll();
-            //flagScroll = false;
+            flagScroll = false;
         }
     }
     
@@ -239,7 +249,6 @@ public class ChatContentRefresh : MonoBehaviour
         eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment").delegato += OnLeaveComment;
 
         eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato += () => commentViews = GetComponentsInChildren<CommentView>(true);
-
         eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamchange").delegato += (streamer) => { flagScroll = true; Middle = 0;};
     }
 }

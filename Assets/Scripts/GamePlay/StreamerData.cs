@@ -131,12 +131,11 @@ public class StreamerData : DataElement<StreamerData>
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        //Debug.Log("Stream " + ID + " current views: " + Viewers.current);
         if((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable && !Finished)
         {
             Finished = true;
-            Debug.Log("Stream " + ID + " InternalShowEnd: LIFE " + (Life.current == 0) + "\n Current views: " + Viewers.current + "  Minimal views: " + streamer.minimalViews);
-            Debug.Log(" VIEWS DEFEAT: " + (Viewers.current <= streamer.minimalViews) + "\n VIEWS WIN: " + (Viewers.current == Viewers.total) + " ENABLE: " + Enable + " FINISHED: " + Finished);
+            //Debug.Log("Stream " + ID + " InternalShowEnd: LIFE " + (Life.current == 0) + "\n Current views: " + Viewers.current + "  Minimal views: " + streamer.minimalViews);
+            //Debug.Log(" VIEWS DEFEAT: " + (Viewers.current <= streamer.minimalViews) + "\n VIEWS WIN: " + (Viewers.current == Viewers.total) + " ENABLE: " + Enable + " FINISHED: " + Finished);
 
             DataRpc.Create(Actions.FinishStream, textIP);
         }
@@ -165,7 +164,6 @@ public class StreamerData : DataElement<StreamerData>
     {
         Finished = true;
 
-
         onEndStream?.Invoke(this);
 
         if (streamerParent.Count > 0)
@@ -173,7 +171,6 @@ public class StreamerData : DataElement<StreamerData>
             streamerParent.Count--;
         }
         
-
         Stop();
 
         if (streamerParent.Count <= 0)
@@ -210,7 +207,7 @@ public class StreamerData : DataElement<StreamerData>
         Viewers.total = streamer.maxViews;
 
         streamerParent.Count++;
-        Debug.Log("Count incrementó. Nuevo valor Count: " + streamerParent.Count);
+        //Debug.Log("Count incrementó. Nuevo valor Count: " + streamerParent.Count);
 
         if (!IsServer)
             return;

@@ -116,7 +116,7 @@ public class UIManager : MonoBehaviour
 
     private void EndGame_onChange(IGetPercentage arg1, float arg2)
     {
-        remanentTime.text = ((int)(arg1.current / 60)).ToString() + ":" + ((int)(arg1.current % 60)).ToString();
+        remanentTime.text = ((int)(arg1.current / 60)).ToString() + ":" + Seconds(arg1);
     }
 
     public void MyAwake()
@@ -140,5 +140,14 @@ public class UIManager : MonoBehaviour
         streamsButtons.Add((stream.ID,button));
 
         return button;
+    }
+
+    string Seconds(IGetPercentage arg1)
+    {
+        var aux = (int)(arg1.current % 60);
+        if (aux >= 10)
+            return aux.ToString();
+        else
+            return "0" + aux.ToString();
     }
 }
