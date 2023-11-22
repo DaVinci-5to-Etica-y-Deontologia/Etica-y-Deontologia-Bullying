@@ -158,12 +158,12 @@ public class UserParent : DataElement<UserParent>
 
         newCommentData.Init(stream.ID, ID);
 
-        if (IsServer)
-            CoolDown = newCommentData.Delay;
-
         comments.Add(newCommentData.CreatePic());
 
         onCreateComment?.Invoke(newCommentData);
+
+        if (IsServer && !stream.ShowEnd)
+            CoolDown = newCommentData.Delay;
     }
 
     void RemoveComment(int index)
