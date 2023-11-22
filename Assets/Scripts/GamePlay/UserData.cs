@@ -86,11 +86,27 @@ public class UserParent : DataElement<UserParent>
 
     public static void Ban(string jsonData, StreamerManager.SearchResult srch)
     {
-        srch.User.Ban();
+        srch.User.Destroy();
+
+        for (int i = srch.User.comments.Count - 1; i >= 0; i--)
+        {
+            srch.User.RemoveComment(i);
+        }
+
+        srch.Streamer.Viewers.current--;
     }
     public static void Admonition(string jsonData, StreamerManager.SearchResult srch)
     {
-        srch.User.Admonition(srch.comment.index);
+        if (srch.User.IsServer)
+            srch.User.CoolDown = 30;
+
+        if (!srch.User._coolDownAdmonition.Chck)
+        {
+            srch.User.Destroy();
+            srch.Streamer.Viewers.current--;
+        }
+
+        srch.User.RemoveComment(srch.comment.index);
     }
     public static void Picantear(string jsonData, StreamerManager.SearchResult srch)
     {
@@ -108,14 +124,28 @@ public class UserParent : DataElement<UserParent>
     {
         srch.User.AddComment(jsonData);
     }
-    public static void RemoveComment(string jsonData, StreamerManager.SearchResult srch)
+
+    static public void Aplicate(string jsonData, StreamerManager.SearchResult srch)
     {
-        //Debug.Log("user: " + (srch.User!=null) + " Comment: " + (srch.CommentData != null));
+        if (srch.Streamer.ShowEnd)
+            return;
+
+        var data = JsonUtility.FromJson<(int, int)>(jsonData);
+
         srch.User.RemoveComment(srch.comment.index);
+
+        srch.Streamer.Viewers.current += data.Item1;
+
+        srch.Streamer.Life.current += data.Item2;
+
+        if (srch.Streamer.IsServer)
+        {
+            srch.Streamer.Users(data.Item1);            
+        }
     }
 
     #endregion
-    
+
 
     #region rpc
     void AddComment(string jsonCommentData)
@@ -152,26 +182,6 @@ public class UserParent : DataElement<UserParent>
 
     #region Moderator
 
-    void Admonition(int index)
-    {
-        if (IsServer)
-            CoolDown = 30;
-
-        if (!_coolDownAdmonition.Chck)
-            Destroy();
-
-        RemoveComment(index);
-    }
-
-    void Ban()
-    {
-        Destroy();
-
-        for (int i = comments.Count - 1; i >= 0; i--)
-        {
-            RemoveComment(i);
-        }
-    }
 
     void SuspectChange(string index)
     {
@@ -218,20 +228,6 @@ public class UserParent : DataElement<UserParent>
 
     #endregion
     
-    public void Aplicate(int views, float damage ,string textIP)
-    {
-        if (stream.ShowEnd)
-            return;
-
-        //Debug.Log($"Aplicar el danio: {damage} ganancia de viewers: {views}");
-
-        stream.Users(views);
-
-        stream.Life.current += damage;
-
-        DataRpc.Create(Actions.RemoveComment, textIP);
-    }
-
     public void Stop()
     {
         _coolDownToComment?.Stop();
@@ -243,7 +239,6 @@ public class UserParent : DataElement<UserParent>
             return;
 
         Enable = false;
-        stream.Viewers.current--;
         Stop();
     }
 

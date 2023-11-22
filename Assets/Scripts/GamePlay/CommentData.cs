@@ -56,8 +56,7 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
         if(IsServer)
             timerDestroy = TimersManager.Create(30, () =>
             {
-                user.Aplicate(comment.Views, comment.Damage, textIP);
-
+                DataRpc.Create(Actions.Aplicate, textIP, (comment.Views, comment.Damage));
             }).SetMultiply(player.multiply);
     }
 

@@ -44,8 +44,9 @@ public class StreamerData : DataElement<StreamerData>
     public bool ShowEnd => (State != StreamState.Empate) && Finished;
 
     //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) ? StreamState.Fallido : StreamState.Empate);
-    //public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
-    public StreamState State => (Viewers.current == Viewers.total) ? StreamState.Completado : (Viewers.current <= streamer.minimalViews || Life.current == 0) ? StreamState.Fallido : StreamState.Empate;
+    //public StreamState State => (Viewers.current == Viewers.total) ? StreamState.Completado : (Viewers.current <= streamer.minimalViews || Life.current == 0) ? StreamState.Fallido : StreamState.Empate;
+    
+    public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
 
     protected override IDataElement parent => streamerParent;
 
@@ -163,18 +164,15 @@ public class StreamerData : DataElement<StreamerData>
     void FinishStream(StreamerManager.SearchResult srch)
     {
         Finished = true;
-        Viewers.current = srch.Streamer.Viewers.current;
-        Life.current = srch.Streamer.Life.current;
+
 
         onEndStream?.Invoke(this);
 
         if (streamerParent.Count > 0)
         {
             streamerParent.Count--;
-            Debug.Log("Count disminuyó. Nuevo valor Count: " + streamerParent.Count);
         }
-        else
-            Debug.Log("Count no pudo disminuir debido a que Count es <= que 0. Count value: " + streamerParent.Count);
+        
 
         Stop();
 

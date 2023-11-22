@@ -17,7 +17,7 @@ public class Actions
 
     public static Actions AddComment { get; private set; } = new ActAddComment(UserData.AddComment);
 
-    public static Actions RemoveComment { get; private set; } = new ActRemoveComment(UserData.RemoveComment);
+    public static Actions Aplicate { get; private set; } = new ActAplicate(UserData.Aplicate);
 
 
     public static Actions AddUser { get; private set; } = new ActAddUser(StreamerData.AddUser);
@@ -206,10 +206,11 @@ public class ActAddComment : ActionComment
     {
     }
 }
+
 [System.Serializable]
-public class ActRemoveComment : ActionComment
+public class ActAplicate : ActionStream
 {
-    public ActRemoveComment(System.Action<string, StreamerManager.SearchResult> action) : base(action)
+    public ActAplicate(System.Action<string, StreamerManager.SearchResult> action) : base(action)
     {
     }
 }
