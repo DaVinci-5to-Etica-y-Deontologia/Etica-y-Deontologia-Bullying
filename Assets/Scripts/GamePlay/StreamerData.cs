@@ -41,11 +41,11 @@ public class StreamerData : DataElement<StreamerData>
 
     public override string textIP => ID.ToString();
 
-    public bool ShowEnd => (State != StreamState.Empate) && Finished;
+    public bool ShowEnd => (Finished || streamerParent.gameEnd);
 
     //public StreamState State => Viewers.current == Viewers.total ? StreamState.Completado : ((Life.current == 0 || Viewers.current <= streamer.minimalViews) ? StreamState.Fallido : StreamState.Empate);
     //public StreamState State => (Viewers.current == Viewers.total) ? StreamState.Completado : (Viewers.current <= streamer.minimalViews || Life.current == 0) ? StreamState.Fallido : StreamState.Empate;
-    
+
     public StreamState State => !Finished ? StreamState.Empate : ( (Viewers.current == Viewers.total)  ? StreamState.Completado : StreamState.Fallido);
 
     protected override IDataElement parent => streamerParent;
@@ -132,7 +132,7 @@ public class StreamerData : DataElement<StreamerData>
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
         //Debug.Log("Stream " + ID + " current views: " + Viewers.current);
-        if (State != StreamState.Empate && Enable && !Finished)
+        if((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable && !Finished)
         {
             Finished = true;
             Debug.Log("Stream " + ID + " InternalShowEnd: LIFE " + (Life.current == 0) + "\n Current views: " + Viewers.current + "  Minimal views: " + streamer.minimalViews);
