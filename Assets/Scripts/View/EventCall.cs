@@ -7,17 +7,23 @@ using UnityEngine.UI;
 public class EventCall : MonoBehaviour
 {
     [SerializeField]
-    UnityEvent<Button> eventToCall;
+    public UnityEvent<EventCall> eventToCall;
 
     [SerializeField]
-    Button button;
+    public Button button;
 
     [SerializeField]
-    TMPro.TextMeshProUGUI textMeshPro;
+    public Image backgroundImage;
+
+    [SerializeField]
+    public TMPro.TextMeshProUGUI textMeshPro;
+
+    [SerializeField]
+    public Image image;
 
     public void OnClick()
     {
-        eventToCall.Invoke(button);
+        eventToCall.Invoke(this);
     }
 
     public void Set(string nameToShow, UnityAction action)
@@ -25,4 +31,42 @@ public class EventCall : MonoBehaviour
         textMeshPro.text = nameToShow;
         button.onClick.AddListener(action);
     }
+
+    public void Set(Sprite spriteToShow, UnityAction action)
+    {
+        image.sprite = spriteToShow;
+        button.onClick.AddListener(action);
+    }
+
+    public override bool Equals(object other)
+    {
+        return base.Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+
+    public static bool operator ==(EventCall eventCall, Button button)
+    {
+        return eventCall.button == button;
+    }
+
+    public static bool operator !=(EventCall eventCall, Button button)
+    {
+        return eventCall.button != button;
+    }
+
+    public static bool operator ==(EventCall eventCall, EventCall button)
+    {
+        return eventCall.Equals(button);
+    }
+
+    public static bool operator !=(EventCall eventCall, EventCall button)
+    {
+        return !eventCall.Equals(button);
+    }
+
+
 }

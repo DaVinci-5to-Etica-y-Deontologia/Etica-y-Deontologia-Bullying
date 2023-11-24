@@ -2,31 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopUpModerator : PopUpElement
+public class PopUpModerator : PopUpComment
 {
     [SerializeField]
-    TMPro.TextMeshProUGUI textToShow;
+    TMPro.TMP_Dropdown dropdown;
 
-    public override void Awake()
+    protected override bool ExecutePopUp => player.Moderator;
+
+    protected override void PopUp(CommentView commentView)
     {
-        base.Awake();
-        eventManager.events.SearchOrCreate<EventParam<CommentData>>("onclickcomment").delegato += PopUp;
-    }
+        base.PopUp(commentView);
 
-    void PopUp(CommentData comment)
-    {
-        onActive.Invoke();
+        dropdown.value = user.Suspect;
 
-        textToShow.text = $"Usuario: {comment.textName}\nComentario: {comment.textComment}";
-
-        callsManager.DestroyAll();
-
-        if (comment.Enable)
-            callsManager.Create("Ban" , () => StreamerManager.Execute(Actions.Ban, comment.textIP));
+        callsManager.Create("Ban" , () =>
+        {
+            Execute();
+            DataRpc.Create(Actions.Ban, comment.textIP); 
+        });
 
         
-        callsManager.Create("Admonition", () => StreamerManager.Execute(Actions.Admonition, comment.textIP));
+        callsManager.Create("Admonition", () =>
+        {
+            Execute();
+            DataRpc.Create(Actions.Admonition, comment.textIP);
+        });
+    }
 
-        //callsManager.Create("Eliminate", () => eliminate.delegato.Invoke(comment));
+    public void DropDown(int index)
+    {
+        if(user.comments.Count > 0)
+            DataRpc.Create(Actions.Suspect, comment.textIP, index.ToString());
     }
 }

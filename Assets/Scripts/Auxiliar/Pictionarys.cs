@@ -12,7 +12,7 @@ using Internal;
 public class Pictionarys<K, V> : IEnumerable<Pictionary<K, V>>
 {
     [SerializeField]
-    List<Pictionary<K, V>> pictionaries;
+    protected List<Pictionary<K, V>> pictionaries;
 
     Stack<Pictionary<K, V>> auxiliarObjects;
 
@@ -372,14 +372,17 @@ public class Pictionarys<K, V> : IEnumerable<Pictionary<K, V>>
     
     int SearchIndex(K key)
     {
+        //string pantalla = "busqueda de: " + key;
         for (int i = 0; i < pictionaries.Count; i++)
         {
+            //pantalla += $"key {pictionaries[i].Key} value {pictionaries[i].Value} indice {i}";
             if (pictionaries[i].Key.Equals(key))
             {
+                //Debug.Log(pantalla);
                 return i;
             }
         }
-
+        //Debug.Log(pantalla);
         return -1;
     }
 

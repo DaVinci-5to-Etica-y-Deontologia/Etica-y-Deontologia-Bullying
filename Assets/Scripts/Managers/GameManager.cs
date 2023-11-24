@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using Fusion;
 
-public class GameManager : SingletonMono<GameManager>
+public class GameManager : NetworkBehaviour
 {
     public static event UnityAction onPause
     {
@@ -32,6 +33,8 @@ public class GameManager : SingletonMono<GameManager>
     }
     public static Pictionarys<MyScripts, UnityAction> fixedUpdate => instance._fixedUpdate;
     public static Pictionarys<MyScripts, UnityAction> update => instance._update;
+
+    public static GameManager instance;
 
     [SerializeField]
     EventManager _eventManager;
@@ -72,13 +75,11 @@ public class GameManager : SingletonMono<GameManager>
     [Tooltip("Evento llamado cuando se la condicion de derrota")]
     public UnityEvent defeat;
 
-
+    FSMGameMaganer _fsmGameMaganer;
 
     Pictionarys<MyScripts, UnityAction> _update = new Pictionarys<MyScripts, UnityAction>();
 
     Pictionarys<MyScripts, UnityAction> _fixedUpdate = new Pictionarys<MyScripts, UnityAction>();
-
-    FSMGameMaganer _fsmGameMaganer;
 
     #region funciones
 
@@ -140,10 +141,8 @@ public class GameManager : SingletonMono<GameManager>
         MyUpdate(_fixedUpdate);
     }
 
-    protected override void Awake()
+    public override void Spawned()
     {
-        base.Awake();
-
         _fsmGameMaganer = new FSMGameMaganer(this);
 
         var victory = _eventManager.events.SearchOrCreate<EventParam>("victory");
@@ -151,15 +150,27 @@ public class GameManager : SingletonMono<GameManager>
         var defeat = _eventManager.events.SearchOrCreate<EventParam>("defeat");
 
         victory.delegato += Victory;
-        victory.delegato += ()=> close.delegato.Invoke();
+        victory.delegato += () => close.delegato.Invoke();
         defeat.delegato += Defeat;
-        defeat.delegato += ()=> close.delegato.Invoke();
+        defeat.delegato += () => close.delegato.Invoke();
+
+        awakeUnityEvent?.Invoke();
 
         updateUnityEvent.AddListener(MyUpdate);
 
         fixedUpdateUnityEvent.AddListener(MyFixedUpdate);
 
-        awakeUnityEvent?.Invoke();
+        enabled = true;
+    }
+
+    protected void Awake()
+    {
+        instance = this;
+
+        enabled = false;
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex != 1)
+            Spawned();
     }
 
     private void Update()
@@ -238,7 +249,7 @@ public class Pause : IState<FSMGameMaganer>
 
     public void OnEnterState(FSMGameMaganer param)
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         onPause?.Invoke();
         param.context.enabled = false;
     }
@@ -246,7 +257,7 @@ public class Pause : IState<FSMGameMaganer>
     public void OnExitState(FSMGameMaganer param)
     {
         onPlay?.Invoke();
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         param.context.enabled = true;
     }
 

@@ -20,10 +20,13 @@ public class Comment : SuperScriptableObject
     public int Views { get; private set; }
 
     [field: SerializeField]
-    public int Damage { get; private set; }
+    public float Damage { get; private set; }
 
     [field: SerializeField]
     public float Deley { get; private set; }
+
+    [field: SerializeField]
+    public float MoralIndex { get; private set; }
 
 
     /////////////////////////////////////////////////////////////////////////
@@ -64,13 +67,14 @@ public class Comment : SuperScriptableObject
         if(int.TryParse(param["Views"], out var aux0))
             Views = aux0;
 
-        if (int.TryParse(param["Damage"], out var aux3))
+        if (float.TryParse(param["Damage"], out var aux3))
             Damage = aux3;
 
         if (float.TryParse(param["Deley"], out var aux2))
             Deley = aux2;
 
-        UnBan = param["Unban"];
+        if (float.TryParse(param["Indice Moral"], out var aux5))
+            MoralIndex = aux5;
 
         Text = param["Comentario"];
 

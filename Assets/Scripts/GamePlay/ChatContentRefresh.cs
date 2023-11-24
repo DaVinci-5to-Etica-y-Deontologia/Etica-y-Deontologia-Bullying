@@ -7,11 +7,9 @@ using System;
 
 public class ChatContentRefresh : MonoBehaviour
 {
-    public UnityEngine.UI.Button topButton;
+    public UnityEngine.Events.UnityEvent<string> onCommentTextChange;
 
-    public UnityEngine.UI.Button bottomButton;
-
-    public TMPro.TextMeshProUGUI commentText;
+    public Player player;
 
     [SerializeField]
     EventManager eventManager;
@@ -30,39 +28,45 @@ public class ChatContentRefresh : MonoBehaviour
 
     int _middle = 10;
 
+    int oldMiddle = 10;
+
     int lenght;
 
     bool flagScroll;
 
     bool flagClamp;
 
-    bool clampTopOrBotton;
-
     CommentView[] commentViews;
 
     List<CommentData> commentDatas;
 
-    Streamer Actual => StreamerManager.instance.Actual;
+    StreamerData ActualStreamer => StreamerManager.instance.Actual;
+    IEnumerable<CommentData> comments => ActualStreamer.commentViews.Select((pic)=>pic.Value);
 
-    IEnumerable<CommentData> comments => Actual.commentViews.Select((pic)=>pic.Value);
+    int MaxCommentsToView => player.NumerOfCommentsToView;
 
-    int actual
+    int MiddleCommentsToView => MaxCommentsToView / 2;
+
+    float PercentageComment => 1f / MaxCommentsToView;
+
+    int Actual
     {
         get
         {
-            return (int)Mathf.Round((min + (max - min) * (1- valueY)));
+            return (int)Mathf.Round((Min + (Max - Min) * (1- valueY)));
         }
     }
 
-    int min => Mathf.Clamp(middle - 10, 0, lenght - 1);
+    int Min => Mathf.Clamp(Middle - MiddleCommentsToView, 0, lenght);
 
-    int max => Mathf.Clamp(middle + 10, 0, lenght - 1);
+    int Max => Mathf.Clamp(Middle + MiddleCommentsToView, 0, lenght);
 
-    public int middle
+    int Middle
     {
-        get => Mathf.Clamp(_middle, 10, lenght - 11);
+        get => Mathf.Clamp(_middle, MiddleCommentsToView, lenght - MiddleCommentsToView);
         set
         {
+            oldMiddle = _middle;
             _middle = value;
         }
     }
@@ -73,50 +77,27 @@ public class ChatContentRefresh : MonoBehaviour
 
         SetText();
 
-        if (flagClamp)
+        if (flagClamp && valueY < 0.35f)
         {
-            if (value.y < 0.025f)
-            {
-                containScroll.value = 0;
-                containScrollRect.verticalNormalizedPosition = 0;
-            }
+            Bottom();
             return;
         }
 
-        if (value.y < 0.02f)
+        if (valueY < PercentageComment || valueY > 1 - PercentageComment)
         {
-            middle = actual;
+            Middle = Actual;
 
             flagScroll = true;
-
-            if (actual != max)
-            {
-                containScroll.value = 0.75f;
-                containScrollRect.verticalNormalizedPosition = 0.75f;
-            }
         }
-        else if (value.y > 0.98f)
-        {
-            middle = actual;
-
-            flagScroll = true;
-
-            if (actual != min)
-            {
-                containScroll.value = 0.25f;
-                containScrollRect.verticalNormalizedPosition = 0.25f;
-            }
-        }        
     }
+
 
     public void SetClamp(bool _clampBotton)
     {
         if (_clampBotton && !flagClamp)
         {
             flagClamp = true;
-            containScroll.value = 0;
-            containScrollRect.verticalNormalizedPosition = 0;
-            middle = this.comments.Count();
+            Bottom();
         }
         else
         {
@@ -127,13 +108,60 @@ public class ChatContentRefresh : MonoBehaviour
         {
             containScroll.value = 1;
             containScrollRect.verticalNormalizedPosition = 1;
-            middle = 0;
+            Middle = 0;
         }
+
+        SetText();
+    }
+
+    void Bottom()
+    {
+        containScroll.value = 0;
+        containScrollRect.verticalNormalizedPosition = 0;
+        Middle = this.comments.Count();
+        flagScroll = true;
     }
 
     void SetText()
     {
-        commentText.text = $"Comentarios: {actual}/{lenght}";
+        //Mira esa concatenacion
+        onCommentTextChange.Invoke($"Viendo comentarios {(flagClamp? "Mas recientes".RichText("color", "green") : ((Min == 0) && lenght>30 ? "Mas Antiguos".RichText("color", "red") : "con el indice: ".RichText("color", "yellow") + Actual))}");
+    }
+
+    void BarScroll()
+    {
+        if (flagClamp)
+        {
+            if (valueY < PercentageComment)
+            {
+                containScroll.value = 0;
+                containScrollRect.verticalNormalizedPosition = 0;
+            }
+            return;
+        }
+
+        if (valueY < PercentageComment)
+        {
+            if(lenght != Max)
+            {
+                float aux = UnityEngine.Mathf.Clamp(((float)_middle - oldMiddle) / MaxCommentsToView , 0 , 0.75f);
+
+                containScroll.value = aux;
+                containScrollRect.verticalNormalizedPosition = aux;
+            }
+            
+        }
+
+        else if (valueY > 1 - PercentageComment)
+        {
+            if(0 != Min)
+            {
+                float aux = 1 + UnityEngine.Mathf.Clamp(((float)_middle - oldMiddle) / MaxCommentsToView, -0.75f, 0);
+
+                containScroll.value = aux;
+                containScrollRect.verticalNormalizedPosition = aux;
+            }
+        }
     }
 
     void Scroll()
@@ -142,7 +170,10 @@ public class ChatContentRefresh : MonoBehaviour
 
         SetText();
 
-        commentDatas = this.comments.Skip(min).Take(max - min).ToList();
+        commentDatas = this.comments.Skip(Min).Take(Max - Min).ToList();
+
+        var commentViews = this.commentViews.Where((commentView) => commentView.commentData != null)
+            .OrderBy((commentView) => commentView.commentData.timeOnCreate).ToArray();
 
         for (int i = 0; i < commentViews.Length; i++)
         {
@@ -153,6 +184,7 @@ public class ChatContentRefresh : MonoBehaviour
                 if(commentDatas[j] == commentViews[i].commentData)
                 {
                     commentDatas.RemoveAt(j);
+                    commentViews[i].transform.SetAsLastSibling();
                     _break = true;
                     break;
                 }
@@ -168,33 +200,41 @@ public class ChatContentRefresh : MonoBehaviour
         {
             StreamerManager.CreateComment(commentDatas[i]);
         }
+
+        BarScroll();
     }
 
     void OnLeaveComment(CommentData commentData)
     {
-        if(min==0)
+        if (!flagClamp)
+        {
+            Middle--;
+        }
+
+        if(Min==0)
             flagScroll = true;
     }
 
     void OnCreateComment(CommentData commentData)
     {
-        if (lenght<30)
+        if (lenght <= MaxCommentsToView)
         {
             flagScroll = true;
         }
 
         if(flagClamp)
         {
-            middle = this.comments.Count();
-            flagScroll = true;
+            //Middle = this.comments.Count();
+            //flagScroll = true;
+            //Scroll();
+
+            Bottom();
         }
     }
 
-
-
     private void LateUpdate()
     {
-        //contain.enabled = !contain.enabled;
+        contain.enabled = !contain.enabled;
 
         if (flagScroll)
         {
@@ -209,5 +249,6 @@ public class ChatContentRefresh : MonoBehaviour
         eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment").delegato += OnLeaveComment;
 
         eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato += () => commentViews = GetComponentsInChildren<CommentView>(true);
+        eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamchange").delegato += (streamer) => { flagScroll = true; Middle = 0;};
     }
 }

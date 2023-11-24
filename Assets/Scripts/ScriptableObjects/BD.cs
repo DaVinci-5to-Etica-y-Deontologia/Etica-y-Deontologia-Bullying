@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Euler;
+using System.Linq;
 
 #if UNITY_EDITOR 
 using UnityEditor;
@@ -10,31 +11,68 @@ using UnityEditor;
 /// <summary>
 /// Clase que representa la base de datos que contiene todos y cada uno de los usuarios con sus respectivos comentarios
 /// </summary>
-[CreateAssetMenu(menuName = "BD")]
+[CreateAssetMenu(menuName = "Managers/BD")]
 public class BD : SuperScriptableObject
 {
     [field: SerializeField]
+    public Material materialForUsers;
+
+    [field: SerializeField]
+    public Streamer[] Streamers { get; private set; }
+
+    [field: SerializeField]
     public Comment[] comments { get; private set; }
 
-    public int Length => comments.Length;
-
-    public Comment this[int index]
+    public void OnDisable()
     {
-        get
+        for (int i = 0; i < Streamers.Length; i++)
         {
-            return comments[index];
+            Streamers[i].inUse = false;
         }
     }
+
+    public int SelectStreamer()
+    {
+        var index = -1;
+
+        do
+        {
+            index = Random.Range(0, Streamers.Length);
+        } while(Streamers[index].inUse);
+
+        Streamers[index].inUse = true;
+
+        return index;
+    }
+
 
     /// <summary>
     /// Adaptar al nuevo sistema
     /// </summary>
     /// <param name="moralIndex"></param>
     /// <param name="moralRange"></param>
-    /// <returns></returns>
-    public Comment SelectComment(float moralIndex, float moralRange)
+    /// <returns>id del comentario seleccionado</returns>
+    public int SelectComment(float moralIndex, float moralRange)
     {
-        return comments[Random.Range(0, comments.Length)];
+        var min = Mathf.Clamp((moralIndex - moralRange), 0, 1);
+
+        var max = Mathf.Clamp((moralIndex + moralRange), 0, 1);
+
+        int minIndex = -1;
+
+        int maxIndex = comments.Length-1;
+
+        for (int i = 0; i < comments.Length; i++)
+        {
+            if (comments[i].MoralIndex < min)
+                minIndex = i;
+            else if (comments[i].MoralIndex < max)
+                maxIndex = i;
+            else
+                break;
+        }
+
+        return Random.Range(minIndex + 1, maxIndex + 1);
     }
 
     #region NO TOCAR
@@ -89,7 +127,7 @@ public class BD : SuperScriptableObject
 
     int Sort(Comment x, Comment y)
     {
-        return int.Parse(x.name) <= int.Parse(y.name) ? -1 : 1;
+        return x.MoralIndex < y.MoralIndex ? -1 : (x.MoralIndex > y.MoralIndex) ? 1 : 0;
     }
 
 #endif

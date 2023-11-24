@@ -185,8 +185,8 @@ RectTransform:
   - {fileID: 4358041710109857418}
   m_Father: {fileID: 1947637450547018206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 257.5, y: 0}
   m_SizeDelta: {x: 325, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -735,7 +735,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   button: {fileID: 140912322178551159}
+  backgroundImage: {fileID: 0}
   textMeshPro: {fileID: 0}
+  image: {fileID: 0}
 --- !u!114 &8657474774859262774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,9 +811,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32946953b798ea649929b1316686ef60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 750771010519157440}
-  perfil: {fileID: 4958837850296979702}
   button: {fileID: 140912322178551159}
+  textMesh: {fileID: 750771010519157440}
+  cuerpo: {fileID: 4958837850296979702}
+  cabeza: {fileID: 5779446429473202489}
+  ojos: {fileID: 7350077285269235968}
+  boquitas: {fileID: 8972498191833053462}
+  accesorios: {fileID: 2404519951988986125}
+  BackGround: {fileID: 3486895204517032133}
+  _commentData:
+    ID: 0
+    comment: {fileID: 0}
+    timeOnCreate: 0
 --- !u!225 &552846352251057716
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -13,6 +13,11 @@ public class TransitionManager : SingletonMono<TransitionManager>
     public const string Lines = "Lines";
     public const string LinesStart = "LinesStart";
     public const string LinesEnd = "LinesEnd";
+    public const string WaitStart = "WaitStart";
+    public const string WaitEnd = "WaitEnd";
+
+    [SerializeField]
+    public TMPro.TextMeshProUGUI texto;
 
     protected override void Awake()
     {
@@ -32,11 +37,18 @@ public class TransitionManager : SingletonMono<TransitionManager>
 
     IEnumerator PLayAnimation(string triggerName, float animationTime, Action endAction)
     {
+        //Debug.Log("llamo a trigger: " + triggerName);
         animator.SetTrigger(triggerName);
 
         yield return new WaitForSeconds(animationTime);
 
+        //Debug.Log("espere la cantidad de " + animationTime);
+
         endAction?.Invoke();
     }
 
+    public void ChangeText(string str)
+    {
+        texto.text = str;
+    }
 }
