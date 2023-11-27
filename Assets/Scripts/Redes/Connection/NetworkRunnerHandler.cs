@@ -22,14 +22,6 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public event Action<List<SessionInfo>> OnSessionListUpdate = delegate { };
 
-    public static void GoToMenu()
-    {
-        if (instance._currentRunner.IsRunning)
-            instance._currentRunner.Shutdown().ContinueWith((task) => ScenesLoader.instance.LoadScene("MainMenu"));
-        else
-            ScenesLoader.instance.LoadScene("MainMenu");
-    }
-
     #region LOBBY
 
     public void JoinLobby()
@@ -103,13 +95,17 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnDisconnectedFromServer(NetworkRunner runner)
     {
-        GoToMenu();
+        ScenesLoader.instance.LoadScene("MainMenu");
     }
     public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
     {
-        GoToMenu();
+        runner.Shutdown();
     }
 
+
+    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
+    {
+    }
 
     #endregion
 
@@ -139,7 +135,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     
-    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
+    
     
     public void OnConnectedToServer(NetworkRunner runner) { }
 
