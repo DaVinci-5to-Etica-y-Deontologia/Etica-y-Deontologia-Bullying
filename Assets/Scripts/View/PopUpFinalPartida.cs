@@ -37,8 +37,6 @@ public class PopUpFinalPartida : PopUpElement
         onActive.Invoke();
         callsManager.DestroyAll();
 
-        StreamerManager.instance?.Runner.Shutdown(false);
-
         foreach (Transform item in container)
         {
             Destroy(item.gameObject);
@@ -93,6 +91,9 @@ public class PopUpFinalPartida : PopUpElement
                 summaryTMP.text = "No corrompiste a los suficientes usuarios para vencer a los moderadores\n\n Has fracasado como instigador";
             }
         }
+
+
+        StreamerManager.instance?.Runner.Shutdown(false);
     }
 
     StreamState MakeSummary()
