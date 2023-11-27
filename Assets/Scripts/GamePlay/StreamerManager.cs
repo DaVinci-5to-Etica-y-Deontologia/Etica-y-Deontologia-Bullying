@@ -398,6 +398,9 @@ public class StreamerManager : NetworkBehaviour
 
     public void ChangeStream(int index)
     {
+        if (index == IndexStreamWatch)
+            return;
+
         var previus = IndexStreamWatch;
         //print("Previous index: " + previus);
 
