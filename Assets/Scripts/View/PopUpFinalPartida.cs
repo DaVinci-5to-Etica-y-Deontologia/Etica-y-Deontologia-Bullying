@@ -54,6 +54,7 @@ public class PopUpFinalPartida : PopUpElement
         {
             TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
             ScenesLoader.instance.LoadScene("MainMenu");
+            StreamerManager.instance?.Runner.Shutdown(false);
         });
 
         var result = MakeSummary();
@@ -93,7 +94,7 @@ public class PopUpFinalPartida : PopUpElement
         }
 
 
-        StreamerManager.instance?.Runner.Shutdown(false);
+        
     }
 
     StreamState MakeSummary()
