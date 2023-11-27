@@ -55,7 +55,7 @@ public class PopUpFinalPartida : PopUpElement
         callsManager.Create("Volver al menú", () =>
         {
             TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
-            ScenesLoader.instance.LoadScene("MainMenu");
+            NetworkRunnerHandler.GoToMenu();
         });
 
         var result = MakeSummary();
