@@ -22,6 +22,8 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public event Action<List<SessionInfo>> OnSessionListUpdate = delegate { };
 
+    StreamerManager streamerManager => StreamerManager.instance;
+
     #region LOBBY
 
     public void JoinLobby()
@@ -95,16 +97,18 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnDisconnectedFromServer(NetworkRunner runner)
     {
-        ScenesLoader.instance.LoadScene("MainMenu");
-    }
-    public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
-    {
-        runner.Shutdown();
+        runner.Shutdown(false);
     }
 
+    public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
+    {
+        runner.Shutdown(false);
+    }
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     {
+        if(!streamerManager.streamersData.gameEnd)
+            ScenesLoader.instance.LoadScene("MainMenu");
     }
 
     #endregion
