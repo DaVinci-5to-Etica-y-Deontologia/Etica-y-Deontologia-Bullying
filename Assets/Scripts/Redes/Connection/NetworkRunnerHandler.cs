@@ -14,13 +14,21 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     [SerializeField] private Player _player;
 
+    private static NetworkRunnerHandler instance;
+
     private NetworkRunner _currentRunner;
 
     public event Action OnLobbyJoined = delegate { };
 
     public event Action<List<SessionInfo>> OnSessionListUpdate = delegate { };
 
-    StreamerManager streamerManager => StreamerManager.instance;
+    public static void GoToMenu()
+    {
+        if (instance._currentRunner.IsRunning)
+            instance._currentRunner.Shutdown().ContinueWith((task) => ScenesLoader.instance.LoadScene("MainMenu"));
+        else
+            ScenesLoader.instance.LoadScene("MainMenu");
+    }
 
     #region LOBBY
 
@@ -57,6 +65,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public void CreateGame(GameMode gameMode, string sessionName, string sceneName)
     {
+        instance = this;
         var clientTask = InitializeGame(gameMode, sessionName, SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneName}"));
     }
 
@@ -92,17 +101,20 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
+    public void OnDisconnectedFromServer(NetworkRunner runner)
+    {
+        GoToMenu();
+    }
+
+    
+
     #endregion
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        
     }
 
-    public void OnDisconnectedFromServer(NetworkRunner runner)
-    {
-        runner.Shutdown();
-    }
+ 
 
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
