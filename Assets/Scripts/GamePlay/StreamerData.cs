@@ -121,8 +121,6 @@ public class StreamerData : DataElement<StreamerData>
 
             var rng = Random.Range(0, usersFiltered.Length);
 
-            usersFiltered[rng].Value.Destroy();
-
             DataRpc.Create(Actions.RemoveUser, usersFiltered[rng].Value.textIP);
         }
     }
@@ -147,7 +145,6 @@ public class StreamerData : DataElement<StreamerData>
         var aux = JsonUtility.FromJson<UserData>(jsonUser);
 
         users.Add(aux.CreatePic<UserData>()).Value.Create(this);
-
 
         aux.onCreateComment += (comment) => onCreateComment?.Invoke(comment);
 
