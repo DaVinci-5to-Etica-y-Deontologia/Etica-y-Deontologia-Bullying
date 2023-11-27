@@ -528,7 +528,7 @@ public class StreamerManager : NetworkBehaviour
 
         UnityEngine.Debug.Log("server: " + IsServer);
 
-        player.Moderator = !(Runner.SessionInfo.PlayerCount % 2 == 0) || Runner.SessionInfo.PlayerCount == 0;
+        player.Moderator = (Runner.IsServer && Runner.SessionInfo.PlayerCount % 2 != 0) || Runner.IsSinglePlayer;
 
         streamersData.endGame = TimersManager.Create(5 * 60, FinishDay).Stop();
     }
