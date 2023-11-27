@@ -37,7 +37,7 @@ public class PopUpFinalPartida : PopUpElement
         onActive.Invoke();
         callsManager.DestroyAll();
 
-        StreamerManager.instance?.Runner.Shutdown();
+        StreamerManager.instance?.Runner.Shutdown(false);
 
         foreach (Transform item in container)
         {
