@@ -121,6 +121,8 @@ public class StreamerData : DataElement<StreamerData>
 
             var rng = Random.Range(0, usersFiltered.Length);
 
+            usersFiltered[rng].Value.Destroy();
+
             DataRpc.Create(Actions.RemoveUser, usersFiltered[rng].Value.textIP);
         }
     }

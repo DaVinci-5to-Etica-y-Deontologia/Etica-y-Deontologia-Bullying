@@ -140,7 +140,7 @@ public class UserParent : DataElement<UserParent>
 
         if (srch.Streamer.IsServer)
         {
-            srch.Streamer.Users(data.Item1);            
+            srch.Streamer.Users(data.Item1);
         }
     }
 
