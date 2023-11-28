@@ -107,7 +107,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     {
-        if(!streamerManager.streamersData.gameEnd)
+        if(streamerManager!= null && !streamerManager.streamersData.gameEnd)
             ScenesLoader.instance.LoadScene("MainMenu");
     }
 
