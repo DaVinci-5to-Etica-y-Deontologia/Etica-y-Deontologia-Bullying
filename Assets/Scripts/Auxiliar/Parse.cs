@@ -66,9 +66,12 @@ namespace Euler
             return this;
         }
 
-        public Parse()
+        public void Clear()
         {
+            DataOriginalOrder.Clear();
+            DataOriginalOrder.Capacity = 0;
         }
+
 
         public Parse(TextAsset textAsset)
         {
@@ -83,11 +86,13 @@ namespace Euler
     /// </summary>
     /// <typeparam name="K"></typeparam>
     /// <typeparam name="V"></typeparam>
+    [System.Serializable]
     public class PDO<K, V> : IEnumerable
     {
+        [SerializeField]
         K[] keys;
 
-
+        [SerializeField]
         V[] value;
 
         public int Length => value.Length;

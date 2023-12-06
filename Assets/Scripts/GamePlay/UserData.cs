@@ -312,11 +312,9 @@ public class UserParent : DataElement<UserParent>
             _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment).SetMultiply(player.multiply);
     }
 
-    public UserParent(int id)
+    public UserParent(int id, StreamerData stream)
     {
         this.ID = id;
-
-        int rng = Random.Range(5,8);
 
         MoralIndex = Random.Range(0, 1f);
 
@@ -328,12 +326,7 @@ public class UserParent : DataElement<UserParent>
 
         Enable = true;
 
-        string chars = "abcdefghijklmnñopqrstuvwxyz";
-
-        for (int i = 0; i < rng; i++)
-        {
-            Name += chars[Random.Range(0, chars.Length)];
-        }
+        Name = stream.dataBase.usernameGenerator.GenerateUsername();
     }
 }
 
@@ -437,7 +430,7 @@ public class UserData : UserParent
         boquita.SetImage(image, dataBase.materialForUsers);
     }
 
-    public UserData(int id) : base(id)
+    public UserData(int id, StreamerData stream) : base(id, stream)
     {
         ojo.Set(ojos.Length);
         boquita.Set(boquitas.Length);

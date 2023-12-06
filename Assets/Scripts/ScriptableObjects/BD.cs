@@ -21,6 +21,9 @@ public class BD : SuperScriptableObject
     public Tutos[] Tutos { get; private set; }
 
     [field: SerializeField]
+    public UsernameGenerator usernameGenerator { get; private set; }
+
+    [field: SerializeField]
     public Streamer[] Streamers { get; private set; }
 
     [field: SerializeField]
@@ -86,6 +89,12 @@ public class BD : SuperScriptableObject
     Parse _txtToParse;
 
     public event System.Action<BD> OnFinishSet;
+
+    [ContextMenu("cargar los nombres de usuario")]
+    void LoadNames()
+    {
+        usernameGenerator.Execute();
+    }
 
     [ContextMenu("Cargar el texto")]
     void LoadText()

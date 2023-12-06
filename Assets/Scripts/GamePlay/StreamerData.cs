@@ -101,7 +101,7 @@ public class StreamerData : DataElement<StreamerData>
     {
         for (int i = 1; i <= number; i++)
         {
-            var userData = new UserData(users.Prepare());
+            var userData = new UserData(users.Prepare(), this);
 
             DataRpc.Create(Actions.AddUser, textIP, userData);
         }
