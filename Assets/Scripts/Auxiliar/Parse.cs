@@ -89,7 +89,6 @@ namespace Euler
     [System.Serializable]
     public class PDO<K, V> : IEnumerable
     {
-        [SerializeField]
         K[] keys;
 
         [SerializeField]
