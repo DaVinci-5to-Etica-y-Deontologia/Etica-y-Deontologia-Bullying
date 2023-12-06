@@ -9,7 +9,7 @@ using UnityEditor;
 #endif
 
 /// <summary>
-/// Clase que representa la base de datos que contiene todos y cada uno de los usuarios con sus respectivos comentarios
+/// Clase que representa la base de datos que contiene los flyweight
 /// </summary>
 [CreateAssetMenu(menuName = "Managers/BD")]
 public class BD : SuperScriptableObject
