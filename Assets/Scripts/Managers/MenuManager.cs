@@ -31,10 +31,12 @@ public class MenuManager : MonoBehaviour
         JoinLobby();
     }
 
-    public void OptionsButton()
+    public void OptionsButton(bool condition)
     {
-        menuPanel.SetActive(true);
-        TransitionManager.instance.SetTransition(TransitionManager.Lines, 0.8f,() => { optionsMenu.SetActive(true); optionsMenu.GetComponent<CanvasGroup>().alpha = 1; });
+        var aux = System.Convert.ToInt32(condition);
+
+        menuPanel.SetActive(condition);
+        TransitionManager.instance.SetTransition(TransitionManager.Lines, 0.8f,() => { optionsMenu.SetActive(condition); optionsMenu.GetComponent<CanvasGroup>().alpha = aux; });
     }
 
     public void QuitButton()
