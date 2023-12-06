@@ -50,12 +50,7 @@ public class PopUpFinalPartida : PopUpElement
         });
         */
 
-        callsManager.Create("Volver al menú", () =>
-        {
-            TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
-            ScenesLoader.instance.LoadScene("MainMenu");
-            StreamerManager.instance?.Runner.Shutdown(false);
-        });
+        callsManager.Create("Volver al menú", () => BackMenu() );
 
         var result = MakeSummary();
 
@@ -95,6 +90,13 @@ public class PopUpFinalPartida : PopUpElement
 
 
         
+    }
+
+    public void BackMenu()
+    {
+        TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
+        ScenesLoader.instance.LoadScene("MainMenu");
+        StreamerManager.instance?.Runner.Shutdown(false);
     }
 
     StreamState MakeSummary()
