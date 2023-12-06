@@ -37,6 +37,12 @@ public class UIManager : MonoBehaviour
     TextMeshProUGUI viewsText;
 
     [SerializeField]
+    TextMeshProUGUI viewsMin;
+
+    [SerializeField]
+    TextMeshProUGUI viewsMax;
+
+    [SerializeField]
     Slider views;
 
     [SerializeField]
@@ -78,14 +84,17 @@ public class UIManager : MonoBehaviour
             streamerData.Viewers.onChange -= Viewers_onChange;
         }
 
-
-        streamImage.sprite = obj.streamerBase.streamImage;
-        iconStreamerImage.sprite = obj.streamerBase.iconStreamerImage;
-        title.text = obj.streamerBase.title;
-        tagsStreamer.text = obj.streamerBase.tagsStreamer;
-        nameStreamer.text = obj.streamerBase.nameStreamer;        
-
         streamerData = obj;
+
+        streamImage.sprite = streamerData.streamerBase.streamImage;
+        iconStreamerImage.sprite = streamerData.streamerBase.iconStreamerImage;
+        title.text = streamerData.streamerBase.title;
+        tagsStreamer.text = streamerData.streamerBase.tagsStreamer;
+        nameStreamer.text = streamerData.streamerBase.nameStreamer;
+
+        viewsMin.text = streamerData.streamerBase.minimalViewers.ToString().RichTextColor(Color.red);
+
+        viewsMax.text = streamerData.streamerBase.maxViews.ToString().RichTextColor(Color.green);
 
         streamerData.Viewers.onChange += Viewers_onChange;
 
@@ -104,7 +113,7 @@ public class UIManager : MonoBehaviour
 
         actual = actual.RichTextColor(Color.Lerp(Color.red, Color.green, views.value));
 
-        viewsText.text = actual + "/" + arg1.total;
+        viewsText.text = actual;
     }
 
     private void Life_onChange(IGetPercentage arg1, float arg2)
