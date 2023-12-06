@@ -37,7 +37,7 @@ public class StreamerData : DataElement<StreamerData>
     }
 
 
-    public Streamer streamer => dataBase.Streamers[streamID];
+    public Streamer streamerBase => dataBase.Streamers[streamID];
 
     public override string textIP => ID.ToString();
 
@@ -73,12 +73,6 @@ public class StreamerData : DataElement<StreamerData>
         srch.streamer.value.SetEnable();
     }
 
-    static public void LifeUpdate(string intString, StreamerManager.SearchResult srch)
-    {
-        if(!srch.streamer.value.IsServer) //el server ya se encarga de esta logica, de no aplicar esto me daria un bucle infinito
-            srch.streamer.value.Life.current = float.Parse(intString);
-    }
-
     static public void FinishStream(string jsonData, StreamerManager.SearchResult srch)
     {
         srch.streamer.value.FinishStream(srch);
@@ -94,10 +88,13 @@ public class StreamerData : DataElement<StreamerData>
 
     public void Users(int number)
     {
+        if (number == 0)
+            return;
+
         if (number > 0)
             CreateUsers(number);
         else
-            LeaveUsers(-number);        
+            LeaveUsers(-number); 
     }    
 
     void CreateUsers(int number)
@@ -112,7 +109,7 @@ public class StreamerData : DataElement<StreamerData>
 
     void LeaveUsers(int number)
     {
-        for (int i = Mathf.Clamp(number - 1, 0 , users.Count - 1); i >= 0; i--)
+        for (int i = Mathf.Clamp(number, 0 , users.Count - 1); i > 0; i--)
         {
             var usersFiltered = users.Where((u) => u.Value.Enable).ToArray();
 
@@ -131,9 +128,8 @@ public class StreamerData : DataElement<StreamerData>
 
     void InternalShowEnd(IGetPercentage percentage , float dif)
     {
-        if((Life.current == 0 || Viewers.current <= streamer.minimalViews || Viewers.current == Viewers.total) && Enable && !Finished)
+        if(Enable && (Life.current == 0 || Viewers.current <= streamerBase.minimalViewers || Viewers.current == Viewers.total)  && !Finished)
         {
-            Finished = true;
             //Debug.Log("Stream " + ID + " InternalShowEnd: LIFE " + (Life.current == 0) + "\n Current views: " + Viewers.current + "  Minimal views: " + streamer.minimalViews);
             //Debug.Log(" VIEWS DEFEAT: " + (Viewers.current <= streamer.minimalViews) + "\n VIEWS WIN: " + (Viewers.current == Viewers.total) + " ENABLE: " + Enable + " FINISHED: " + Finished);
 
@@ -161,6 +157,9 @@ public class StreamerData : DataElement<StreamerData>
 
     void FinishStream(StreamerManager.SearchResult srch)
     {
+        if (Finished)
+            return;
+
         Finished = true;
 
         onEndStream?.Invoke(this);
@@ -201,9 +200,11 @@ public class StreamerData : DataElement<StreamerData>
     {
         Init();
 
-        Life.Set(streamer.Life);
+        Life.Set(streamerBase.Life);
 
-        Viewers.total = streamer.maxViews;
+        Viewers.total = streamerBase.maxViews;
+
+        Viewers.current = streamerBase.minimalViewers * 2;
 
         streamerParent.Count++;
         //Debug.Log("Count incrementó. Nuevo valor Count: " + streamerParent.Count);
@@ -211,7 +212,7 @@ public class StreamerData : DataElement<StreamerData>
         if (!IsServer)
             return;
 
-        Users(streamer.minimalViews * 2);
+        Users((int)Viewers.current);
 
         DataRpc.Create(Actions.EnableStream, textIP);
     }

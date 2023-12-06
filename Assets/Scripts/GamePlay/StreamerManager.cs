@@ -103,10 +103,10 @@ public class StreamerManager : NetworkBehaviour
 
     Dictionary<int,string> buffer = new();
 
-
+    /*
     [SerializeField]
     AuxWrapper<DataRpc[]> listRpc;
-
+    */
 
 
 
@@ -249,11 +249,13 @@ public class StreamerManager : NetworkBehaviour
         if (!started)
             return;
 
-        listRpc = JsonUtility.FromJson<AuxWrapper<DataRpc[]>>(json);
+        //listRpc = JsonUtility.FromJson<AuxWrapper<DataRpc[]>>(json);
 
-        for (int i = 0; i < listRpc.data.Length; i++)
+        DataRpc dataRpc = JsonUtility.FromJson<DataRpc>(json);
+
+        //for (int i = 0; i < listRpc.data.Length; i++)
         {
-            var dataRpc = listRpc.data[i];
+            //dataRpc = listRpc.data[i];
 
             var srch = Search(dataRpc.direction);
 
@@ -364,12 +366,10 @@ public class StreamerManager : NetworkBehaviour
                     foreach (var comment in user.Value.comments)
                     {
                         comment.Value.Parent = UserData.poolCommentData;
-                        comment.Value.Init(stream.Key, user.Key);
+                        comment.Value.Init(user.Value);
                     }
                 }
             }
-
-            //UnityEngine.Debug.Log("ACABARON DE CARGAR LOS DATOS");
 
             CreateStream();
             ChangeStream(0);
@@ -572,9 +572,9 @@ public struct DataRpc
 
     public static int Count => streamsRequests.Count + usersRequests.Count + commentsRequests.Count;
 
-    const int limitRpc = 2; // el limite de caracteres es de: 32767
+    //const int limitRpc = 2; // el limite de caracteres es de: 32767
 
-    static int sum;
+    //static int sum;
 
     public static void Create(Actions action)
     {
@@ -622,7 +622,7 @@ public struct DataRpc
             }
             */
 
-            if (++sum > limitRpc)
+            //if (++sum > limitRpc)
                 finish = true;
             
 
@@ -638,8 +638,9 @@ public struct DataRpc
             Concat(usersRequests);
             Concat(commentsRequests);
 
-            var aux = JsonUtility.ToJson(new AuxWrapper<DataRpc[]>(_definitiveList.ToArray()));
+            //var aux = JsonUtility.ToJson(new AuxWrapper<DataRpc[]>(_definitiveList.ToArray()));
 
+            var aux = JsonUtility.ToJson(_definitiveList[0]);
 
             //UnityEngine.Debug.Log($"JSON enviado: {sum} de {aux.Length}  \n  {aux}  \n\n");
 
@@ -650,7 +651,7 @@ public struct DataRpc
             */
 
             _definitiveList.Clear();
-            sum = 0;
+            //sum = 0;
             finish = false;
 
             return aux;
@@ -672,9 +673,6 @@ public struct DataRpc
             commentsRequests.Enqueue(dataRpc);
     }
 }
-
-
-
 
 
 [System.Serializable]

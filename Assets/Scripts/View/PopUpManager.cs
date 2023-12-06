@@ -61,7 +61,7 @@ public abstract class PopUpComment : PopUpElement
     protected TMPro.TextMeshProUGUI textToShow;
 
     [SerializeField]
-    protected Transform placeToCreate;
+    protected UnityEngine.UI.ContentSizeFitter placeToCreate;
 
     [SerializeField]
     protected Color commentDestroy;
@@ -75,7 +75,7 @@ public abstract class PopUpComment : PopUpElement
     public override void MyAwake(PopUpManager popUpManager)
     {
         base.MyAwake(popUpManager);
-       
+
         eventManager.events.SearchOrCreate<EventParam<CommentData>>("createcomment").delegato += OnCreateComment;
         eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment").delegato += OnLeaveComment;
 
@@ -90,7 +90,7 @@ public abstract class PopUpComment : PopUpElement
 
         callsManager.DestroyAll();
 
-        foreach (Transform item in placeToCreate)
+        foreach (Transform item in placeToCreate.transform)
         {
             Destroy(item.gameObject);
         }
@@ -135,12 +135,16 @@ public abstract class PopUpComment : PopUpElement
 
     void CreateView(CommentData commentData)
     {
-        var aux = Instantiate(commentViewPrefab, placeToCreate);
+        var aux = Instantiate(commentViewPrefab, placeToCreate.transform);
 
         aux.button.interactable = false;
 
         aux.commentData = commentData;
     }
 
+    private void Update()
+    {
+        placeToCreate.enabled = !placeToCreate.enabled;
+    }
 }
 

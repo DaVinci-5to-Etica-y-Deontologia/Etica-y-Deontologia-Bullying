@@ -134,6 +134,8 @@ public class UserParent : DataElement<UserParent>
 
         srch.User.RemoveComment(srch.comment.index);
 
+        
+
         srch.Streamer.Viewers.current += data.Item1;
 
         srch.Streamer.Life.current += data.Item2;
@@ -156,7 +158,7 @@ public class UserParent : DataElement<UserParent>
 
         //Debug.Log("Tengo un padre desp de overrider? " + (poolCommentData != null));
 
-        newCommentData.Init(stream.ID, ID);
+        newCommentData.Init((UserData)this);
 
         comments.Add(newCommentData.CreatePic());
 
@@ -303,8 +305,6 @@ public class UserParent : DataElement<UserParent>
     public void Create(StreamerData stream)
     {
         Init(stream);
-
-        stream.Viewers.current++;
 
         colorText = colorText.ChangeAlphaCopy(1);
 

@@ -1705,7 +1705,7 @@ MonoBehaviour:
     title: La wea fome culeao
     nameStreamer: ElCuchiWea
     tagsStreamer: '#ChilePazion #Pasillo'
-    minimalViews: 5
+    minimalViewers: 10
     maxViews: 100
     Life: 100
   - inUse: 0
@@ -1714,7 +1714,7 @@ MonoBehaviour:
     title: Sopa du maqaqo
     nameStreamer: KKKKK
     tagsStreamer: "#Ro\xF1aldi\xF1o #Selva"
-    minimalViews: 3
+    minimalViewers: 12
     maxViews: 130
     Life: 100
   - inUse: 0
@@ -1723,7 +1723,7 @@ MonoBehaviour:
     title: "So\xF1ando con un mar"
     nameStreamer: TuVerdulero
     tagsStreamer: '#DeConfianza'
-    minimalViews: 4
+    minimalViewers: 7
     maxViews: 150
     Life: 100
   - inUse: 0
@@ -1732,7 +1732,7 @@ MonoBehaviour:
     title: doge
     nameStreamer: Poni
     tagsStreamer: '#dogdoggo'
-    minimalViews: 5
+    minimalViewers: 3
     maxViews: 100
     Life: 100
   - inUse: 0
@@ -1741,7 +1741,7 @@ MonoBehaviour:
     title: La inmortalidad del cangrejo
     nameStreamer: Sebas Tian
     tagsStreamer: '#sabadoalanoche'
-    minimalViews: 6
+    minimalViewers: 5
     maxViews: 120
     Life: 100
   - inUse: 0
@@ -1750,7 +1750,7 @@ MonoBehaviour:
     title: todos pillos
     nameStreamer: roberto
     tagsStreamer: '#bitches'
-    minimalViews: 3
+    minimalViewers: 8
     maxViews: 103
     Life: 100
   - inUse: 0
@@ -1759,7 +1759,7 @@ MonoBehaviour:
     title: aguante vacalin vieja
     nameStreamer: Lechuga
     tagsStreamer: '#fueraserenisima'
-    minimalViews: 2
+    minimalViewers: 15
     maxViews: 98
     Life: 100
   - inUse: 0
@@ -1768,7 +1768,7 @@ MonoBehaviour:
     title: La vida es una lenteja
     nameStreamer: Zaz
     tagsStreamer: '#oLaTomas #oLaDejas'
-    minimalViews: 6
+    minimalViewers: 3
     maxViews: 130
     Life: 100
   - inUse: 0
@@ -1777,7 +1777,7 @@ MonoBehaviour:
     title: 'Challenge: 0 death?'
     nameStreamer: GothicGhoulTV
     tagsStreamer: '#mori'
-    minimalViews: 7
+    minimalViewers: 20
     maxViews: 150
     Life: 100
   - inUse: 0
@@ -1786,7 +1786,7 @@ MonoBehaviour:
     title: persiste y venceras
     nameStreamer: FemmeFrights
     tagsStreamer: '#eso-dicen'
-    minimalViews: 5
+    minimalViewers: 9
     maxViews: 162
     Life: 100
   - inUse: 0
@@ -1795,7 +1795,7 @@ MonoBehaviour:
     title: Recargando baterias Zzz
     nameStreamer: VolcaRx07
     tagsStreamer: '#ineeddormir'
-    minimalViews: 6
+    minimalViewers: 4
     maxViews: 127
     Life: 100
   - inUse: 0
@@ -1804,7 +1804,7 @@ MonoBehaviour:
     title: "hab\xEDa una vez"
     nameStreamer: truz
     tagsStreamer: '#quisieraserunpez'
-    minimalViews: 3
+    minimalViewers: 3
     maxViews: 115
     Life: 100
   - inUse: 0
@@ -1813,7 +1813,7 @@ MonoBehaviour:
     title: bootcamp roster announced
     nameStreamer: troki
     tagsStreamer: '#TeamfightTactics'
-    minimalViews: 6
+    minimalViewers: 6
     maxViews: 122
     Life: 100
   - inUse: 0
@@ -1822,7 +1822,7 @@ MonoBehaviour:
     title: Vibing
     nameStreamer: QuantumChic
     tagsStreamer: '#chill'
-    minimalViews: 2
+    minimalViewers: 7
     maxViews: 136
     Life: 100
   - inUse: 0
@@ -1831,7 +1831,7 @@ MonoBehaviour:
     title: its me.. !mario
     nameStreamer: CAHOS
     tagsStreamer: '#laconcentreishon'
-    minimalViews: 5
+    minimalViewers: 11
     maxViews: 130
     Life: 100
   - inUse: 0
@@ -1840,7 +1840,7 @@ MonoBehaviour:
     title: dale agus ponele ganas
     nameStreamer: agusAnado
     tagsStreamer: '#quepaja'
-    minimalViews: 4
+    minimalViewers: 10
     maxViews: 100
     Life: 100
   - inUse: 0
@@ -1849,7 +1849,7 @@ MonoBehaviour:
     title: que bonitos ojos tienes
     nameStreamer: z_Krip
     tagsStreamer: '#completalafrase'
-    minimalViews: 5
+    minimalViewers: 1
     maxViews: 110
     Life: 100
   - inUse: 0
@@ -1858,7 +1858,7 @@ MonoBehaviour:
     title: :)
     nameStreamer: lokoferru1
     tagsStreamer: '#trolleando #randoms'
-    minimalViews: 2
+    minimalViewers: 3
     maxViews: 150
     Life: 100
   - inUse: 0
@@ -1867,7 +1867,7 @@ MonoBehaviour:
     title: Experimento hardcore
     nameStreamer: Fuzoh
     tagsStreamer: '#dia3'
-    minimalViews: 8
+    minimalViewers: 6
     maxViews: 128
     Life: 100
   - inUse: 0
@@ -1876,7 +1876,7 @@ MonoBehaviour:
     title: "LETHALCOMPANY WITH FUN SQUAD! \uFFFD\u2642l"
     nameStreamer: XenoFeing
     tagsStreamer: '#epic'
-    minimalViews: 6
+    minimalViewers: 8
     maxViews: 105
     Life: 100
   <comments>k__BackingField:

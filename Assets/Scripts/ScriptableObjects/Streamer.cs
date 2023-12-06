@@ -17,7 +17,7 @@ public class Streamer
 
     public string tagsStreamer;
 
-    public int minimalViews;
+    public int minimalViewers;
 
     public int maxViews;
 

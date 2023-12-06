@@ -56,8 +56,6 @@ public class UIManager : MonoBehaviour
 
     public static void PressButtonByID(int ID)
     {
-        //streamsButtons[ID].button.onClick.Invoke();
-
         foreach (var item in streamsButtons)
         {
             if (item.Item1 == ID)
@@ -81,11 +79,11 @@ public class UIManager : MonoBehaviour
         }
 
 
-        streamImage.sprite = obj.streamer.streamImage;
-        iconStreamerImage.sprite = obj.streamer.iconStreamerImage;
-        title.text = obj.streamer.title;
-        tagsStreamer.text = obj.streamer.tagsStreamer;
-        nameStreamer.text = obj.streamer.nameStreamer;        
+        streamImage.sprite = obj.streamerBase.streamImage;
+        iconStreamerImage.sprite = obj.streamerBase.iconStreamerImage;
+        title.text = obj.streamerBase.title;
+        tagsStreamer.text = obj.streamerBase.tagsStreamer;
+        nameStreamer.text = obj.streamerBase.nameStreamer;        
 
         streamerData = obj;
 
@@ -96,9 +94,9 @@ public class UIManager : MonoBehaviour
 
     private void Viewers_onChange(IGetPercentage arg1, float arg2)
     {
-        var current = arg1.current - streamerData.streamer.minimalViews;
+        var current = arg1.current - streamerData.streamerBase.minimalViewers;
 
-        var max = arg1.total - streamerData.streamer.minimalViews;
+        var max = arg1.total - streamerData.streamerBase.minimalViewers;
 
         views.value = current / max;
 
@@ -133,11 +131,13 @@ public class UIManager : MonoBehaviour
 
     EventCall CreateStreamButton(StreamerData stream)
     {
-        var button = eventCalls.Create(stream.streamer.iconStreamerImage, () =>
+        var ID = stream.ID;
+
+        var button = eventCalls.Create(stream.streamerBase.iconStreamerImage, () =>
         {
-            streamerManager.ChangeStreamByID(stream.ID);
+            streamerManager.ChangeStreamByID(ID);
         });
-        streamsButtons.Add((stream.ID,button));
+        streamsButtons.Add((ID, button));
 
         return button;
     }

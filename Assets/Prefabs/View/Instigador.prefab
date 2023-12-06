@@ -1205,7 +1205,7 @@ MonoBehaviour:
         m_CallState: 2
   userName: {fileID: 6584402887473032189}
   textToShow: {fileID: 5095691694950139490}
-  placeToCreate: {fileID: 3391498184455504172}
+  placeToCreate: {fileID: 6870201332136555089}
   commentDestroy: {r: 1, g: 0.5340909, b: 0, a: 1}
   leftSlider: {fileID: 6972269611750768013}
   middleSlider: {fileID: 1125911565041611598}

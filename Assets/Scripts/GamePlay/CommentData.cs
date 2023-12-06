@@ -50,11 +50,9 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
         return new CommentData();
     }
 
-    public void Init(int idStream, int idUser)
+    public void Init(UserData user)
     {
-        var stream = StreamerManager.instance[idStream].value;
-
-        _user = stream?[idUser].value;
+        _user = user;
 
         if (IsServer)
             timerDestroy = TimersManager.Create(30, () =>

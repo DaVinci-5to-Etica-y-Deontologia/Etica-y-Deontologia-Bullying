@@ -127,7 +127,7 @@ public class PopUpFinalPartida : PopUpElement
                 draws++;
             }
 
-            summItem.SetItem(data.Item1, item.Value.streamer.iconStreamerImage, data.Item2);
+            summItem.SetItem(data.Item1, item.Value.streamerBase.iconStreamerImage, data.Item2);
         }
 
         if (modsWins == instigatorsWins)

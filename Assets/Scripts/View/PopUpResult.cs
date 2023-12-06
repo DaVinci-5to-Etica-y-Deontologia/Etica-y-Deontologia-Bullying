@@ -39,8 +39,8 @@ public class PopUpResult : PopUpElement
         onActive.Invoke();
         callsManager.DestroyAll();
 
-        streamerName.text = resultado.streamer.nameStreamer;
-        streamerIcon.sprite = resultado.streamer.iconStreamerImage;
+        streamerName.text = resultado.streamerBase.nameStreamer;
+        streamerIcon.sprite = resultado.streamerBase.iconStreamerImage;
 
         callsManager.Create("Cambiar de stream", () =>
         {
@@ -62,7 +62,7 @@ public class PopUpResult : PopUpElement
 
             viwersNumber.text = i.ToString();
 
-            if(resultado.streamer.minimalViews >= resultado.Viewers.current)
+            if(resultado.streamerBase.minimalViewers >= resultado.Viewers.current)
             {
                 viwersNumber.text = viwersNumber.text.RichTextColor(Color.red);
             }
