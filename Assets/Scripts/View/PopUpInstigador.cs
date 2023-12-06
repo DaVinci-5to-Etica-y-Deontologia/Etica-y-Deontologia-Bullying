@@ -75,6 +75,10 @@ public class PopUpInstigador : PopUpComment
             {
                 Execute();
                 cooldownFirstHability.Reset();
+
+                if (!comment.Enable)
+                    return;
+                
                 DataRpc.Create(Actions.Corromper, comment.textIP);
             });
     }
@@ -86,6 +90,10 @@ public class PopUpInstigador : PopUpComment
             {
                 Execute();
                 cooldownSecondHability.Reset();
+
+                if (!comment.Enable)
+                    return;
+
                 DataRpc.Create(Actions.Picantear, comment.textIP);
             });
     }

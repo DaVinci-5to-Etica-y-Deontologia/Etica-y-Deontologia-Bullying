@@ -18,6 +18,11 @@ public class PopUpModerator : PopUpComment
         callsManager.Create("Ban" , () =>
         {
             Execute();
+
+            if (!comment.Enable)
+                return;
+
+           
             DataRpc.Create(Actions.Ban, comment.textIP); 
         });
 
@@ -25,13 +30,17 @@ public class PopUpModerator : PopUpComment
         callsManager.Create("Admonition", () =>
         {
             Execute();
+
+            if (!comment.Enable)
+                return;
+
             DataRpc.Create(Actions.Admonition, comment.textIP);
         });
     }
 
     public void DropDown(int index)
     {
-        if(user.comments.Count > 0)
+        if(user.comments.Count > 0 && comment.Enable)
             DataRpc.Create(Actions.Suspect, comment.textIP, index.ToString());
     }
 }

@@ -232,6 +232,25 @@ public class ChatContentRefresh : MonoBehaviour
         }
     }
 
+    void ChangeStream(StreamerData streamerData)
+    {
+        for (int j = 0; j < commentViews.Length; j++)
+        {
+            commentViews[j].Destroy();
+        }
+
+        Middle = 0;
+
+        commentDatas = this.comments.Skip(Min).Take(Max - Min).ToList();
+
+        for (int i = 0; i < commentDatas.Count; i++)
+        {
+            StreamerManager.CreateComment(commentDatas[i]);
+        }
+
+        BarScroll();
+    }
+
     private void LateUpdate()
     {
         contain.enabled = !contain.enabled;
@@ -249,6 +268,6 @@ public class ChatContentRefresh : MonoBehaviour
         eventManager.events.SearchOrCreate<EventParam<CommentData>>("leavecomment").delegato += OnLeaveComment;
 
         eventManager.events.SearchOrCreate<EventParam>("poolloaded").delegato += () => commentViews = GetComponentsInChildren<CommentView>(true);
-        eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamchange").delegato += (streamer) => { flagScroll = true; Middle = 0;};
+        eventManager.events.SearchOrCreate<EventParam<StreamerData>>("streamchange").delegato += ChangeStream;
     }
 }
