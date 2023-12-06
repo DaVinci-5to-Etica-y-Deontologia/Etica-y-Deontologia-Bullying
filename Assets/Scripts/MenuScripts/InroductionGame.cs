@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class InroductionGame : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI title;
-    [SerializeField] Button[] mainButtons = new Button[3];
+    [SerializeField] Button[] mainButtons = new Button[4];
 
     [SerializeField] Ease easeType = Ease.OutBounce;
     [SerializeField] float timerToAppear;
@@ -37,7 +37,7 @@ public class InroductionGame : MonoBehaviour
         .OnComplete(() =>
         {
             mainButtons[1].transform.DOScaleX(1, timerToAppear).SetEase(easeType);
-
+            
             mainButtons[0].GetComponent<RectTransform>()
             .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
             .SetDelay(0.5f)
@@ -47,12 +47,36 @@ public class InroductionGame : MonoBehaviour
             .DOAnchorPos(mainButtons[1].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
             .SetDelay(0.5f)
             .SetEase(easeType)
+
             .OnComplete(() =>
             {
                 mainButtons[2].transform.DOScaleX(1, timerToAppear).SetEase(easeType);
 
+                mainButtons[0].GetComponent<RectTransform>()
+                .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
+                .SetDelay(0.5f)
+                .SetEase(easeType);
+
                 EnableDisableButtons(true);
+                mainButtons[1].transform.GetComponent<RectTransform>()
+                .DOAnchorPos(mainButtons[1].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
+                .SetDelay(0.5f)
+                .SetEase(easeType);
+
+                mainButtons[2].transform.GetComponent<RectTransform>()
+                .DOAnchorPos(mainButtons[2].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
+                .SetDelay(0.5f)
+                .SetEase(easeType)
+
+                .OnComplete(() =>
+                {
+                    mainButtons[3].transform.DOScaleX(1, timerToAppear).SetEase(easeType);
+
+                    EnableDisableButtons(true);
+                });
+
             });
+
         });
     }
 
