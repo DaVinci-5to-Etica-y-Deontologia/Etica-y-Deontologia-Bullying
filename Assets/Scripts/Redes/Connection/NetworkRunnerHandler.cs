@@ -44,6 +44,8 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
         if (result.Ok)
         {
             OnLobbyJoined();
+
+            
         }
         else
         {
@@ -74,8 +76,6 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
         _currentRunner.ProvideInput = true;
 
-        Debug.Log("Se ejecuto InitializeGame");
-
         var result = await _currentRunner.StartGame(new StartGameArgs()
         {
             GameMode = gameMode,
@@ -87,7 +87,7 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
 
         if (result.Ok)
         {
-            Debug.Log("[Custom Msg] Game Created/Joined");
+            Debug.Log("[Custom Msg] Game Created/Joined");           
         }
         else
         {
@@ -109,15 +109,21 @@ public class NetworkRunnerHandler : MonoBehaviour, INetworkRunnerCallbacks
     {
         if(streamerManager!= null && !streamerManager.streamersData.gameEnd)
             ScenesLoader.instance.LoadScene("MainMenu");
+
+        _player.ID = -1;
+    }
+
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        if (_player.ID == -1)
+            _player.ID = player.PlayerId;
     }
 
     #endregion
 
-    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
-    {
-    }
 
- 
+
+
 
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {

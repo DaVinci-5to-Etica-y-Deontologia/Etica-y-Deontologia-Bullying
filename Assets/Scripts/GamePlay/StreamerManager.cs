@@ -41,6 +41,8 @@ public class StreamerManager : NetworkBehaviour
 
         public Player player => streamerManager.player;
 
+        public Pictionarys<string, bool> playersReady = new();
+
 
         StreamerManager _streamerManager;
 
@@ -229,15 +231,40 @@ public class StreamerManager : NetworkBehaviour
     {
         if (instance.IsServer)
         {
+            instance.StopAllCoroutines();
+
+            instance.Rpc_GlobalPause();
+
             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(instance.streamersData)));
 
             TransitionManager.instance.ChangeText("Un jugador nuevo se esta uniendo a la partida");
-            instance.Rpc_GlobalPause();
         }
     }
     static public void EndUpdateStreamers(string jsonData, StreamerManager.SearchResult srch)
     {
-        instance.GlobalUnPause();
+        TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
+        DataRpc.Create(Actions.StartGame, "", instance.player.ID.ToString());
+    }
+
+    static public void StartReady(string jsonData, StreamerManager.SearchResult srch)
+    {
+        var playersReady = instance.streamersData.playersReady;
+
+        if (playersReady.TryGetValue(jsonData, out var ready))
+        {
+            playersReady[jsonData] = !ready;
+        }
+        else
+        {
+            playersReady.Add(jsonData, false);
+        }
+
+        bool chckReady = playersReady.All((p) => p.Value);
+
+        if(chckReady)
+            instance.GlobalUnPause();
+
+        instance.eventManager.events.SearchOrCreate<EventParam<bool>>("allready").delegato.Invoke(chckReady);
     }
 
     #endregion
@@ -278,7 +305,7 @@ public class StreamerManager : NetworkBehaviour
     public void GlobalUnPause()
     {
         GameManager.instance.Pause(false);
-        TransitionManager.instance.SetTransition(TransitionManager.WaitEnd);
+        
         
         //UnityEngine.Debug.Log("El juego se des pauso");
     }
@@ -314,12 +341,12 @@ public class StreamerManager : NetworkBehaviour
         //UnityEngine.Debug.Log("EMPEZO A CARGAR LOS DATOS");
         do
         {
-            Rpc_RequestUpdate(json.SubstringClamped(0, 500), order , false);
-            json = json.SubstringClamped(500);
+            Rpc_RequestUpdate(json.SubstringClamped(0, 1000), order , false);
+            json = json.SubstringClamped(1000);
             yield return null;
             order++;
         }
-        while (json.Length > 500);
+        while (json.Length > 1000);
 
         Rpc_RequestUpdate(json, order, true);
     }
@@ -331,8 +358,11 @@ public class StreamerManager : NetworkBehaviour
             return;
 
         if (!end)
-        {
-            buffer.Add(order, json);
+        { 
+            if(!buffer.ContainsKey(order))
+                buffer.Add(order, json);
+            else
+                buffer[order] = json;
         }
         else 
         {

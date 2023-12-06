@@ -16,4 +16,6 @@ public class Player : ScriptableObject
     public float InstigatorCooldownSecond=5;
 
     public float multiply = 1;
+
+    public int ID;
 }

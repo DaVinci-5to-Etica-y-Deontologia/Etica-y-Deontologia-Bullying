@@ -1698,6 +1698,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parent: {fileID: 0}
   materialForUsers: {fileID: 2100000, guid: 1dfffe22a81ce834fa08eb517cd6d594, type: 2}
+  <Tutos>k__BackingField:
+  - sprite: {fileID: 21300000, guid: 647f71fd125b29c45b0d118cd0345f9e, type: 3}
+    texts:
+      texts:
+      - size: 36
+        text: Consejo
+        color: {r: 1, g: 1, b: 1, a: 1}
+      - size: 30
+        text: '
+
+          Si vas a saltar, usa las'
+        color: {r: 1, g: 1, b: 1, a: 1}
+      - size: 30
+        text: piernas
+        color: {r: 1, g: 0, b: 0, a: 1}
+      separator: ' '
+  - sprite: {fileID: 21300000, guid: 44a054df1702e39458b7072b08d0f212, type: 3}
+    texts:
+      texts:
+      - size: 36
+        text: Consejo
+        color: {r: 1, g: 1, b: 1, a: 1}
+      - size: 30
+        text: '
+
+          Lavate las manos no seas '
+        color: {r: 1, g: 1, b: 1, a: 1}
+      - size: 30
+        text: sucio
+        color: {r: 1, g: 0, b: 0, a: 1}
+      separator: ' '
   <Streamers>k__BackingField:
   - inUse: 0
     streamImage: {fileID: 21300000, guid: ecd9b2e900cd8c5478d92a184650073b, type: 3}

@@ -18,6 +18,9 @@ public class BD : SuperScriptableObject
     public Material materialForUsers;
 
     [field: SerializeField]
+    public Tutos[] Tutos { get; private set; }
+
+    [field: SerializeField]
     public Streamer[] Streamers { get; private set; }
 
     [field: SerializeField]
@@ -133,4 +136,40 @@ public class BD : SuperScriptableObject
 #endif
 
     #endregion
+}
+
+[System.Serializable]
+public struct Tutos
+{
+    public Sprite sprite;
+
+    public CompleteText texts;
+}
+
+[System.Serializable]
+public class CompleteText
+{
+    [System.Serializable]
+    public class TextWithSize
+    {
+        public float size = 30;
+        [TextArea(3, 6)]
+        public string text;
+
+        public Color color = Color.white;
+
+        public override string ToString()
+        {
+            return text.RichText("size", size.ToString()).RichTextColor(color);
+        }
+    }
+
+    public TextWithSize[] texts;
+
+    public string separator = " ";
+
+    public override string ToString()
+    {
+        return texts.Aggregate(string.Empty, (ret, text) => ret += text.ToString() + separator);
+    }
 }

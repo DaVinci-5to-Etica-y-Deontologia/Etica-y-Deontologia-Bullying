@@ -38,6 +38,8 @@ public class Actions
 
     public static Actions FinishStream { get; private set; } = new ActFinishStream(StreamerData.FinishStream);
 
+    public static Actions StartGame { get; private set; } = new ActStart(StreamerManager.StartReady);
+
 
     public string className;
 
@@ -203,6 +205,14 @@ public class ActAddComment : ActionComment
 public class ActAplicate : ActionStream
 {
     public ActAplicate(System.Action<string, StreamerManager.SearchResult> action) : base(action)
+    {
+    }
+}
+
+[System.Serializable]
+public class ActStart: ActionStream
+{
+    public ActStart(System.Action<string, StreamerManager.SearchResult> action) : base(action)
     {
     }
 }
