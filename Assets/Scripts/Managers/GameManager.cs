@@ -154,7 +154,7 @@ public class GameManager : NetworkBehaviour
         defeat.delegato += Defeat;
         defeat.delegato += () => close.delegato.Invoke();
 
-        awakeUnityEvent?.Invoke();
+
 
         updateUnityEvent.AddListener(MyUpdate);
 
@@ -168,6 +168,8 @@ public class GameManager : NetworkBehaviour
         instance = this;
 
         enabled = false;
+
+        awakeUnityEvent?.Invoke();
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex != 1)
             Spawned();

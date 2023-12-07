@@ -17,15 +17,6 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private InputField _sessionNameField;
 
-    private void Start()
-    {
-        _networkRunnerHandler.OnLobbyJoined += () =>
-        {
-            TransitionManager.instance.SetTransition("SquaresEnd");
-            lobby.SetActive(true);
-        };
-    }
-
 
     public void StartButton()
     {
@@ -76,6 +67,19 @@ public class MenuManager : MonoBehaviour
         _networkRunnerHandler.JoinLobby();
         TransitionManager.instance.SetTransition(TransitionManager.SquaresStart, 0.8f, () => _networkRunnerHandler.CreateGame(Fusion.GameMode.Single, _sessionNameField.text, "SampleScene"));
     }
+    void LobbyJoined()
+    {
+        TransitionManager.instance.SetTransition("SquaresEnd");
+        lobby.SetActive(true);
+    }
 
+    private void OnDestroy()
+    {
+        _networkRunnerHandler.OnLobbyJoined -= LobbyJoined;
+    }
 
+    private void Start()
+    {
+        _networkRunnerHandler.OnLobbyJoined += LobbyJoined;
+    }
 }
