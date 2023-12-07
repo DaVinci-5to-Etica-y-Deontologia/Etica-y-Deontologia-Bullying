@@ -185,8 +185,8 @@ RectTransform:
   - {fileID: 4358041710109857418}
   m_Father: {fileID: 1947637450547018206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 257.5, y: 0}
   m_SizeDelta: {x: 325, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -821,7 +821,8 @@ MonoBehaviour:
   BackGround: {fileID: 3486895204517032133}
   _commentData:
     ID: 0
-    comment: {fileID: 0}
+    <Enable>k__BackingField: 0
+    commentID: 0
     timeOnCreate: 0
 --- !u!225 &552846352251057716
 CanvasGroup:
