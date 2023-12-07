@@ -2641,6 +2641,7 @@ MonoBehaviour:
       - Gamer
       - Sindicalista
       - 3p
+    maxCount: 5
   <Streamers>k__BackingField:
   - inUse: 0
     streamImage: {fileID: 21300000, guid: ecd9b2e900cd8c5478d92a184650073b, type: 3}
