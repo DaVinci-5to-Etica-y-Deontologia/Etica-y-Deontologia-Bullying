@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.103773594, g: 0.1032841, b: 0.1032841, a: 1}
+  m_Color: {r: 0.33962262, g: 0.2508264, b: 0.18422925, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -316,7 +316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4141955637983207450
 RectTransform:
   m_ObjectHideFlags: 0
@@ -510,7 +510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.001513, y: -2284.7952}
+  m_AnchoredPosition: {x: -100, y: -2183.7952}
   m_SizeDelta: {x: 1283.1, y: 2453.824}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3676499568647522316
@@ -541,16 +541,32 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Leader
+  m_text: '
 
 
 
-    Props
+    Leader
 
 
 
+    Streams ilustrations
 
-    UI
+
+
+    Streamers icons
+
+
+
+    Color
+    palette
+
+
+
+    UI design
+
+
+
+    Buttons design
 
 
 
@@ -570,11 +586,46 @@ MonoBehaviour:
 
 
 
-    UX
+    Gameplay
+
+
+
+
+
+
+
+    Main
+    menu design
+
+
+
+
+
+    Pop ups design
+
+
+
+
+
+
+    Submenus design
+
+
+
+
+
+    Credits
+    design
 
 
 
     Scripting
+
+
+
+
+
+
 
 
 
@@ -589,11 +640,54 @@ MonoBehaviour:
 
 
 
-    Tools
+
+    Backend
 
 
 
-    Backend'
+
+
+
+    Gameplay
+    implementation
+
+
+
+
+
+    Main menu implementation
+
+
+
+
+
+    Submenus implementation
+
+
+
+    Pop
+    ups implementation
+
+
+
+
+    Random names generator
+
+
+
+
+    Credits implementation
+
+
+
+    Testers
+
+
+
+
+
+
+    Fixes'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -602,8 +696,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293058356
-  m_fontColor: {r: 0.20496619, g: 0.87330025, b: 0.8867924, a: 1}
+    rgba: 4288269823
+  m_fontColor: {r: 1, g: 0.80318743, b: 0.5990566, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -656,7 +750,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -4365.6494}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -794,7 +888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030518, y: -2257.243}
+  m_AnchoredPosition: {x: 0.000030518, y: -2156.243}
   m_SizeDelta: {x: 1283.097, y: 2964.722}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5800508240207593542
@@ -825,12 +919,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Thomas Posada\n\n\n\n\n\n\n\nAntonella Bartone\n\n\n\nKarina Revelli\nLucas
-    Olivares\nLuca Pacheco\n\n\nIara Libert\n\n\n\nValentino Rom\xE1n\n\n\nTob\xEDas
-    Lesta\nDiego Katabian\n\n\n\n\n\n\nIgnacio Settembrini\n\n\n\nJuli\xE1n Ben\xEDtez\nBruno
-    Matone\n\n\nJhamil Castillo\n\n\n\n\n\n\n\nJoaqu\xEDn Moore\n\n\nJuli\xE1n Laboratto\nAlejandro
-    Caffarena\n\n\nEzequiel Oyhambure\nLucas Euler\n\n\nLuca Fern\xE1ndez\nIgnacio
-    Trussi\nFranco Daniel Garc\xEDa\nMat\xEDas Bortolo Maliauskas\nTiago Zedde\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCatalina
+  m_text: "Lucas Euler\n\n\n\n\nThomas Posadas\n\n\n\n\n\r\nIara Libert\r\n\r\n\n\r\nKarina
+    Revelli\r\n\r\n\n\r\nKarina Revelli\r\n\r\n\r\n\nIara Libert\r\n\r\n\r\nIara
+    Libert\r\n\r\n\n\r\nKarina Revelli\r\n\r\n\n\r\nValentino Roman\r\n\r\n\n\r\nTobias
+    Lesta\r\nDiego Katabian\r\n\r\n\r\n\r\n\n\n\r\nIgnacio Settembrini\r\n\r\n\n\n\r\nIgnacio
+    Settembrini\r\nLucas Euler\r\nJoaqu\xEDn Moore\r\nJhamil Castillo\r\nBruno Matone\r\n\r\n\n\r\nBruno
+    Matone\r\nEzequiel Oyhambure\r\nJulian Laboratto\r\n\r\n\n\r\n\nBruno Matone\r\nIara
+    Libert\r\nJhamil Castillo\r\nKarina Revelli\r\n\r\n\n\r\nBruno Matone\r\nLuca
+    Pacheco\r\nAlejandro Estanislao\r\n\r\n\n\r\nTiago Zedde\r\n\r\n\n\r\nJhamil
+    Castillo\r\nTiago Zedde\r\nTobias Lesta\r\nDaniel Garcia\r\nMatias Bontolo\r\nRamiro
+    Nazareno\r\n\r\n\n\n\n\n\n\n\r\nJoaqu\xEDn Moore\r\n\r\n\n\n\r\nJulian Laboratto\r\nAlejandro
+    Estanislao\r\n\r\n\n\r\nLuca Fern\xE1ndez\r\nIgnacio Trussi\r\nFranco Garcia\r\nMatias
+    Bontolo\r\n\r\n\n\n\r\nJoaqu\xEDn Moore\r\nLucas Euler\r\nJhamil Castillo\r\n\r\n\n\r\nEzequiel
+    Oyhambure\r\nJulian Laboratto\r\nJhamil Castillo\r\n\r\n\n\r\nAlejandro Estanislao\r\n\r\n\n\r\nLucas
+    Euler\r\nJhamil Castillo\r\n\r\n\n\r\nRamiro Nazareno\r\nLucas Euler\r\n\r\n\n\r\nJhamil
+    Castillo\r\n\r\n\r\nJoaqu\xEDn Moore\r\nLucas Euler\r\nKarina Revelli\r\nJhamil
+    Castillo\r\n\r\n\n\n\r\nLucas Euler\r\nJhamil Castillo\r\nJoaqu\xEDn Moore\n\n\n\n\n\n\n\nLucas
+    Euler\nKarina Revelli\nJhamil Castillo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCatalina
     Cabana"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -840,8 +945,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4287606750
+  m_fontColor: {r: 0.8705883, g: 0.6862745, b: 0.56078434, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -894,7 +999,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -806.65625}
+  m_margin: {x: 0, y: 0, z: 0, w: -5622.7734}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1056,8 +1161,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4287606750
+  m_fontColor: {r: 0.8705883, g: 0.6862745, b: 0.56078434, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1150,7 +1255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1757}
+  m_AnchoredPosition: {x: 0, y: -1659}
   m_SizeDelta: {x: 988.418, y: 2208.793}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5475788003503109352
@@ -1185,6 +1290,10 @@ MonoBehaviour:
 
 
 
+    Project Manager''s Secretary
+
+
+
 
     Art
 
@@ -1204,7 +1313,38 @@ MonoBehaviour:
 
 
 
-    Game Design
+
+
+
+
+
+
+    Game
+    Design
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1247,6 +1387,35 @@ MonoBehaviour:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Multiplayer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Special
     Thanks'
   m_isRightToLeft: 0
@@ -1257,8 +1426,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281071092
-  m_fontColor: {r: 0.95639163, g: 0.9622642, b: 0.16794233, a: 1}
+    rgba: 4284193501
+  m_fontColor: {r: 0.8679245, g: 0.60271263, b: 0.35617658, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1311,7 +1480,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0.000053397343}
+  m_margin: {x: 0, y: 0, z: 0, w: -6377.3037}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1331,19 +1500,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 798834770017409449, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
       propertyPath: m_fontColor.b
-      value: 1
+      value: 0.56078434
       objectReference: {fileID: 0}
     - target: {fileID: 798834770017409449, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
       propertyPath: m_fontColor.g
-      value: 1
+      value: 0.6862745
       objectReference: {fileID: 0}
     - target: {fileID: 798834770017409449, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
       propertyPath: m_fontColor.r
-      value: 1
+      value: 0.8705883
       objectReference: {fileID: 0}
     - target: {fileID: 798834770017409449, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4294967295
+      value: 4287606750
       objectReference: {fileID: 0}
     - target: {fileID: 1870284471046995724, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
       propertyPath: m_Pivot.x
