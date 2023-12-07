@@ -64,6 +64,9 @@ public abstract class PopUpComment : PopUpElement
     protected UnityEngine.UI.ContentSizeFitter placeToCreate;
 
     [SerializeField]
+    protected GameObject optionsToInteract;
+
+    [SerializeField]
     protected Color commentDestroy;
 
     protected CommentData comment;
@@ -115,15 +118,21 @@ public abstract class PopUpComment : PopUpElement
     void InternalPopUp(CommentView commentView)
     {
         if (ExecutePopUp)
+        {
+            optionsToInteract.SetActive(true);
             PopUp(commentView);
+        }
+            
     }
 
     void OnLeaveComment(CommentData commentData)
     {
         if (isActiveAndEnabled && user == commentData.user && !user.Enable && user.comments.Count == 0)
         {
+            optionsToInteract.SetActive(false);
             callsManager.DestroyAll();
             textToShow.text = "Se retiro el usuario y no quedan comentarios\n" + "No hay posibles acciones".RichTextColor(commentDestroy);
+            user = null;
         }
     }
 

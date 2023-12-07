@@ -70,7 +70,7 @@ public class PopUpInstigador : PopUpComment
 
     void First()
     {
-        if (cooldownFirstHability.Chck && isActiveAndEnabled)
+        if (cooldownFirstHability.Chck && isActiveAndEnabled && user != null)
             callsManager.Create("Corromper", () =>
             {
                 Execute();
@@ -85,7 +85,7 @@ public class PopUpInstigador : PopUpComment
 
     void Second()
     {
-        if (cooldownSecondHability.Chck && isActiveAndEnabled)
+        if (cooldownSecondHability.Chck && isActiveAndEnabled && user != null)
             callsManager.Create("Picantear", () =>
             {
                 Execute();
