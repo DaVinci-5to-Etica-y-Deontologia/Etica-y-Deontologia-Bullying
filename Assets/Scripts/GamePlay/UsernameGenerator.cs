@@ -32,6 +32,7 @@ public class UsernameGenerator
     [SerializeField]
     List<PDO<string, string>> totalList = new List<PDO<string, string>>();
 
+    [SerializeField]
     int maxCount;
 
     public string GenerateUsername()
@@ -43,7 +44,7 @@ public class UsernameGenerator
             int rng = Random.Range(0, totalList.Count);
 
             if(i < totalList[rng].Length)
-                newUserName += totalList[rng][i].ToString();
+                newUserName += totalList[rng][i];
         }
 
         return newUserName;
