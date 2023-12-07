@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] GameObject optionsMenu;
 
+    [SerializeField] GameObject credits;
+
     [SerializeField] GameObject lobby;
 
     [SerializeField] private InputField _sessionNameField;
@@ -37,6 +39,16 @@ public class MenuManager : MonoBehaviour
 
         menuPanel.SetActive(condition);
         TransitionManager.instance.SetTransition(TransitionManager.Lines, 0.8f,() => { optionsMenu.SetActive(condition); optionsMenu.GetComponent<CanvasGroup>().alpha = aux; });
+    }
+
+    public void CreditsButton()
+    {
+        TransitionManager.instance.SetTransition(TransitionManager.LinesStart, 0.8f, () => { credits.SetActive(true); TransitionManager.instance.SetTransition(TransitionManager.LinesEnd); });
+    }
+
+    public void CloseCreditsButton()
+    {
+        TransitionManager.instance.SetTransition(TransitionManager.Lines, 0.5f, ()=> credits.SetActive(false));
     }
 
     public void QuitButton()
