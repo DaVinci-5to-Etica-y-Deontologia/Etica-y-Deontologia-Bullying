@@ -89,6 +89,8 @@ public class LoadView : MonoBehaviour, IPointerClickHandler
         timerToChange = TimersManager.Create(6, ChangeTuto).SetLoop(true);
 
         eventManager.events.SearchOrCreate<EventParam<bool>>("allready").delegato += UpdateReady;
+
+        ready = false;
     }
 
 

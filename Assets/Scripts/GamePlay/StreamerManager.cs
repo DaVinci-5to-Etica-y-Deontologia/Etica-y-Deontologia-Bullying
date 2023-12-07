@@ -501,6 +501,10 @@ public class StreamerManager : NetworkBehaviour
                 TransitionManager.instance.ChangeText("Esperando a otro jugador para empezar la partida");
                 Rpc_GlobalPause();
             }
+            else
+            {
+                DataRpc.Create(Actions.StartGame, "", instance.player.ID.ToString());
+            }
         } 
         else
         {
