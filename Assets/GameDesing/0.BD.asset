@@ -1699,35 +1699,37 @@ MonoBehaviour:
   _parent: {fileID: 0}
   materialForUsers: {fileID: 2100000, guid: 1dfffe22a81ce834fa08eb517cd6d594, type: 2}
   <Tutos>k__BackingField:
-  - sprite: {fileID: 21300000, guid: 647f71fd125b29c45b0d118cd0345f9e, type: 3}
+  - sprite: {fileID: 21300000, guid: bcb0583350f9dc048a06c4468c5ec401, type: 3}
     texts:
       texts:
-      - size: 36
-        text: Consejo
-        color: {r: 1, g: 1, b: 1, a: 1}
       - size: 30
-        text: '
-
-          Si vas a saltar, usa las'
+        text: "Cada streamer tiene una barra de salud, una cantidad de viewers actual
+          con una meta y un chat en vivo que alterar\xE1 esos dos par\xE1metros \r"
         color: {r: 1, g: 1, b: 1, a: 1}
-      - size: 30
-        text: piernas
-        color: {r: 1, g: 0, b: 0, a: 1}
       separator: ' '
-  - sprite: {fileID: 21300000, guid: 44a054df1702e39458b7072b08d0f212, type: 3}
+  - sprite: {fileID: 21300000, guid: ca3aaac4c9ecca848994e64b889c1f81, type: 3}
     texts:
       texts:
-      - size: 36
-        text: Consejo
-        color: {r: 1, g: 1, b: 1, a: 1}
       - size: 30
-        text: '
-
-          Lavate las manos no seas '
+        text: "Los moderadores regulan a los usuarios del chat al marcarlos, banearlos
+          o amonestarlos \r"
         color: {r: 1, g: 1, b: 1, a: 1}
+      separator: ' '
+  - sprite: {fileID: 21300000, guid: e8d612518c599d34ba2cd2a5e8bb5fdc, type: 3}
+    texts:
+      texts:
       - size: 30
-        text: sucio
-        color: {r: 1, g: 0, b: 0, a: 1}
+        text: "Los instigadores pueden ver la moralidad de los usuarios y corromper
+          o picantear a los usuarios buenos\r"
+        color: {r: 1, g: 1, b: 1, a: 1}
+      separator: ' '
+  - sprite: {fileID: 21300000, guid: 217620814aa1d314db91f35f388b42cc, type: 3}
+    texts:
+      texts:
+      - size: 30
+        text: "Para que ganen los moderadores la mayor\xEDa de los streamers deben
+          terminar vivos y lo contrario para que ganen los instigadores \r"
+        color: {r: 1, g: 1, b: 1, a: 1}
       separator: ' '
   <usernameGenerator>k__BackingField:
     autoParses:

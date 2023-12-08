@@ -17,3 +17,4 @@ MonoBehaviour:
   InstigatorCooldownFirst: 3
   InstigatorCooldownSecond: 5
   multiply: 1
+  ID: -1

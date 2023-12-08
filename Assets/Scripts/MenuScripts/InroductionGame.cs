@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class InroductionGame : MonoBehaviour
 {
+    [SerializeField] float delayButtons = 0.2f;
+
     [SerializeField] TextMeshProUGUI title;
     [SerializeField] Button[] mainButtons = new Button[5];
 
@@ -33,19 +35,19 @@ public class InroductionGame : MonoBehaviour
         mainButtons[0].GetComponent<RectTransform>()
         .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
         .SetEase(easeType)
-        .SetDelay(1.5f)
+        .SetDelay(1.2f)
         .OnComplete(() =>
         {
             mainButtons[1].transform.DOScaleX(1, timerToAppear).SetEase(easeType);
             
             mainButtons[0].GetComponent<RectTransform>()
             .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-            .SetDelay(0.5f)
+            .SetDelay(delayButtons)
             .SetEase(easeType);
 
             mainButtons[1].transform.GetComponent<RectTransform>()
             .DOAnchorPos(mainButtons[1].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-            .SetDelay(0.5f)
+            .SetDelay(delayButtons)
             .SetEase(easeType)
 
             .OnComplete(() =>
@@ -54,18 +56,18 @@ public class InroductionGame : MonoBehaviour
 
                 mainButtons[0].GetComponent<RectTransform>()
                 .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-                .SetDelay(0.5f)
+                .SetDelay(delayButtons)
                 .SetEase(easeType);
 
                 EnableDisableButtons(true);
                 mainButtons[1].transform.GetComponent<RectTransform>()
                 .DOAnchorPos(mainButtons[1].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-                .SetDelay(0.5f)
+                .SetDelay(delayButtons)
                 .SetEase(easeType);
 
                 mainButtons[2].transform.GetComponent<RectTransform>()
                 .DOAnchorPos(mainButtons[2].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-                .SetDelay(0.5f)
+                .SetDelay(delayButtons)
                 .SetEase(easeType)
 
                 .OnComplete(() =>
@@ -74,23 +76,23 @@ public class InroductionGame : MonoBehaviour
 
                     mainButtons[0].GetComponent<RectTransform>()
                     .DOAnchorPos(mainButtons[0].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-                    .SetDelay(0.5f)
+                    .SetDelay(delayButtons)
                     .SetEase(easeType);
 
                     EnableDisableButtons(true);
                     mainButtons[1].transform.GetComponent<RectTransform>()
                     .DOAnchorPos(mainButtons[1].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-                    .SetDelay(0.5f)
+                    .SetDelay(delayButtons)
                     .SetEase(easeType);
 
                     mainButtons[2].transform.GetComponent<RectTransform>()
                     .DOAnchorPos(mainButtons[2].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-                    .SetDelay(0.5f)
+                    .SetDelay(delayButtons)
                     .SetEase(easeType);
 
                     mainButtons[3].transform.GetComponent<RectTransform>()
                     .DOAnchorPos(mainButtons[3].GetComponent<RectTransform>().anchoredPosition + new Vector2(0, 80), timerToMove)
-                    .SetDelay(0.5f)
+                    .SetDelay(delayButtons)
                     .SetEase(easeType)
 
                     .OnComplete(() =>
