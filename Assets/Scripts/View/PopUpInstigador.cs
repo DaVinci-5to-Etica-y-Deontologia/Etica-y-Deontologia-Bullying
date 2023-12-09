@@ -78,7 +78,8 @@ public class PopUpInstigador : PopUpComment
 
                 if (!comment.Enable)
                     return;
-                
+
+                AudioManager.instance.Play("Corromper");
                 DataRpc.Create(Actions.Corromper, comment.textIP);
             });
     }
@@ -94,6 +95,7 @@ public class PopUpInstigador : PopUpComment
                 if (!comment.Enable)
                     return;
 
+                AudioManager.instance.Play("Picantear");
                 DataRpc.Create(Actions.Picantear, comment.textIP);
             });
     }

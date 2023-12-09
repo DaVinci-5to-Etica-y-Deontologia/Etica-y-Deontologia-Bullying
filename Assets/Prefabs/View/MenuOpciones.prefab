@@ -739,6 +739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 4907293832167059973, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
+      propertyPath: genericSound
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7228248245979058331, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 4.207794
@@ -882,6 +886,10 @@ PrefabInstance:
     - target: {fileID: 4864904637926644723, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
       propertyPath: m_Name
       value: Button Audio
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907293832167059973, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
+      propertyPath: genericSound
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4907293832167059973, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.size
@@ -1816,6 +1824,10 @@ PrefabInstance:
       value: Button Video
       objectReference: {fileID: 0}
     - target: {fileID: 4907293832167059973, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
+      propertyPath: genericSound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907293832167059973, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2034,6 +2046,10 @@ PrefabInstance:
     - target: {fileID: 4864904637926644723, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
       propertyPath: m_Name
       value: Button Continuar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4907293832167059973, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
+      propertyPath: genericSound
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7228248245979058331, guid: 6ccd5a080fd7b1740a0dc40cdcec3451, type: 3}
       propertyPath: m_AnchoredPosition.y

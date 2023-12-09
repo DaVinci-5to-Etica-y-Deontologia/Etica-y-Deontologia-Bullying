@@ -22,6 +22,8 @@ public class InroductionGame : MonoBehaviour
         TimersManager.Create(0.8f, ActiveIntro);
 
         EnableDisableButtons(false);
+
+        AudioManager.instance.Play("MenuMusic");
     }
 
     void ActiveIntro()

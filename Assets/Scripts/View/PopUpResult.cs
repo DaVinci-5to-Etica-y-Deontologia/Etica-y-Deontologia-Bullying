@@ -45,6 +45,7 @@ public class PopUpResult : PopUpElement
         callsManager.Create("Cambiar de stream", () =>
         {
             StreamerManager.instance.NextStreamer();
+            AudioManager.instance.Play("Click4");
         });
 
         StartCoroutine(ViewerNumber(resultado));

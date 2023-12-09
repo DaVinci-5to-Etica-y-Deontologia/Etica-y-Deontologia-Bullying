@@ -734,6 +734,7 @@ MonoBehaviour:
   eventToCall:
     m_PersistentCalls:
       m_Calls: []
+  genericSound: 0
   button: {fileID: 140912322178551159}
   backgroundImage: {fileID: 0}
   textMeshPro: {fileID: 0}

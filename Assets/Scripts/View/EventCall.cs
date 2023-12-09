@@ -10,6 +10,9 @@ public class EventCall : MonoBehaviour
     public UnityEvent<EventCall> eventToCall;
 
     [SerializeField]
+    public bool genericSound = false;
+
+    [SerializeField]
     public Button button;
 
     [SerializeField]
@@ -24,6 +27,8 @@ public class EventCall : MonoBehaviour
     public void OnClick()
     {
         eventToCall.Invoke(this);
+        if (genericSound)
+            AudioManager.instance.Play("Click2");
     }
 
     public void Set(string nameToShow, UnityAction action)

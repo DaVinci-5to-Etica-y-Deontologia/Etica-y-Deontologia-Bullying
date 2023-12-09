@@ -22,7 +22,7 @@ public class PopUpModerator : PopUpComment
             if (!comment.Enable)
                 return;
 
-           
+            AudioManager.instance.Play("Ban");
             DataRpc.Create(Actions.Ban, comment.textIP); 
         });
 
@@ -34,6 +34,7 @@ public class PopUpModerator : PopUpComment
             if (!comment.Enable)
                 return;
 
+            AudioManager.instance.Play("Admonition");
             DataRpc.Create(Actions.Admonition, comment.textIP);
         });
     }

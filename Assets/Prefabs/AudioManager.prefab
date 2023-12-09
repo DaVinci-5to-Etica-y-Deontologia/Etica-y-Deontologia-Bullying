@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &146511906938108931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6603308029056300788}
+  - component: {fileID: 6931707359759363647}
+  - component: {fileID: 8629740493932343899}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6603308029056300788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146511906938108931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1157.1777, y: 645.3335, z: 14.899363}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6931707359759363647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146511906938108931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4316710f36382b740a6235757066a7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Click1
+    clip: {fileID: 8300000, guid: f048d5bfaea2dcf4ab69eb9dd69fb69a, type: 3}
+    source: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: Click2
+    clip: {fileID: 8300000, guid: 5028d6f936f3e074c8ca0b89e0533d29, type: 3}
+    source: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: Click3
+    clip: {fileID: 8300000, guid: 39bfa3dd1b425fb43a80688fcd070008, type: 3}
+    source: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: Click4
+    clip: {fileID: 8300000, guid: 67be1f6b37245ad4d985c2cfca904f06, type: 3}
+    source: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: Ban
+    clip: {fileID: 8300000, guid: 76f4461dc4668734a9cacade0cdfc058, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: Admonition
+    clip: {fileID: 8300000, guid: 26c7d1a3c50e772469e3fdaa874e9c85, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: PressComent1
+    clip: {fileID: 8300000, guid: c3a9dbb2ff18d564e955cd154bb99eca, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: PressComent2
+    clip: {fileID: 8300000, guid: dd5814c1dc456be4bafbd1151258cf67, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: Corromper
+    clip: {fileID: 8300000, guid: de5ddc08ffc10d04a9ddc64ab63c2728, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: Picantear
+    clip: {fileID: 8300000, guid: e86a4279f051f65489bb121d4c167548, type: 3}
+    source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 7370553928790127733, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: GameplayMusic
+    clip: {fileID: 8300000, guid: 9e99429d23c6c6b46b57fc9c885e08bd, type: 3}
+    source: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 1966499354970491384, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+  - name: MenuMusic
+    clip: {fileID: 8300000, guid: 64efcf8ddb8190e45b8700b2dd20dfb7, type: 3}
+    source: {fileID: 0}
+    volume: 0.4
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    audioMixerGroup: {fileID: 1966499354970491384, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
+--- !u!114 &8629740493932343899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146511906938108931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95af65d8c3731fb409cbe9621c80fd48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioCategories:
+  - Master
+  - SFX
+  - Music
+  _audioMixer: {fileID: 24100000, guid: 86275d39fdb572644985158ccd154ed3, type: 2}

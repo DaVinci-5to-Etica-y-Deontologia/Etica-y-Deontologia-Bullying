@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button Close PopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 5655673441593109337, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
+      propertyPath: genericSound
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8874761820115736253, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2

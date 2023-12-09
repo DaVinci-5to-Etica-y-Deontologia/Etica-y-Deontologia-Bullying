@@ -142,6 +142,9 @@ public class CommentView : MonoBehaviour, IPoolElement<CommentView>
     public void OnClick()
     {
         commentData.eventManager.events.SearchOrCreate<EventParam<CommentView>>("onclickcomment").delegato.Invoke(this);
+
+        if (Random.Range(0, 2) == 0) AudioManager.instance.Play("PressComent1");
+        else AudioManager.instance.Play("PressComent2");
     }
 
 

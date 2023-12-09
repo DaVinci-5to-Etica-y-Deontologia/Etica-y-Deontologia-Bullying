@@ -152,6 +152,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Lobby]Button Servidores'
       objectReference: {fileID: 0}
+    - target: {fileID: 5655673441593109337, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
+      propertyPath: genericSound
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7937926127868234183, guid: 2623cbb2c605c9041939e0904e904e5d, type: 3}
       propertyPath: m_SizeDelta.x
       value: -32.830006
