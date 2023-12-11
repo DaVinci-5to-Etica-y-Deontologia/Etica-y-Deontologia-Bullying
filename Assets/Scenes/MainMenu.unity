@@ -3486,6 +3486,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5115219528279909527, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
+      propertyPath: m_text
+      value: "Lucas Euler\n\n\n\n\nThomas Posadas\n\n\n\n\n\r\nIara Libert\r\n\r\n\n\r\nKarina
+        Revelli\r\n\r\n\n\r\nKarina Revelli\r\n\r\n\r\n\nIara Libert\r\n\r\n\r\nIara
+        Libert\r\n\r\n\n\r\nKarina Revelli\r\n\r\n\n\r\nValentino Roman\r\n\r\n\n\r\nTobias
+        Lesta\r\nDiego Katabian\r\n\r\n\r\n\r\n\n\n\r\nIgnacio Settembrini\r\n\r\n\n\n\r\nIgnacio
+        Settembrini\r\nLucas Euler\r\nJoaqu\xEDn Moore\r\nJhamil Castillo\r\nBruno
+        Matone\r\n\r\n\n\r\nBruno Matone\r\nEzequiel Oyhambure\r\nJulian Laboratto\r\n\r\n\n\r\n\nBruno
+        Matone\r\nIara Libert\r\nJhamil Castillo\r\nKarina Revelli\r\n\r\n\n\r\nBruno
+        Matone\r\nLuca Pacheco\r\nAlejandro Estanislao\r\n\r\n\n\r\nTiago Zedde\r\n\r\n\n\r\nJhamil
+        Castillo\r\nTiago Zedde\r\nTobias Lesta\r\nDaniel Garcia\r\nMatias Bontolo\r\nRamiro
+        Nazareno\r\n\r\n\n\n\n\n\n\n\r\nJoaqu\xEDn Moore\r\n\r\n\n\n\r\nJulian Laboratto\r\nAlejandro
+        Estanislao\r\n\r\n\n\r\nLuca Fern\xE1ndez\r\nIgnacio Trussi\r\nFranco Garcia\r\nMatias
+        Bontolo\r\n\r\n\n\n\r\nJoaqu\xEDn Moore\r\nLucas Euler\r\nJhamil Castillo\r\n\r\n\n\r\nEzequiel
+        Oyhambure\r\nJulian Laboratto\r\nJhamil Castillo\r\n\r\n\n\r\nAlejandro Estanislao\r\n\r\n\n\r\nLucas
+        Euler\r\nJhamil Castillo\r\n\r\n\n\r\nRamiro Nazareno\r\nLucas Euler\r\n\r\n\n\r\nJhamil
+        Castillo\r\n\r\n\r\nJoaqu\xEDn Moore\r\nLucas Euler\r\nKarina Revelli\r\nJhamil
+        Castillo\r\n\r\n\n\n\r\nLucas Euler\r\nJhamil Castillo\r\nJoaqu\xEDn Moore\n\n\n\n\n\n\n\nLucas
+        Euler\nKarina Revelli\nJhamil Castillo\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCatalina
+        Caba\xF1a"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

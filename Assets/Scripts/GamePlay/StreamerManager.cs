@@ -321,6 +321,8 @@ public class StreamerManager : NetworkBehaviour
 
         streamersData.endGame.Stop();
 
+        DataRpc.Clear();
+
         foreach (var item in streamersData.streamers)
         {
             item.Value.Stop();
@@ -562,6 +564,8 @@ public class StreamerManager : NetworkBehaviour
     {
         watchdog.Start();
 
+        DataRpc.Clear();
+
         UnityEngine.Debug.Log("server: " + IsServer);
 
         player.Moderator = (Runner.IsServer && Runner.SessionInfo.PlayerCount % 2 != 0) || Runner.IsSinglePlayer;
@@ -704,6 +708,15 @@ public struct DataRpc
             usersRequests.Enqueue(dataRpc);
         else if (dataRpc._action is ActionComment)
             commentsRequests.Enqueue(dataRpc);
+    }
+
+    public static void Clear()
+    {
+        streamsRequests.Clear();
+        usersRequests.Clear();
+        commentsRequests.Clear();
+        _definitiveList.Clear();
+
     }
 }
 
