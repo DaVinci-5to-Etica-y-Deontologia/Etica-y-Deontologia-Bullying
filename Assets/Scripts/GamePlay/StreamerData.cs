@@ -63,14 +63,17 @@ public class StreamerData : DataElement<StreamerData>
     static public void AddUser(string jsonData, StreamerManager.SearchResult srch)
     {
         srch.Streamer.AddUser(jsonData);
+        //Debug.Log($"AddUser\nViewers {srch.Streamer.Viewers.current}\t {srch.Streamer.users.Where((u)=>u.Value.Enable).Count()} \nLife {srch.Streamer.Life.current}\t");
     }
     static public void RemoveUser(string jsonData, StreamerManager.SearchResult srch)
     {
         srch.Streamer.RemoveUser(srch.user.index);
+        //Debug.Log($"RemoveUser\nViewers {srch.Streamer.Viewers.current}\t {srch.Streamer.users.Where((u) => u.Value.Enable).Count()} \nLife {srch.Streamer.Life.current}\t");
     }
     static public void EnableStream(string jsonData, StreamerManager.SearchResult srch)
     {
         srch.streamer.value.SetEnable();
+        //Debug.Log($"EnableStream\nViewers {srch.Streamer.Viewers.current}\t {srch.Streamer.users.Where((u) => u.Value.Enable).Count()} \nLife {srch.Streamer.Life.current}\t");
     }
 
     static public void FinishStream(string jsonData, StreamerManager.SearchResult srch)

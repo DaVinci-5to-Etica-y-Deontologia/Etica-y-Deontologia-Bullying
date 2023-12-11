@@ -19,7 +19,7 @@ public class DataPic<T> : Pictionarys<int, T>
     {
         if(!ContainsKey(ID, out var index))
         {
-            Debug.LogError("no se encontro el ID: " + ID);
+            //Debug.LogError("no se encontro el ID: " + ID);
             return default;
         }
 

@@ -128,6 +128,8 @@ public class UIManager : MonoBehaviour
 
     public void MyAwake()
     {
+        streamsButtons.Clear();
+
         streamerManager.onStreamerChange.delegato += StreamerManager_onStreamerChange;
         streamerManager.onStreamerCreate.delegato +=
             (StreamerData stream) => CreateStreamButton(stream);

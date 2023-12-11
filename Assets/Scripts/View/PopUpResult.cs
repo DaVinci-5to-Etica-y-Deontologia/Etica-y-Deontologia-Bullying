@@ -48,6 +48,7 @@ public class PopUpResult : PopUpElement
             AudioManager.instance.Play("Click4");
         });
 
+        StopAllCoroutines();
         StartCoroutine(ViewerNumber(resultado));
     }
 

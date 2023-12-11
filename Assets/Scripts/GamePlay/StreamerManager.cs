@@ -420,7 +420,6 @@ public class StreamerManager : NetworkBehaviour
             if(!item.Value.ShowEnd)
             {
                 UIManager.PressButtonByID(item.Key);
-                //ChangeStreamByID(item.Key);
                 return;
             }
         }
