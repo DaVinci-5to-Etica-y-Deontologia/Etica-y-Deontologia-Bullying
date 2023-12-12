@@ -959,7 +959,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 5931288400532693448}
         m_TargetAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
-        m_MethodName: set_isOn
+        m_MethodName: SetIsOnWithoutNotify
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1951,7 +1951,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 6068285495535997455}
         m_TargetAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
-        m_MethodName: set_isOn
+        m_MethodName: SetIsOnWithoutNotify
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2279,6 +2279,30 @@ PrefabInstance:
     - target: {fileID: 6426821816901072244, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987693246680667450, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7728895827417770323, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
       propertyPath: m_text
