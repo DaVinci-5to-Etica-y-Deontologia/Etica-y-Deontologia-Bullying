@@ -94,9 +94,7 @@ public class PopUpFinalPartida : PopUpElement
 
     public void BackMenu()
     {
-        TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
-        ScenesLoader.instance.LoadScene("MainMenu");
-        StreamerManager.instance?.Runner?.Shutdown(false);
+        ScenesLoader.GoToMenu();
         AudioManager.instance.Play("Click3");
     }
 

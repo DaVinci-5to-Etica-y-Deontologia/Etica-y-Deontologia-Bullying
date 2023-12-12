@@ -32,8 +32,6 @@ public class LoadView : MonoBehaviour, IPointerClickHandler
 
     Player player => StreamerManager.instance.player;
 
-    System.Action MyUpdate;
-
     static bool ready;
 
     int index;
@@ -84,16 +82,6 @@ public class LoadView : MonoBehaviour, IPointerClickHandler
         tutorialText.text = tutos[index].texts.ToString();
     }
 
-    void VerifyEsc()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            TransitionManager.instance.SetTransition(TransitionManager.SquaresStart);
-            ScenesLoader.instance.LoadScene("MainMenu");
-            StreamerManager.instance?.Runner?.Shutdown(false);
-        }
-    }
-
     private void Awake()
     {
         timerToChange = TimersManager.Create(6, ChangeTuto).SetLoop(true);
@@ -101,13 +89,14 @@ public class LoadView : MonoBehaviour, IPointerClickHandler
         eventManager.events.SearchOrCreate<EventParam<bool>>("allready").delegato += UpdateReady;
 
         ready = false;
-
-        onReadyAll.AddListener(() => MyUpdate -= VerifyEsc);
     }
 
     private void Update()
     {
-        MyUpdate?.Invoke();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ScenesLoader.GoToMenu();
+        }
     }
 
     private void OnEnable()
@@ -117,8 +106,6 @@ public class LoadView : MonoBehaviour, IPointerClickHandler
         ChangeTuto();
 
         timerToChange.Reset();
-
-        MyUpdate += VerifyEsc;
     }
 }
 
