@@ -3122,6 +3122,18 @@ MonoBehaviour:
           m_StringArgument: Click1
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1448684055}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: Stop
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MenuMusic
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1398788387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3376,18 +3388,30 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1285700369}
     - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1448684055}
+    - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
@@ -3395,11 +3419,27 @@ PrefabInstance:
       value: CloseCreditsButton
       objectReference: {fileID: 0}
     - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: MenuMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548688465577399970, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4217908095648389417, guid: 85fa46f2d92d8654eba17ada81c8ed20, type: 3}

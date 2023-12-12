@@ -132,7 +132,7 @@ MonoBehaviour:
     volume: 0.4
     pitch: 1
     playOnAwake: 0
-    loop: 0
+    loop: 1
     audioMixerGroup: {fileID: 1966499354970491384, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
   - name: MenuMusic
     clip: {fileID: 8300000, guid: 64efcf8ddb8190e45b8700b2dd20dfb7, type: 3}
@@ -140,7 +140,7 @@ MonoBehaviour:
     volume: 0.4
     pitch: 1
     playOnAwake: 0
-    loop: 0
+    loop: 1
     audioMixerGroup: {fileID: 1966499354970491384, guid: 86275d39fdb572644985158ccd154ed3, type: 2}
 --- !u!114 &8629740493932343899
 MonoBehaviour:
