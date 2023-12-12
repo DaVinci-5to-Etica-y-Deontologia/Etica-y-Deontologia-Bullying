@@ -941,7 +941,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4642147295395580413}
   toggleTransition: 1
   graphic: {fileID: 6424052515999624471}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 1657899366793947820}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -949,18 +949,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: SetModerator
         m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5931288400532693448}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
-        m_MethodName: SetIsOnWithoutNotify
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1930,38 +1918,14 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 4642147295395580413}
+  m_TargetGraphic: {fileID: 7802032097464082093}
   toggleTransition: 1
-  graphic: {fileID: 6424052515999624471}
-  m_Group: {fileID: 0}
+  graphic: {fileID: 6776281034315669706}
+  m_Group: {fileID: 1657899366793947820}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 58cac3681301b7d499ad817f59f58553, type: 2}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: SetModerator
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6068285495535997455}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Toggle, UnityEngine.UI
-        m_MethodName: SetIsOnWithoutNotify
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_IsOn: 0
+      m_Calls: []
+  m_IsOn: 1
 --- !u!1 &9056199918543599096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2111,6 +2075,54 @@ PrefabInstance:
     - target: {fileID: 657923506032953559, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
       propertyPath: m_Name
       value: '[Boton]1 jugador'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060809586228175137, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060809586228175137, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060809586228175137, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060809586228175137, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SingleGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060809586228175137, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1060809586228175137, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085517496931229847, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085517496931229847, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085517496931229847, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 8186785970546347490}
+    - target: {fileID: 1085517496931229847, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085517496931229847, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085517496931229847, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831608816519550261, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
       propertyPath: m_Pivot.x
@@ -2328,13 +2340,34 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3470920725479615311, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
       insertIndex: 1
       addedObject: {fileID: 6336664755822587232}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3249385804070751300, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1657899366793947820}
   m_SourcePrefab: {fileID: 100100000, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
 --- !u!224 &7831299435966786281 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3470920725479615311, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
   m_PrefabInstance: {fileID: 6666855060049527206}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8186785970546347490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3249385804070751300, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}
+  m_PrefabInstance: {fileID: 6666855060049527206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1657899366793947820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8186785970546347490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowSwitchOff: 0
 --- !u!224 &8921217916096451731 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2831608816519550261, guid: d31c4bd121852af40be00c3cf91f5851, type: 3}

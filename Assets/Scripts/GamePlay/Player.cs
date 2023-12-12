@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Managers/Player")]
 public class Player : ScriptableObject
 {
-    [field: Tooltip("true for moderator, false to Instigator")]
+    [field: SerializeField, Tooltip("true for moderator, false to Instigator")]
     public bool Moderator { get; set; }
 
     [field: SerializeField, Range(10,30)]

@@ -408,9 +408,41 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
       propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1921845436}
+    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 58cac3681301b7d499ad817f59f58553, type: 2}
+    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetMultiply
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539069806876738204, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
+      propertyPath: awakeUnityEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4074322121216960538, guid: 96d8c97b63d89ff4a99b3f8452a77153, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -4153,6 +4185,14 @@ PrefabInstance:
       propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 250317694}
+    - target: {fileID: 5926083896737341575, guid: aa7ab8e06ef533a46a819953c1e461bc, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1285700369}
+    - target: {fileID: 6022972085046485297, guid: aa7ab8e06ef533a46a819953c1e461bc, type: 3}
+      propertyPath: eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1285700369}
     - target: {fileID: 8186785970546347490, guid: aa7ab8e06ef533a46a819953c1e461bc, type: 3}
       propertyPath: m_Name
       value: '[Popup] Play'

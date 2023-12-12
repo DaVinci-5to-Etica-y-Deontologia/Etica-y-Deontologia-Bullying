@@ -233,7 +233,7 @@ public class StreamerManager : NetworkBehaviour
         {
             instance.StopAllCoroutines();
 
-            instance.Rpc_GlobalPause();
+            instance.Rpc_WatingForPlayers();
 
             instance.StartCoroutine(instance.PrependUpdate(JsonUtility.ToJson(instance.streamersData)));
 
@@ -294,7 +294,7 @@ public class StreamerManager : NetworkBehaviour
 
 
     [Rpc(RpcSources.All, RpcTargets.All)]
-    public void Rpc_GlobalPause()
+    public void Rpc_WatingForPlayers()
     {
         GameManager.instance.Pause(true);
         TransitionManager.instance.SetTransition(TransitionManager.WaitStart);
@@ -496,14 +496,17 @@ public class StreamerManager : NetworkBehaviour
         {
             CreateFirstStream();
             print("Game mode: " + Runner.GameMode);
+            
 
             if (Runner.GameMode == GameMode.Host)
             {
+                Rpc_WatingForPlayers();
                 TransitionManager.instance.ChangeText("Esperando a otro jugador para empezar la partida");
-                Rpc_GlobalPause();
+                
             }
             else
             {
+                GameManager.instance.Pause(true);
                 DataRpc.Create(Actions.StartGame, "", instance.player.ID.ToString());
             }
         } 
