@@ -291,11 +291,11 @@ public class UserParent : DataElement<UserParent>
     {
         this.stream = stream;
 
-        _coolDownAdmonition = TimersManager.Create(15).SetInitCurrent(0).SetMultiply(player.multiply);
+        _coolDownAdmonition = TimersManager.Create(15).SetInitCurrent(0).SetMultiply(player.Multiply);
 
-        _moralIndexCooldown = TimersManager.Create<float>(() => _newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s).SetMultiply(player.multiply).Stop();
+        _moralIndexCooldown = TimersManager.Create<float>(() => _newMoralIndex, _moralIndex, 30, Mathf.Lerp, (s) => MoralIndex = s).SetMultiply(player.Multiply).Stop();
 
-        _moralRangeCooldown = TimersManager.Create<float>(() => _newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s).SetMultiply(player.multiply).Stop();
+        _moralRangeCooldown = TimersManager.Create<float>(() => _newMoralRange, _moralRange, 30, Mathf.Lerp, (s) => MoralRange = s).SetMultiply(player.Multiply).Stop();
 
         _moralRangeCooldown.onChange += _moralRangeCooldown_onChange;
 
@@ -309,7 +309,7 @@ public class UserParent : DataElement<UserParent>
         colorText = colorText.ChangeAlphaCopy(1);
 
         if (IsServer)
-            _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment).SetMultiply(player.multiply);
+            _coolDownToComment = TimersManager.Create(Random.Range(10, 15), CreateComment).SetMultiply(player.Multiply);
     }
 
     public UserParent(int id, string name)

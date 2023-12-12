@@ -5,17 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Managers/Player")]
 public class Player : ScriptableObject
 {
-    [Tooltip("true for moderator, false to Instigator")]
-    public bool Moderator;
+    [field: Tooltip("true for moderator, false to Instigator")]
+    public bool Moderator { get; set; }
 
-    [SerializeField, Range(10,30)]
-    public int NumerOfCommentsToView = 20;
+    [field: SerializeField, Range(10,30)]
+    public int NumerOfCommentsToView { get; set; } = 20;
 
-    public float InstigatorCooldownFirst=3;
+    [field: SerializeField]
+    public float InstigatorCooldownFirst { get; set; } = 3;
 
-    public float InstigatorCooldownSecond=5;
+    [field: SerializeField]
+    public float InstigatorCooldownSecond { get; set; } =5;
 
-    public float multiply = 1;
+    [field: SerializeField]
+    public float Multiply { get; set; } = 1;
 
+    [field: SerializeField]
     public int ID;
+
+    public void SetModerator(bool b) => Moderator = b;
+
+    public void SetMultiply(int i) => Multiply = 0.5f + i * 0.25f;
 }

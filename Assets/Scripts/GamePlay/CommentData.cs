@@ -60,7 +60,7 @@ public class CommentData : DataElement<CommentData>, IPoolElement<CommentData>
                 //DataRpc.Create(Actions.Aplicate, textIP, (stream.Viewers.current + comment.Views , stream.Life.current + comment.Damage));
 
                 DataRpc.Create(Actions.Aplicate, textIP, (comment.Views, comment.Damage));
-            }).SetMultiply(player.multiply);
+            }).SetMultiply(player.Multiply);
     }
 
     public void Create(int id, int idComment)
