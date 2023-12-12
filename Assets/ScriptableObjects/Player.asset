@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5926e2d2b5c2a8a498fbc3db302e2878, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  Moderator: 1
-  NumerOfCommentsToView: 30
-  InstigatorCooldownFirst: 3
-  InstigatorCooldownSecond: 5
-  multiply: 1
+  <NumerOfCommentsToView>k__BackingField: 30
+  <InstigatorCooldownFirst>k__BackingField: 3
+  <InstigatorCooldownSecond>k__BackingField: 5
+  <Multiply>k__BackingField: 1
   ID: -1
