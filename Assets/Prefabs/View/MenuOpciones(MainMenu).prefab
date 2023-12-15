@@ -332,6 +332,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4542150816519498133, guid: 0726291e663bdd840ac7db7eb0986a73, type: 3}
+      propertyPath: m_Name
+      value: Music
+      objectReference: {fileID: 0}
     - target: {fileID: 4638697695673166583, guid: 0726291e663bdd840ac7db7eb0986a73, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -391,6 +395,10 @@ PrefabInstance:
     - target: {fileID: 6182291453100906898, guid: 0726291e663bdd840ac7db7eb0986a73, type: 3}
       propertyPath: m_AnchorMin.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216437240554886640, guid: 0726291e663bdd840ac7db7eb0986a73, type: 3}
+      propertyPath: m_Name
+      value: SFX
       objectReference: {fileID: 0}
     - target: {fileID: 6305150996686513333, guid: 0726291e663bdd840ac7db7eb0986a73, type: 3}
       propertyPath: m_AnchorMax.y

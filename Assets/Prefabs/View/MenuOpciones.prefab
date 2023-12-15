@@ -1439,6 +1439,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.7499919
       objectReference: {fileID: 0}
+    - target: {fileID: 765398801088412484, guid: d9ec977e06b61e54a89ec47156989386, type: 3}
+      propertyPath: m_Name
+      value: Music
+      objectReference: {fileID: 0}
     - target: {fileID: 1439709514277713882, guid: d9ec977e06b61e54a89ec47156989386, type: 3}
       propertyPath: m_Name
       value: Tab Sonidos
@@ -1694,6 +1698,10 @@ PrefabInstance:
     - target: {fileID: 6943461489957407555, guid: d9ec977e06b61e54a89ec47156989386, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7193076014779451169, guid: d9ec977e06b61e54a89ec47156989386, type: 3}
+      propertyPath: m_Name
+      value: SFX
       objectReference: {fileID: 0}
     - target: {fileID: 8344286265079352436, guid: d9ec977e06b61e54a89ec47156989386, type: 3}
       propertyPath: m_SizeDelta.x
